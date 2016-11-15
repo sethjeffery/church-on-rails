@@ -6,7 +6,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'd092ad0c88dde610412a6e986bbbce12694c6577ea8ccad2298c2efc0ba2f0aeff95ce8705254354015e3ad1da1d1bbe4bc013e41e897d4823ca1401aaeb8927'
+  config.secret_key = 'd092ad0c88dde610412a6e986bbbce12694c6577ea8ccad2298c2efc0ba2f0aeff95ce8705254354015e3ad1da1d1bbe4bc013e41e897d4823ca1401aaeb8927'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -15,10 +15,10 @@ Devise.setup do |config|
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
+  config.mailer = 'Devise::Mailer'
 
   # Configure the parent class responsible to send e-mails.
-  # config.parent_mailer = 'ActionMailer::Base'
+  config.parent_mailer = 'ActionMailer::Base'
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -133,7 +133,8 @@ Devise.setup do |config|
   # initial account confirmation) to be applied. Requires additional unconfirmed_email
   # db field (see migrations). Until confirmed, new email is stored in
   # unconfirmed_email column, and copied to email column on successful confirmation.
-  config.reconfirmable = true
+  config.reconfirmable = false
+  config.allow_unconfirmed_access_for = 1.day
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [:email]

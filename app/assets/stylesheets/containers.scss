@@ -1,0 +1,28 @@
+@import 'bootstrap/variables';
+@import 'bootstrap/mixins/breakpoints';
+
+@mixin total-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+%container-xs {
+  margin: auto;
+  max-width: 380px;
+}
+
+.container-login {
+  @extend %container-xs;
+  @media (min-height: 440px) {
+    @include total-center;
+  }
+}
+
+.container-signup {
+  @extend %container-xs;
+  @media (min-height: 700px) {
+    @include total-center;
+  }
+}

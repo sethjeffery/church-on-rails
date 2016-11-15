@@ -1,0 +1,45 @@
+<div class="container-login pb-3 pt-1">
+  <h2 class="text-xs-center mb-1">Sign in</h2>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= flash_messages %>
+
+    <div class="field">
+      <div class="input-group">
+        <label class="input-group-addon" for="user_email">
+          <span class="fa fa-envelope fa-1x"></span>
+        </label>
+        <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email' %>
+      </div>
+    </div>
+
+    <div class="field row mt-1">
+      <div class="col-xs-12 <% if devise_mapping.rememberable?%>col-sm-6<% end %>">
+        <div class="input-group">
+          <label class="input-group-addon" for="user_password">
+            <span class="fa fa-lock fa-1x"></span>
+          </label>
+          <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password' %>
+        </div>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="col-sm-6 form-control-static text-sm-right">
+          <label class="field custom-checkbox custom-control mb-0">
+            <%= f.check_box :remember_me, class: 'custom-control-input' %>
+            <span class="custom-control-indicator"></span>
+            Remember me
+          </label>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="actions mt-1">
+      <%= f.submit "Log in", class: 'btn btn-primary btn-block btn-lg' %>
+    </div>
+
+    <%= render "devise/shared/links" %>
+
+  <% end %>
+
+</div>

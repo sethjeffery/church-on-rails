@@ -1,0 +1,27 @@
+<div class="container-login pb-3 pt-1">
+  <h2 class="text-xs-center mb-1">Resend confirmation email</h2>
+
+  <div class="size-sm mb-1">Sorry if you missed our confirmation email. Enter your email address and we'll send you a new one.</div>
+
+  <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+    <%= devise_error_messages! %>
+
+    <div class="input-group">
+      <label class="input-group-addon" for="user_email">
+        <span class="fa fa-envelope fa-1x"></span>
+      </label>
+      <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email', value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+    </div>
+
+    <div class="size-sm mt-1">
+      If you still get no email, you might have mistyped it when you signed up. If so, just
+      <%= link_to "sign up again", new_user_registration_path %>.
+    </div>
+
+    <div class="actions mt-1">
+      <%= f.submit "Resend email", class: 'btn btn-primary btn-block btn-lg' %>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+</div>

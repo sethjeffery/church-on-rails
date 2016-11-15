@@ -1,0 +1,49 @@
+<div class="container-signup pb-3 pt-1">
+  <h2 class="text-xs-center">Create an Account</h2>
+  <div class="size-sm text-light text-xs-center">It's really easy.</div>
+
+  <hr />
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
+
+    <div class="size-sm mb-sm">
+      Please enter your email address, this will be your login.
+    </div>
+    <div class="input-group mb-1">
+      <label class="input-group-addon" for="user_email">
+        <span class="fa fa-envelope fa-1x"></span>
+      </label>
+      <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email' %>
+    </div>
+
+    <div class="size-sm mb-sm">
+      Please provide a password for this account.
+      <% if @minimum_password_length %>
+        <div class="size-xs font-weight-bold">(<%= @minimum_password_length %> characters minimum)</div>
+      <% end %>
+    </div>
+    <div class="input-group mb-1">
+      <label class="input-group-addon" for="user_password">
+        <span class="fa fa-lock fa-1x"></span>
+      </label>
+      <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password' %>
+    </div>
+
+    <div class="size-sm">
+      We will send a confirmation email to your address once you register by clicking below.
+    </div>
+
+    <hr />
+
+    <div class="size-sm text-light">
+      By signing up you agree to any terms and conditions and promise to be a good citizen of this website.
+    </div>
+
+    <div class="actions mt-1">
+      <%= f.submit "Sign up", class: 'btn btn-primary btn-lg btn-block' %>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+</div>

@@ -1,0 +1,38 @@
+$headings-font-weight:   300 !default;
+
+$spacer:   1rem !default;
+$spacer-x: $spacer !default;
+$spacer-y: $spacer !default;
+$spacers: (
+  0: (
+    x: 0,
+    y: 0
+  ),
+  1: (
+    x: $spacer-x,
+    y: $spacer-y
+  ),
+  2: (
+    x: ($spacer-x * 1.5),
+    y: ($spacer-y * 1.5)
+  ),
+  3: (
+    x: ($spacer-x * 3),
+    y: ($spacer-y * 3)
+  ),
+  'sm': (
+    x: ($spacer-x * 0.5),
+    y: ($spacer-y * 0.5)
+  ),
+  'xs': (
+    x: ($spacer-x * 0.25),
+    y: ($spacer-y * 0.25)
+  )
+) !default;
+
+
+$state-danger-text: #b42426 !default;
+$state-danger-bg: #ffecec !default;
+
+
+@import '_bootstrap';

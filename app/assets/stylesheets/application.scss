@@ -12,8 +12,6 @@
  *
  *= require_tree .
  *= require font-awesome
+ *= require bootstrap
  *= require_self
  */
-
-/* Custom bootstrap variables must be set or imported before bootstrap itself. */
-@import "bootstrap";
