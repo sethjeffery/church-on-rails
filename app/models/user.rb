@@ -1,6 +1,5 @@
 class User < ApplicationRecord
-  include Concerns::Naming
-  delegate :admin?, to: :person, allow_nil: true
+  delegate :admin?, :name, to: :person, allow_nil: true
 
   # Include default devise modules. Others available are:
   # :lockable, and :timeoutable
@@ -9,5 +8,7 @@ class User < ApplicationRecord
 
   has_one :person
 
-  validates_presence_of :name
+  def to_s
+    email
+  end
 end

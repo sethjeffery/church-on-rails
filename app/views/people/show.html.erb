@@ -1,47 +1,46 @@
-<h2 class="text-xs-center mb-1"><%= @person.name %></h2>
-
-<div class="row">
-  <div class="col-xs-12 <%= 'col-sm-6' if @person.families.present? %>">
-    <h4>Teams</h4>
-    <%= render 'shared/list_group', collection: @person.teams do |team| %>
-      <div class="row">
-        <div class="col-sm-12">
-          <%= link_to team, class: 'text-ellipsis' do %>
-            <%= team.name %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-
-  <% if @person.families.present? %>
-    <div class="col-sm-6">
-      <h4>Family</h4>
-      <%= render 'shared/list_group', collection: @person.families do |family| %>
-        <div class="row">
-          <div class="col-sm-12">
-            <%= link_to family, class: 'text-ellipsis' do %>
-              <%= family.name %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
+<div class="text-xs-center mb-1">
+  <%= avatar_tag @person, class: 'avatar-xl' %>
 </div>
 
-<% if @person.user %>
-  <h4 class="mt-2">Account</h4>
-  <%= render 'shared/list_group', collection: [@person.user] do |user| %>
-    <div class="row">
-      <div class="col-sm-6">
-        <%= link_to user, class: 'text-ellipsis' do %>
-          <%= user.name %>
+<h2 class="text-xs-center mb-1"><%= @person %></h2>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="list-group mb-2">
+      <div class="list-group-item list-group-item-secondary">
+        <%= link_to edit_person_path(@person), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+          <%= fa_icon 'pencil 1x', class: 'mr-xs' %>Edit
         <% end %>
+
+        Details
       </div>
-      <div class="col-sm-6 text-light size-xs-small">
-        <%= user.email %>
-      </div>
+
+      <%= list_group_fields class: 'mb-2', fields: {
+          :full_name  => @person.full_name,
+          'DOB'       => @person.dob&.strftime('%d %b %Y'),
+          :email      => (link_to(@person.email, "mailto:#{@person.email}", class: 'dotted') if @person.email),
+          :phone      => @person.phone,
+          :gender     => gender_icon(@person),
+          :account    => @person.user ? fa_icon('check 1x') : link_to('Link account', new_user_path, class: 'btn btn-secondary btn-sm btn-align-middle')
+      } %>
     </div>
-  <% end %>
-<% end %>
+  </div>
+
+  <div class="col-md-6">
+    <div class="list-group mb-2">
+      <div class="list-group-item list-group-item-secondary">
+        Teams
+      </div>
+
+      <%= list_group @person.teams, wrap: false do |team| %>
+        <%= link_to team, class: "text-ellipsis" do %>
+          <%= fa_icon 'star 1x', class: 'mr-xs' if team.admin? %><%= team %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <% @person.families.each do |family| %>
+      <%= render family %>
+    <% end %>
+  </div>
+</div>

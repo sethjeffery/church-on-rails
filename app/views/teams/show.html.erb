@@ -1,13 +1,29 @@
-<h2 class="text-xs-center mb-1"><%= @team.name %></h2>
+<%= render 'teams/title' %>
 
-<%= render 'shared/list_group', collection: @team.people do |person| %>
-
-  <div class="row">
-    <div class="col-sm-12">
-      <%= link_to person, class: 'text-ellipsis' do %>
-        <%= person.name %>
+<div class="container-sm">
+  <div class="list-group mb-2">
+    <div class="list-group-item list-group-item-secondary">
+      <%= link_to new_team_team_membership_path(@team), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+        <%= fa_icon 'user 1x', class: 'mr-xs' %>Add person
       <% end %>
+
+      Members
     </div>
+
+    <%= render 'teams/memberships', team: @team %>
   </div>
 
-<% end %>
+  <div class="list-group mb-2">
+    <div class="list-group-item list-group-item-secondary">
+      <%= link_to edit_team_path(@team), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+        <%= fa_icon 'pencil 1x', class: 'mr-xs' %>Edit
+      <% end %>
+
+      Team details
+    </div>
+
+    <%= list_group_fields class: 'mb-2', fields: {
+        :name   => @team.name
+    } %>
+  </div>
+</div>

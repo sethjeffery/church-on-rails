@@ -1,0 +1,43 @@
+<%= flash_messages %>
+<%= form_for(@person) do |f| %>
+
+  <div class="list-group mb-2">
+    <div class="list-group-item list-group-item-secondary">
+      <% if @person.new_record? %>
+        <%= link_to 'Cancel', people_path, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+      <% else %>
+        <%= link_to 'Cancel', @person, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+      <% end %>
+
+      Details
+    </div>
+
+    <%= render 'people/form_fields', f: f, person: @person %>
+  </div>
+
+  <% if @person.new_record? %>
+    <div class="list-group mb-2">
+      <div class="list-group-item list-group-item-secondary">
+        Add to Family
+      </div>
+      <div class="list-group-item">
+        <%= f.collection_select :family_ids, Family.all, :id, :name, { include_blank: true }, class: 'form-control', data: { selectpicker: true, placeholder: '', 'allow-clear': true } %>
+      </div>
+    </div>
+
+    <div class="list-group mb-2">
+      <div class="list-group-item list-group-item-secondary">
+        Add to Teams
+      </div>
+      <div class="list-group-item">
+        <%= f.collection_select :team_ids, Team.all, :id, :name, { }, multiple: true, class: 'form-control', data: { selectpicker: true } %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="text-xs-center">
+    <button type="submit" class="btn btn-primary btn-lg">
+      <%= fa_icon 'user', class: 'mr-sm' %><%= @person.new_record? ? 'Add member' : 'Save changes' %>
+    </button>
+  </div>
+<% end %>

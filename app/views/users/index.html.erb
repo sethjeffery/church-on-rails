@@ -1,10 +1,10 @@
 <h2 class="text-xs-center mb-1">Users</h2>
 
-<%= render 'shared/list_group', collection: @users do |user| %>
+<%= list_group @users do |user| %>
 
   <div class="row">
     <div class="col-sm-6">
-      <%= link_to user, class: 'text-ellipsis' do %>
+      <%= link_to user.person, class: 'text-ellipsis' do %>
         <%= user.name %>
       <% end %>
     </div>

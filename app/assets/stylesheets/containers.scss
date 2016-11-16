@@ -10,23 +10,20 @@
   width: 100%;
 }
 
-%container-xs {
+.container-xs {
   margin: auto;
   max-width: 380px;
 }
 
 .container-login {
-  @extend %container-xs;
+  @extend .container-xs;
   @media (min-height: 440px) {
     max-width: 380px + 32px;
     @include total-center;
   }
 }
 
-.container-signup {
-  @extend %container-xs;
-  @media (min-height: 700px) {
-    max-width: 380px + 32px;
-    @include total-center;
-  }
+.container-sm {
+  margin: auto;
+  max-width: 480px;
 }

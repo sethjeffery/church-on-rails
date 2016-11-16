@@ -1,0 +1,5 @@
+$('#family_membership-<%= @family_membership.id %>').slideUp(150);
+
+<% if @family_membership.person_id == current_user.person&.id %>
+  $('#family-<%= @family_membership.family_id %>').fadeOut(150);
+<% end %>

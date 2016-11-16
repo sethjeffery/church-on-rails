@@ -1,11 +1,11 @@
 <h2 class="text-xs-center mb-1">Teams</h2>
 
-<%= render 'shared/list_group', collection: @teams do |team| %>
+<%= list_group @teams do |team| %>
 
   <div class="row">
     <div class="col-sm-6">
-      <%= link_to team, class: "text-ellipsis #{'font-weight-bold' if team.admin?}" do %>
-        <%= team.name %>
+      <%= link_to team, class: "text-ellipsis" do %>
+        <%= fa_icon 'star 1x', class: 'mr-xs' if team.admin? %><%= team %>
       <% end %>
     </div>
     <div class="col-sm-6">

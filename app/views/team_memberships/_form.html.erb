@@ -1,0 +1,29 @@
+<%= flash_messages %>
+<%= form_for([@team, @team_membership]) do |f| %>
+
+  <div class="list-group mb-2">
+    <div class="list-group-item list-group-item-secondary">
+      <%= link_to 'Cancel', @team, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+
+      Add to Team
+    </div>
+
+    <div class="list-group-item">
+      <div class="mb-1 <%= 'has-danger' if @team_membership.errors[:person_id].present? %>">
+        <%= f.collection_select :person_id, Person.all, :id, :name, { include_blank: true }, class: 'form-control',
+                                data: { selectpicker: true, placeholder: 'Choose a member' } %>
+
+        <% if @team_membership.errors[:person_id].present? %>
+          <div class="size-xs-tiny text-danger">Team member <%= @team_membership.errors[:person_id].join(', ') %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-xs-center">
+    <button type="submit" class="btn btn-primary btn-lg">
+      <%= fa_icon 'user', class: 'mr-sm' %>Add member
+    </button>
+  </div>
+
+<% end %>

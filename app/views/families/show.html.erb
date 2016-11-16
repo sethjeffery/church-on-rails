@@ -1,13 +1,33 @@
-<h2 class="text-xs-center mb-1"><%= @family.name %> Family</h2>
+<%= render 'families/title' %>
 
-<%= render 'shared/list_group', collection: @family.people do |person| %>
-
-  <div class="row">
-    <div class="col-sm-12">
-      <%= link_to person, class: 'text-ellipsis' do %>
-        <%= person.name %>
+<div class="container-sm">
+  <div class="list-group mb-2">
+    <div class="list-group-item list-group-item-secondary">
+      <%= link_to new_family_family_membership_path(@family), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+        <%= fa_icon 'user 1x', class: 'mr-xs' %>Add person
       <% end %>
+
+      Members
     </div>
+
+    <%= render 'families/memberships', family: @family %>
   </div>
 
-<% end %>
+  <div class="list-group mb-2">
+    <div class="list-group-item list-group-item-secondary">
+      <%= link_to edit_family_path(@family), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+        <%= fa_icon 'pencil 1x', class: 'mr-xs' %>Edit
+      <% end %>
+
+      Details
+    </div>
+
+    <%= list_group_fields class: 'mb-2', fields: {
+        :name       => @family.name,
+        :address1   => @family.address1,
+        :address2   => @family.address2,
+        :postcode   => @family.postcode,
+        :country    => @family.country
+    } %>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<% team.team_memberships.includes(:person).each do |membership| %>
+  <div class="list-group-item" id="team_membership-<%= membership.id %>">
+    <%= button_to [team, membership], method: :delete, remote: true, class: 'btn btn-link py-0 px-xs float-xs-right text-light', data: { confirm: "Really remove #{membership.person} from #{team}?" } do %>
+      <%= fa_icon('times') %>
+    <% end %>
+
+    <div class="avatar-container">
+      <%= avatar_tag membership.person %>
+      <%= link_to membership.person, membership.person %>
+    </div>
+  </div>
+<% end %>

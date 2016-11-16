@@ -36,6 +36,10 @@ gem 'font-awesome-rails'
 gem 'omniauth-facebook'
 gem 'cancancan'
 gem 'paperclip'
+gem 'bootstrap3-datetimepicker-rails'
+gem 'momentjs-rails'
+gem "select2-rails"
+gem 'gravatarify'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

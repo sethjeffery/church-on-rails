@@ -4,12 +4,17 @@
 .text-light {
   color: #999;
 }
-
 .text-ellipsis {
   overflow: hidden;
   white-space: nowrap;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
+}
+
+h4 {
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
 }
 
 @each $breakpoint in map-keys($grid-breakpoints) {
@@ -18,4 +23,14 @@
     .size-#{$breakpoint}-small  { font-size: 0.875rem !important; }
     .size-#{$breakpoint}-normal { font-size: 1rem !important; }
   }
+}
+
+.field-required {
+  font-weight: 600;
+  color: $brand-danger;
+}
+
+a.dotted {
+  text-decoration: none;
+  border-bottom: dotted 1px $link-color;
 }

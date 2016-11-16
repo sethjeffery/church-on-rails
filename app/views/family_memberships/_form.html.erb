@@ -1,0 +1,37 @@
+<%= flash_messages %>
+<%= form_for([@family, @family_membership]) do |f| %>
+
+  <div class="list-group mb-2">
+    <div class="list-group-item list-group-item-secondary">
+      <%= link_to 'Cancel', @family, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+
+      Add to Family
+    </div>
+
+    <div class="list-group-item">
+      <div class="mb-1 <%= 'has-danger' if @family_membership.errors[:person_id].present? %>">
+        <%= f.collection_select :person_id, Person.all, :id, :name, { include_blank: true }, class: 'form-control',
+                                data: { selectpicker: true, placeholder: 'Choose a member' } %>
+
+        <% if @family_membership.errors[:person_id].present? %>
+          <div class="size-xs-tiny text-danger">Family member <%= @family_membership.errors[:person_id].join(', ') %></div>
+        <% end %>
+      </div>
+
+      <div class="text-xs-center">
+        <label class="field custom-checkbox custom-control mb-0">
+          <%= f.check_box :head, class: 'custom-control-input' %>
+          <span class="custom-control-indicator"></span>
+          Head of household
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-xs-center">
+    <button type="submit" class="btn btn-primary btn-lg">
+      <%= fa_icon 'user', class: 'mr-sm' %>Add member
+    </button>
+  </div>
+
+<% end %>

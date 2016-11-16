@@ -1,6 +1,6 @@
 <h2 class="text-xs-center mb-1">Families</h2>
 
-<%= render 'shared/list_group', collection: @families do |family| %>
+<%= list_group @families do |family| %>
 
   <div class="row">
     <div class="col-sm-6">
@@ -10,7 +10,7 @@
     </div>
     <div class="col-sm-6">
       <div class="text-ellipsis text-light size-xs-small">
-        <%= family.people.map(&:name).join(', ') %>
+        <%= family.people.map(&:short_name).join(', ') %>
       </div>
     </div>
   </div>

@@ -1,0 +1,41 @@
+.bootstrap-datetimepicker-widget table td {
+  text-align: inherit;
+
+  span {
+    text-align: center;
+  }
+}
+
+.bootstrap-datetimepicker-widget table th {
+  height: 30px;
+  width: 30px;
+  text-align: center;
+}
+
+.bootstrap-datetimepicker-widget table td.day {
+  height: 30px;
+  width: 30px;
+  text-align: center;
+}
+
+.bootstrap-datetimepicker-widget .datepicker-decades .decade {
+  line-height: 1.25em !important;
+  font-size: 0.875rem;
+  padding: 8px 0;
+
+  ~ :not(.decade) {
+    vertical-align: top;
+    pointe-events: none;
+  }
+}
+
+
+.select2-container--bootstrap .select2-selection--single {
+  line-height: 1.5;
+  font-size: 1rem;
+  height: 38px;
+}
+
+.select2-container--bootstrap .select2-selection__clear {
+  line-height: 1.25;
+}

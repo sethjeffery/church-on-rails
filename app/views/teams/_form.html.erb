@@ -1,0 +1,25 @@
+<%= flash_messages %>
+<%= form_for(@team) do |f| %>
+
+  <div class="list-group mb-2">
+    <div class="list-group-item list-group-item-secondary">
+      <% if @team.new_record? %>
+        <%= link_to 'Cancel', teams_path, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+      <% else %>
+        <%= link_to 'Cancel', @person, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+      <% end %>
+
+      Edit team details
+    </div>
+
+    <%= render 'shared/list_group_item_field', f: f, model: @team, field: :name %>
+
+  </div>
+
+  <div class="text-xs-center">
+    <button type="submit" class="btn btn-primary btn-lg">
+      <%= fa_icon 'users', class: 'mr-sm' %><%= @team.new_record? ? 'Make new team' : 'Save changes' %>
+    </button>
+  </div>
+
+<% end %>

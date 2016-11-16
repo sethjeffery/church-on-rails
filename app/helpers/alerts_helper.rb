@@ -1,5 +1,5 @@
 module AlertsHelper
-  def flash_messages
+  def flash_messages(model=nil)
     if flash[:alert]
       html = <<-HTML
         <div class="alert alert-danger">

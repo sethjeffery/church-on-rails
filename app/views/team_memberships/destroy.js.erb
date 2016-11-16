@@ -1,0 +1,5 @@
+$('#team_membership-<%= @team_membership.id %>').slideUp(150);
+
+<% if @team_membership.person_id == current_user.person&.id %>
+  $('#team-<%= @team_membership.team_id%>').fadeOut(150);
+<% end %>

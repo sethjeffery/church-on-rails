@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161116083524) do
+ActiveRecord::Schema.define(version: 20161116185238) do
 
   create_table "families", force: :cascade do |t|
     t.string   "name"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20161116083524) do
     t.integer  "person_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "head"
     t.index ["family_id"], name: "index_family_memberships_on_family_id"
     t.index ["person_id"], name: "index_family_memberships_on_person_id"
   end
@@ -45,6 +46,7 @@ ActiveRecord::Schema.define(version: 20161116083524) do
     t.datetime "updated_at",  null: false
     t.string   "email"
     t.string   "phone"
+    t.string   "gender"
     t.index ["first_name"], name: "index_people_on_first_name"
     t.index ["last_name"], name: "index_people_on_last_name"
     t.index ["user_id"], name: "index_people_on_user_id"
@@ -85,15 +87,8 @@ ActiveRecord::Schema.define(version: 20161116083524) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "middle_name"
-    t.string   "prefix"
-    t.string   "suffix"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["first_name"], name: "index_users_on_first_name"
-    t.index ["last_name"], name: "index_users_on_last_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

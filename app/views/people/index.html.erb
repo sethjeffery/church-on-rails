@@ -1,17 +1,19 @@
 <h2 class="text-xs-center mb-1">People</h2>
 
-<%= render 'shared/list_group', collection: @people do |person| %>
+<%= list_group @people do |person| %>
 
   <div class="row">
     <div class="col-sm-6">
-      <%= link_to person, class: 'text-ellipsis' do %>
-        <%= person.name %>
-      <% end %>
+      <a class="avatar-md-container" href="<%= url_for(person) %>">
+        <%= avatar_tag person, class: 'avatar-md' %>
+        <div class="text-ellipsis"><%= person.name %></div>
+      </a>
     </div>
+
     <div class="col-sm-6">
       <div class="text-ellipsis text-light">
         <% person.teams.each do |team| %>
-          <a class="tag tag-default" href="#"><%= team.name %></a>
+          <%= link_to team, team, class: 'tag tag-default' %>
         <% end %>
       </div>
     </div>
