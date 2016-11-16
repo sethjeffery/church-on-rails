@@ -1,0 +1,22 @@
+<h2 class="text-xs-center mb-1">Users</h2>
+
+<div class="list-group">
+  <% @users.each do |user| %>
+    <a class="list-group-item clearfix size-xs-small size-sm-normal list-group-item-action" href="<%= user_path(user) %>">
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="text-ellipsis">
+            <%= user.name %>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="text-ellipsis text-light">
+            <%= user.email %>
+          </div>
+        </div>
+      </div>
+
+    </a>
+  <% end %>
+</div>

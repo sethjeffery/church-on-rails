@@ -1,7 +1,7 @@
 <div class="container-login pb-3 pt-1">
   <h2 class="text-xs-center mb-1">Forgotten your password?</h2>
 
-  <div class="size-sm mb-1">If you've forgotten your password we can email you instructions to reset it.</div>
+  <div class="size-xs-small mb-1">If you've forgotten your password we can email you instructions to reset it.</div>
 
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
      <%= devise_error_messages! %>

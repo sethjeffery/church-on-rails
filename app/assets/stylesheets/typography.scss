@@ -1,11 +1,21 @@
-.size-sm {
-  font-size: 0.875rem;
-}
-
-.size-xs {
-  font-size: 0.75rem;
-}
+@import 'bootstrap/variables';
+@import 'bootstrap/mixins/breakpoints';
 
 .text-light {
   color: #999;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    .size-#{$breakpoint}-tiny   { font-size: 0.75rem !important; }
+    .size-#{$breakpoint}-small  { font-size: 0.875rem !important; }
+    .size-#{$breakpoint}-normal { font-size: 1rem !important; }
+  }
 }

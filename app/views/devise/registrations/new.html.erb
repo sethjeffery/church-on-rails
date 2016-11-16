@@ -1,13 +1,13 @@
 <div class="container-signup pb-3 pt-1">
   <h2 class="text-xs-center">Create an Account</h2>
-  <div class="size-sm text-light text-xs-center">It's really easy.</div>
+  <div class="size-xs-small text-light text-xs-center">It's really easy.</div>
 
   <hr />
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
 
-    <div class="size-sm mb-sm">
+    <div class="size-xs-small mb-sm">
       Please enter your email address, this will be your login.
     </div>
     <div class="input-group mb-1">
@@ -17,10 +17,10 @@
       <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email' %>
     </div>
 
-    <div class="size-sm mb-sm">
+    <div class="size-xs-small mb-sm">
       Please provide a password for this account.
       <% if @minimum_password_length %>
-        <div class="size-xs font-weight-bold">(<%= @minimum_password_length %> characters minimum)</div>
+        <div class="size-xs-tiny font-weight-bold">(<%= @minimum_password_length %> characters minimum)</div>
       <% end %>
     </div>
     <div class="input-group mb-1">
@@ -30,13 +30,13 @@
       <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password' %>
     </div>
 
-    <div class="size-sm">
+    <div class="size-xs-small">
       We will send a confirmation email to your address once you register by clicking below.
     </div>
 
     <hr />
 
-    <div class="size-sm text-light">
+    <div class="size-xs-small text-light">
       By signing up you agree to any terms and conditions and promise to be a good citizen of this website.
     </div>
 
