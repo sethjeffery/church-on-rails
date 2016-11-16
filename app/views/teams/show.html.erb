@@ -1,0 +1,13 @@
+<h2 class="text-xs-center mb-1"><%= @team.name %></h2>
+
+<%= render 'shared/list_group', collection: @team.people do |person| %>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <%= link_to person, class: 'text-ellipsis' do %>
+        <%= person.name %>
+      <% end %>
+    </div>
+  </div>
+
+<% end %>

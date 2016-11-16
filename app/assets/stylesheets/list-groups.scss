@@ -1,0 +1,5 @@
+@import 'bootstrap/variables';
+
+.list-group-item {
+  line-height: #{$line-height-base}rem;
+}

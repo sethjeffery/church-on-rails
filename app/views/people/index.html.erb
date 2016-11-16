@@ -1,0 +1,20 @@
+<h2 class="text-xs-center mb-1">People</h2>
+
+<%= render 'shared/list_group', collection: @people do |person| %>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <%= link_to person, class: 'text-ellipsis' do %>
+        <%= person.name %>
+      <% end %>
+    </div>
+    <div class="col-sm-6">
+      <div class="text-ellipsis text-light">
+        <% person.teams.each do |team| %>
+          <a class="tag tag-default" href="#"><%= team.name %></a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+<% end %>

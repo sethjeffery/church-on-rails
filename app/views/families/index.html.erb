@@ -1,0 +1,18 @@
+<h2 class="text-xs-center mb-1">Families</h2>
+
+<%= render 'shared/list_group', collection: @families do |family| %>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <%= link_to family, class: 'text-ellipsis' do %>
+        <%= family.name %>
+      <% end %>
+    </div>
+    <div class="col-sm-6">
+      <div class="text-ellipsis text-light size-xs-small">
+        <%= family.people.map(&:name).join(', ') %>
+      </div>
+    </div>
+  </div>
+
+<% end %>

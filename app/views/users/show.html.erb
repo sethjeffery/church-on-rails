@@ -1,0 +1,10 @@
+<h2 class="text-xs-center mb-1"><%= @user.name %></h2>
+
+<% if @user.person %>
+  <h4 class="mt-2">Membership</h4>
+  <%= render 'shared/list_group', collection: [@user.person] do |person| %>
+    <%= link_to person, class: 'text-ellipsis' do %>
+      <%= person.name %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,0 +1,18 @@
+<h2 class="text-xs-center mb-1">Teams</h2>
+
+<%= render 'shared/list_group', collection: @teams do |team| %>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <%= link_to team, class: "text-ellipsis #{'font-weight-bold' if team.admin?}" do %>
+        <%= team.name %>
+      <% end %>
+    </div>
+    <div class="col-sm-6">
+      <div class="text-ellipsis text-light size-xs-small">
+        <%= pluralize team.team_memberships.count, 'member' %>
+      </div>
+    </div>
+  </div>
+
+<% end %>

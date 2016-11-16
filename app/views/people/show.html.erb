@@ -1,0 +1,47 @@
+<h2 class="text-xs-center mb-1"><%= @person.name %></h2>
+
+<div class="row">
+  <div class="col-xs-12 <%= 'col-sm-6' if @person.families.present? %>">
+    <h4>Teams</h4>
+    <%= render 'shared/list_group', collection: @person.teams do |team| %>
+      <div class="row">
+        <div class="col-sm-12">
+          <%= link_to team, class: 'text-ellipsis' do %>
+            <%= team.name %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @person.families.present? %>
+    <div class="col-sm-6">
+      <h4>Family</h4>
+      <%= render 'shared/list_group', collection: @person.families do |family| %>
+        <div class="row">
+          <div class="col-sm-12">
+            <%= link_to family, class: 'text-ellipsis' do %>
+              <%= family.name %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<% if @person.user %>
+  <h4 class="mt-2">Account</h4>
+  <%= render 'shared/list_group', collection: [@person.user] do |user| %>
+    <div class="row">
+      <div class="col-sm-6">
+        <%= link_to user, class: 'text-ellipsis' do %>
+          <%= user.name %>
+        <% end %>
+      </div>
+      <div class="col-sm-6 text-light size-xs-small">
+        <%= user.email %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
