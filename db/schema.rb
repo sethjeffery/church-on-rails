@@ -10,12 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161116080759) do
+ActiveRecord::Schema.define(version: 20161116083524) do
 
   create_table "families", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "city"
+    t.string   "postcode"
+    t.string   "country"
     t.index ["name"], name: "index_families_on_name"
   end
 
@@ -38,6 +43,8 @@ ActiveRecord::Schema.define(version: 20161116080759) do
     t.date     "dob"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "email"
+    t.string   "phone"
     t.index ["first_name"], name: "index_people_on_first_name"
     t.index ["last_name"], name: "index_people_on_last_name"
     t.index ["user_id"], name: "index_people_on_user_id"
