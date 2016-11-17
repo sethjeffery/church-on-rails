@@ -10,6 +10,7 @@ class Person < ApplicationRecord
   validates_presence_of :first_name, :last_name
   validates_inclusion_of :gender, in: %w( m f ), allow_nil: true
   before_validation :copy_changes_to_user
+  before_validation :sanitize_names
 
   def admin?
     teams.admins.present?
@@ -31,7 +32,19 @@ class Person < ApplicationRecord
     end
   end
 
+  protected
+
   def copy_changes_to_user
-    user.email = email if email_changed? and email.present?
+    user.email = email if email_changed? && email.present? && user.present?
+  end
+
+  def sanitize_names
+    self.first_name  = capitalize(first_name)  if first_name
+    self.middle_name = capitalize(middle_name) if middle_name
+    self.last_name   = capitalize(last_name)   if last_name
+  end
+
+  def capitalize(name)
+    name.slice(0,1).capitalize + name.slice(1..-1)
   end
 end

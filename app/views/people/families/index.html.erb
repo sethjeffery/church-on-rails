@@ -1,18 +1,26 @@
+<% if can? :create, Family %>
+  <%= link_to new_family_path, class: 'btn btn-primary float-xs-right' do %>
+    <%= fa_icon 'plus-circle' %> <span class="hidden-md-down">New</span> <span class="hidden-sm-up">New</span>
+  <% end %>
+<% end %>
+
 <%= render 'shared/title', title: 'Families' %>
 
-<%= list_group @families do |family| %>
+<div class="list-group">
+  <%= render 'shared/search_header', resource: :families %>
 
-  <div class="row">
-    <div class="col-sm-6">
-      <%= link_to family, class: 'text-ellipsis' do %>
-        <%= family.name %>
-      <% end %>
-    </div>
-    <div class="col-sm-6">
-      <div class="text-ellipsis text-light size-xs-small">
-        <%= family.people.map(&:short_name).join(', ') %>
+  <% @families.each do |family| %>
+    <%= list_group_item family, url: family do %>
+
+      <div class="row">
+        <div class="col-sm-6 text-ellipsis">
+          <%= family %>
+        </div>
+        <div class="col-sm-6 text-ellipsis text-light size-xs-small">
+          <%= family.people.map(&:short_name).join(', ') %>
+        </div>
       </div>
-    </div>
-  </div>
 
-<% end %>
+    <% end %>
+  <% end %>
+</div>

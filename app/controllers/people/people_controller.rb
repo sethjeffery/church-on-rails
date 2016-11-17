@@ -2,6 +2,10 @@ module People
   class PeopleController < ApplicationController
     load_and_authorize_resource
 
+    def index
+      @people = @people.where("first_name LIKE ? OR last_name LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%") if params[:q]
+    end
+
     def create
       if @person.save
         @person.assign_families create_params[:family_ids]
@@ -21,6 +25,10 @@ module People
     end
 
     private
+
+    def new_params
+      params.require(:person).permit(:first_name, :last_name)
+    end
 
     def create_params
       blanks_to_nil params.require(:person).permit(:first_name, :last_name, :prefix, :suffix, :dob, :gender, :email, :phone,

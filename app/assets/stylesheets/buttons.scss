@@ -1,3 +1,7 @@
+@import 'bootstrap/variables';
+@import 'bootstrap/mixins/breakpoints';
+@import 'bootstrap/mixins/hover';
+
 .btn-sm {
   line-height: 18px;
 
@@ -5,5 +9,15 @@
     margin-top: -2px;
     margin-bottom: -2px;
     vertical-align: top;
+  }
+}
+
+.search-options {
+  @include media-breakpoint-up(sm) {
+    text-align: right;
+  }
+  @include media-breakpoint-down(xs) {
+    margin-top: .25rem;
+    text-align: center;
   }
 }

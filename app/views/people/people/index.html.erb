@@ -1,22 +1,35 @@
+<% if can? :create, Person %>
+  <%= link_to new_person_path, class: 'btn btn-primary float-xs-right' do %>
+    <%= fa_icon 'plus-circle' %> <span class="hidden-md-down">New</span> <span class="hidden-sm-up">New</span>
+  <% end %>
+<% end %>
+
 <%= render 'shared/title', title: 'People' %>
 
-<%= list_group @people do |person| %>
+<div class="list-group">
+  <%= render 'shared/search_header', resource: :people %>
 
-  <div class="row">
-    <div class="col-sm-6">
-      <a class="avatar-md-container" href="<%= url_for(person) %>">
+  <% if @people.empty? %>
+    <%= render 'people/people/empty' %>
+  <% end %>
+
+  <% @people.each do |person| %>
+    <%= list_group_item person, url: person do %>
+      <div class="avatar-md-container">
         <%= avatar_tag person, class: 'avatar-md' %>
-        <div class="text-ellipsis"><%= person.name %></div>
-      </a>
-    </div>
 
-    <div class="col-sm-6">
-      <div class="text-ellipsis text-light">
-        <% person.teams.each do |team| %>
-          <%= link_to team, team, class: 'tag tag-default' %>
-        <% end %>
+        <div class="row">
+          <div class="col-sm-6 text-ellipsis">
+            <%= person.name %>
+          </div>
+
+          <div class="col-sm-6 text-ellipsis text-light">
+            <% person.teams.each do |team| %>
+              <%= content_tag :span, team, class: 'tag tag-default' %>
+            <% end %>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-
-<% end %>
+    <% end %>
+  <% end %>
+</div>

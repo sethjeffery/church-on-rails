@@ -1,18 +1,26 @@
+<% if can? :create, Team %>
+  <%= link_to new_team_path, class: 'btn btn-primary float-xs-right' do %>
+    <%= fa_icon 'plus-circle' %> <span class="hidden-md-down">New</span> <span class="hidden-sm-up">New</span>
+  <% end %>
+<% end %>
+
 <%= render 'shared/title', title: 'Teams' %>
 
-<%= list_group @teams do |team| %>
+<div class="list-group">
+  <%= render 'shared/search_header', resource: :teams %>
 
-  <div class="row">
-    <div class="col-sm-6">
-      <%= link_to team, class: "text-ellipsis" do %>
-        <%= fa_icon 'star 1x', class: 'mr-xs' if team.admin? %><%= team %>
-      <% end %>
-    </div>
-    <div class="col-sm-6">
-      <div class="text-ellipsis text-light size-xs-small">
-        <%= pluralize team.team_memberships.count, 'member' %>
+  <% @teams.each do |team| %>
+    <%= list_group_item team, url: team do %>
+
+      <div class="row">
+        <div class="col-sm-6 text-ellipsis">
+          <%= fa_icon 'star 1x', class: 'mr-xs' if team.admin? %><%= team %>
+        </div>
+        <div class="col-sm-6 text-ellipsis text-light size-xs-small">
+          <%= pluralize team.team_memberships.count, 'member' %>
+        </div>
       </div>
-    </div>
-  </div>
 
-<% end %>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,9 @@
+<div class="list-group-item list-group-item-padded">
+  <h2>Nothing found.</h2>
+  <div class="text-light">
+    We couldn't find anyone matching the criteria.
+    <% if can? :create, Person %>
+      Would you like to <%= link_to 'add a new member', new_person_path('person[first_name]': params[:q].split(' ')[0], 'person[last_name]': params[:q].split(' ')[1]) %>?
+    <% end %>
+  </div>
+</div>

@@ -16,7 +16,7 @@ module ListHelper
   end
 
   def list_group_item(model, options={}, &block)
-    if options[:link]
+    if (link = options[:url])
       link_to (link === true ? model : link), class: 'list-group-item clearfix size-xs-small size-sm-normal list-group-item-action' do
         capture(model, &block) if block_given?
       end

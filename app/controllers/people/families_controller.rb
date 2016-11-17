@@ -3,7 +3,8 @@ module People
     load_and_authorize_resource
 
     def index
-      @families.includes(:people)
+      @families = @families.includes(:people)
+      @families = @families.where("name LIKE ?", "%#{params[:q]}%") if params[:q]
     end
 
     def create
