@@ -1,16 +1,16 @@
-<%= render 'families/title' %>
+<%= render 'people/families/title' %>
 
 <div class="container-sm">
   <div class="list-group mb-2">
     <div class="list-group-item list-group-item-secondary">
-      <%= link_to new_family_family_membership_path(@family), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+      <%= link_to new_family_membership_path(@family), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
         <%= fa_icon 'user 1x', class: 'mr-xs' %>Add person
       <% end %>
 
       Members
     </div>
 
-    <%= render 'families/memberships', family: @family %>
+    <%= render 'people/families/memberships', family: @family %>
   </div>
 
   <div class="list-group mb-2">

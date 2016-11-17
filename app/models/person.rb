@@ -1,7 +1,7 @@
 class Person < ApplicationRecord
   include Concerns::Naming
 
-  belongs_to :user
+  belongs_to :user, autosave: true
   has_many :family_memberships
   has_many :families, through: :family_memberships, inverse_of: :people
   has_many :team_memberships
@@ -9,6 +9,7 @@ class Person < ApplicationRecord
 
   validates_presence_of :first_name, :last_name
   validates_inclusion_of :gender, in: %w( m f ), allow_nil: true
+  before_validation :copy_changes_to_user
 
   def admin?
     teams.admins.present?
@@ -28,5 +29,9 @@ class Person < ApplicationRecord
         TeamMembership.create user_id: id, team_id: team_id
       end
     end
+  end
+
+  def copy_changes_to_user
+    user.email = email if email_changed? and email.present?
   end
 end

@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
-  resources :families do
-    resources :family_memberships, path: 'memberships'
+  scope module: 'people' do
+    resources :families do
+      resources :family_memberships, path: 'memberships'
+    end
+    resources :teams do
+      resources :team_memberships, path: 'memberships'
+    end
+    resources :people do
+      resources :users
+    end
   end
-  resources :teams do
-    resources :team_memberships, path: 'memberships'
-  end
-  resources :people
+
   devise_for :users,
              sign_out_via: :get,
              controllers: {confirmations: 'users/confirmations'},
