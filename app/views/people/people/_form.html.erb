@@ -6,7 +6,7 @@
       <% if @person.new_record? %>
         <%= link_to 'Cancel', people_path, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
       <% else %>
-        <%= link_to 'Cancel', @person, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+        <%= link_to 'Cancel', account_or_person_path(@person), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
       <% end %>
 
       Details
@@ -21,7 +21,7 @@
         Add to Family
       </div>
       <div class="list-group-item">
-        <%= f.collection_select :family_ids, Family.all, :id, :name, { include_blank: true }, class: 'form-control', data: { selectpicker: true, placeholder: '', 'allow-clear': true } %>
+        <%= f.collection_select :family_ids, Family.all, :id, :name, { include_blank: true }, class: 'form-control', data: { selectpicker: true, placeholder: '', :'allow-clear' => true } %>
       </div>
     </div>
 

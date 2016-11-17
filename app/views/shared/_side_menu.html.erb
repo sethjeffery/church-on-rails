@@ -1,28 +1,38 @@
 <div class="side-menu">
 
-  <a class="side-menu-item <%= 'active' if params[:controller] == 'users' %>" href="<%= users_path %>">
-    <%= fa_icon 'user-circle-o 2x' %>
-    <div class="side-menu-item-text">Accounts</div>
-  </a>
+  <% if can? :read, current_user %>
+    <a class="side-menu-item <%= 'active' if params[:controller] == 'account/people' %>" href="<%= account_path %>">
+      <%= fa_icon 'user-circle-o 2x' %>
+      <div class="side-menu-item-text">My Account</div>
+    </a>
+  <% end %>
 
-  <a class="side-menu-item <%= 'active' if params[:controller] == 'people' %>" href="<%= people_path %>">
-    <%= fa_icon 'user 2x' %>
-    <div class="side-menu-item-text">People</div>
-  </a>
+  <% if can? :read, Person %>
+    <a class="side-menu-item <%= 'active' if params[:controller] == 'people/people' %>" href="<%= people_path %>">
+      <%= fa_icon 'user 2x' %>
+      <div class="side-menu-item-text">People</div>
+    </a>
+  <% end %>
 
-  <a class="side-menu-item <%= 'active' if params[:controller] == 'teams' %>" href="<%= teams_path %>">
-    <%= fa_icon 'users 2x' %>
-    <div class="side-menu-item-text">Teams</div>
-  </a>
+  <% if can? :read, Team %>
+    <a class="side-menu-item <%= 'active' if params[:controller] == 'people/teams' %>" href="<%= teams_path %>">
+      <%= fa_icon 'users 2x' %>
+      <div class="side-menu-item-text">Teams</div>
+    </a>
+  <% end %>
 
-  <a class="side-menu-item <%= 'active' if params[:controller] == 'families' %>" href="<%= families_path %>">
-    <%= fa_icon 'address-card 2x' %>
-    <div class="side-menu-item-text">Families</div>
-  </a>
+  <% if can? :read, Family %>
+    <a class="side-menu-item <%= 'active' if params[:controller] == 'people/families' %>" href="<%= families_path %>">
+      <%= fa_icon 'address-card 2x' %>
+      <div class="side-menu-item-text">Families</div>
+    </a>
+  <% end %>
 
-  <a class="side-menu-item side-menu-item-bottom" href="<%= destroy_user_session_path %>">
-    <%= fa_icon 'sign-out 2x' %>
-    <div class="side-menu-item-text">Sign out</div>
-  </a>
+  <% if user_signed_in? %>
+    <a class="side-menu-item side-menu-item-bottom" href="<%= destroy_user_session_path %>">
+      <%= fa_icon 'sign-out 2x' %>
+      <div class="side-menu-item-text">Sign out</div>
+    </a>
+  <% end %>
 
 </div>

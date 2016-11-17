@@ -6,7 +6,7 @@ module People
       if @person.save
         @person.assign_families create_params[:family_ids]
         @person.assign_teams create_params[:team_ids]
-        redirect_to person_path(@person)
+        redirect_to show_path
       else
         render :new
       end
@@ -14,7 +14,7 @@ module People
 
     def update
       if @person.update_attributes(update_params)
-        redirect_to person_path(@person)
+        redirect_to show_path
       else
         render :edit
       end
@@ -29,6 +29,14 @@ module People
 
     def update_params
       blanks_to_nil params.require(:person).permit(:first_name, :last_name, :prefix, :suffix, :dob, :gender, :email, :phone)
+    end
+
+    def show_path
+      if @person == current_user.person
+        account_path
+      else
+        person_path(@person)
+      end
     end
   end
 end

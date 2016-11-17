@@ -1,0 +1,28 @@
+<div class="container-xs">
+  <%= render 'account/people/title', title: 'Your profile' %>
+
+  <% if @person.new_record? %>
+    <p class="size-xs-small">
+      Welcome! To add your account to the church database,
+      we respectfully ask that you provide some identity information.
+    </p>
+
+    <p class="size-xs-small text-light">
+      Fields in red are required.
+    </p>
+  <% end %>
+
+  <%= flash_messages %>
+  <%= form_for(@person, url: account_person_path) do |f| %>
+
+    <div class="list-group mb-1">
+      <%= render 'account/people/form_fields', f: f, person: @person, email: false %>
+    </div>
+
+    <div class="text-xs-center">
+      <button type="submit" class="btn btn-primary btn-lg">
+        <%= fa_icon 'user', class: 'mr-sm' %>Save changes
+      </button>
+    </div>
+  <% end %>
+</div>

@@ -24,7 +24,7 @@ module UsersHelper
   end
 
   def avatar_tag(person, args={})
-    args[:size] ||= avatar_size_from_class(args[:class])
+    args[:size] ||= avatar_size_from_class(args[:class].match(/avatar[^\s]*/).to_s)
     image_tag(avatar_url(person, size: args[:size]), class: "avatar #{args[:class]}")
   end
 

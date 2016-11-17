@@ -32,6 +32,10 @@ class Ability
     user ||= User.new
     if user.admin?
       can :manage, :all
+    else
+      can :create, :person
+      can :manage, user
+      can :manage, user.person
     end
   end
 end
