@@ -41,6 +41,9 @@ gem 'momentjs-rails'
 gem "select2-rails"
 gem 'gravatarify'
 
+# With figaro you can define ENV variables on the server more easily with a `config/application.yml` file.
+gem 'figaro'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
