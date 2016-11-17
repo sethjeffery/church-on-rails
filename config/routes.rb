@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: 'home#index'
+
   resources :families do
     resources :family_memberships, path: 'memberships'
   end

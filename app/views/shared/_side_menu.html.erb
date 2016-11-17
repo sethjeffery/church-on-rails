@@ -1,0 +1,28 @@
+<div class="side-menu">
+
+  <a class="side-menu-item <%= 'active' if params[:controller] == 'users' %>" href="<%= users_path %>">
+    <%= fa_icon 'user-circle-o 2x' %>
+    <div class="side-menu-item-text">Accounts</div>
+  </a>
+
+  <a class="side-menu-item <%= 'active' if params[:controller] == 'people' %>" href="<%= people_path %>">
+    <%= fa_icon 'user 2x' %>
+    <div class="side-menu-item-text">People</div>
+  </a>
+
+  <a class="side-menu-item <%= 'active' if params[:controller] == 'teams' %>" href="<%= teams_path %>">
+    <%= fa_icon 'users 2x' %>
+    <div class="side-menu-item-text">Teams</div>
+  </a>
+
+  <a class="side-menu-item <%= 'active' if params[:controller] == 'families' %>" href="<%= families_path %>">
+    <%= fa_icon 'address-card 2x' %>
+    <div class="side-menu-item-text">Families</div>
+  </a>
+
+  <a class="side-menu-item side-menu-item-bottom" href="<%= destroy_user_session_path %>">
+    <%= fa_icon 'sign-out 2x' %>
+    <div class="side-menu-item-text">Sign out</div>
+  </a>
+
+</div>

@@ -1,0 +1,78 @@
+@import 'bootstrap/variables';
+@import 'bootstrap/mixins/breakpoints';
+
+$side-menu-width: 6.5rem;
+$side-menu-width-sm: 3.5rem;
+$side-menu-border-color: #e0e0e0;
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: $side-menu-width;
+  min-height: 100%;
+  background-color: #f4f4f4;
+  text-align: center;
+  font-size: 0.875rem;
+  border-right: solid 1px $side-menu-border-color;
+  padding-bottom: 5.25rem; // approximation to account for bottom item
+
+  @include media-breakpoint-down(sm) {
+    width: $side-menu-width-sm;
+    font-size: 0.625rem;
+  }
+}
+
+.side-menu-item {
+  display: block;
+  color: $body-color;
+  padding: 1rem 0.5rem;
+  margin: 0 0.5rem;
+  border-bottom: solid 1px $side-menu-border-color;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &.active .side-menu-item-text {
+    font-weight: bold;
+  }
+
+  @include media-breakpoint-down(sm) {
+    margin: 0 0.25rem;
+  }
+}
+
+.with-side-menu {
+  padding-left: $side-menu-width;
+
+  @include media-breakpoint-down(sm) {
+    padding-left: $side-menu-width-sm;
+  }
+}
+
+.side-menu-item-text {
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+
+  @include media-breakpoint-down(sm) {
+    display: none;
+  }
+}
+
+.side-menu-item-bottom {
+  border-bottom: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+
+  .side-menu-item-text {
+    @include media-breakpoint-down(sm) {
+      display: block;
+      font-size: 0.5rem;
+      margin-top: 0;
+    }
+  }
+}

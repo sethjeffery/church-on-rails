@@ -9,7 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
 
-  <body>
+  <body class="<%= 'with-side-menu' if side_menu? %>">
+    <% if side_menu? %>
+      <%= render 'shared/side_menu' %>
+    <% end %>
+
     <div class="container py-1">
       <%= yield %>
     </div>
