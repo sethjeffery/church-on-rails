@@ -16,23 +16,27 @@
   </div>
 
   <% if @person.new_record? %>
-    <div class="list-group mb-2">
-      <div class="list-group-item list-group-item-secondary">
-        Add to Family
+    <% if can?(:create, FamilyMembership) %>
+      <div class="list-group mb-2">
+        <div class="list-group-item list-group-item-secondary">
+          Add to Family
+        </div>
+        <div class="list-group-item">
+          <%= f.collection_select :family_ids, Family.all, :id, :name, { include_blank: true }, class: 'form-control', data: { selectpicker: true, placeholder: '', :'allow-clear' => true } %>
+        </div>
       </div>
-      <div class="list-group-item">
-        <%= f.collection_select :family_ids, Family.all, :id, :name, { include_blank: true }, class: 'form-control', data: { selectpicker: true, placeholder: '', :'allow-clear' => true } %>
-      </div>
-    </div>
+    <% end %>
 
-    <div class="list-group mb-2">
-      <div class="list-group-item list-group-item-secondary">
-        Add to Teams
+    <% if can?(:create, TeamMembership) %>
+      <div class="list-group mb-2">
+        <div class="list-group-item list-group-item-secondary">
+          Add to Teams
+        </div>
+        <div class="list-group-item">
+          <%= f.collection_select :team_ids, Team.all, :id, :name, { }, multiple: true, class: 'form-control', data: { selectpicker: true } %>
+        </div>
       </div>
-      <div class="list-group-item">
-        <%= f.collection_select :team_ids, Team.all, :id, :name, { }, multiple: true, class: 'form-control', data: { selectpicker: true } %>
-      </div>
-    </div>
+    <% end %>
   <% end %>
 
   <div class="text-xs-center">

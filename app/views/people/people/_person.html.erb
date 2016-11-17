@@ -2,8 +2,10 @@
   <div class="col-md-6">
     <div class="list-group mb-2">
       <div class="list-group-item list-group-item-secondary">
-        <%= link_to edit_person_path(@person), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
-          <%= fa_icon 'pencil 1x', class: 'mr-xs' %>Edit
+        <% if can? :edit, @person %>
+          <%= link_to edit_person_path(@person), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+            <%= fa_icon 'pencil 1x', class: 'mr-xs' %>Edit
+          <% end %>
         <% end %>
 
         Details
@@ -34,7 +36,7 @@
     </div>
 
     <% @person.families.each do |family| %>
-      <%= render family %>
+      <%= render 'people/families/family', family: family %>
     <% end %>
   </div>
 </div>
