@@ -1,8 +1,4 @@
-<div class="text-xs-center mb-1">
-  <%= avatar_tag @person, class: 'avatar-xl' %>
-</div>
-
-<h2 class="text-xs-center mb-1"><%= @person %></h2>
+<%= render 'people/people/title' %>
 
 <div class="row">
   <div class="col-md-6">
@@ -21,7 +17,7 @@
           :email      => (link_to(@person.email, "mailto:#{@person.email}", class: 'dotted') if @person.email),
           :phone      => @person.phone,
           :gender     => gender_icon(@person),
-          :account    => @person.user ? fa_icon('check 1x') : link_to('Link account', new_user_path, class: 'btn btn-secondary btn-sm btn-align-middle')
+          :account    => @person.user ? fa_icon('check 1x') : link_to('Link account', new_person_user_path(@person), class: 'btn btn-secondary btn-sm btn-align-middle')
       } %>
     </div>
   </div>

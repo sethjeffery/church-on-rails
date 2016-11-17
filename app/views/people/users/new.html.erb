@@ -1,0 +1,33 @@
+<%= render 'people/people/title' %>
+
+<div class="container-sm">
+
+  <%= flash_messages %>
+  <%= form_for(@person, url: person_user_path(@person)) do |f| %>
+
+    <div class="list-group mb-2">
+      <div class="list-group-item list-group-item-secondary">
+        Link to User Account
+      </div>
+
+      <div class="list-group-item">
+        <div class="mb-1 <%= 'has-danger' if @person.errors[:user_id].present? %>">
+          <%= f.collection_select :user_id, User.all, :id, :email, { include_blank: true }, class: 'form-control',
+                                  data: { selectpicker: true, placeholder: 'Choose a user account' } %>
+
+          <% if @person.errors[:user_id].present? %>
+            <div class="size-xs-tiny text-danger">Account <%= @person.errors[:user_id].join(', ') %></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-xs-center">
+      <button type="submit" class="btn btn-primary btn-lg">
+        <%= fa_icon 'user', class: 'mr-sm' %>Link account
+      </button>
+    </div>
+
+  <% end %>
+
+</div>

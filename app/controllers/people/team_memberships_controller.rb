@@ -29,7 +29,7 @@ module People
 
     def load_and_authorize_team
       @team = Team.find(params[:team_id])
-      authorize! params[:action].to_sym, @team
+      authorize! :show, @team
     end
   end
 end

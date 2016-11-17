@@ -29,7 +29,7 @@ module People
 
     def load_and_authorize_family
       @family = Family.find(params[:family_id])
-      authorize! params[:action].to_sym, @family
+      authorize! :show, @family
     end
   end
 end
