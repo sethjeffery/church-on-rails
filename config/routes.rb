@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       resources :team_memberships, path: 'memberships'
     end
     resources :people do
-      resources :users
+      resource :user
     end
   end
 
