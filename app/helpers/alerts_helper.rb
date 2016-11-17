@@ -1,44 +1,18 @@
 module AlertsHelper
   def flash_messages(args={})
     if flash[:alert]
-      html = <<-HTML
-        <div class="alert alert-danger">
-          #{flash[:alert]}
-        </div>
-      HTML
-
+      html = content_tag :div, flash[:alert],   class: 'alert alert-danger'
     elsif flash[:info]
-      html = <<-HTML
-        <div class="alert alert-info">
-          #{flash[:info]}
-        </div>
-      HTML
-
+      html = content_tag :div, flash[:info],    class: 'alert alert-info'
     elsif flash[:notice]
-      html = <<-HTML
-        <div class="alert alert-info">
-          #{flash[:notice]}
-        </div>
-      HTML
-
+      html = content_tag :div, flash[:notice],  class: 'alert alert-info'
     elsif flash[:success]
-      html = <<-HTML
-        <div class="alert alert-success">
-          #{flash[:success]}
-        </div>
-      HTML
+      html = content_tag :div, flash[:success], class: 'alert alert-success'
     else
-      html = ''
+      return
     end
 
-    wrap_message(html, args)
-  end
-
-  def wrap_message(message, args={})
-    if args[:container]
-      "<div class='#{args[:container]}'>#{message}</div>".html_safe
-    else
-      message.html_safe
-    end
+    html = content_tag :div, html, class: args[:container] if args[:container]
+    html
   end
 end
