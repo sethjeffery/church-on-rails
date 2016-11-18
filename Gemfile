@@ -41,6 +41,8 @@ gem 'momentjs-rails'
 gem "select2-rails"
 gem 'gravatarify'
 gem 'redcarpet'
+gem 'kaminari'
+gem 'bootstrap4-kaminari-views'
 
 # With figaro you can define ENV variables on the server more easily with a `config/application.yml` file.
 gem 'figaro'

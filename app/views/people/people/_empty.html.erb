@@ -2,7 +2,7 @@
   <h2>Nothing found.</h2>
   <div class="text-light">
     We couldn't find anyone matching the criteria.
-    <% if can? :create, Person %>
+    <% if can?(:create, Person) && params[:q].present? %>
       Would you like to <%= link_to 'add a new member', new_person_path('person[first_name]': params[:q].split(' ')[0], 'person[last_name]': params[:q].split(' ')[1]) %>?
     <% end %>
   </div>

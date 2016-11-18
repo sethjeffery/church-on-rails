@@ -17,10 +17,14 @@
           <%= fa_icon 'star 1x', class: 'mr-xs' if team.admin? %><%= team %>
         </div>
         <div class="col-sm-6 text-ellipsis text-light size-xs-small">
-          <%= pluralize team.team_memberships.count, 'member' %>
+          <%= pluralize team.team_memberships.to_a.count, 'member' %>
         </div>
       </div>
 
     <% end %>
   <% end %>
+</div>
+
+<div class="text-xs-center mt-1">
+  <%= paginate @teams, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
 </div>

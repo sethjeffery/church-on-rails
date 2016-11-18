@@ -1,0 +1,13 @@
+@import 'bootstrap/variables';
+@import 'bootstrap/mixins/breakpoints';
+
+.pagination {
+  margin: 0 auto;
+  vertical-align: top;
+}
+
+.pagination-sm .page-link {
+  @include media-breakpoint-down(xs) {
+    padding: 0.275rem 0.5rem;
+  }
+}

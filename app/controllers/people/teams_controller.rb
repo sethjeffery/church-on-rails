@@ -3,8 +3,8 @@ module People
     load_and_authorize_resource
 
     def index
-      @teams = @teams.includes(:team_memberships)
       @teams = @teams.where("name LIKE ?", "%#{params[:q]}%") if params[:q]
+      @teams = @teams.includes(:team_memberships, :people).page(params[:page]).per(20)
     end
 
     def create
