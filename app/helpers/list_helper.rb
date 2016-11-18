@@ -17,11 +17,11 @@ module ListHelper
 
   def list_group_item(model, options={}, &block)
     if (link = options[:url])
-      link_to (link === true ? model : link), class: 'list-group-item clearfix size-xs-small size-sm-normal list-group-item-action' do
+      link_to (link === true ? model : link), class: "list-group-item clearfix size-xs-small size-sm-normal list-group-item-action #{options[:class]}" do
         capture(model, &block) if block_given?
       end
     else
-      content_tag :div, class: 'list-group-item clearfix size-xs-small size-sm-normal' do
+      content_tag :div, class: "list-group-item clearfix size-xs-small size-sm-normal #{options[:class]}" do
         capture(model, &block) if block_given?
       end
     end

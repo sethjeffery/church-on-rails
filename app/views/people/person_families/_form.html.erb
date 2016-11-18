@@ -1,0 +1,7 @@
+<%= flash_messages %>
+<%= form_for(@person, url: person_families_path(@person)) do |f| %>
+
+  <%= render 'people/people/form_family_membership', f: f %>
+  <%= render 'shared/form_submit', title: 'Add to family', icon: 'address-card' %>
+
+<% end %>

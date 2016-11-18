@@ -1,0 +1,7 @@
+<%= flash_messages %>
+<%= form_for(@person, url: person_teams_path(@person)) do |f| %>
+
+  <%= render 'people/people/form_team_membership', f: f %>
+  <%= render 'shared/form_submit', title: 'Update teams', icon: 'users' %>
+
+<% end %>

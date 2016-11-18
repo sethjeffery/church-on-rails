@@ -1,4 +1,4 @@
-<% family.family_memberships.includes(:person).each do |membership| %>
+<% family.family_memberships.joins(:person).includes(:person).order('head DESC', 'first_name').each do |membership| %>
   <div class="list-group-item clearfix <%= 'size-xs-small' unless membership.head? %>" id="family_membership-<%= membership.id %>">
     <% if can?(:destroy, membership) %>
       <%= button_to [family, membership], method: :delete, remote: true, class: 'btn btn-link py-0 px-xs float-xs-right text-light', data: { confirm: "Really remove #{membership.person} from #{family}?" } do %>

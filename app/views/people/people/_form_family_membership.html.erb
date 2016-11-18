@@ -1,0 +1,14 @@
+<% if can?(:create, FamilyMembership) %>
+  <div class="list-group mb-2">
+    <div class="list-group-item list-group-item-secondary">
+      <% unless @person.new_record? %>
+        <%= link_to 'Cancel', @person, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+      <% end %>
+      Add to Family
+    </div>
+    <div class="list-group-item" id="family-picker">
+      <%= f.select :family_ids, [['< Start new family >', 'New']] + Family.all.map{|family| [ family.name, family.id ] }, { include_blank: true }, class: 'form-control', data: { selectpicker: true, placeholder: 'Choose a Family', :'allow-clear' => true } %>
+      <%= f.text_field :family_name, class: 'form-control mt-sm', placeholder: 'Family name' %>
+    </div>
+  </div>
+<% end %>

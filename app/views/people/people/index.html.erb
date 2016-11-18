@@ -15,8 +15,8 @@
 
   <% @people.each do |person| %>
     <%= list_group_item person, url: person do %>
-      <div class="avatar-md-container">
-        <%= avatar_tag person, class: 'avatar-md' %>
+      <div class="avatar-container">
+        <%= avatar_tag person %>
 
         <div class="row">
           <div class="col-sm-6 text-ellipsis">

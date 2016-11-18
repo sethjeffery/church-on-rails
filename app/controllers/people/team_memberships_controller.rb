@@ -8,8 +8,6 @@ module People
     end
 
     def create
-      @team_membership.team = @team
-
       if @team_membership.save
         redirect_to team_path(@team)
       else
@@ -24,12 +22,12 @@ module People
     private
 
     def create_params
-      params.require(:team_membership).permit(:person_id)
+      params.require(:team_membership).permit(:person_id, :team_id)
     end
 
     def load_and_authorize_team
       @team = Team.find(params[:team_id])
-      authorize! :show, @team
+      authorize! :edit, @team
     end
   end
 end

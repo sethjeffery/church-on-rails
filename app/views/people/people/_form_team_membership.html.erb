@@ -1,0 +1,13 @@
+<% if can?(:create, TeamMembership) %>
+  <div class="list-group mb-2">
+    <div class="list-group-item list-group-item-secondary">
+      <% unless @person.new_record? %>
+        <%= link_to 'Cancel', @person, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+      <% end %>
+      Add to Teams
+    </div>
+    <div class="list-group-item">
+      <%= f.collection_select :team_ids, Team.all, :id, :name, { }, multiple: true, class: 'form-control', data: { selectpicker: true, placeholder: 'Choose Teams' } %>
+    </div>
+  </div>
+<% end %>

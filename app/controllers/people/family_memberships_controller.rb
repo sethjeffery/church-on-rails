@@ -8,8 +8,6 @@ module People
     end
 
     def create
-      @family_membership.family = @family
-
       if @family_membership.save
         redirect_to family_path(@family)
       else
@@ -24,12 +22,12 @@ module People
     private
 
     def create_params
-      params.require(:family_membership).permit(:person_id, :head)
+      params.require(:family_membership).permit(:person_id, :head, :family_id)
     end
 
     def load_and_authorize_family
       @family = Family.find(params[:family_id])
-      authorize! :show, @family
+      authorize! :edit, @family
     end
   end
 end

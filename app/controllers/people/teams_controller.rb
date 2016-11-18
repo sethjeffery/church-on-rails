@@ -4,7 +4,7 @@ module People
 
     def index
       @teams = @teams.where("name LIKE ?", "%#{params[:q]}%") if params[:q]
-      @teams = @teams.includes(:team_memberships, :people).page(params[:page]).per(20)
+      @teams = @teams.includes(:team_memberships, :people).order(:name).page(params[:page]).per(20)
     end
 
     def create

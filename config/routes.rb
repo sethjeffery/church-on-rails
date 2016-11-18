@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     end
     resources :people do
       resource :user
+      resource :teams, controller: :person_teams
+      resource :families, controller: :person_families
     end
   end
 

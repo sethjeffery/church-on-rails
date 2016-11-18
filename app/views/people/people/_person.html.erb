@@ -19,7 +19,7 @@
           :email      => (link_to(@person.email, "mailto:#{@person.email}", class: 'dotted') if @person.email),
           :phone      => @person.phone,
           :gender     => gender_icon(@person),
-          :account    => @person.user ? fa_icon('check 1x') : link_to('Link account', new_person_user_path(@person), class: 'btn btn-secondary btn-sm btn-align-middle')
+          :account    => (fa_icon('check 1x') if @person.user)
       } %>
     </div>
   </div>
@@ -27,6 +27,12 @@
   <div class="col-md-6">
     <div class="list-group mb-2">
       <div class="list-group-item list-group-item-secondary">
+        <% if can? :create, TeamMembership %>
+          <%= link_to person_teams_path(@person), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+            <%= fa_icon 'users 1x', class: 'mr-xs' %>Join
+          <% end %>
+        <% end %>
+
         Teams
       </div>
 
@@ -37,8 +43,22 @@
       <% end %>
     </div>
 
-    <% @person.families.each do |family| %>
-      <%= render 'people/families/family_list_group', family: family %>
+    <% if @person.families.blank? %>
+      <% if can? :create, FamilyMembership %>
+        <div class="list-group mb-2">
+          <div class="list-group-item list-group-item-secondary">
+            <%= link_to person_families_path(@person), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+              <%= fa_icon 'address-card 1x', class: 'mr-xs' %>Join
+            <% end %>
+
+            Family
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <% @person.families.each do |family| %>
+        <%= render 'people/families/family_list_group', family: family %>
+      <% end %>
     <% end %>
   </div>
 </div>
