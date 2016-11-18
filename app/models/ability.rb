@@ -30,12 +30,22 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 
     user ||= User.new
-    if user.admin?
-      can :manage, :all
-    else
-      can :create, :person
-      can :manage, user
-      can :manage, user.person
+    can :manage, user
+    can :manage, user.person
+
+    user.teams&.each do |team|
+      add_team_abilities(user, team)
+    end
+  end
+
+  def add_team_abilities(user, team)
+    can :manage, :all if team.admin?
+
+    [Person, Family, Team, TeamMembership, FamilyMembership].each do |klass|
+      can :read,   klass if team.people_reader?
+      can :edit,   klass if team.people_editor?
+      can :create, klass if team.people_editor?
+      can :manage, klass if team.people_admin?
     end
   end
 end

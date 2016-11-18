@@ -4,6 +4,7 @@
 
 .list-group-item {
   line-height: #{$line-height-base}rem;
+  background-color: rgba(255,255,255,0.85);
 }
 
 
@@ -18,6 +19,18 @@
   &.list-group-item-action {
     @include hover-focus {
       background-color: darken($list-group-disabled-bg, 5%);
+    }
+  }
+
+  .custom-control-indicator {
+    border: solid 1px $link-color;
+  }
+
+  .custom-control {
+    display: block;
+    color: $link-color;
+    &:hover {
+      color: $link-hover-color;
     }
   }
 }

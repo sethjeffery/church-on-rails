@@ -21,8 +21,9 @@
         <div class="list-group-item list-group-item-secondary">
           Add to Family
         </div>
-        <div class="list-group-item">
-          <%= f.collection_select :family_ids, Family.all, :id, :name, { include_blank: true }, class: 'form-control', data: { selectpicker: true, placeholder: '', :'allow-clear' => true } %>
+        <div class="list-group-item" id="family-picker">
+          <%= f.select :family_ids, [['< Start new family >', 'New']] + Family.all.map{|family| [ family.name, family.id ] }, { include_blank: true }, class: 'form-control', data: { selectpicker: true, placeholder: 'Choose a Family', :'allow-clear' => true } %>
+          <%= f.text_field :family_name, class: 'form-control mt-sm', placeholder: 'Family name' %>
         </div>
       </div>
     <% end %>
@@ -33,7 +34,7 @@
           Add to Teams
         </div>
         <div class="list-group-item">
-          <%= f.collection_select :team_ids, Team.all, :id, :name, { }, multiple: true, class: 'form-control', data: { selectpicker: true } %>
+          <%= f.collection_select :team_ids, Team.all, :id, :name, { }, multiple: true, class: 'form-control', data: { selectpicker: true, placeholder: 'Choose Teams' } %>
         </div>
       </div>
     <% end %>

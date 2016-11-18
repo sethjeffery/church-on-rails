@@ -15,6 +15,9 @@ Rails.application.routes.draw do
 
   namespace :account do
     get '/' => 'people#show'
+    devise_scope :user do
+      get 'resend_confirmation' => 'confirmations#resend'
+    end
     resource :person
   end
 

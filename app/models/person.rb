@@ -1,5 +1,6 @@
 class Person < ApplicationRecord
   include Concerns::Naming
+  attr_accessor :family_name
 
   belongs_to :user, autosave: true
   has_many :family_memberships
@@ -12,24 +13,9 @@ class Person < ApplicationRecord
   before_validation :copy_changes_to_user
   before_validation :sanitize_names
 
-  def admin?
-    teams.admins.present?
-  end
-
-  def assign_families(family_ids)
-    if family_ids.present?
-      Array.wrap(family_ids).compact.each do |family_id|
-        FamilyMembership.create user_id: id, family_id: family_id
-      end
-    end
-  end
-
-  def assign_teams(team_ids)
-    if team_ids.present?
-      Array.wrap(team_ids).compact.each do |team_id|
-        TeamMembership.create user_id: id, team_id: team_id
-      end
-    end
+  def start_family(family_name)
+    family = Family.create! name: family_name
+    FamilyMembership.create! person: self, family: family
   end
 
   protected

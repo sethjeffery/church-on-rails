@@ -19,9 +19,10 @@ h4 {
 
 @each $breakpoint in map-keys($grid-breakpoints) {
   @include media-breakpoint-up($breakpoint) {
-    .size-#{$breakpoint}-tiny   { font-size: 0.75rem !important; }
-    .size-#{$breakpoint}-small  { font-size: 0.875rem !important; }
-    .size-#{$breakpoint}-normal { font-size: 1rem !important; }
+    .size-#{$breakpoint}-tiny   { font-size: 0.75rem !important; line-height: 1.5; }
+    .size-#{$breakpoint}-small  { font-size: 0.875rem !important; line-height: 1.5; }
+    .size-#{$breakpoint}-normal { font-size: 1rem !important; line-height: 1.5; }
+    .size-#{$breakpoint}-large  { font-size: 1.25rem !important; line-height: 1.5; }
   }
 }
 
@@ -33,4 +34,8 @@ h4 {
 a.dotted {
   text-decoration: none;
   border-bottom: dotted 1px $link-color;
+}
+
+.markdown-container p:last-child {
+  margin-bottom: 0;
 }

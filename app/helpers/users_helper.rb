@@ -20,7 +20,7 @@ module UsersHelper
   end
 
   def avatar_url(person, size: 48)
-    h gravatar_url(person.email, size: size, default: :mm)
+    h gravatar_url(person&.email, size: size, default: :mm)
   end
 
   def avatar_tag(person, args={})

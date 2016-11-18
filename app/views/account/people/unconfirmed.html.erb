@@ -1,0 +1,14 @@
+<div class="container-xs">
+  <%= render 'people/people/title', title: 'Confirmation needed' %>
+
+  <p class="alert alert-info">
+    We have sent an email to <strong><%= current_user.email %></strong>
+    with instructions to confirm your account. Please check your
+    inbox for the email.
+  </p>
+
+  <p class="text-xs-center size-xs-small">
+    Can't see our email?
+    <%= link_to "Click here to resend it.", account_resend_confirmation_path %>
+  </p>
+</div>

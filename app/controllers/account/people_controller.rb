@@ -1,7 +1,9 @@
 class Account::PeopleController < ApplicationController
+  before_action :require_confirmation, except: [:show]
   before_action :require_person, only: [:show, :edit, :update]
 
   def show
+    render :unconfirmed unless current_user.confirmed?
   end
 
   def edit
@@ -25,8 +27,12 @@ class Account::PeopleController < ApplicationController
 
   private
 
+  def require_confirmation
+    redirect_to account_person_path unless current_user.confirmed?
+  end
+
   def require_person
-    redirect_to new_account_person_path unless current_user.person.present?
+    redirect_to new_account_person_path if current_user.person.blank? && current_user.confirmed?
     @person = current_user.person
   end
 

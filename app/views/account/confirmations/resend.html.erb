@@ -1,0 +1,10 @@
+<div class="container-xs">
+  <%= render 'people/people/title', title: 'Confirmation sent' %>
+
+  <%= flash_messages %>
+
+  <p class="alert alert-info">
+    We have sent another email to <strong><%= current_user.email %></strong>
+    with instructions. Please check your inbox for the email.
+  </p>
+</div>

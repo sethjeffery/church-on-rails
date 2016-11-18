@@ -1,4 +1,8 @@
 class Account::ConfirmationsController < Devise::ConfirmationsController
+  def resend
+    current_user.resend_confirmation_instructions
+  end
+
   def after_confirmation_path_for(resource_name, resource)
     if signed_in?(resource_name)
       signed_in_root_path(resource)

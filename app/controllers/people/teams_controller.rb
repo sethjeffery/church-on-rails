@@ -26,7 +26,12 @@ module People
     private
 
     def create_params
-      blanks_to_nil params.require(:team).permit(:name)
+      if can? :manage, @team
+        blanks_to_nil params.require(:team).permit :name, :description,
+                                                   :people_reader, :people_editor, :people_admin
+      else
+        blanks_to_nil params.require(:team).permit :name, :description
+      end
     end
   end
 end

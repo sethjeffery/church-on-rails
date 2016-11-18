@@ -31,7 +31,7 @@ module ListHelper
     <<-HTML
       <div class="list-group-item">
         <div class="row">
-          <div class="col-sm-4 text-light">#{ field.is_a?(Symbol) ? field.to_s.humanize : field }</div>
+          <div class="col-sm-4 text-light size-xs-small size-sm-normal">#{ field.is_a?(Symbol) ? field.to_s.humanize : field }</div>
           <div class="col-sm-8">#{ h value }</div>
         </div>
       </div>

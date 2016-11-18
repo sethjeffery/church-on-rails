@@ -40,6 +40,7 @@ gem 'bootstrap3-datetimepicker-rails'
 gem 'momentjs-rails'
 gem "select2-rails"
 gem 'gravatarify'
+gem 'redcarpet'
 
 # With figaro you can define ENV variables on the server more easily with a `config/application.yml` file.
 gem 'figaro'

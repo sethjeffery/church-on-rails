@@ -3,13 +3,16 @@ module People
     load_and_authorize_resource
 
     def index
+      @people = @people.includes(:teams)
       @people = @people.where("first_name LIKE ? OR last_name LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%") if params[:q]
     end
 
     def create
       if @person.save
-        @person.assign_families create_params[:family_ids]
-        @person.assign_teams create_params[:team_ids]
+        if create_params[:family_name].present? && @person.families.blank?
+          @person.start_family(create_params[:family_name])
+        end
+
         redirect_to show_path
       else
         render :new
@@ -17,7 +20,7 @@ module People
     end
 
     def update
-      if @person.update_attributes(update_params)
+      if @person.update_attributes(create_params)
         redirect_to show_path
       else
         render :edit
@@ -31,12 +34,13 @@ module People
     end
 
     def create_params
-      blanks_to_nil params.require(:person).permit(:first_name, :last_name, :prefix, :suffix, :dob, :gender, :email, :phone,
-                                                   :family_ids, :team_ids, family_ids: [], team_ids: [])
-    end
+      fields      = [ :first_name, :last_name, :prefix, :suffix, :dob, :gender, :email, :phone ]
+      fields.concat [ :family_name, :family_ids, family_ids: []]    if can? :create, FamilyMembership
+      fields.concat [ :team_ids, team_ids: []]                      if can? :create, TeamMembership
 
-    def update_params
-      blanks_to_nil params.require(:person).permit(:first_name, :last_name, :prefix, :suffix, :dob, :gender, :email, :phone)
+      hash = blanks_to_nil(params.require(:person).permit(*fields))
+      hash.delete(:family_ids) if hash[:family_ids] == "New"
+      hash
     end
 
     def show_path

@@ -2,4 +2,4 @@
   <%= avatar_tag @person, class: 'avatar-xl' %>
 </div>
 
-<h2 class="text-xs-center mb-1"><%= @person %></h2>
+<%= render 'shared/title', title: (local_assigns[:title] || @person.to_s), align: :center %>

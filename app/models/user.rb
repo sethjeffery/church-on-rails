@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  delegate :admin?, :name, to: :person, allow_nil: true
+  delegate :teams, :families, :name, to: :person, allow_nil: true
 
   # Include default devise modules. Others available are:
   # :lockable, and :timeoutable
@@ -8,7 +8,14 @@ class User < ApplicationRecord
 
   has_one :person
 
+  before_save :auto_connect_person, if: :confirmed_at_changed?
+
   def to_s
     email
+  end
+
+  def auto_connect_person
+    person = Person.find_by(email: email)
+    person&.update_attributes user_id: id unless person.user_id
   end
 end

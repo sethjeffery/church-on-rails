@@ -6,14 +6,91 @@
       <% if @team.new_record? %>
         <%= link_to 'Cancel', teams_path, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
       <% else %>
-        <%= link_to 'Cancel', @person, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+        <%= link_to 'Cancel', @team, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
       <% end %>
 
-      Edit team details
+      Team details
     </div>
 
-    <%= render 'shared/list_group_item_field', f: f, model: @team, field: :name %>
+    <div class="list-group-item <%= 'has-danger' if @team.errors[:name].present? %>">
+      <% if @team.new_record? %>
+        <div class="mb-sm">Name</div>
+      <% end %>
 
+      <%= f.text_field :name, class: 'form-control', autofocus: true, placeholder: "e.g. Editors, Worship team, Pastors, ..." %>
+
+      <% if @team.errors[:name].present? %>
+        <div class="size-xs-tiny text-danger">Name <%= @team.errors[:name].join(', ') %></div>
+      <% end %>
+    </div>
+
+    <div class="list-group-item <%= 'has-danger' if @team.errors[:description].present? %>">
+      Description
+      <div class="size-xs-small text-light mb-sm">A short description of your team, e.g. what it does or where it meets.</div>
+
+      <%= f.text_area :description, class: 'form-control', rows: 10 %>
+
+      <% if @team.errors[:description].present? %>
+        <div class="size-xs-tiny text-danger">Description <%= @team.errors[:description].join(', ') %></div>
+      <% end %>
+    </div>
+
+    <% if can? :manage, @team %>
+      <div class="list-group-item">
+        Permissions
+        <div class="size-xs-small text-light mb-1">
+          Should team members receive special permissions on this website?
+          <a href="#permissions-info" title="Click for more info" data-tooltip data-trigger="hover" data-toggle="collapse"><%= fa_icon 'info-circle' %></a>
+        </div>
+
+        <div class="collapse" id="permissions-info">
+          <hr class="mt-0"/>
+          <p>
+            By default, anyone who creates an account still cannot see anything beyond their own account. By adding people to teams
+            and giving those teams permissions, you can open up parts of your website to your members.
+          </p>
+
+          <p>
+            <strong>View</strong> permissions allow someone to read information (like people's names, contact info),
+            but not to change it.
+          </p>
+
+          <p>
+            <strong>Edit</strong> permissions allow someone to make changes to any existing information. They could
+            change a person's name in the database for example, and add new people, but not remove anything.
+          </p>
+
+          <p>
+            <strong>Manage</strong> permissions are the highest level. Managers can create or remove all kinds
+            of information from the database.
+          </p>
+          <hr/>
+        </div>
+
+        <div class="mb-xs">
+          <%= fa_icon 'user 1x mr-xs' %>
+          <span class="">People, Teams, Families</span>
+        </div>
+
+        <label class="field custom-checkbox custom-control">
+          <%= f.check_box :people_reader, class: 'custom-control-input' %>
+          <span class="custom-control-indicator"></span>
+          View
+        </label>
+
+        <label class="field custom-checkbox custom-control">
+          <%= f.check_box :people_editor, class: 'custom-control-input' %>
+          <span class="custom-control-indicator"></span>
+          Edit
+        </label>
+
+        <label class="field custom-checkbox custom-control">
+          <%= f.check_box :people_admin, class: 'custom-control-input' %>
+          <span class="custom-control-indicator"></span>
+          Manage
+        </label>
+      </div>
+    <% end %>
   </div>
 
   <div class="text-xs-center">
