@@ -15,7 +15,7 @@ class Person < ApplicationRecord
 
   def start_family(family_name)
     family = Family.create! name: family_name
-    FamilyMembership.create! person: self, family: family
+    FamilyMembership.create! person: self, family: family, head: true
   end
 
   protected
