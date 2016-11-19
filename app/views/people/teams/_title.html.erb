@@ -1,4 +1,7 @@
-<h2 class="text-xs-center mb-1">
-  <%= fa_icon 'star 1x', class: 'mr-1' if @team.admin? %>
-  <%= @team.name %>
-</h2>
+<div class="text-xs-center mb-sm">
+  <span class="avatar avatar-xl avatar-team" style="background-color: <%= '#' + @team.color %>;">
+    <%= fa_icon @team.icon %>
+  </span>
+</div>
+
+<%= render 'shared/title', title: @team, align: :center %>

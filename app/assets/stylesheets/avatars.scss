@@ -13,6 +13,7 @@ $avatar-width: 1.5rem;
 }
 
 .avatar {
+  display: inline-block;
   width: $avatar-width;
   height: $avatar-width;
   border-radius: 50%;
@@ -44,4 +45,58 @@ $avatar-width: 1.5rem;
 .avatar-xl {
   width: $avatar-width * 4;
   height: $avatar-width * 4;
+}
+
+.avatar-team {
+  color: white;
+  font-size: 3rem;
+  line-height: 6rem;
+  background-color: #ccc;
+  border: solid 1px rgba(0,0,0,0.1);
+}
+
+.family-avatars {
+  position: relative;
+
+  > .avatar {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+  }
+
+  > .avatar:nth-child(1) {
+    width: $avatar-width * 4;
+    height: $avatar-width * 4;
+    position: relative;
+    left: inherit;
+    z-index: 5;
+  }
+  > .avatar:nth-child(2) {
+    width: $avatar-width * 3;
+    height: $avatar-width * 3;
+    z-index: 4;
+    margin-left: $avatar-width;
+    filter: brightness(1.1);
+  }
+  > .avatar:nth-child(3) {
+    width: $avatar-width * 3;
+    height: $avatar-width * 3;
+    z-index: 3;
+    margin-left: $avatar-width * -4;
+    filter: brightness(1.1);
+  }
+  > .avatar:nth-child(4) {
+    width: $avatar-width * 2;
+    height: $avatar-width * 2;
+    z-index: 2;
+    margin-left: $avatar-width * 3;
+    filter: brightness(1.2);
+  }
+  > .avatar:nth-child(5) {
+    width: $avatar-width * 2;
+    height: $avatar-width * 2;
+    z-index: 1;
+    margin-left: $avatar-width * -6;
+    filter: brightness(1.2);
+  }
 }

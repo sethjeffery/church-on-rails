@@ -63,15 +63,15 @@ ActiveRecord::Schema.define(version: 20161118231143) do
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.boolean  "admin",         default: false
     t.text     "description"
-    t.string   "color"
+    t.string   "color",         default: "c0c0c0"
     t.boolean  "people_editor"
     t.boolean  "people_reader"
     t.boolean  "people_admin"
-    t.string   "icon"
+    t.string   "icon",          default: "users"
     t.index ["name"], name: "index_teams_on_name"
   end
 

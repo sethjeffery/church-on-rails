@@ -1,1 +1,7 @@
-<h2 class="text-xs-center mb-1"><%= @family %></h2>
+<div class="text-xs-center mb-sm family-avatars">
+  <% @family.people[0...5].each do |person| %>
+    <%= avatar_tag person, size: 192 %>
+  <% end %>
+</div>
+
+<%= render 'shared/title', title: @family, align: :center %>

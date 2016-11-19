@@ -7,6 +7,10 @@ module People
       @teams = @teams.includes(:team_memberships, :people).order(:name).page(params[:page]).per(20)
     end
 
+    def new
+      @team.color = Team::COLORS.sample
+    end
+
     def create
       if @team.save
         redirect_to team_path @team
@@ -27,7 +31,7 @@ module People
 
     def create_params
       if can? :manage, @team
-        blanks_to_nil params.require(:team).permit :name, :description,
+        blanks_to_nil params.require(:team).permit :name, :description, :icon, :color,
                                                    :people_reader, :people_editor, :people_admin
       else
         blanks_to_nil params.require(:team).permit :name, :description

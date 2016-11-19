@@ -17,7 +17,29 @@
         <div class="mb-sm">Name</div>
       <% end %>
 
-      <%= f.text_field :name, class: 'form-control', autofocus: true, placeholder: "e.g. Editors, Worship team, Pastors, ..." %>
+      <div class="input-group">
+        <%= f.text_field :name, class: 'form-control', autofocus: true, placeholder: "e.g. Editors, Worship team, Pastors, ..." %>
+        <%= f.hidden_field :icon %>
+        <%= f.hidden_field :color %>
+
+        <div class="input-group-btn dropdown">
+          <a class="btn btn-secondary" data-toggle="dropdown"><%= fa_icon "#{@team.icon} 1x" %></a>
+          <div class="dropdown-menu dropdown-menu-icons dropdown-menu-right">
+            <% Team::ICONS.each do |icon| %>
+              <%= link_to raw(fa_icon("#{icon} 2x")), '#', class: "dropdown-item dropdown-item-icon text-xs-center", data: { toggle: 'icon', icon: icon } %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="input-group-btn dropdown">
+          <a class="btn btn-secondary" data-toggle="dropdown" style="color: <%= '#' + @team.color %>;"><%= fa_icon "square 1x" %></a>
+          <div class="dropdown-menu dropdown-menu-icons dropdown-menu-right">
+            <% Team::COLORS.each do |color| %>
+              <%= link_to raw(fa_icon("square 2x")), '#', class: "dropdown-item dropdown-item-icon text-xs-center", data: { toggle: 'color', color: color }, style: "color: ##{color}" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
 
       <% if @team.errors[:name].present? %>
         <div class="size-xs-tiny text-danger">Name <%= @team.errors[:name].join(', ') %></div>

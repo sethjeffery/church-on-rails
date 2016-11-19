@@ -10,18 +10,17 @@
   <%= render 'shared/search_header', resource: :teams %>
 
   <% @teams.each do |team| %>
-    <%= list_group_item team, url: team do %>
-
+    <a href="<%= url_for(team) %>" class="list-group-item clearfix size-xs-small size-sm-normal list-group-item-action list-group-item-team" style="<%= "border-left-color: ##{team.color};" if team.color %>">
       <div class="row">
         <div class="col-sm-6 text-ellipsis">
-          <%= fa_icon 'star 1x', class: 'mr-xs' if team.admin? %><%= team %>
+          <%= fa_icon "#{team.icon} 1x", class: 'mr-xs'%>
+          <%= team %>
         </div>
         <div class="col-sm-6 text-ellipsis text-light size-xs-small">
           <%= pluralize team.team_memberships.to_a.count, 'member' %>
         </div>
       </div>
-
-    <% end %>
+    </a>
   <% end %>
 </div>
 
