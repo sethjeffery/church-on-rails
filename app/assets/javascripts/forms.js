@@ -15,14 +15,14 @@ $(document).on('turbolinks:load', function() {
   var pickerOptions = function($el) {
     return {
       icons: pickerIcons,
-      format: $el.data('format') || 'DD MMM YYYY',
+      format: $el.data('format') || 'DD MMM YYYY HH:mm',
       viewMode: $el.data('view-mode'),
       showClear: $el.data('show-clear'),
       showClose: $el.data('show-close')
     };
   };
 
-  $('[data-datepicker]').each(function() {
+  $('[data-datetimepicker]').each(function() {
     $(this).datetimepicker(pickerOptions($(this)));
   });
 

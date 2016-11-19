@@ -23,12 +23,7 @@
 
 
 <%= render 'shared/list_group_item_field', f: f, model: person, field: :dob do %>
-  <div class="input-group date">
-    <%= f.text_field :dob, data: { datepicker: true, :'view-mode' => 'years', :'show-clear' => true }, class: 'form-control' %>
-    <label class="input-group-addon" for="person_dob">
-      <%= fa_icon 'calendar 1x' %>
-    </label>
-  </div>
+  <%= f.date_select :dob, data: { :'view-mode' => 'years', :'show-clear' => true } %>
 <% end %>
 
 
