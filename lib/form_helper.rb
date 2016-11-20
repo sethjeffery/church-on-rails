@@ -14,13 +14,13 @@ module ActionView
           options["value"] = options.fetch("value") { value_before_type_cast(object) }
           add_default_name_and_id(options)
 
-          text_tag = tag(:input, options)
+          text_tag = "<input#{tag_options(options, true) if options}/>".html_safe
 
           if options["icon"]
-            label_tag = content_tag(:label, content_tag(:i, '', class: "fa fa-1x #{options["icon"].gsub(/\b([\w\-_]+)\b/, "fa-\\1")}"), class: 'input-group-addon', for: options["id"])
-            content_tag :div, text_tag + label_tag, class: 'input-group date'
+            label_tag = content_tag_string(:label, content_tag_string(:i, '', class: "fa fa-1x #{options["icon"].gsub(/\b([\w\-_]+)\b/, "fa-\\1")}"), class: 'input-group-addon', for: options["id"])
+            error_wrapping content_tag_string :div, text_tag + label_tag, class: 'input-group date'
           else
-            text_tag
+            error_wrapping text_tag
           end
         end
 
@@ -37,8 +37,26 @@ module ActionView
 
       class DateTimeSelect < DateSelect # :nodoc:
         def render
-          render_as_text icon: 'calendar', data: { format: 'HHDD MMM YYYY HH:mm' }
+          render_as_text icon: 'calendar', data: { format: 'DD MMM YYYY HH:mm' }
         end
+      end
+    end
+  end
+
+  # Better field rendering for error fields
+  Base.field_error_proc = Proc.new do |html_tag, instance|
+    object = instance.instance_variable_get(:@object)
+    object_name = instance.instance_variable_get(:@object_name)
+    method_name = instance.instance_variable_get(:@method_name)
+    field_name = ActionView::Helpers::Tags::Translator.new(object, object_name, method_name, scope: "helpers.label").translate
+
+    if html_tag =~ /^<label .+\/label>$/
+      %(<div class="has-danger">#{html_tag}</div>).html_safe
+    else
+      if instance.error_message.kind_of?(Array)
+        %(<div class="has-danger">#{html_tag}</div><div class="size-xs-tiny font-weight-normal text-danger my-xs">#{field_name} #{instance.error_message.uniq.join(', ')}</div>).html_safe
+      else
+        %(<div class="has-danger">#{html_tag}</div><div class="size-xs-tiny font-weight-normal text-danger my-xs">#{field_name} #{instance.error_message}</div>).html_safe
       end
     end
   end

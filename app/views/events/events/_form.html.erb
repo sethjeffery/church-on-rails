@@ -1,0 +1,65 @@
+<%= flash_messages %>
+<%= form_for(@event) do |f| %>
+
+  <div class="list-group mb-2">
+    <div class="list-group-item list-group-item-secondary">
+      <% if @event.new_record? %>
+        <%= link_to 'Cancel', @team, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+      <% else %>
+        <%= link_to 'Cancel', [@team, @event], class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+      <% end %>
+
+      Event details
+    </div>
+
+    <div class="list-group-item field-required">
+      <%= field_name @event, :name %>
+      <%= f.text_field :name, class: 'form-control mt-sm', autofocus: true %>
+    </div>
+
+    <div class="list-group-item">
+      Who is this for?
+      <div class="mt-sm">
+        <%= f.collection_select :team_id, Team.all, :id, :name, { include_blank: 'Everyone' }, data: { selectpicker: true, width: '100%' } %>
+      </div>
+    </div>
+
+    <div class="list-group-item">
+      <%= field_name @event, :description %>
+      <div class="size-xs-small text-light">You can write more details about your event if you wish.</div>
+      <%= f.text_area :description, class: 'form-control mt-sm', rows: 10 %>
+    </div>
+  </div>
+
+  <div class="list-group mb-2">
+    <div class="list-group-item list-group-item-secondary">
+      Date and time
+    </div>
+    <div class="list-group-item">
+      <p class="text-light size-xs-small">
+        Events can be either on a single date, or recurring.
+      </p>
+
+      <%= f.schedule_select :schedule, style: :bootstrap,
+                            from: true, until: true,
+                            date_select_wrapper: { },
+                            collection_check_boxes_item_wrapper: { tag: 'div', class: 'checkbox' },
+                            number_field_html: { class: 'form-control' },
+                            collection_select_html: { data: { selectpicker: true, width: '100%', 'minimum-results-for-search': 'Infinity' }} %>
+    </div>
+  </div>
+
+  <div class="list-group mb-2">
+    <div class="list-group-item list-group-item-secondary">
+      Venue
+    </div>
+
+    <%= render 'shared/list_group_item_field', f: f, model: @event, field: :address1 %>
+    <%= render 'shared/list_group_item_field', f: f, model: @event, field: :address2 %>
+    <%= render 'shared/list_group_item_field', f: f, model: @event, field: :postcode %>
+    <%= render 'shared/list_group_item_field', f: f, model: @event, field: :country %>
+  </div>
+
+  <%= render 'shared/form_submit', title: (@event.new_record? ? 'Create event' : 'Save changes'), icon: 'calendar' %>
+
+<% end %>

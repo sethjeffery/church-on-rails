@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161118231143) do
+ActiveRecord::Schema.define(version: 20161120191352) do
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "author_id"
+    t.integer  "team_id"
+    t.string   "name"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "postcode"
+    t.string   "country"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["author_id"], name: "index_events_on_author_id"
+    t.index ["team_id"], name: "index_events_on_team_id"
+  end
 
   create_table "families", force: :cascade do |t|
     t.string   "name"
@@ -50,6 +65,21 @@ ActiveRecord::Schema.define(version: 20161118231143) do
     t.index ["first_name"], name: "index_people_on_first_name"
     t.index ["last_name"], name: "index_people_on_last_name"
     t.index ["user_id"], name: "index_people_on_user_id"
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.string   "schedulable_type"
+    t.integer  "schedulable_id"
+    t.date     "date"
+    t.time     "time"
+    t.string   "rule"
+    t.string   "interval"
+    t.text     "day"
+    t.text     "day_of_week"
+    t.datetime "until"
+    t.integer  "count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "team_memberships", force: :cascade do |t|

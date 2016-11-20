@@ -44,6 +44,10 @@ gem 'redcarpet'
 gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
 
+# events calendar
+gem 'ice_cube'
+gem 'schedulable', git: 'https://github.com/sethjeffery/schedulable.git'
+
 # With figaro you can define ENV variables on the server more easily with a `config/application.yml` file.
 gem 'figaro'
 

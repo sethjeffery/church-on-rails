@@ -4,6 +4,7 @@ class Team < ApplicationRecord
 
   has_many :team_memberships
   has_many :people, through: :team_memberships
+  has_many :events
 
   scope :admins, -> { where(admin: true) }
 

@@ -24,3 +24,17 @@ en:
     pagination:
       last: "&raquo;"
       first: "&laquo;"
+  schedulable:
+    rules:
+      singular: "Single event"
+  activerecord:
+    attributes:
+      event:
+      schedule:
+      person:
+      team:
+      family:
+      family_membership:
+        person_id: Family member
+      team_membership:
+        person_id: Team member

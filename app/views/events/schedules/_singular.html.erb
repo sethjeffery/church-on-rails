@@ -1,0 +1,13 @@
+<div class="list-group-item py-sm">
+  <div class="row">
+    <div class="col-xs-12 <%= 'col-sm-6' if schedule.time.present? %> py-sm">
+      <%= fa_icon 'calendar' %>
+      <%= schedule.date.strftime('%-d %B %Y') %>
+    </div>
+    <% if schedule.time.present? %>
+      <div class="col-sm-6 py-sm">
+        <%= render 'events/schedules/time', schedule: schedule %>
+      </div>
+    <% end %>
+  </div>
+</div>

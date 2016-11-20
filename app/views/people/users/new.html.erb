@@ -11,13 +11,9 @@
       </div>
 
       <div class="list-group-item">
-        <div class="mb-1 <%= 'has-danger' if @person.errors[:user_id].present? %>">
+        <div class="mb-1">
           <%= f.collection_select :user_id, User.all, :id, :email, { include_blank: true }, class: 'form-control',
                                   data: { selectpicker: true, placeholder: 'Choose a user account' } %>
-
-          <% if @person.errors[:user_id].present? %>
-            <div class="size-xs-tiny text-danger">Account <%= @person.errors[:user_id].join(', ') %></div>
-          <% end %>
         </div>
       </div>
     </div>

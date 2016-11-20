@@ -12,7 +12,7 @@
       Team details
     </div>
 
-    <div class="list-group-item <%= 'has-danger' if @team.errors[:name].present? %>">
+    <div class="list-group-item">
       <% if @team.new_record? %>
         <div class="mb-sm">Name</div>
       <% end %>
@@ -40,21 +40,13 @@
           </div>
         </div>
       </div>
-
-      <% if @team.errors[:name].present? %>
-        <div class="size-xs-tiny text-danger">Name <%= @team.errors[:name].join(', ') %></div>
-      <% end %>
     </div>
 
-    <div class="list-group-item <%= 'has-danger' if @team.errors[:description].present? %>">
+    <div class="list-group-item">
       Description
       <div class="size-xs-small text-light mb-sm">A short description of your team, e.g. what it does or where it meets.</div>
 
       <%= f.text_area :description, class: 'form-control', rows: 10 %>
-
-      <% if @team.errors[:description].present? %>
-        <div class="size-xs-tiny text-danger">Description <%= @team.errors[:description].join(', ') %></div>
-      <% end %>
     </div>
 
     <% if can? :manage, @team %>

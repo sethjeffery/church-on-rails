@@ -25,4 +25,7 @@ module ApplicationHelper
     content_tag :div, markdown.render(text).html_safe, class: 'markdown-container'
   end
 
+  def field_name(object, method)
+    ActionView::Helpers::Tags::Translator.new(object, object.class.name.underscore, method, scope: "helpers.label").translate
+  end
 end

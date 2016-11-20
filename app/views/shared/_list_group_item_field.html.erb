@@ -1,5 +1,5 @@
 <div class="list-group-item">
-  <div class="row <%= 'has-danger' if model.errors[field].present? %>">
+  <div class="row">
     <div class="col-sm-5 <%= 'field-required' if defined?(required) %>"><%= f.label field, class: 'form-control-static mb-0' %></div>
     <div class="col-sm-7">
 
@@ -8,10 +8,6 @@
         <%= content %>
       <% else %>
         <%= f.send (local_assigns[:control] || :text_field), field, class: 'form-control' %>
-      <% end %>
-
-      <% if model.errors[field].present? %>
-        <div class="size-xs-tiny text-danger"><%= field.to_s.humanize %> <%= model.errors[field].join(', ') %></div>
       <% end %>
     </div>
   </div>

@@ -7,6 +7,7 @@ class Person < ApplicationRecord
   has_many :families, through: :family_memberships, inverse_of: :people
   has_many :team_memberships
   has_many :teams, through: :team_memberships
+  has_many :events, inverse_of: :author
 
   validates_presence_of :first_name, :last_name
   validates_inclusion_of :gender, in: %w( m f ), allow_nil: true

@@ -9,13 +9,9 @@
     </div>
 
     <div class="list-group-item">
-      <div class="mb-1 <%= 'has-danger' if @family_membership.errors[:person_id].present? %>">
+      <div class="mb-1">
         <%= f.collection_select :person_id, Person.all, :id, :name, { include_blank: true }, class: 'form-control',
                                 data: { selectpicker: true, placeholder: 'Choose a member' } %>
-
-        <% if @family_membership.errors[:person_id].present? %>
-          <div class="size-xs-tiny text-danger">Family member <%= @family_membership.errors[:person_id].join(', ') %></div>
-        <% end %>
       </div>
 
       <div class="text-xs-center">

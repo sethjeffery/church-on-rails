@@ -7,12 +7,17 @@ Rails.application.routes.draw do
     end
     resources :teams do
       resources :team_memberships, path: 'memberships'
+      resources :events, controller: '/events/events'
     end
     resources :people do
       resource :user
       resource :teams, controller: :person_teams
       resource :families, controller: :person_families
     end
+  end
+
+  scope module: 'events' do
+    resources :events
   end
 
   namespace :account do

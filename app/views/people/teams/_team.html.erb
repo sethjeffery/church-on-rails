@@ -75,5 +75,18 @@
 
       <%= render 'people/teams/memberships', team: @team %>
     </div>
+
+    <div class="list-group mb-2">
+      <div class="list-group-item list-group-item-secondary">
+
+        <% if can? :create, Event %>
+          <%= link_to new_team_event_path(@team), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+            <%= fa_icon 'calendar 1x', class: 'mr-xs' %>Add event
+          <% end %>
+        <% end %>
+
+        Events
+      </div>
+    </div>
   </div>
 </div>
