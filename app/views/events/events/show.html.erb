@@ -7,7 +7,7 @@
     </div>
   <% end %>
 
-  <div class="list-group">
+  <div class="list-group mb-2">
     <div class="list-group-item list-group-item-secondary">
       <% if can? :edit, @event %>
         <%= link_to edit_event_path(@event), class: 'btn btn-secondary btn-sm float-xs-right btn-align-middle' do %>
@@ -20,4 +20,21 @@
 
     <%= render "events/schedules/#{@event.schedule.rule}", schedule: @event.schedule %>
   </div>
+
+  <% if @event.full_address.present? %>
+    <div class="list-group mb-2">
+      <div class="list-group-item list-group-item-secondary">
+        Venue
+      </div>
+
+      <% if @event.lat && @event.lng %>
+        <%= map_for @event, height: '400px' %>
+      <% end %>
+
+      <div class="list-group-item">
+        <%= fa_icon 'map-marker', class: 'mr-xs' %>
+        <%= @event.full_address %>
+      </div>
+    </div>
+  <% end %>
 </div>

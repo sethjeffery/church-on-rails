@@ -44,6 +44,10 @@ gem 'redcarpet'
 gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
 
+# google maps
+gem 'gmaps-rails'
+gem 'geocoder'
+
 # events calendar
 gem 'ice_cube'
 gem 'schedulable', git: 'https://github.com/sethjeffery/schedulable.git'

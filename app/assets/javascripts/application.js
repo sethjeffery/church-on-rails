@@ -19,4 +19,5 @@
 //= require bootstrap
 //= require bootstrap-datetimepicker
 //= require select2-full
+//= require gmaps
 //= require_tree .
