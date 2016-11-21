@@ -18,7 +18,13 @@
       Details
     </div>
 
-    <%= render "events/schedules/#{@event.schedule.rule}", schedule: @event.schedule %>
+    <div class="list-group-item py-sm">
+      <%= render "events/schedules/#{@event.schedule.rule}", schedule: @event.schedule %>
+    </div>
+
+    <% if @event.team %>
+      <%= render 'people/teams/team_item', team_item: @event.team %>
+    <% end %>
   </div>
 
   <% if @event.full_address.present? %>
@@ -32,7 +38,7 @@
       <% end %>
 
       <div class="list-group-item">
-        <%= fa_icon 'map-marker', class: 'mr-xs' %>
+        <%= fa_icon 'map-marker 1x', class: 'mr-xs' %>
         <%= @event.full_address %>
       </div>
     </div>

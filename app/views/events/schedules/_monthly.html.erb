@@ -1,22 +1,20 @@
-<div class="list-group-item py-sm">
-  <div class="row">
-    <div class="col-xs-12 <%= 'col-sm-6' if schedule.time.present? %> py-sm">
-      <%= fa_icon 'calendar' %>
-      Monthly
+<div class="row">
+  <div class="col-xs-12 <%= 'col-sm-7' if schedule.time.present? %> py-sm">
+    <%= fa_icon 'calendar 1x', class: 'mr-xs' %>
+    Monthly
 
-      <% schedule.day_of_week.each do |day, values| %>
-        <% if values.select(&:present?).present? %>
-          <div class="size-xs-small ml-1 pl-xs">
-            Every <%= values.select(&:present?).map{|v| v.to_i == -1 ? 'last' : v.to_i.ordinalize}.to_sentence %> <%= day.titleize %>
-          </div>
-        <% end %>
+    <% schedule.day_of_week.each do |day, values| %>
+      <% if values.select(&:present?).present? %>
+        <div class="size-xs-small ml-2">
+          Every <%= values.select(&:present?).map{|v| v.to_i == -1 ? 'last' : v.to_i.ordinalize}.to_sentence %> <%= day.titleize %>
+        </div>
       <% end %>
-    </div>
-
-    <% if schedule.time.present? %>
-      <div class="col-sm-6 py-sm">
-        <%= render 'events/schedules/time', schedule: schedule %>
-      </div>
     <% end %>
   </div>
+
+  <% if schedule.time.present? %>
+    <div class="col-sm-5 py-sm">
+      <%= render 'events/schedules/time', schedule: schedule %>
+    </div>
+  <% end %>
 </div>

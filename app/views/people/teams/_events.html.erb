@@ -1,0 +1,21 @@
+<% team.events.upcoming.sort_by{|t| t.schedule.next_datetime }.each do |event| %>
+  <div class="list-group-item">
+    <div class="font-weight-bold">
+      <%= link_to_if can?(:view, event), event, event %>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-7">
+        <%= fa_icon 'calendar 1x', class: 'mr-xs' %>
+        <%= event.schedule.next_datetime.strftime('%-d %B %Y') %>
+      </div>
+      <div class="col-sm-5">
+        <% if event.schedule.recurring? %>
+          <div class="float-xs-right" data-tooltip title="Recurring"><%= fa_icon 'repeat 1x' %></div>
+        <% end %>
+        <%= render "events/schedules/time", schedule: event.schedule %>
+      </div>
+    </div>
+
+  </div>
+<% end %>

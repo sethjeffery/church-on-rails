@@ -1,26 +1,24 @@
-<div class="list-group-item py-sm">
-  <div class="row">
-    <div class="col-xs-12 <%= 'col-sm-6' if schedule.time.present? %> py-sm">
-      <%= fa_icon 'calendar' %>
+<div class="row">
+  <div class="col-xs-12 <%= 'col-sm-7' if schedule.time.present? %> py-sm">
+    <%= fa_icon 'calendar 1x', class: 'mr-xs' %>
 
-      <% if schedule.day.length == 1 %>
-        <%= schedule.day.first.pluralize.humanize %>
+    <% if schedule.day.length == 1 %>
+      <%= schedule.day.first.pluralize.humanize %>
 
-      <% else %>
-        Weekly
+    <% else %>
+      Weekly
 
-        <% schedule.day.each do |day| %>
-          <div class="size-xs-small ml-1 pl-xs">
-            <%= day.pluralize.humanize %>
-          </div>
-        <% end %>
+      <% schedule.day.each do |day| %>
+        <div class="size-xs-small ml-2">
+          <%= day.pluralize.humanize %>
+        </div>
       <% end %>
-    </div>
-
-    <% if schedule.time.present? %>
-      <div class="col-sm-6 py-sm">
-        <%= render 'events/schedules/time', schedule: schedule %>
-      </div>
     <% end %>
   </div>
+
+  <% if schedule.time.present? %>
+    <div class="col-sm-5 py-sm">
+      <%= render 'events/schedules/time', schedule: schedule %>
+    </div>
+  <% end %>
 </div>

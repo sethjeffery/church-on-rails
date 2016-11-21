@@ -37,14 +37,7 @@
       </div>
 
       <div class="list-group">
-        <% @person.teams.each do |team| %>
-          <div
-              class="list-group-item clearfix size-xs-small size-sm-normal list-group-item-team text-ellipesis"
-              style="border-left-color: <%= '#' + team.color %>;">
-            <%= fa_icon "#{team.icon} 1x", class: 'mr-xs'%>
-            <%= link_to team, team %>
-          </div>
-        <% end %>
+        <%= render partial: 'people/teams/team_item', collection: @person.teams %>
       </div>
     </div>
 
