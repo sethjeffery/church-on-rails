@@ -1,0 +1,8 @@
+<% if can? :create, Event %>
+  <%= link_to new_event_path, class: 'btn btn-primary float-xs-right' do %>
+    <%= fa_icon 'plus-circle' %> New
+  <% end %>
+<% end %>
+
+<%= render 'shared/title', title: 'Upcoming Events' %>
+<%= render partial: 'events/events/event_item', collection: @events.sort_by{|t| t.schedule.next_datetime } %>

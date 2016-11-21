@@ -28,6 +28,13 @@
     </a>
   <% end %>
 
+  <% if can? :read, Event %>
+    <a class="side-menu-item <%= 'active' if params[:controller] == 'events/events' %>" href="<%= events_path %>">
+      <%= fa_icon 'calendar 2x' %>
+      <div class="side-menu-item-text">Events</div>
+    </a>
+  <% end %>
+
   <% if user_signed_in? %>
     <a class="side-menu-item side-menu-item-bottom" href="<%= destroy_user_session_path %>">
       <%= fa_icon 'sign-out 2x' %>

@@ -1,0 +1,10 @@
+<% if description.length > 200 %>
+  <div class="size-xs-small"><%= markdown description %></div>
+
+<% elsif description.length > 100 %>
+  <div class="size-xs-small size-sm-normal"><%= markdown description %></div>
+
+<% else %>
+  <div class="size-xs-small size-sm-normal size-md-large"><%= markdown description %></div>
+
+<% end %>

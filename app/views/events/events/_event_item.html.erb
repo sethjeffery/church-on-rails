@@ -1,0 +1,19 @@
+<div class="list-group-item">
+  <div class="font-weight-bold">
+    <%= link_to_if can?(:view, event_item), event_item, event_item %>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-7">
+      <%= fa_icon 'calendar 1x', class: 'mr-xs' %>
+      <%= event_item.schedule.next_datetime.strftime('%-d %B %Y') %>
+    </div>
+    <div class="col-sm-5">
+      <% if event_item.schedule.recurring? %>
+        <div class="float-xs-right" data-tooltip title="Recurring"><%= fa_icon 'repeat 1x' %></div>
+      <% end %>
+      <%= render "events/schedules/time", schedule: event_item.schedule %>
+    </div>
+  </div>
+
+</div>

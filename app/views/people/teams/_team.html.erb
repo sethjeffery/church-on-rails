@@ -2,7 +2,7 @@
 
 <div class="row">
 
-  <div class="col-md-6">
+  <div class="col-lg-6">
     <div class="list-group mb-2">
       <div class="list-group-item list-group-item-secondary">
         <% if can? :edit, @team %>
@@ -16,16 +16,7 @@
 
       <% if @team.description.present? %>
         <div class="list-group-item">
-          <% if @team.description.length > 200 %>
-            <div class="size-xs-small"><%= markdown @team.description %></div>
-
-          <% elsif @team.description.length > 100 %>
-            <div class="size-xs-small size-sm-normal"><%= markdown @team.description %></div>
-
-          <% else %>
-            <div class="size-xs-small size-sm-normal size-md-large"><%= markdown @team.description %></div>
-
-          <% end %>
+          <%= render 'shared/description', description: @team.description %>
         </div>
       <% end %>
 
@@ -60,7 +51,7 @@
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-lg-6">
     <div class="list-group mb-2">
       <div class="list-group-item list-group-item-secondary">
 
@@ -88,7 +79,7 @@
         Events
       </div>
 
-      <%= render 'people/teams/events', team: @team %>
+      <%= render partial: 'events/events/event_item', collection: @team.events.upcoming.sort_by{|t| t.schedule.next_datetime } %>
     </div>
   </div>
 </div>

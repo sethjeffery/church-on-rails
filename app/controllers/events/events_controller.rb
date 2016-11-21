@@ -1,6 +1,10 @@
 class Events::EventsController < ApplicationController
   load_and_authorize_resource
 
+  def index
+    @events = @events.upcoming
+  end
+
   def new
     @event.team_id = params[:team_id]
   end
