@@ -1,0 +1,53 @@
+<%= render 'processes/church_processes/title' %>
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="list-group mb-2">
+      <div class="list-group-item list-group-item-secondary">
+        <% if can? :edit, @church_process %>
+          <%= link_to edit_church_process_path(@church_process), class: 'btn btn-secondary btn-sm float-xs-right btn-align-middle' do %>
+            <%= fa_icon 'pencil 1x' %>
+            Change
+          <% end %>
+        <% end %>
+        Details
+      </div>
+
+      <% if @church_process.description.present? %>
+        <div class="list-group-item">
+          <%= render 'shared/description', description: @church_process.description %>
+        </div>
+      <% end %>
+
+      <ol class="list-group-item list-steps">
+        <% @church_process.steps.select(&:present?).each do |step| %>
+          <li class="list-step size-xs-small size-sm-normal">
+            <%= fa_icon 'check-square-o 1x', class: 'mr-xs' %>
+            <%= step %>
+          </li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="list-group mb-2">
+      <div class="list-group-item list-group-item-secondary">
+        <% if can? :create, PersonProcess %>
+          <%= link_to new_church_process_person_process_path(@church_process), class: 'btn btn-secondary btn-sm float-xs-right btn-align-middle' do %>
+            <%= fa_icon 'user 1x' %>
+            Add
+          <% end %>
+        <% end %>
+
+        People on this process
+      </div>
+
+      <% @church_process.active_processes.each do |person_process| %>
+        <div class="list-group-item">
+          <%= link_to person_process, church_process_person_process(@church_process, person_process) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

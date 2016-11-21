@@ -1,0 +1,26 @@
+<% if can? :create, ChurchProcess %>
+  <%= link_to new_church_process_path, class: 'btn btn-primary float-xs-right' do %>
+    <%= fa_icon 'plus-circle' %> New
+  <% end %>
+<% end %>
+
+<%= render 'shared/title', title: 'Processes' %>
+
+<div class="list-group">
+  <% if @church_processes.present? %>
+    <%= render partial: 'processes/church_processes/church_process_item', collection: @church_processes %>
+  <% else %>
+    <div class="list-group-item list-group-item-padded">
+      <h1>Never lose a connection.</h1>
+      <p>
+        Processes are your church's way of connecting to people. You can start a follow-up process for first-time visitors,
+        or for members wanting to join a particular team.
+      </p>
+      <% if can? :create, ChurchProcess %>
+        <p>
+          <%= link_to "Create a process", new_church_process_path %> and start connecting people.
+        </p>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,78 @@
+<%= flash_messages %>
+<%= form_for(@church_process) do |f| %>
+
+  <div class="list-group mb-2">
+    <div class="list-group-item list-group-item-secondary">
+      <% if @church_process.new_record? %>
+        <%= link_to 'Cancel', church_processes_path, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+      <% else %>
+        <%= link_to 'Cancel', @church_process, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+      <% end %>
+
+      Process details
+    </div>
+
+    <div class="list-group-item">
+      <div class="field-required">
+        <%= field_name @church_process, :name %>
+      </div>
+      <div class="input-group <%= 'has-danger' if @church_process.errors[:name].present? %>">
+        <%= f.text_field :name, class: 'form-control', autofocus: true, hide_errors: true %>
+        <%= f.hidden_field :icon %>
+        <%= f.hidden_field :color %>
+
+        <div class="input-group-btn dropdown">
+          <a class="btn btn-secondary" data-toggle="dropdown"><%= fa_icon "#{@church_process.icon} 1x" %></a>
+          <div class="dropdown-menu dropdown-menu-icons dropdown-menu-right">
+            <% ChurchProcess::ICONS.each do |icon| %>
+              <%= link_to raw(fa_icon("#{icon} 2x")), '#', class: "dropdown-item dropdown-item-icon text-xs-center", data: { toggle: 'icon', icon: icon } %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="input-group-btn dropdown">
+          <div class="dropdown-menu dropdown-menu-icons dropdown-menu-right">
+            <% ChurchProcess::COLORS.each do |color| %>
+              <%= link_to raw(fa_icon("square 2x")), '#', class: "dropdown-item dropdown-item-icon text-xs-center", data: { toggle: 'color', color: color }, style: "color: ##{color}" %>
+            <% end %>
+          </div>
+          <a class="btn btn-secondary" data-toggle="dropdown" style="color: <%= '#' + @church_process.color %>;"><%= fa_icon "square 1x" %></a>
+        </div>
+      </div>
+      <%= field_error(@church_process, :name) %>
+    </div>
+
+    <div class="list-group-item">
+      <%= field_name @church_process, :description %>
+      <div class="size-xs-small text-light">You can write more details about your process if you wish.</div>
+      <%= f.text_area :description, class: 'form-control mt-sm', rows: 8 %>
+    </div>
+  </div>
+
+  <div class="list-group mb-2">
+    <div class="list-group-item list-group-item-secondary">
+      Steps
+    </div>
+    <div class="list-group-item">
+      <p class="text-light size-xs-small">
+        Write your steps below. Steps are the checklist for your process. As a person goes through this process, you can check them off.
+      </p>
+      <div class="draggable">
+        <% @church_process.steps.each do |step| %>
+          <div class="input-group mb-sm">
+            <label class="input-group-addon">
+              <%= fa_icon 'bars 1x' %>
+            </label>
+            <%= f.text_field :steps, name: 'church_process[steps][]', value: step, class: 'form-control' %>
+          </div>
+        <% end %>
+      </div>
+      <a class="btn btn-secondary btn-block js-add-step" href="javascript:void(0)">
+        <%= fa_icon "plus-circle 1x", class: 'mr-xs' %>Add step
+      </a>
+    </div>
+  </div>
+
+  <%= render 'shared/form_submit', title: (@church_process.new_record? ? 'Create process' : 'Save changes'), icon: 'arrow-right' %>
+
+<% end %>

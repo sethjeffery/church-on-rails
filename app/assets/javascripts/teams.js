@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function() {
-  var $icon = $('#team_icon'), $color = $('#team_color');
+  var $icon = $('#team_icon, #church_process_icon'), $color = $('#team_color, #church_process_color');
 
   $('[data-toggle=color]').click(function(e) {
     e.preventDefault();

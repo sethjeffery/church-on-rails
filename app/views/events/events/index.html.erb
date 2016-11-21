@@ -5,4 +5,7 @@
 <% end %>
 
 <%= render 'shared/title', title: 'Upcoming Events' %>
-<%= render partial: 'events/events/event_item', collection: @events.sort_by{|t| t.schedule.next_datetime } %>
+
+<div class="list-group">
+  <%= render partial: 'events/events/event_item', collection: @events.sort_by{|t| t.schedule.next_datetime } %>
+</div>

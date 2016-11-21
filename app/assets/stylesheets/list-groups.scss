@@ -47,6 +47,14 @@
   }
 }
 
-.list-group-item-team {
+.list-group-item-team, .list-group-item-process {
   border-left: solid 4px #ccc;
+}
+
+.list-group-item.list-steps {
+  > .list-step {
+    display: block;
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+  }
 }

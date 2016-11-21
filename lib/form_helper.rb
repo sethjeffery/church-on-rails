@@ -46,17 +46,22 @@ module ActionView
   # Better field rendering for error fields
   Base.field_error_proc = Proc.new do |html_tag, instance|
     object = instance.instance_variable_get(:@object)
+    options = instance.instance_variable_get(:@options)
     object_name = instance.instance_variable_get(:@object_name)
     method_name = instance.instance_variable_get(:@method_name)
     field_name = ActionView::Helpers::Tags::Translator.new(object, object_name, method_name, scope: "helpers.label").translate
 
-    if html_tag =~ /^<label .+\/label>$/
-      %(<div class="has-danger">#{html_tag}</div>).html_safe
+    if options.stringify_keys["hide_errors"]
+      html_tag
     else
-      if instance.error_message.kind_of?(Array)
-        %(<div class="has-danger">#{html_tag}</div><div class="size-xs-tiny font-weight-normal text-danger my-xs">#{field_name} #{instance.error_message.uniq.join(', ')}</div>).html_safe
+      if html_tag =~ /^<label .+\/label>$/
+        %(<div class="has-danger">#{html_tag}</div>).html_safe
       else
-        %(<div class="has-danger">#{html_tag}</div><div class="size-xs-tiny font-weight-normal text-danger my-xs">#{field_name} #{instance.error_message}</div>).html_safe
+        if instance.error_message.kind_of?(Array)
+          %(<div class="has-danger">#{html_tag}</div><div class="size-xs-tiny font-weight-normal text-danger my-xs">#{field_name} #{instance.error_message.uniq.join(', ')}</div>).html_safe
+        else
+          %(<div class="has-danger">#{html_tag}</div><div class="size-xs-tiny font-weight-normal text-danger my-xs">#{field_name} #{instance.error_message}</div>).html_safe
+        end
       end
     end
   end

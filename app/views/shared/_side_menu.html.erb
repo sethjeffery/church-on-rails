@@ -35,6 +35,13 @@
     </a>
   <% end %>
 
+  <% if can? :read, ChurchProcess %>
+    <a class="side-menu-item <%= 'active' if params[:controller] == 'processes/church_processes' %>" href="<%= church_processes_path %>">
+      <%= fa_icon 'arrow-right 2x' %>
+      <div class="side-menu-item-text">Processes</div>
+    </a>
+  <% end %>
+
   <% if user_signed_in? %>
     <a class="side-menu-item side-menu-item-bottom" href="<%= destroy_user_session_path %>">
       <%= fa_icon 'sign-out 2x' %>

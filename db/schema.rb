@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161120202838) do
+ActiveRecord::Schema.define(version: 20161121074328) do
+
+  create_table "church_processes", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "color",       default: "c0c0c0"
+    t.string   "icon",        default: "arrow-right"
+    t.text     "steps"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
 
   create_table "events", force: :cascade do |t|
     t.integer  "author_id"
@@ -69,6 +79,26 @@ ActiveRecord::Schema.define(version: 20161120202838) do
     t.index ["first_name"], name: "index_people_on_first_name"
     t.index ["last_name"], name: "index_people_on_last_name"
     t.index ["user_id"], name: "index_people_on_user_id"
+  end
+
+  create_table "person_process_assignees", force: :cascade do |t|
+    t.integer  "assignee_id"
+    t.integer  "person_process_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["assignee_id"], name: "index_person_process_assignees_on_assignee_id"
+    t.index ["person_process_id"], name: "index_person_process_assignees_on_person_process_id"
+  end
+
+  create_table "person_processes", force: :cascade do |t|
+    t.integer  "person_id"
+    t.integer  "church_process_id"
+    t.boolean  "complete"
+    t.text     "steps"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["church_process_id"], name: "index_person_processes_on_church_process_id"
+    t.index ["person_id"], name: "index_person_processes_on_person_id"
   end
 
   create_table "schedules", force: :cascade do |t|

@@ -10,6 +10,7 @@ class Events::EventsController < ApplicationController
   end
 
   def create
+    @event.author = current_user
     if @event.save
       redirect_to @event
     else

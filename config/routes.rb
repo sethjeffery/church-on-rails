@@ -20,6 +20,12 @@ Rails.application.routes.draw do
     resources :events
   end
 
+  scope module: 'processes' do
+    resources :church_processes, path: 'processes' do
+      resources :person_process, path: 'people'
+    end
+  end
+
   namespace :account do
     get '/' => 'people#show'
     devise_scope :user do

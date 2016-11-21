@@ -4,9 +4,9 @@
   <div class="list-group mb-2">
     <div class="list-group-item list-group-item-secondary">
       <% if @event.new_record? %>
-        <%= link_to 'Cancel', @team, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+        <%= link_to 'Cancel', @team || events_path, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
       <% else %>
-        <%= link_to 'Cancel', [@team, @event], class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+        <%= link_to 'Cancel', @event, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
       <% end %>
 
       Event details
@@ -27,7 +27,7 @@
     <div class="list-group-item">
       <%= field_name @event, :description %>
       <div class="size-xs-small text-light">You can write more details about your event if you wish.</div>
-      <%= f.text_area :description, class: 'form-control mt-sm', rows: 10 %>
+      <%= f.text_area :description, class: 'form-control mt-sm', rows: 8 %>
     </div>
   </div>
 

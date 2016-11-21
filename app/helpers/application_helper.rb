@@ -28,4 +28,12 @@ module ApplicationHelper
   def field_name(object, method)
     ActionView::Helpers::Tags::Translator.new(object, object.class.name.underscore, method, scope: "helpers.label").translate
   end
+
+  def field_error(object, method)
+    if object.errors[method].present?
+      content_tag :div, class: "size-xs-tiny font-weight-normal text-danger my-xs" do
+        field_name(object, method) << ' ' << object.errors[method].uniq.join(', ')
+      end
+    end
+  end
 end
