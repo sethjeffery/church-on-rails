@@ -3,7 +3,11 @@ module Concerns
     extend ActiveSupport::Concern
 
     def full_address
-      [address1, address2, postcode, country || 'UK'].select(&:present?).join(', ')
+      arr = [address1, address2, postcode, country].select(&:present?)
+      if arr.present?
+        arr << 'UK' if country.blank?
+        arr.join(', ')
+      end
     end
 
     def lat

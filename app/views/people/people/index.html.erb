@@ -18,14 +18,16 @@
       <div class="avatar-container">
         <%= avatar_tag person %>
 
-        <div class="row">
-          <div class="col-sm-6 text-ellipsis">
+        <div class="clearfix">
+          <div class="float-sm-left text-ellipsis">
             <%= person.name %>
           </div>
 
-          <div class="col-sm-6 text-ellipsis text-light">
+          <div class="float-sm-right">
             <% person.teams.each do |team| %>
-              <%= content_tag :span, team, class: 'tag tag-default' %>
+              <span style="color: <%= '#' + team.color %>;", data-tooltip title="<%= team %>">
+                <%= fa_icon "#{team.icon} 1x", class: 'ml-sm' %>
+              </span>
             <% end %>
           </div>
         </div>

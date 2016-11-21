@@ -32,6 +32,7 @@ en:
       event:
       schedule:
       person:
+        dob: 'Date of birth'
       team:
       family:
       family_membership:
