@@ -1,3 +1,13 @@
 textarea.form-control {
   line-height: 1.75;
 }
+
+.custom-control.list-group-item {
+  margin-left: 0;
+  padding-left: 3rem;
+
+  .custom-control-indicator {
+    top: 1rem;
+    left: 1.375rem;
+  }
+}

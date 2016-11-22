@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resource :user
       resource :teams, controller: :person_teams
       resource :families, controller: :person_families
+      resources :person_processes, path: 'processes'
     end
   end
 
@@ -22,7 +23,7 @@ Rails.application.routes.draw do
 
   scope module: 'processes' do
     resources :church_processes, path: 'processes' do
-      resources :person_process, path: 'people'
+      resources :person_processes, path: 'people'
     end
   end
 

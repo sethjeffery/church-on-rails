@@ -40,14 +40,15 @@
           <% end %>
         <% end %>
 
-        People on this process
+        <div class="hidden-xs-down">
+          People on this process
+        </div>
+        <div class="hidden-sm-up">
+          People
+        </div>
       </div>
 
-      <% @church_process.active_processes.each do |person_process| %>
-        <div class="list-group-item">
-          <%= link_to person_process, church_process_person_process(@church_process, person_process) %>
-        </div>
-      <% end %>
+      <%= render partial: 'processes/person_processes/person_process_item', collection: @church_process.active_processes %>
     </div>
   </div>
 </div>

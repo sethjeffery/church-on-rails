@@ -6,7 +6,7 @@
       <div class="list-group-item list-group-item-secondary">
         <% if can? :edit, @person %>
           <%= link_to edit_person_path(@person), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
-            <%= fa_icon 'pencil 1x', class: 'mr-xs' %>Edit
+            <%= fa_icon 'pencil' %> Edit
           <% end %>
         <% end %>
 
@@ -22,31 +22,13 @@
           :account    => (fa_icon('check 1x') if @person.user)
       } %>
     </div>
-  </div>
-
-  <div class="col-lg-6">
-    <div class="list-group mb-2">
-      <div class="list-group-item list-group-item-secondary">
-        <% if can? :create, TeamMembership %>
-          <%= link_to person_teams_path(@person), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
-            <%= fa_icon 'users 1x', class: 'mr-xs' %>Join
-          <% end %>
-        <% end %>
-
-        Teams
-      </div>
-
-      <div class="list-group">
-        <%= render partial: 'people/teams/team_item', collection: @person.teams %>
-      </div>
-    </div>
 
     <% if @person.families.blank? %>
       <% if can? :create, FamilyMembership %>
         <div class="list-group mb-2">
           <div class="list-group-item list-group-item-secondary">
             <%= link_to person_families_path(@person), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
-              <%= fa_icon 'address-card 1x', class: 'mr-xs' %>Join
+              <%= fa_icon 'address-card' %> Join
             <% end %>
 
             Family
@@ -58,5 +40,38 @@
         <%= render 'people/families/family_list_group', family: family %>
       <% end %>
     <% end %>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="list-group mb-2">
+      <div class="list-group-item list-group-item-secondary">
+        <% if can? :create, TeamMembership %>
+          <%= link_to person_teams_path(@person), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+            <%= fa_icon 'users' %> Join
+          <% end %>
+        <% end %>
+
+        Teams
+      </div>
+
+      <div class="list-group">
+        <%= render partial: 'people/teams/team_item', collection: @person.teams %>
+      </div>
+    </div>
+
+    <div class="list-group mb-2">
+      <div class="list-group-item list-group-item-secondary">
+        <% if can? :create, PersonProcess %>
+          <%= link_to new_person_person_process_path(@person), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+            <%= fa_icon 'arrow-right' %> Start
+          <% end %>
+        <% end %>
+
+        Processes
+      </div>
+
+      <%= render partial: 'processes/person_processes/person_process_item', collection: @person.person_processes %>
+    </div>
+
   </div>
 </div>

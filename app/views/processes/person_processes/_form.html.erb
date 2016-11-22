@@ -1,0 +1,61 @@
+<%= form_for([@church_process, @person, @person_process]) do |f| %>
+  <div class="list-group mb-2">
+    <% if @person_process.church_process %>
+      <div
+          class="list-group-item list-group-item-process list-group-item-secondary"
+          style="border-left-color: <%= '#' + @person_process.color %>;">
+
+        <%= link_to (@person_process.new_record? ? 'Cancel' : 'View'), @person_process.church_process, class: 'btn btn-secondary btn-sm btn-align-middle float-xs-right' %>
+        <%= fa_icon "#{@person_process.icon} 1x", class: 'mr-xs' %>
+        <%= @person_process.church_process %>
+      </div>
+    <% else %>
+      <div class="list-group-item list-group-item-secondary">
+        <%= link_to "Cancel", @person, class: 'btn btn-secondary btn-sm btn-align-middle float-xs-right' %>
+        Process
+      </div>
+    <% end %>
+
+    <% if @person_process.new_record? %>
+      <% if @church_process %>
+        <div class="list-group-item">
+          <p class="size-xs-small">
+            Select the person in the database who will start this process.
+          </p>
+          <%= f.collection_select :person_id, all_people, :id, :name, { include_blank: true }, { data: { selectpicker: true, placeholder: "Choose a person", width: '100%' }} %>
+        </div>
+      <% else %>
+        <div class="list-group-item pb-2">
+          <p class="size-xs-small">
+            Select the process to start for <strong><%= @person %></strong>.
+          </p>
+          <%= f.collection_select :church_process_id, all_church_processes, :id, :name, { include_blank: true }, { data: { selectpicker: true, placeholder: "Choose a process", width: '100%' }} %>
+        </div>
+      <% end %>
+    <% else %>
+      <% @person_process.church_process.steps.select(&:present?).each do |step| %>
+        <label class="list-group-item size-xs-small size-sm-normal custom-checkbox custom-control">
+          <%= f.check_box :steps, { name: "person_process[steps][]", class: 'custom-control-input' }, step.parameterize, "" %>
+          <span class="custom-control-indicator"></span>
+          <%= step %>
+        </label>
+      <% end %>
+    <% end %>
+
+    <div class="list-group-item list-group-item-secondary">
+      Assignees
+    </div>
+
+    <div class="list-group-item">
+      <p class="size-xs-small">
+        Assign leaders or pastors to help fulfil the process for this person.
+        They will get email notifications when any changes are made to this process.
+      </p>
+
+      <%= f.collection_select :assignee_ids, all_people, :id, :name, { }, multiple: true, data: { selectpicker: true, width: '100%', placeholder: 'Choose assignees' } %>
+
+    </div>
+  </div>
+
+  <%= render 'shared/form_submit', title: (@person_process.new_record? ? 'Start process' : 'Save changes'), icon: 'arrow-right' %>
+<% end %>

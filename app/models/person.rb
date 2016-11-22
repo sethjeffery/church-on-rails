@@ -8,6 +8,7 @@ class Person < ApplicationRecord
   has_many :team_memberships
   has_many :teams, through: :team_memberships
   has_many :events, inverse_of: :author
+  has_many :person_processes
 
   validates_presence_of :first_name, :last_name
   validates_inclusion_of :gender, in: %w( m f ), allow_nil: true
@@ -30,6 +31,8 @@ class Person < ApplicationRecord
     self.middle_name = capitalize(middle_name) if middle_name
     self.last_name   = capitalize(last_name)   if last_name
   end
+
+  private
 
   def capitalize(name)
     name.slice(0,1).capitalize + name.slice(1..-1)

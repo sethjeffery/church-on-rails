@@ -1,7 +1,13 @@
 <div class="text-xs-center mb-sm">
-  <span class="avatar avatar-xl avatar-icon" style="background-color: <%= '#' + @church_process.color %>;">
-    <%= fa_icon @church_process.icon %>
-  </span>
+  <% if @church_process %>
+    <span class="avatar avatar-xl avatar-icon" style="background-color: <%= '#' + @church_process.color %>;">
+      <%= fa_icon @church_process.icon %>
+    </span>
+  <% else %>
+    <span class="avatar avatar-xl avatar-icon">
+      <%= fa_icon 'arrow-right' %>
+    </span>
+  <% end %>
 </div>
 
 <%= render 'shared/title', align: :center, title: (local_assigns[:title] || @church_process) %>

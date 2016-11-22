@@ -1,0 +1,11 @@
+<div class="text-xs-center mb-sm">
+  <%= avatar_tag @person_process.person, class: 'avatar-xl' %>
+</div>
+
+<h2 class="text-xs-center mb-1">
+  <%= link_to @person_process.person, @person_process.person %>
+</h2>
+
+<div class="container-sm">
+  <%= render 'processes/person_processes/form' %>
+</div>
