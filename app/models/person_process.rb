@@ -24,7 +24,9 @@ class PersonProcess < ApplicationRecord
   end
 
   def set_complete
-    self.complete = !!church_process.steps&.all?{|step| completed_step? step }
+    if church_process&.steps&.all?{|step| completed_step? step }
+      self.complete = true
+    end
   end
 
   def to_s

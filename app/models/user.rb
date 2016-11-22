@@ -15,7 +15,9 @@ class User < ApplicationRecord
   end
 
   def auto_connect_person
-    person = Person.find_by(email: email)
-    person&.update_attributes user_id: id unless person.user_id
+    if confirmed_at.present?
+      person = Person.find_by(email: email)
+      person&.update_attributes user_id: id unless person.user_id
+    end
   end
 end

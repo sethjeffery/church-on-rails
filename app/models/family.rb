@@ -6,7 +6,11 @@ class Family < ApplicationRecord
 
   validates_presence_of :name
 
-  def to_s
+  def family_name
     name + ' Family'
+  end
+
+  def to_s
+    family_name
   end
 end

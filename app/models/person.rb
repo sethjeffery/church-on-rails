@@ -1,6 +1,5 @@
 class Person < ApplicationRecord
   include Concerns::Naming
-  attr_accessor :family_name
 
   belongs_to :user, autosave: true
   has_many :family_memberships
@@ -16,6 +15,7 @@ class Person < ApplicationRecord
   before_validation :sanitize_names
 
   def start_family(family_name)
+    save if new_record?
     family = Family.create! name: family_name
     FamilyMembership.create! person: self, family: family, head: true
   end
