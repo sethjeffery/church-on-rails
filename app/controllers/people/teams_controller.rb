@@ -8,7 +8,7 @@ module People
     end
 
     def new
-      @team.color = Team::COLORS.sample
+      @team.color = Team::COLORS.first
     end
 
     def create

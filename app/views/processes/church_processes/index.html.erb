@@ -1,12 +1,16 @@
 <% if can? :create, ChurchProcess %>
-  <%= link_to new_church_process_path, class: 'btn btn-primary float-xs-right' do %>
+  <%= link_to new_church_process_path, class: 'btn btn-success float-xs-right' do %>
     <%= fa_icon 'plus-circle' %> New
   <% end %>
 <% end %>
 
-<%= render 'shared/title', title: 'Processes' %>
+<%= render 'shared/title', title: 'Processes', background: :process %>
 
 <div class="list-group">
+  <div class="list-group-item list-group-item-secondary">
+    All church processes
+  </div>
+
   <% if @church_processes.present? %>
     <%= render partial: 'processes/church_processes/church_process_item', collection: @church_processes %>
   <% else %>

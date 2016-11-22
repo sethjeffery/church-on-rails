@@ -1,17 +1,19 @@
 <div class="text-xs-center mb-sm">
-  <%= avatar_tag @person_process.person, class: 'avatar-xl' %>
+  <%= link_to @person_process.person do %>
+    <%= avatar_tag @person_process.person, class: 'avatar-xl' %>
+  <% end %>
 </div>
 
-<h2 class="text-xs-center mb-1">
-  <%= link_to @person_process.person, @person_process.person %>
-</h2>
+<%= render 'shared/title',
+           title: @person_process.person,
+           link: @person_process.person,
+           background: :process,
+           align: :center %>
 
 <div class="container-sm">
   <%= form_for([@church_process, @person_process]) do |f| %>
     <div class="list-group mb-2">
-      <div
-          class="list-group-item list-group-item-process list-group-item-secondary"
-          style="border-left-color: <%= '#' + @church_process.color %>;">
+      <div class="list-group-item list-group-item-process list-group-item-secondary">
         <% if can?(:read, @church_process) %>
           <%= link_to "View", @church_process, class: 'btn btn-secondary btn-sm btn-align-middle float-xs-right' %>
         <% end %>

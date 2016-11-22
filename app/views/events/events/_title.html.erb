@@ -1,5 +1,6 @@
-<div class="text-xs-center">
-  <%= fa_icon 'calendar 3x', class: 'my-1' %>
-</div>
-
-<%= render 'shared/title', align: :center, title: (local_assigns[:title] || @event) %>
+<%= render 'shared/title',
+           icon: :calendar,
+           align: :center,
+           title: (local_assigns[:title] || @event),
+           short: local_assigns[:short],
+           background: (local_assigns[:background] || :event) %>

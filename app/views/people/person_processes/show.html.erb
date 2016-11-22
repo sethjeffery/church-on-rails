@@ -2,9 +2,10 @@
   <%= avatar_tag @person_process.person, class: 'avatar-xl' %>
 </div>
 
-<h2 class="text-xs-center mb-1">
-  <%= link_to @person_process.person, @person_process.person %>
-</h2>
+<%= render 'shared/title',
+           title: @person_process.person,
+           link: @person_process.person,
+           align: :center %>
 
 <div class="container-sm">
   <%= render 'processes/person_processes/form' %>

@@ -7,6 +7,7 @@ class Account::PeopleController < ApplicationController
   end
 
   def edit
+    render :new
   end
 
   def new

@@ -1,7 +1,5 @@
-<div class="text-xs-center mb-sm">
-  <span class="avatar avatar-xl avatar-icon" style="background-color: <%= '#' + @team.color %>;">
-    <%= fa_icon @team.icon %>
-  </span>
-</div>
-
-<%= render 'shared/title', title: @team, align: :center %>
+<%= render 'shared/title',
+           icon: @team.icon,
+           title: @team,
+           align: :center,
+           background: @team.color %>

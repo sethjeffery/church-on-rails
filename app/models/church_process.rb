@@ -1,6 +1,6 @@
 class ChurchProcess < ApplicationRecord
   ICONS = %w(arrow-right star link pencil music smile-o frown-o heart thumbs-up wheelchair home phone user-plus male female child)
-  COLORS = %w(e34747 ea8e2b f1df12 1ac63b 1aa7e1 da1ae1 c0c0c0 606060)
+  COLORS = %w(65d268)
 
   has_many :person_processes
   has_many :people, through: :person_processes

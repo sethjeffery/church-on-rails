@@ -1,6 +1,6 @@
 class Team < ApplicationRecord
   ICONS = %w(users star laptop pencil music medkit briefcase bullhorn child heart thumbs-up cutlery home map-marker globe car)
-  COLORS = %w(e34747 ea8e2b f1df12 1ac63b 1aa7e1 da1ae1 c0c0c0 606060)
+  COLORS = %w(54aeea ea695c ea8e2b eccf0f 65d268 da1ae1 c0c0c0 606060)
 
   has_many :team_memberships
   has_many :people, through: :team_memberships

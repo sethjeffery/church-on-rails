@@ -22,21 +22,12 @@
         <%= f.hidden_field :color %>
 
         <div class="input-group-btn dropdown">
-          <a class="btn btn-secondary" data-toggle="dropdown"><%= fa_icon "#{@church_process.icon} 1x" %></a>
           <div class="dropdown-menu dropdown-menu-icons dropdown-menu-right">
             <% ChurchProcess::ICONS.each do |icon| %>
               <%= link_to raw(fa_icon("#{icon} 2x")), '#', class: "dropdown-item dropdown-item-icon text-xs-center", data: { toggle: 'icon', icon: icon } %>
             <% end %>
           </div>
-        </div>
-
-        <div class="input-group-btn dropdown">
-          <div class="dropdown-menu dropdown-menu-icons dropdown-menu-right">
-            <% ChurchProcess::COLORS.each do |color| %>
-              <%= link_to raw(fa_icon("square 2x")), '#', class: "dropdown-item dropdown-item-icon text-xs-center", data: { toggle: 'color', color: color }, style: "color: ##{color}" %>
-            <% end %>
-          </div>
-          <a class="btn btn-secondary" data-toggle="dropdown" style="color: <%= '#' + @church_process.color %>;"><%= fa_icon "square 1x" %></a>
+          <a class="btn btn-secondary" data-toggle="dropdown"><%= fa_icon "#{@church_process.icon} 1x" %></a>
         </div>
       </div>
       <%= field_error(@church_process, :name) %>

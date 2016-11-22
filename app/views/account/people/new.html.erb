@@ -1,8 +1,8 @@
-<div class="container-xs">
-  <%= render 'people/people/title', title: 'Your profile' %>
+<%= render 'people/people/title', title: 'Your profile', short: @person.new_record? %>
 
+<div class="container-xs">
   <% if @person.new_record? %>
-    <p class="size-xs-small">
+    <p class="size-xs-small mt-2">
       Welcome! To add your account to the church database,
       we respectfully ask that you provide some identity information.
     </p>
@@ -16,6 +16,9 @@
   <%= form_for(@person, url: account_person_path) do |f| %>
 
     <div class="list-group mb-1">
+      <div class="list-group-item list-group-item-secondary">
+        Details
+      </div>
       <%= render 'account/people/form_fields', f: f, person: @person, email: false %>
     </div>
 

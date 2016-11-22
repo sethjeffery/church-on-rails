@@ -1,0 +1,39 @@
+.title-container {
+  color: white;
+
+  a {
+    color: white;
+  }
+}
+
+.title-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1000px;
+  margin-top: -924px;
+  background-color: #54aeea;
+  z-index: -1;
+
+  .title-container-short & {
+    margin-top: -950px;
+  }
+}
+
+.title-container::after {
+  @extend .title-overlay;
+  content: '';
+  z-index: -2;
+}
+
+.title-container-short::after {
+  margin-top: -950px;
+}
+
+.title-container-event::after {
+  background-color: #ea695c;
+}
+
+.title-container-process::after {
+  background-color: #65d268;
+}

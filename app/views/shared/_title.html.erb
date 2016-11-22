@@ -1,3 +1,19 @@
-<h2 class="<%= "text-xs-#{align}" if local_assigns[:align] %> mb-1">
-  <%= title %>
+<% if local_assigns[:icon] %>
+  <div class="text-xs-center mb-sm">
+    <span class="avatar avatar-xl avatar-icon">
+      <%= fa_icon icon.to_s %>
+    </span>
+  </div>
+<% end %>
+
+<h2 class="
+        mb-1 title-container
+        <%= "text-xs-#{align}"              if local_assigns[:align] %>
+        <%= "title-container-short"         if local_assigns[:short] %>
+        <%= "title-container-#{background}" if local_assigns[:background].is_a?(Symbol) %>
+">
+  <% if local_assigns[:background].is_a?(String) %>
+    <div class="title-overlay" style="background-color: <%= '#' + background %>;"></div>
+  <% end %>
+  <%= link_to_if !!local_assigns[:link], title, local_assigns[:link] %>
 </h2>
