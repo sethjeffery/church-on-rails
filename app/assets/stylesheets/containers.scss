@@ -23,6 +23,14 @@
   }
 }
 
+.container-signup {
+  @extend .container-xs;
+  @media (min-height: 750px) {
+    max-width: 380px + 32px;
+    @include total-center;
+  }
+}
+
 .container-sm {
   margin: auto;
   max-width: 510px;

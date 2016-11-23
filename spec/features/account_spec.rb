@@ -27,7 +27,7 @@ RSpec.describe "Account" do
       click_button 'Save changes'
 
       expect(page).to have_no_text 'add your account'
-      expect(current_path).to eq '/account'
+      expect(current_path).to eq '/account/welcome'
     end
 
     it "Autoconnect with existing person" do

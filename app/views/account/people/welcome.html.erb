@@ -1,0 +1,29 @@
+<%= render 'shared/title', title: "Welcome, #{current_user.person}!", icon: 'thumbs-up', align: :center %>
+
+<div class="container-xs">
+  <p class="alert alert-info mb-2">
+    This is your first time using Church-on-Rails. We have created an <strong>Admins</strong>
+    team for you and set up a few defaults. You now have administrative access
+    to the site.
+  </p>
+
+  <h4 class="mb-1">What next?</h4>
+
+  <div class="fa-2x-container mb-2">
+    <%= fa_icon 'user-circle-o 2x' %>
+    Update your <%= link_to 'account profile', account_path %> with more information so that you can be identified more
+    easily on this website.
+  </div>
+
+  <div class="fa-2x-container mb-2">
+    <%= fa_icon 'user 2x' %>
+    Start adding <%= link_to 'people', people_path %> to your church database.
+  </div>
+
+  <div class="fa-2x-container mb-2">
+    <%= fa_icon 'users 2x' %>
+    Define <%= link_to 'teams', teams_path %> for your members. Teams not just identify
+    home groups and church teams, but can also be used to give access permissions on this website
+    to others.
+  </div>
+</div>

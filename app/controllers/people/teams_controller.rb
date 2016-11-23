@@ -7,10 +7,6 @@ module People
       @teams = @teams.includes(:team_memberships, :people).order(:name).page(params[:page]).per(20)
     end
 
-    def new
-      @team.color = Team::COLORS.first
-    end
-
     def create
       if @team.save
         redirect_to team_path @team

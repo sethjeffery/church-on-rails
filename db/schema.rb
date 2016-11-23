@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20161122165817) do
   create_table "church_processes", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
-    t.string   "color",       default: "c0c0c0"
     t.string   "icon",        default: "arrow-right"
     t.text     "steps"
     t.datetime "created_at",                          null: false
@@ -131,7 +130,7 @@ ActiveRecord::Schema.define(version: 20161122165817) do
     t.datetime "updated_at",                        null: false
     t.boolean  "admin",          default: false
     t.text     "description"
-    t.string   "color",          default: "c0c0c0"
+    t.string   "color",          default: "54aeea"
     t.boolean  "people_editor"
     t.boolean  "people_reader"
     t.boolean  "people_admin"

@@ -10,20 +10,35 @@
 <div class="list-group">
   <%= render 'shared/search_header', resource: :families %>
 
-  <% @families.each do |family| %>
-    <%= list_group_item family, url: family do %>
+  <% if @families.present? %>
+    <% @families.each do |family| %>
+      <%= list_group_item family, url: family do %>
 
-      <div class="row">
-        <div class="col-sm-6 text-ellipsis">
-          <%= fa_icon 'address-card 1x', class: 'mr-xs' %>
-          <%= family %>
+        <div class="row">
+          <div class="col-sm-6 text-ellipsis">
+            <%= fa_icon 'address-card 1x', class: 'mr-xs' %>
+            <%= family %>
+          </div>
+          <div class="col-sm-6 text-ellipsis text-light size-xs-small">
+            <%= family.people.map(&:short_name).join(', ') %>
+          </div>
         </div>
-        <div class="col-sm-6 text-ellipsis text-light size-xs-small">
-          <%= family.people.map(&:short_name).join(', ') %>
-        </div>
-      </div>
 
+      <% end %>
     <% end %>
+  <% else %>
+    <div class="list-group-item list-group-item-padded">
+      <h1>Start a family.</h1>
+      <p>
+        Families are an essential connection of the database to people. Defining families allows you to
+        group people in the same family together at a specific home address.
+      </p>
+      <% if can? :create, Family %>
+        <p>
+          <%= link_to "Create a family", new_family_path %> for your church members.
+        </p>
+      <% end %>
+    </div>
   <% end %>
 </div>
 

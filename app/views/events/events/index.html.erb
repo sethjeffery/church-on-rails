@@ -11,7 +11,23 @@
   <div class="list-group-item list-group-item-secondary">
     Upcoming events
   </div>
-  <%= render partial: 'events/events/event_item', collection: @events %>
+  <% if @events.present? %>
+    <%= render partial: 'events/events/event_item', collection: @events %>
+  <% else %>
+    <div class="list-group-item list-group-item-padded">
+      <h1>Get together.</h1>
+      <p>
+        Events are ways for you to specify meetings and special events either for your teams
+        or for the whole church. Events can be recurring (like a regular small group) or
+        once off (like a special occasion).
+      </p>
+      <% if can? :create, Event %>
+        <p>
+          <%= link_to "Create an event", new_family_path %> and get everyone together.
+        </p>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
 <div class="text-xs-center mt-1">

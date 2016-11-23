@@ -1,4 +1,4 @@
-<div class="container-xs pb-3 pt-1">
+<div class="container-signup pb-3 pt-1">
   <h2 class="text-xs-center">Create an Account</h2>
   <div class="size-xs-small text-light text-xs-center">It's really easy.</div>
 
@@ -10,27 +10,29 @@
     <div class="size-xs-small mb-sm">
       Please enter your email address, this will be your login.
     </div>
-    <div class="input-group mb-1">
+    <div class="input-group <%= 'has-danger' if resource.errors[:email].present? %>">
       <label class="input-group-addon" for="user_email">
         <span class="fa fa-envelope fa-1x"></span>
       </label>
-      <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email' %>
+      <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email', hide_errors: true %>
     </div>
+    <%= field_error(resource, :email) %>
 
-    <div class="size-xs-small mb-sm">
+    <div class="size-xs-small mb-sm mt-1">
       Please provide a password for this account.
       <% if @minimum_password_length %>
         <div class="size-xs-tiny font-weight-bold">(<%= @minimum_password_length %> characters minimum)</div>
       <% end %>
     </div>
-    <div class="input-group mb-1">
+    <div class="input-group <%= 'has-danger' if resource.errors[:password].present? %>">
       <label class="input-group-addon" for="user_password">
         <span class="fa fa-lock fa-1x"></span>
       </label>
-      <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password' %>
+      <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password', hide_errors: true %>
     </div>
+    <%= field_error(resource, :password) %>
 
-    <div class="size-xs-small">
+    <div class="size-xs-small mt-1">
       We will send a confirmation email to your address once you register by clicking below.
     </div>
 

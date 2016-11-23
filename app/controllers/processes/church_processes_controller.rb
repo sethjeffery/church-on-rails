@@ -6,10 +6,6 @@ class Processes::ChurchProcessesController < ApplicationController
     @church_processes = @church_processes.where("lower(name) LIKE ?", "%#{params[:q].downcase}%") if params[:q]
   end
 
-  def new
-    @church_process.color = ChurchProcess::COLORS.sample
-  end
-
   def create
     if @church_process.save
       redirect_to @church_process
@@ -34,6 +30,6 @@ class Processes::ChurchProcessesController < ApplicationController
   protected
 
   def create_params
-    params.require(:church_process).permit(:name, :description, :icon, :color, steps: [])
+    params.require(:church_process).permit(:name, :description, :icon, steps: [])
   end
 end

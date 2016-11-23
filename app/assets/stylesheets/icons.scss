@@ -2,3 +2,15 @@
   width: 16px;
   text-align: center;
 }
+
+.fa-2x-container {
+  padding-left: 3em;
+
+  > .fa {
+    float: left;
+    margin: 0 -1em 0 -1.5em;
+    width: 1em;
+    height: 1em;
+    text-align: center;
+  }
+}

@@ -8,7 +8,6 @@ class ChurchProcess < ApplicationRecord
   serialize :steps
 
   validates :name, presence: true, uniqueness: true
-  validates :color, format: /\A[0-9a-f]{6}\z/, allow_nil: true
 
   after_initialize :generate_steps
   after_validation :compact_steps

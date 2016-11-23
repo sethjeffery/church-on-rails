@@ -5,6 +5,12 @@ Rails.application.routes.draw do
     get '(page/:page)', :action => :index, :on => :collection, :as => ''
   end
 
+  unauthenticated do
+    as :user do
+      get 'users', to: redirect('/users/login')
+    end
+  end
+
   authenticate do
     scope module: 'people' do
       resources :families, concerns: :paginatable do
@@ -40,6 +46,7 @@ Rails.application.routes.draw do
 
     namespace :account do
       get '/' => 'people#show'
+      get 'welcome' => 'people#welcome', as: :welcome
       as :user do
         get 'resend_confirmation' => 'confirmations#resend'
       end

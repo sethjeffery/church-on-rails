@@ -20,7 +20,12 @@ class Account::PeopleController < ApplicationController
     @person.user = current_user
 
     if @person.save
-      redirect_to account_path
+      if Person.count == 1 && !Team.exists?
+        FirstPersonJob.perform_now(@person)
+        redirect_to account_welcome_path
+      else
+        redirect_to account_path
+      end
     else
       render :new
     end

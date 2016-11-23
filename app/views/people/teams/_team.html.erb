@@ -87,10 +87,12 @@
         <div class="list-group-item list-group-item-secondary">
           Management
         </div>
-        <div class="list-group-item">
-          <%= fa_icon 'trash 1x', class: 'mr-xs' %>
-          <%= link_to 'Remove team', confirm_destroy_team_path(team) %>
-        </div>
+        <% unless team.admin? %>
+          <div class="list-group-item">
+            <%= fa_icon 'trash 1x', class: 'mr-xs' %>
+            <%= link_to 'Remove team', confirm_destroy_team_path(team) %>
+          </div>
+        <% end %>
       </div>
     <% end %>
   </div>

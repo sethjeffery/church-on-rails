@@ -19,7 +19,6 @@
       <div class="input-group <%= 'has-danger' if @church_process.errors[:name].present? %>">
         <%= f.text_field :name, class: 'form-control', autofocus: true, hide_errors: true %>
         <%= f.hidden_field :icon %>
-        <%= f.hidden_field :color %>
 
         <div class="input-group-btn dropdown">
           <div class="dropdown-menu dropdown-menu-icons dropdown-menu-right">

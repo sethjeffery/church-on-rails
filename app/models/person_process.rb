@@ -1,6 +1,6 @@
 class PersonProcess < ApplicationRecord
   delegate :short_name, :name, to: :person
-  delegate :icon, :color, to: :church_process
+  delegate :icon, to: :church_process
 
   belongs_to :person
   belongs_to :church_process
