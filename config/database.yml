@@ -1,25 +1,49 @@
-# SQLite version 3.x
-#   gem install sqlite3
+# Church-on-Rails supports multiple database types.
 #
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
+# The database for running tests is always sqlite3.
+# But for development and production it can be easily customised
+# to your system by setting environment variables on the server.
+#
+#   DB_ADAPTER:   sqlite3 | mysql2 | postgresql
+#   DB_NAME:      your database name
+#   DB_USER:      username
+#   DB_PASSSWORD: ******
 #
 default: &default
-  adapter: sqlite3
   pool: 5
   timeout: 5000
+  adapter: <%= ENV["DB_ADAPTER"] %>
+
+  <% if ENV["DB_ADAPTER"] == 'sqlite3' %>
+  database: db/<%= Rails.env %>.sqlite3
+
+  <% elsif ENV["DB_ADAPTER"] == 'postgresql' %>
+  encoding: unicode
+  database: <%= ENV["DB_NAME"] %>
+  username: <%= ENV["DB_USER"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+
+  <% elsif ENV["DB_ADAPTER"] == 'mysql2' %>
+  encoding: utf8
+  database: <%= ENV["DB_NAME"] %>
+  username: <%= ENV["DB_USER"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+  host:     <%= ENV["DB_HOST"] || '127.0.0.1' %>
+  port:     <%= ENV["DB_PORT"] || '3306' %>
+
+  <% end %>
 
 development:
   <<: *default
-  database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
   database: db/test.sqlite3
 
 production:
   <<: *default
-  database: db/production.sqlite3
