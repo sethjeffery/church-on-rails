@@ -1,11 +1,12 @@
 class Person < ApplicationRecord
   include Concerns::Naming
+  attr_accessor :family_name
 
   belongs_to :user, autosave: true
   has_many :family_memberships
   has_many :families, through: :family_memberships, inverse_of: :people
   has_many :team_memberships
-  has_many :teams, through: :team_memberships
+  has_many :teams, through: :team_memberships, inverse_of: :people
   has_many :events, inverse_of: :author
   has_many :person_processes
 
@@ -15,9 +16,21 @@ class Person < ApplicationRecord
   before_validation :sanitize_names
 
   def start_family(family_name)
+    join Family.create(name: family_name), head: true
+  end
+
+  def join(group, args={})
     save if new_record?
-    family = Family.create! name: family_name
-    FamilyMembership.create! person: self, family: family, head: true
+
+    if group.is_a? Family
+      join_family group, args
+
+    elsif group.is_a? Team
+      join_team group, args
+
+    else
+      raise "Unexpected type #{group.class.name}"
+    end
   end
 
   protected
@@ -32,7 +45,13 @@ class Person < ApplicationRecord
     self.last_name   = capitalize(last_name)   if last_name
   end
 
-  private
+  def join_team(team, args={})
+    team_memberships.create({ team: team }.merge(args))
+  end
+
+  def join_family(family, args={})
+    family_memberships.create({ family: family }.merge(args))
+  end
 
   def capitalize(name)
     name.slice(0,1).capitalize + name.slice(1..-1)

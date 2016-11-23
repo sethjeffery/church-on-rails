@@ -8,6 +8,7 @@ module People
     end
 
     def create
+      @family_membership.family = @family
       if @family_membership.save
         redirect_to family_path(@family)
       else
@@ -17,12 +18,17 @@ module People
 
     def destroy
       @family_membership.destroy
+
+      respond_to do |format|
+        format.html { redirect_to @family }
+        format.js
+      end
     end
 
     private
 
     def create_params
-      params.require(:family_membership).permit(:person_id, :head, :family_id)
+      params.require(:family_membership).permit(:person_id, :head)
     end
 
     def load_and_authorize_family

@@ -43,9 +43,23 @@ class Ability
 
     [Person, Family, Team, TeamMembership, FamilyMembership].each do |klass|
       can :read,   klass if team.people_reader?
-      can :edit,   klass if team.people_editor?
+      can :update, klass if team.people_editor?
       can :create, klass if team.people_editor?
       can :manage, klass if team.people_admin?
+    end
+
+    [ChurchProcess, PersonProcess].each do |klass|
+      can :read,   klass if team.process_reader?
+      can :update, klass if team.process_editor?
+      can :create, klass if team.process_editor?
+      can :manage, klass if team.process_admin?
+    end
+
+    [Event].each do |klass|
+      can :read,   klass if team.event_reader?
+      can :update, klass if team.event_editor?
+      can :create, klass if team.event_editor?
+      can :manage, klass if team.event_admin?
     end
   end
 end

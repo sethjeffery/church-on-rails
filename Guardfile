@@ -3,6 +3,7 @@ guard :rspec, cmd: 'bundle exec rspec' do
   watch('config/routes.rb')                           { "spec/routing" }
   watch('app/controllers/application_controller.rb')  { "spec/controllers" }
   watch(%r{^spec/.+_spec\.rb$})
+  watch(%r{^spec/support/.+\.rb$})                    { "spec" }
   watch(%r{^app/(.+)\.rb$})                           { |m| "spec/#{m[1]}_spec.rb" }
   watch(%r{^app/(.*)(\.erb|\.haml|\.slim)$})          { |m| "spec/#{m[1]}#{m[2]}_spec.rb" }
   watch(%r{^lib/(.+)\.rb$})                           { |m| "spec/lib/#{m[1]}_spec.rb" }
@@ -13,4 +14,9 @@ end
 guard :rails, port: 3000, host: '0.0.0.0' do
   watch('Gemfile.lock')
   watch(%r{^(config|lib)/.*})
+end
+
+guard 'migrate' do
+  watch(%r{^db/migrate/(\d+).+\.rb})
+  watch('db/seeds.rb')
 end

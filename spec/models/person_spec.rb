@@ -61,6 +61,26 @@ RSpec.describe Person do
     end
   end
 
+  describe '#join' do
+    it 'can join a family' do
+      team = create(:team)
+      subject.join team
+      expect(team.people).to include subject
+    end
+
+    it 'can join a team' do
+      family = create(:family)
+      subject.join family
+      expect(family.people).to include subject
+    end
+
+    it 'can join nothing else' do
+      expect {
+        subject.join 'the navy'
+      }.to raise_error "Unexpected type String"
+    end
+  end
+
   context 'saving' do
     it 'capitalizes names' do
       subject.first_name = 'edward'

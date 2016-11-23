@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161121074328) do
+ActiveRecord::Schema.define(version: 20161122165817) do
 
   create_table "church_processes", force: :cascade do |t|
     t.string   "name"
@@ -127,15 +127,21 @@ ActiveRecord::Schema.define(version: 20161121074328) do
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.boolean  "admin",         default: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.boolean  "admin",          default: false
     t.text     "description"
-    t.string   "color",         default: "c0c0c0"
+    t.string   "color",          default: "c0c0c0"
     t.boolean  "people_editor"
     t.boolean  "people_reader"
     t.boolean  "people_admin"
-    t.string   "icon",          default: "users"
+    t.string   "icon",           default: "users"
+    t.boolean  "process_editor"
+    t.boolean  "process_reader"
+    t.boolean  "process_admin"
+    t.boolean  "event_editor"
+    t.boolean  "event_reader"
+    t.boolean  "event_admin"
     t.index ["name"], name: "index_teams_on_name"
   end
 

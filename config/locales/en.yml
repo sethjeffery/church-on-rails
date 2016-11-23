@@ -35,6 +35,9 @@ en:
         dob: 'Date of birth'
       team:
       family:
+        address1: 'Address'
+        address2: 'Town'
+        postcode: 'Post code'
       family_membership:
         person_id: Family member
       team_membership:

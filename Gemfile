@@ -75,6 +75,8 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'guard-rails', require: false
+  gem 'guard-migrate', require: false
+  gem 'capybara'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

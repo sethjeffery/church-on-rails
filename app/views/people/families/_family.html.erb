@@ -1,12 +1,14 @@
 <%= flash_messages container: 'container-sm' %>
 
-<div class="<%= 'container-sm' unless can?(:edit, family) || @family.full_address.present? %>">
+<div class="<%= 'container-sm' unless can?(:update, family) || @family.full_address.present? %>">
   <div class="row">
-    <div class="col-xs-12 <%= 'col-lg-6' if can?(:edit, family) || @family.full_address.present? %>">
+    <div class="col-xs-12 <%= 'col-lg-6' if can?(:update, family) || @family.full_address.present? %>">
       <div class="list-group mb-2">
         <div class="list-group-item list-group-item-secondary">
-          <%= link_to new_family_family_membership_path(family), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
-            <%= fa_icon 'user 1x', class: 'mr-xs' %>Add person
+          <% if can? :update, family %>
+            <%= link_to new_family_family_membership_path(family), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+              <%= fa_icon 'user 1x', class: 'mr-xs' %>Add person
+            <% end %>
           <% end %>
 
           Members
@@ -17,11 +19,11 @@
 
     </div>
 
-    <% if can?(:edit, family) || @family.full_address.present? %>
+    <% if can?(:update, family) || @family.full_address.present? %>
       <div class="col-xs-12 col-lg-6">
         <div class="list-group mb-2">
           <div class="list-group-item list-group-item-secondary">
-            <% if can? :edit, family %>
+            <% if can? :update, family %>
               <%= link_to edit_family_path(family), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
                 <%= fa_icon 'pencil 1x', class: 'mr-xs' %>Edit
               <% end %>

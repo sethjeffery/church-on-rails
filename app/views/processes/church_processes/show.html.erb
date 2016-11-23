@@ -4,7 +4,7 @@
   <div class="col-lg-6">
     <div class="list-group mb-2">
       <div class="list-group-item list-group-item-secondary">
-        <% if can? :edit, @church_process %>
+        <% if can? :update, @church_process %>
           <%= link_to edit_church_process_path(@church_process), class: 'btn btn-secondary btn-sm float-xs-right btn-align-middle' do %>
             <%= fa_icon 'pencil 1x' %>
             Change

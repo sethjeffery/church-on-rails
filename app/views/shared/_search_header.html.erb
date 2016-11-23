@@ -6,6 +6,7 @@
           <%= text_field_tag :q, params[:q], class: 'form-control', autofocus: true %>
           <div class="input-group-btn">
             <button type="submit" class="btn btn-secondary" onclick="$(this).closest('form').submit();">
+              <span class="sr-only">Search</span>
               <%= fa_icon 'search 1x' %>
             </button>
           </div>

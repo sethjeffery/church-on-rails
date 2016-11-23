@@ -3,7 +3,7 @@ class Team < ApplicationRecord
   COLORS = %w(54aeea ea695c ea8e2b eccf0f 65d268 da1ae1 c0c0c0 606060)
 
   has_many :team_memberships
-  has_many :people, through: :team_memberships
+  has_many :people, through: :team_memberships, inverse_of: :teams
   has_many :events
 
   scope :admins, -> { where(admin: true) }

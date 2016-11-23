@@ -19,6 +19,12 @@ FactoryGirl.define do
   factory :user do
     email         { Faker::Internet.email }
     password      { Faker::Internet.password }
+
+    trait :person do
+      after(:create) do |user|
+        user.person = FactoryGirl.create(:person, user: user, email: user.email)
+      end
+    end
   end
 
   factory :person do
@@ -37,4 +43,7 @@ FactoryGirl.define do
   factory :team do
     name  { Faker::Lorem.sentence }
   end
+
+  factory :family_membership
+  factory :team_membership
 end

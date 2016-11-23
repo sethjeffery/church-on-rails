@@ -20,7 +20,7 @@ class Account::PeopleController < ApplicationController
     @person.user = current_user
 
     if @person.save
-      redirect_to account_person_path
+      redirect_to account_path
     else
       render :new
     end
