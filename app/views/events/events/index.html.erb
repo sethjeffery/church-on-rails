@@ -11,5 +11,9 @@
   <div class="list-group-item list-group-item-secondary">
     Upcoming events
   </div>
-  <%= render partial: 'events/events/event_item', collection: @events.sort_by{|t| t.schedule.next_datetime } %>
+  <%= render partial: 'events/events/event_item', collection: @events %>
+</div>
+
+<div class="text-xs-center mt-1">
+  <%= paginate @events, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
 </div>

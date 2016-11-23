@@ -3,6 +3,8 @@ class Events::EventsController < ApplicationController
 
   def index
     @events = @events.upcoming
+    @events = @events.where("lower(name) LIKE ?", "%#{params[:q].downcase}%") if params[:q]
+    @events = Kaminari.paginate_array(@events.sort_by_closest).page(params[:page]).per(20)
   end
 
   def new

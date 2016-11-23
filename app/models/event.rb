@@ -9,6 +9,10 @@ class Event < ApplicationRecord
 
   validates_presence_of :name
 
+  def self.sort_by_closest
+    all.sort_by{|event| event.schedule.next_datetime }
+  end
+
   def to_s
     name
   end

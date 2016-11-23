@@ -1,18 +1,22 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
+  concern :paginatable do
+    get '(page/:page)', :action => :index, :on => :collection, :as => ''
+  end
+
   authenticate do
     scope module: 'people' do
-      resources :families do
+      resources :families, concerns: :paginatable do
         get :confirm_destroy, on: :member
         resources :family_memberships, path: 'memberships'
       end
-      resources :teams do
+      resources :teams, concerns: :paginatable do
         get :confirm_destroy, on: :member
         resources :team_memberships, path: 'memberships'
         resources :events, controller: '/events/events'
       end
-      resources :people do
+      resources :people, concerns: :paginatable do
         get :confirm_destroy, on: :member
         resource :user
         resource :teams, controller: :person_teams
@@ -22,13 +26,13 @@ Rails.application.routes.draw do
     end
 
     scope module: 'events' do
-      resources :events do
+      resources :events, concerns: :paginatable do
         get :confirm_destroy, on: :member
       end
     end
 
     scope module: 'processes' do
-      resources :church_processes, path: 'processes' do
+      resources :church_processes, concerns: :paginatable, path: 'processes' do
         get :confirm_destroy, on: :member
         resources :person_processes, path: 'people'
       end

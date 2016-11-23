@@ -37,7 +37,7 @@ RSpec.describe "People" do
 
         # search
         person = people[0] == user.person ? people[1] : people[0]
-        person.update_attributes first_name: 'xxxxx', last_name: 'yyyyyy'
+        person.update_attributes first_name: 'xxxxx', last_name: 'yyyyy'
         fill_in 'q', with: 'xxxxx'
         click_on 'Search'
         expect(page).to have_text person.name

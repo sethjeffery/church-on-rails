@@ -2,7 +2,8 @@ class Processes::ChurchProcessesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @church_processes = @church_processes.includes(:person_processes).includes(:people)
+    @church_processes = @church_processes.includes(:person_processes).includes(:people).order(:name).page(params[:page]).per(20)
+    @church_processes = @church_processes.where("lower(name) LIKE ?", "%#{params[:q].downcase}%") if params[:q]
   end
 
   def new

@@ -3,7 +3,7 @@ module People
     load_and_authorize_resource
 
     def index
-      @teams = @teams.where("name LIKE ?", "%#{params[:q]}%") if params[:q]
+      @teams = @teams.where("lower(name) LIKE ?", "%#{params[:q].downcase}%") if params[:q]
       @teams = @teams.includes(:team_memberships, :people).order(:name).page(params[:page]).per(20)
     end
 

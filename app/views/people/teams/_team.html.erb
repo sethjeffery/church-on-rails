@@ -79,7 +79,7 @@
         Events
       </div>
 
-      <%= render partial: 'events/events/event_item', collection: team.events.upcoming.sort_by{|t| t.schedule.next_datetime } %>
+      <%= render partial: 'events/events/event_item', collection: team.events.upcoming.sort_by_closest %>
     </div>
 
     <% if can? :manage, team %>
