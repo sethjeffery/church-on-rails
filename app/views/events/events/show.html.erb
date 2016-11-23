@@ -1,8 +1,8 @@
 <%= render 'events/events/title' %>
 
-<div class="<%= 'container-sm' unless @event.full_address.present? || can?(:manage, @event) %>">
+<div class="<%= 'container-sm' unless two_event_columns? %>">
   <div class="row">
-    <div class="col-xs-12 <%= 'col-lg-6' if @event.full_address.present? %>">
+    <div class="col-xs-12 <%= 'col-lg-6' if two_event_columns? %>">
       <div class="list-group mb-2">
         <div class="list-group-item list-group-item-secondary">
           <% if can? :update, @event %>

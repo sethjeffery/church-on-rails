@@ -7,4 +7,8 @@ module EventsHelper
                                  title: event.to_s }] }
     map_div map, style: "width: #{width}; height: #{height}"
   end
+
+  def two_event_columns?
+    @event.full_address.present? || can?(:manage, @event)
+  end
 end
