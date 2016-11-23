@@ -4,15 +4,6 @@ RSpec.shared_examples "a named model" do |name_field = :name|
   end
 end
 
-RSpec.shared_examples "an authenticated request" do |url|
-  context 'not signed in' do
-    it "redirects to login" do
-      get url
-      expect(response).to redirect_to('/users/login')
-    end
-  end
-end
-
 RSpec.shared_examples "an authenticated feature" do |url|
   context 'not signed in' do
     before { logout }

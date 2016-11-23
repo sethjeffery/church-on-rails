@@ -3,7 +3,11 @@ class HomeController < ApplicationController
     if user_signed_in?
       redirect_to account_path
     else
-      redirect_to new_user_session_path
+      if User.exists?
+        redirect_to new_user_session_path
+      else
+        redirect_to new_user_registration_path
+      end
     end
   end
 end
