@@ -3,17 +3,19 @@
     href="<%= url_for(church_process_item) %>">
 
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-xs-9 col-md-8">
       <%= fa_icon "#{church_process_item.icon} 1x", class: 'mr-xs'%>
       <%= church_process_item %>
     </div>
     <% if church_process_item.active_processes_count == 0 %>
-      <div class="col-sm-6 text-light size-xs-small">
-        <%= pluralize church_process_item.active_processes_count, 'person' %>
+      <div class="col-xs-3 col-md-4 text-light size-xs-small">
+        <div class="hidden-xs-down"><%= pluralize church_process_item.active_processes_count, 'person' %></div>
+        <div class="hidden-sm-up"><%= church_process_item.active_processes_count %></div>
       </div>
     <% else %>
-      <div class="col-sm-6 size-xs-small">
-        <%= pluralize church_process_item.active_processes_count, 'person' %>
+      <div class="col-xs-3 col-md-4 size-xs-small">
+        <div class="hidden-xs-down"><%= pluralize church_process_item.active_processes_count, 'person' %></div>
+        <div class="hidden-sm-up"><%= church_process_item.active_processes_count %></div>
       </div>
     <% end %>
   </div>

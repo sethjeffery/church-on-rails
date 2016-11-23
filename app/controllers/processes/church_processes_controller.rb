@@ -25,6 +25,11 @@ class Processes::ChurchProcessesController < ApplicationController
     end
   end
 
+  def destroy
+    @church_process.destroy
+    redirect_to church_processes_path, notice: "#{@church_process} has been removed from the database."
+  end
+
   protected
 
   def create_params

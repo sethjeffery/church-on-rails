@@ -1,0 +1,20 @@
+<%= render 'people/teams/title', background: :danger %>
+
+<div class="container-xs">
+  <div class="list-group mb-2">
+    <div class="list-group-item list-group-item-secondary">
+      Remove team
+    </div>
+
+    <div class="list-group-item">
+      <p>
+        If you do this, <strong><%= @team %></strong> will be removed from the database.
+        Any members will stay in the database but no longer a part of this team.
+        Are you sure?
+      </p>
+
+      <%= link_to 'No, stop!', @team, class: 'btn btn-secondary btn-block btn-lg mb-sm' %>
+      <%= button_to 'Yes, do it.', @team, method: :delete, class: 'btn btn-danger btn-block btn-lg mb-sm' %>
+    </div>
+  </div>
+</div>

@@ -76,5 +76,17 @@
         <%= render partial: 'processes/person_processes/person_process_item', collection: @person.person_processes %>
       </div>
     <% end %>
+
+    <% if can? :manage, person %>
+      <div class="list-group mb-2">
+        <div class="list-group-item list-group-item-secondary">
+          Management
+        </div>
+        <div class="list-group-item">
+          <%= fa_icon 'trash 1x', class: 'mr-xs' %>
+          <%= link_to 'Remove person', confirm_destroy_person_path(@person) %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

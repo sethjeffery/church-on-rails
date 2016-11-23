@@ -2,8 +2,8 @@ class ChurchProcess < ApplicationRecord
   ICONS = %w(arrow-right star link pencil music smile-o frown-o heart thumbs-up wheelchair home phone user-plus male female child)
   COLORS = %w(65d268)
 
-  has_many :person_processes
-  has_many :people, through: :person_processes
+  has_many :person_processes, dependent: :destroy
+  has_many :people,           through: :person_processes
 
   serialize :steps
 

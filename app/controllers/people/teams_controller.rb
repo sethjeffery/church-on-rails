@@ -27,6 +27,11 @@ module People
       end
     end
 
+    def destroy
+      @team.destroy
+      redirect_to teams_path, notice: "#{@team} has been removed from the database."
+    end
+
     private
 
     def create_params

@@ -27,6 +27,11 @@ module People
       end
     end
 
+    def destroy
+      @person.destroy
+      redirect_to people_path, notice: "#{@person} has been removed from the database."
+    end
+
     private
 
     def new_params

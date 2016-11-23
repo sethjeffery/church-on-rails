@@ -1,0 +1,19 @@
+<%= render 'events/events/title', background: :danger %>
+
+<div class="container-xs">
+  <div class="list-group mb-2">
+    <div class="list-group-item list-group-item-secondary">
+      Remove event
+    </div>
+
+    <div class="list-group-item">
+      <p>
+        If you do this, <strong><%= @event %></strong> will be removed from the database.
+        Are you sure?
+      </p>
+
+      <%= link_to 'No, stop!', @event, class: 'btn btn-secondary btn-block btn-lg mb-sm' %>
+      <%= button_to 'Yes, do it.', @event, method: :delete, class: 'btn btn-danger btn-block btn-lg mb-sm' %>
+    </div>
+  </div>
+</div>

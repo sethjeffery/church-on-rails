@@ -28,7 +28,7 @@ class Processes::PersonProcessesController < ApplicationController
   def create_params
     params.require(:person_process).permit(:person_id, :assignee_ids, :steps, assignee_ids: [], steps: []).tap{|hash|
       hash[:assignee_ids].select!(&:present?)
-      hash[:steps].select!(&:present?)
+      hash[:steps]&.select!(&:present?)
     }
   end
 

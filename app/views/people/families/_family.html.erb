@@ -1,8 +1,8 @@
 <%= flash_messages container: 'container-sm' %>
 
-<div class="<%= 'container-sm' unless can?(:update, family) || @family.full_address.present? %>">
+<div class="<%= 'container-sm' unless can?(:update, family) || family.full_address.present? %>">
   <div class="row">
-    <div class="col-xs-12 <%= 'col-lg-6' if can?(:update, family) || @family.full_address.present? %>">
+    <div class="col-xs-12 <%= 'col-lg-6' if can?(:update, family) || family.full_address.present? %>">
       <div class="list-group mb-2">
         <div class="list-group-item list-group-item-secondary">
           <% if can? :update, family %>
@@ -19,7 +19,7 @@
 
     </div>
 
-    <% if can?(:update, family) || @family.full_address.present? %>
+    <% if can?(:update, family) || family.full_address.present? %>
       <div class="col-xs-12 col-lg-6">
         <div class="list-group mb-2">
           <div class="list-group-item list-group-item-secondary">
@@ -32,17 +32,30 @@
             Details
           </div>
 
-          <% if @family.full_address.present? %>
-            <% if @family.lat && @family.lng %>
-              <%= map_for @family, height: '400px' %>
+          <% if family.full_address.present? %>
+            <% if family.lat && family.lng %>
+              <%= map_for family, height: '400px' %>
             <% end %>
 
             <div class="list-group-item size-xs-small size-sm-normal">
               <%= fa_icon 'map-marker', class: 'mr-xs' %>
-              <%= @family.full_address %>
+              <%= family.full_address %>
             </div>
           <% end %>
+
         </div>
+
+        <% if can? :manage, family %>
+          <div class="list-group mb-2">
+            <div class="list-group-item list-group-item-secondary">
+              Management
+            </div>
+            <div class="list-group-item">
+              <%= fa_icon 'trash 1x', class: 'mr-xs' %>
+              <%= link_to 'Remove family', confirm_destroy_family_path(family) %>
+            </div>
+          </div>
+        <% end %>
       </div>
     <% end %>
 

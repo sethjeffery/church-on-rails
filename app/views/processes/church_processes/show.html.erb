@@ -50,5 +50,17 @@
 
       <%= render partial: 'processes/person_processes/person_process_item', collection: @church_process.active_processes %>
     </div>
+
+    <% if can? :manage, @church_process %>
+      <div class="list-group mb-2">
+        <div class="list-group-item list-group-item-secondary">
+          Management
+        </div>
+        <div class="list-group-item">
+          <%= fa_icon 'trash 1x', class: 'mr-xs' %>
+          <%= link_to 'Remove process', confirm_destroy_church_process_path(@church_process) %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

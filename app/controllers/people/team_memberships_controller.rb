@@ -8,6 +8,7 @@ module People
     end
 
     def create
+      @team_membership.team = @team
       if @team_membership.save
         redirect_to team_path(@team)
       else
@@ -17,6 +18,11 @@ module People
 
     def destroy
       @team_membership.destroy
+
+      respond_to do |format|
+        format.html { redirect_to @team }
+        format.js
+      end
     end
 
     private

@@ -1,6 +1,6 @@
 <%= render 'events/events/title' %>
 
-<div class="<%= 'container-sm' unless @event.full_address.present? %>">
+<div class="<%= 'container-sm' unless @event.full_address.present? || can?(:manage, @event) %>">
   <div class="row">
     <div class="col-xs-12 <%= 'col-lg-6' if @event.full_address.present? %>">
       <div class="list-group mb-2">
@@ -30,8 +30,8 @@
       </div>
     </div>
 
-    <% if @event.full_address.present? %>
-      <div class="col-xs-12 col-lg-6">
+    <div class="col-xs-12 col-lg-6">
+      <% if @event.full_address.present? %>
         <div class="list-group mb-2">
           <div class="list-group-item list-group-item-secondary">
             Venue
@@ -46,7 +46,19 @@
             <%= @event.full_address %>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+
+      <% if can? :manage, @event %>
+        <div class="list-group mb-2">
+          <div class="list-group-item list-group-item-secondary">
+            Management
+          </div>
+          <div class="list-group-item">
+            <%= fa_icon 'trash 1x', class: 'mr-xs' %>
+            <%= link_to 'Remove event', confirm_destroy_event_path(@event) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

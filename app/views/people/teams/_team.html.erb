@@ -5,8 +5,8 @@
   <div class="col-lg-6">
     <div class="list-group mb-2">
       <div class="list-group-item list-group-item-secondary">
-        <% if can? :update, @team %>
-          <%= link_to edit_team_path(@team), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+        <% if can? :update, team %>
+          <%= link_to edit_team_path(team), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
             <%= fa_icon 'pencil 1x', class: 'mr-xs' %>Edit
           <% end %>
         <% end %>
@@ -14,14 +14,14 @@
         Team details
       </div>
 
-      <% if @team.description.present? %>
+      <% if team.description.present? %>
         <div class="list-group-item">
-          <%= render 'shared/description', description: @team.description %>
+          <%= render 'shared/description', description: team.description %>
         </div>
       <% end %>
 
-      <% if can? :manage, @team %>
-        <% if @team.admin? %>
+      <% if can? :manage, team %>
+        <% if team.admin? %>
           <div class="list-group-item">
             <div class="mb-xs">
               <%= fa_icon 'star 1x mr-xs' %>
@@ -32,17 +32,17 @@
             </div>
           </div>
 
-        <% elsif @team.has_permissions? %>
-          <% if @team.has_permissions_for? :people %>
+        <% elsif team.has_permissions? %>
+          <% if team.has_permissions_for? :people %>
             <div class="list-group-item">
               <div class="mb-xs">
                 <%= fa_icon 'user 1x mr-xs' %>
                 People, Teams, Families
               </div>
               <div class="size-xs-small clearfix">
-                <% if @team.people_reader? %><div class="float-xs-left mr-1"><%= fa_icon 'check' %> View</div><% end %>
-                <% if @team.people_editor? %><div class="float-xs-left mr-1"><%= fa_icon 'check' %> Edit</div><% end %>
-                <% if @team.people_admin?  %><div class="float-xs-left mr-1"><%= fa_icon 'check' %> Manage</div><% end %>
+                <% if team.people_reader? %><div class="float-xs-left mr-1"><%= fa_icon 'check' %> View</div><% end %>
+                <% if team.people_editor? %><div class="float-xs-left mr-1"><%= fa_icon 'check' %> Edit</div><% end %>
+                <% if team.people_admin?  %><div class="float-xs-left mr-1"><%= fa_icon 'check' %> Manage</div><% end %>
               </div>
             </div>
           <% end %>
@@ -56,7 +56,7 @@
       <div class="list-group-item list-group-item-secondary">
 
         <% if can? :create, TeamMembership %>
-          <%= link_to new_team_team_membership_path(@team), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+          <%= link_to new_team_team_membership_path(team), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
             <%= fa_icon 'user 1x', class: 'mr-xs' %>Add person
           <% end %>
         <% end %>
@@ -64,14 +64,14 @@
         Members
       </div>
 
-      <%= render 'people/teams/memberships', team: @team %>
+      <%= render 'people/teams/memberships', team: team %>
     </div>
 
     <div class="list-group mb-2">
       <div class="list-group-item list-group-item-secondary">
 
         <% if can? :create, Event %>
-          <%= link_to new_team_event_path(@team), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+          <%= link_to new_team_event_path(team), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
             <%= fa_icon 'calendar 1x', class: 'mr-xs' %>Add event
           <% end %>
         <% end %>
@@ -79,7 +79,19 @@
         Events
       </div>
 
-      <%= render partial: 'events/events/event_item', collection: @team.events.upcoming.sort_by{|t| t.schedule.next_datetime } %>
+      <%= render partial: 'events/events/event_item', collection: team.events.upcoming.sort_by{|t| t.schedule.next_datetime } %>
     </div>
+
+    <% if can? :manage, team %>
+      <div class="list-group mb-2">
+        <div class="list-group-item list-group-item-secondary">
+          Management
+        </div>
+        <div class="list-group-item">
+          <%= fa_icon 'trash 1x', class: 'mr-xs' %>
+          <%= link_to 'Remove team', confirm_destroy_team_path(team) %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

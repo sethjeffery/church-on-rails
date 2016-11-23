@@ -1,8 +1,8 @@
 class Family < ApplicationRecord
   include Concerns::Geocoding
 
-  has_many :family_memberships
-  has_many :people, through: :family_memberships, inverse_of: :families
+  has_many :family_memberships, dependent: :destroy
+  has_many :people,             through: :family_memberships, inverse_of: :families
 
   validates_presence_of :name
 

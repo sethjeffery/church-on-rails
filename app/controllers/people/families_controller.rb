@@ -23,6 +23,11 @@ module People
       end
     end
 
+    def destroy
+      @family.destroy
+      redirect_to families_path, notice: "#{@family} has been removed from the database."
+    end
+
     private
 
     def create_params

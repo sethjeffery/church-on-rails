@@ -83,16 +83,28 @@ RSpec.describe "Families" do
         user.person.join create(:team, people_reader: true, people_editor: true, people_admin: true)
       end
 
-      it 'can edit families' do
+      it 'can remove people from families' do
         family = create(:family, name: 'Smith')
         member = create(:person)
         member.join family
 
         visit "/families/#{family.id}"
         find(:css, '.list-group-item form.button_to button').click
-        expect(page).to have_no_content member.name
 
+        expect(page).to have_no_content member.name
         expect(family.reload.people).not_to include member
+      end
+
+      it 'can destroy families' do
+        family = create(:family)
+
+        visit "/families/#{family.id}"
+        click_on 'Remove family'
+        click_on 'Yes, do it.'
+
+        expect(page).to have_content "#{family} has been removed"
+        visit '/families'
+        expect(page).to have_no_content family.name
       end
     end
   end

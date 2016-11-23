@@ -26,6 +26,11 @@ class Events::EventsController < ApplicationController
     end
   end
 
+  def destroy
+    @event.destroy
+    redirect_to events_path, notice: "#{@event} has been removed from the database."
+  end
+
   protected
 
   def create_params

@@ -4,13 +4,16 @@ Rails.application.routes.draw do
   authenticate do
     scope module: 'people' do
       resources :families do
+        get :confirm_destroy, on: :member
         resources :family_memberships, path: 'memberships'
       end
       resources :teams do
+        get :confirm_destroy, on: :member
         resources :team_memberships, path: 'memberships'
         resources :events, controller: '/events/events'
       end
       resources :people do
+        get :confirm_destroy, on: :member
         resource :user
         resource :teams, controller: :person_teams
         resource :families, controller: :person_families
@@ -19,11 +22,14 @@ Rails.application.routes.draw do
     end
 
     scope module: 'events' do
-      resources :events
+      resources :events do
+        get :confirm_destroy, on: :member
+      end
     end
 
     scope module: 'processes' do
       resources :church_processes, path: 'processes' do
+        get :confirm_destroy, on: :member
         resources :person_processes, path: 'people'
       end
     end

@@ -2,13 +2,15 @@ class Person < ApplicationRecord
   include Concerns::Naming
   attr_accessor :family_name
 
-  belongs_to :user, autosave: true
-  has_many :family_memberships
-  has_many :families, through: :family_memberships, inverse_of: :people
-  has_many :team_memberships
-  has_many :teams, through: :team_memberships, inverse_of: :people
-  has_many :events, inverse_of: :author
-  has_many :person_processes
+  belongs_to :user,                     dependent: :destroy, autosave: true
+  has_many :family_memberships,         dependent: :destroy
+  has_many :team_memberships,           dependent: :destroy
+  has_many :events,                     dependent: :destroy, inverse_of: :author, foreign_key: :author_id
+  has_many :person_processes,           dependent: :destroy
+  has_many :person_process_assignees,   dependent: :destroy, inverse_of: :assignee, foreign_key: :assignee_id
+  has_many :families,                   through: :family_memberships, inverse_of: :people
+  has_many :teams,                      through: :team_memberships, inverse_of: :people
+  has_many :assigned_person_processes,  through: :person_process_assignees, class_name: 'PersonProcess', inverse_of: :assignees
 
   validates_presence_of :first_name, :last_name
   validates_inclusion_of :gender, in: %w( m f ), allow_nil: true

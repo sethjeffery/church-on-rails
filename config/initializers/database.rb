@@ -1,1 +1,1 @@
-require ENV["DB_ADAPTER"]
+require ENV["DB_ADAPTER"] || 'sqlite3'

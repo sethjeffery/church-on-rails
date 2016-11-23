@@ -4,8 +4,8 @@ class PersonProcess < ApplicationRecord
 
   belongs_to :person
   belongs_to :church_process
-  has_many :process_assignees, class_name: 'PersonProcessAssignee'
-  has_many :assignees, class_name: 'Person', through: :process_assignees
+  has_many :process_assignees,  dependent: :destroy, class_name: 'PersonProcessAssignee', inverse_of: :person_process
+  has_many :assignees,          through: :process_assignees, class_name: 'Person'
 
   serialize :steps
 

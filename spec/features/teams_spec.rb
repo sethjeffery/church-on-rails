@@ -95,6 +95,30 @@ RSpec.describe "Teams" do
 
         expect(page).to have_content 'People, Teams, Families View Edit Manage'
       end
+
+      it 'can remove people from teams' do
+        team = create(:team)
+        member = create(:person)
+        member.join team
+
+        visit "/teams/#{team.id}"
+        find(:css, '.list-group-item form.button_to button').click
+
+        expect(page).to have_no_content member.name
+        expect(team.reload.people).not_to include member
+      end
+
+      it 'can destroy teams' do
+        team = create(:team)
+
+        visit "/teams/#{team.id}"
+        click_on 'Remove team'
+        click_on 'Yes, do it.'
+
+        expect(page).to have_content "#{team} has been removed"
+        visit '/teams'
+        expect(page).to have_no_content team.name
+      end
     end
 
     context 'with event permissions' do

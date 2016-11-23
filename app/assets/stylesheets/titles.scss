@@ -30,10 +30,10 @@
   margin-top: -950px;
 }
 
-.title-container-event::after {
+.title-container-event::after, .title-container-danger::after {
   background-color: #ea695c;
 }
 
-.title-container-process::after {
+.title-container-process::after, .title-container-success::after {
   background-color: #65d268;
 }

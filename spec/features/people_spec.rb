@@ -144,6 +144,9 @@ RSpec.describe "People" do
         expect(page).to have_selector 'a.btn', :text => /Start/
         expect(page).to have_selector 'a.btn', :text => /Edit/
 
+        # cannot remove people
+        expect(page).to have_no_selector 'Remove person'
+
         click_on 'Edit'
         fill_in 'First name', with: 'aaaaaa'
         fill_in 'Middle name', with: 'bbbbbb'
@@ -156,6 +159,24 @@ RSpec.describe "People" do
         expect(page).to have_content "Full name Mr Aaaaaa Bbbbbb Cccccc"
         expect(page).to have_content "Email new@example.com"
         expect(page).to have_content "Phone 01234567890"
+      end
+    end
+
+    context 'with manage permissions' do
+      before do
+        user.person.join create(:team, people_reader: true, people_editor: true, people_admin: true)
+      end
+
+      it 'can destroy person' do
+        person = create(:person)
+
+        visit "/people/#{person.id}"
+        click_on 'Remove person'
+        click_on 'Yes, do it.'
+
+        expect(page).to have_content "#{person.name} has been removed"
+        visit '/people'
+        expect(page).to have_no_content person.name
       end
     end
   end
