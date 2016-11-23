@@ -36,12 +36,12 @@ RSpec.describe "People" do
         end
 
         # search
-        person = people[0]
+        person = people[0] == user.person ? people[1] : people[0]
         person.update_attributes first_name: 'xxxxx', last_name: 'yyyyyy'
         fill_in 'q', with: 'xxxxx'
         click_on 'Search'
         expect(page).to have_text person.name
-        people[1...25].each do |other|
+        people.select{|other_person| other_person != person}.each do |other|
           expect(page).to have_no_text other.name
         end
 
@@ -58,12 +58,6 @@ RSpec.describe "People" do
         expect(page).to have_content team.name
 
         # no editing access
-        unless page.has_no_selector? 'a.btn', :text => /Edit/
-          p text
-          p user.person
-          p person
-          p user.can? :update, person
-        end
         expect(page).to have_no_selector 'a.btn', :text => /Join/
         expect(page).to have_no_selector 'a.btn', :text => /Edit/
 
