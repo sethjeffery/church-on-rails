@@ -1,9 +1,12 @@
-<div class="text-xs-center mb-sm">
-  <%= avatar_tag @person, class: 'avatar-xl' %>
-</div>
+<% unless local_assigns[:icon] %>
+  <div class="text-xs-center mb-sm">
+    <%= avatar_tag @person, class: 'avatar-xl' %>
+  </div>
+<% end %>
 
 <%= render 'shared/title',
            title: (local_assigns[:title] || @person.to_s),
            background: local_assigns[:background],
            short: local_assigns[:short],
+           icon: local_assigns[:icon],
            align: :center %>
