@@ -7,7 +7,7 @@
       <% if content.present? %>
         <%= content %>
       <% else %>
-        <%= f.send (local_assigns[:control] || :text_field), field, class: 'form-control' %>
+        <%= f.send (local_assigns[:control] || :text_field), field, class: 'form-control', placeholder: local_assigns[:placeholder] %>
       <% end %>
     </div>
   </div>

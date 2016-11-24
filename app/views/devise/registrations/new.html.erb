@@ -2,13 +2,16 @@
   <h2 class="text-xs-center">Create an Account</h2>
   <div class="size-xs-small text-light text-xs-center">It's really easy.</div>
 
+  <%= link_to user_facebook_omniauth_authorize_path, class: 'btn btn-secondary btn-block mt-1' do %>
+    <%= fa_icon 'facebook-square', class: 'mr-xs' %>
+    Sign up with Facebook
+  <% end %>
+
   <hr />
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= devise_error_messages! %>
-
     <div class="size-xs-small mb-sm">
-      Please enter your email address, this will be your login.
+      Or enter your email address, which will be your login.
     </div>
     <div class="input-group <%= 'has-danger' if resource.errors[:email].present? %>">
       <label class="input-group-addon" for="user_email">

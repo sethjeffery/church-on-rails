@@ -46,6 +46,7 @@ gem 'redcarpet'
 gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
 gem 'autosize-rails'
+gem 'omniauth-facebook'
 
 # google maps
 gem 'gmaps-rails'

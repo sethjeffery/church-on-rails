@@ -34,8 +34,12 @@
       <% end %>
     </div>
 
-    <div class="actions mt-1">
+    <div class="actions mt-1 text-xs-center">
       <%= f.submit "Log in", class: 'btn btn-primary btn-block btn-lg' %>
+      <%= link_to user_facebook_omniauth_authorize_path, class: 'btn btn-secondary btn-block' do %>
+        <%= fa_icon 'facebook-square', class: 'mr-xs' %>
+        Sign in with Facebook
+      <% end %>
     </div>
 
     <%= render "devise/shared/links" %>

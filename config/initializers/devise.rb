@@ -250,6 +250,14 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
+  if ENV["FACEBOOK_APP_ID"] && ENV["FACEBOOK_APP_SECRET"]
+    config.omniauth :facebook,
+                    ENV["FACEBOOK_APP_ID"],
+                    ENV["FACEBOOK_APP_SECRET"],
+                    scope: 'public_profile,email',
+                    callback_url: "#{ENV["HOST_NAME"]}/users/auth/facebook/callback"
+  end
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
@@ -272,4 +280,5 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+
 end

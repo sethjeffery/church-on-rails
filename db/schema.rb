@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123210837) do
+ActiveRecord::Schema.define(version: 20161124141944) do
 
   create_table "church_processes", force: :cascade do |t|
     t.string   "name"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20161123210837) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string   "description"
+    t.text     "description"
     t.integer  "person_id"
     t.string   "commentable_type"
     t.integer  "commentable_id"
@@ -86,6 +86,8 @@ ActiveRecord::Schema.define(version: 20161123210837) do
     t.string   "email"
     t.string   "phone"
     t.string   "gender"
+    t.string   "facebook"
+    t.string   "twitter"
     t.index ["first_name"], name: "index_people_on_first_name"
     t.index ["last_name"], name: "index_people_on_last_name"
     t.index ["user_id"], name: "index_people_on_user_id"
@@ -141,7 +143,7 @@ ActiveRecord::Schema.define(version: 20161123210837) do
     t.datetime "updated_at",                        null: false
     t.boolean  "admin",          default: false
     t.text     "description"
-    t.string   "color",          default: "c0c0c0"
+    t.string   "color",          default: "54aeea"
     t.boolean  "people_editor"
     t.boolean  "people_reader"
     t.boolean  "people_admin"

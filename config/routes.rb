@@ -62,7 +62,8 @@ Rails.application.routes.draw do
              sign_out_via: :get,
              controllers: {
                confirmations: 'account/confirmations',
-               registrations: 'account/registrations'
+               registrations: 'account/registrations',
+               omniauth_callbacks: 'account/omniauth_callbacks'
              },
              path_names: {
                sign_in: 'login',

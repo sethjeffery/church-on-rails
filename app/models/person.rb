@@ -15,8 +15,13 @@ class Person < ApplicationRecord
 
   validates_presence_of :first_name, :last_name
   validates_inclusion_of :gender, in: %w( m f ), allow_nil: true
+  validates_format_of :facebook, with: /\A[\w\d\.]+\z/, allow_nil: true
+  validates_format_of :twitter, with: /\A@[\w\d\._]+\z/, allow_nil: true
+
   before_validation :copy_changes_to_user
   before_validation :sanitize_names
+  before_validation :sanitize_facebook
+  before_validation :sanitize_twitter
 
   def start_family(family_name)
     join Family.create(name: family_name), head: true
@@ -58,5 +63,22 @@ class Person < ApplicationRecord
 
   def capitalize(name)
     name.slice(0,1).capitalize + name.slice(1..-1)
+  end
+
+  def sanitize_facebook
+    if facebook.present?
+      self.facebook.gsub!(/^https?:\/\/(www\.)?(facebook|fb)\.com\//, '')
+    else
+      self.facebook = nil
+    end
+  end
+
+  def sanitize_twitter
+    if twitter.present?
+      self.twitter.gsub!(/^https?:\/\/(www\.)?(twitter)\.com\//, '@')
+      self.twitter = "@" + twitter unless self.twitter.start_with?('@')
+    else
+      self.twitter = nil
+    end
   end
 end

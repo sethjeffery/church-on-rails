@@ -1,5 +1,5 @@
 <%= flash_messages container: 'container-sm' %>
-<%  two_columns = can?(:manage, person) || can?(:read, Comment) %>
+<%  two_columns = (can?(:manage, person) && person != current_person) || can?(:read, Comment) %>
 
 <div class="<%= 'container-sm' unless two_columns %>">
   <div class="row">
@@ -21,7 +21,9 @@
             :email      => (link_to(@person.email, "mailto:#{@person.email}", class: 'dotted') if @person.email),
             :phone      => @person.phone,
             :gender     => gender_icon(@person),
-            :account    => (fa_icon('check 1x') if @person.user)
+            :account    => (fa_icon('check 1x') if @person.user),
+            :facebook   => (link_to(fa_icon('facebook-square 1x', class: 'mr-sm') + "fb.com/#{@person.facebook}", "https://fb.com/#{@person.facebook}", target: '_blank') if @person.facebook),
+            :twitter    => (link_to(fa_icon('twitter-square  1x', class: 'mr-sm') + "twitter.com/#{@person.twitter}", "https://twitter.com/#{@person.twitter}", target: '_blank') if @person.twitter)
         } %>
       </div>
 

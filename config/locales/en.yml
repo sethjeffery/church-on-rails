@@ -42,3 +42,11 @@ en:
         person_id: Family member
       team_membership:
         person_id: Team member
+    errors:
+      models:
+        person:
+          attributes:
+            facebook:
+              invalid: "must be a username or URL"
+            twitter:
+              invalid: "must be a username or URL"

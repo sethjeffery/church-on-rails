@@ -2,32 +2,25 @@
   <%= f.select :prefix, prefixes, { include_blank: true }, class: 'form-control', data: { selectpicker: true, placeholder: '', :'allow-clear' => true } %>
 <% end %>
 
-
 <%= render 'shared/list_group_item_field', f: f, model: person, field: :first_name, required: true do %>
   <%= f.text_field :first_name, class: 'form-control', autofocus: true %>
 <% end %>
 
-
 <%= render 'shared/list_group_item_field', f: f, model: person, field: :middle_name %>
-
-
 <%= render 'shared/list_group_item_field', f: f, model: person, field: :last_name, required: true %>
-
-
 <%= render 'shared/list_group_item_field', f: f, model: person, field: :suffix %>
-
 
 <%= render 'shared/list_group_item_field', f: f, model: person, field: :gender do %>
   <%= f.select :gender, genders, { include_blank: true }, class: 'form-control', data: { selectpicker: true, placeholder: '', :'allow-clear' => true } %>
 <% end %>
 
-
 <%= render 'shared/list_group_item_field', f: f, model: person, field: :dob do %>
   <%= f.date_select :dob, data: { :'view-mode' => 'years', :'show-clear' => true } %>
 <% end %>
 
-
 <%= render 'shared/list_group_item_field', f: f, model: person, field: :email, control: :email_field %>
-
-
 <%= render 'shared/list_group_item_field', f: f, model: person, field: :phone, control: :phone_field %>
+
+
+<%= render 'shared/list_group_item_field', f: f, model: person, field: :facebook, placeholder: "e.g. facebook.com/username" %>
+<%= render 'shared/list_group_item_field', f: f, model: person, field: :twitter, placeholder: "e.g. twitter.com/username" %>
