@@ -2,11 +2,11 @@
 <%= form_for(@event) do |f| %>
 
   <div class="list-group mb-2">
-    <div class="list-group-item list-group-item-secondary">
+    <div class="list-group-item active">
       <% if @event.new_record? %>
-        <%= link_to 'Cancel', @team || events_path, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+        <%= link_to 'Cancel', @team || events_path, class: 'float-xs-right btn btn-outline-primary btn-sm btn-align-middle' %>
       <% else %>
-        <%= link_to 'Cancel', @event, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+        <%= link_to 'Cancel', @event, class: 'float-xs-right btn btn-outline-primary btn-sm btn-align-middle' %>
       <% end %>
 
       Event details
@@ -32,7 +32,7 @@
   </div>
 
   <div class="list-group mb-2">
-    <div class="list-group-item list-group-item-secondary">
+    <div class="list-group-item active">
       Date and time
     </div>
     <div class="list-group-item">
@@ -50,7 +50,7 @@
   </div>
 
   <div class="list-group mb-2">
-    <div class="list-group-item list-group-item-secondary">
+    <div class="list-group-item active">
       Venue
     </div>
 

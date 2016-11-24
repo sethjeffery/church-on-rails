@@ -3,9 +3,9 @@
 <div class="row">
   <div class="col-lg-6">
     <div class="list-group mb-2">
-      <div class="list-group-item list-group-item-secondary">
+      <div class="list-group-item active">
         <% if can? :update, @church_process %>
-          <%= link_to edit_church_process_path(@church_process), class: 'btn btn-secondary btn-sm float-xs-right btn-align-middle' do %>
+          <%= link_to edit_church_process_path(@church_process), class: 'btn btn-primary btn-sm float-xs-right btn-align-middle' do %>
             <%= fa_icon 'pencil 1x' %>
             Change
           <% end %>
@@ -32,9 +32,9 @@
 
   <div class="col-lg-6">
     <div class="list-group mb-2">
-      <div class="list-group-item list-group-item-secondary">
+      <div class="list-group-item active">
         <% if can? :create, PersonProcess %>
-          <%= link_to new_church_process_person_process_path(@church_process), class: 'btn btn-secondary btn-sm float-xs-right btn-align-middle' do %>
+          <%= link_to new_church_process_person_process_path(@church_process), class: 'btn btn-primary btn-sm float-xs-right btn-align-middle' do %>
             <%= fa_icon 'user 1x' %>
             Add
           <% end %>
@@ -53,7 +53,7 @@
 
     <% if can? :manage, @church_process %>
       <div class="list-group mb-2">
-        <div class="list-group-item list-group-item-secondary">
+        <div class="list-group-item active">
           Management
         </div>
         <div class="list-group-item">

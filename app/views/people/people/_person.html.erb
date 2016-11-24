@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-xs-12 <%= 'col-lg-7' if two_columns %>">
       <div class="list-group mb-2">
-        <div class="list-group-item list-group-item-secondary">
+        <div class="list-group-item active">
           <% if can? :update, @person %>
             <%= link_to edit_person_path(@person), class: 'float-xs-right btn btn-primary btn-sm btn-align-middle' do %>
               <%= fa_icon 'pencil' %> Edit
@@ -28,7 +28,7 @@
       <% if @person.families.blank? %>
         <% if can? :create, FamilyMembership %>
           <div class="list-group mb-2">
-            <div class="list-group-item list-group-item-secondary">
+            <div class="list-group-item active">
               <%= link_to person_families_path(@person), class: 'float-xs-right btn btn-primary btn-sm btn-align-middle' do %>
                 <%= fa_icon 'address-card' %> Join
               <% end %>
@@ -45,7 +45,7 @@
 
       <% if can? :read, Team %>
         <div class="list-group mb-2">
-          <div class="list-group-item list-group-item-secondary">
+          <div class="list-group-item active">
             <% if can? :create, TeamMembership %>
               <%= link_to person_teams_path(@person), class: 'float-xs-right btn btn-primary btn-sm btn-align-middle' do %>
                 <%= fa_icon 'users' %> Join
@@ -63,7 +63,7 @@
 
       <% if can? :read, PersonProcess %>
         <div class="list-group mb-2">
-          <div class="list-group-item list-group-item-secondary">
+          <div class="list-group-item active">
             <% if can? :create, PersonProcess %>
               <%= link_to new_person_person_process_path(@person), class: 'float-xs-right btn btn-primary btn-sm btn-align-middle' do %>
                 <%= fa_icon 'arrow-right' %> Start
@@ -81,7 +81,7 @@
     <div class="col-xs-12 <%= 'col-lg-5' if two_columns %>">
       <% if can?(:manage, person) && person != current_person %>
         <div class="list-group mb-2">
-          <div class="list-group-item list-group-item-secondary">
+          <div class="list-group-item active">
             Management
           </div>
           <% unless person == current_person %>

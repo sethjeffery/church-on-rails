@@ -8,29 +8,14 @@
 }
 
 
-.list-group-item-secondary {
-  @include plain-hover-focus {
-    z-index: 2; // Place active items above their siblings for proper border styling
-    text-decoration: none; // Repeat here because it inherits global a:hover otherwise
-  }
+.list-group-item.active {
+  .btn-outline-primary {
+    color: white;
+    border-color: white;
 
-  background-color: $list-group-disabled-bg;
-
-  &.list-group-item-action {
-    @include hover-focus {
-      background-color: darken($list-group-disabled-bg, 5%);
-    }
-  }
-
-  .custom-control-indicator {
-    border: solid 1px $link-color;
-  }
-
-  .custom-control {
-    display: block;
-    color: $link-color;
     &:hover {
-      color: $link-hover-color;
+      color: $brand-primary;
+      background-color: white;
     }
   }
 }

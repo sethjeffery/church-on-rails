@@ -23,6 +23,10 @@ class People::PersonProcessesController < ApplicationController
     end
   end
 
+  def show
+    render 'processes/person_processes/show'
+  end
+
   protected
 
   def create_params

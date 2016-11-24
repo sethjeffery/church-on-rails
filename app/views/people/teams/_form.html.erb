@@ -2,11 +2,11 @@
 <%= form_for(@team) do |f| %>
 
   <div class="list-group mb-2">
-    <div class="list-group-item list-group-item-secondary">
+    <div class="list-group-item active">
       <% if @team.new_record? %>
-        <%= link_to 'Cancel', teams_path, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+        <%= link_to 'Cancel', teams_path, class: 'float-xs-right btn btn-outline-primary btn-sm btn-align-middle' %>
       <% else %>
-        <%= link_to 'Cancel', @team, class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' %>
+        <%= link_to 'Cancel', @team, class: 'float-xs-right btn btn-outline-primary btn-sm btn-align-middle' %>
       <% end %>
 
       Team details

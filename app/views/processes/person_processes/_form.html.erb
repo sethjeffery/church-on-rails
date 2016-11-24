@@ -1,14 +1,16 @@
 <%= form_for([@church_process, @person, @person_process]) do |f| %>
   <div class="list-group mb-2">
     <% if @person_process.church_process %>
-      <div class="list-group-item list-group-item-process list-group-item-secondary">
-        <%= link_to (@person_process.new_record? ? 'Cancel' : 'View'), @person_process.church_process, class: 'btn btn-secondary btn-sm btn-align-middle float-xs-right' %>
-        <%= fa_icon "#{@person_process.icon} 1x", class: 'mr-xs' %>
-        <%= @person_process.church_process %>
+      <div class="list-group-item list-group-item-process active">
+        <%= link_to (@person_process.new_record? ? 'Cancel' : 'View process'), @person_process.church_process, class: 'btn btn-outline-primary btn-sm btn-align-middle float-xs-right' %>
+        <div class="text-ellipsis">
+          <%= fa_icon "#{@person_process.icon} 1x", class: 'mr-xs' %>
+          <%= @person_process.church_process %>
+        </div>
       </div>
     <% else %>
-      <div class="list-group-item list-group-item-secondary">
-        <%= link_to "Cancel", @person, class: 'btn btn-secondary btn-sm btn-align-middle float-xs-right' %>
+      <div class="list-group-item active">
+        <%= link_to "Cancel", @person, class: 'btn btn-outline-primary btn-sm btn-align-middle float-xs-right' %>
         Process
       </div>
     <% end %>
@@ -39,7 +41,7 @@
       <% end %>
     <% end %>
 
-    <div class="list-group-item list-group-item-secondary">
+    <div class="list-group-item active">
       Assignees
     </div>
 
