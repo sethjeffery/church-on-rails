@@ -49,7 +49,7 @@ module People
     end
 
     def show_path
-      if @person == current_user.person
+      if @person == current_person
         account_path
       else
         person_path(@person)

@@ -1,8 +1,9 @@
 <%= flash_messages container: 'container-sm' %>
+<% two_columns = can?(:manage, family) || (can?(:read, Comment) && family.comments.present?) || can?(:create, Comment) %>
 
-<div class="<%= 'container-sm' unless can?(:update, family) || family.full_address.present? %>">
+<div class="<%= 'container-sm' unless two_columns %>">
   <div class="row">
-    <div class="col-xs-12 <%= 'col-lg-6' if can?(:update, family) || family.full_address.present? %>">
+    <div class="col-xs-12 <%= 'col-lg-7' if two_columns %>">
       <div class="list-group mb-2">
         <div class="list-group-item list-group-item-secondary">
           <% if can? :update, family %>
@@ -17,34 +18,34 @@
         <%= render 'people/families/memberships', family: family %>
       </div>
 
+      <div class="list-group mb-2">
+        <div class="list-group-item list-group-item-secondary">
+          <% if can? :update, family %>
+            <%= link_to edit_family_path(family), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+              <%= fa_icon 'pencil 1x', class: 'mr-xs' %>Edit
+            <% end %>
+          <% end %>
+
+          Details
+        </div>
+
+        <% if family.full_address.present? %>
+          <% if family.lat && family.lng %>
+            <%= map_for family, height: '400px' %>
+          <% end %>
+
+          <div class="list-group-item size-xs-small size-sm-normal">
+            <%= fa_icon 'map-marker', class: 'mr-xs' %>
+            <%= family.full_address %>
+          </div>
+        <% end %>
+
+      </div>
+
     </div>
 
     <% if can?(:update, family) || family.full_address.present? %>
-      <div class="col-xs-12 col-lg-6">
-        <div class="list-group mb-2">
-          <div class="list-group-item list-group-item-secondary">
-            <% if can? :update, family %>
-              <%= link_to edit_family_path(family), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
-                <%= fa_icon 'pencil 1x', class: 'mr-xs' %>Edit
-              <% end %>
-            <% end %>
-
-            Details
-          </div>
-
-          <% if family.full_address.present? %>
-            <% if family.lat && family.lng %>
-              <%= map_for family, height: '400px' %>
-            <% end %>
-
-            <div class="list-group-item size-xs-small size-sm-normal">
-              <%= fa_icon 'map-marker', class: 'mr-xs' %>
-              <%= family.full_address %>
-            </div>
-          <% end %>
-
-        </div>
-
+      <div class="col-xs-12 <%= 'col-lg-5' if two_columns %>">
         <% if can? :manage, family %>
           <div class="list-group mb-2">
             <div class="list-group-item list-group-item-secondary">
@@ -56,6 +57,9 @@
             </div>
           </div>
         <% end %>
+
+        <%= render 'comments/form', resource: family %>
+
       </div>
     <% end %>
 

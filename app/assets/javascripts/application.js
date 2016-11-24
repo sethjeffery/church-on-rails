@@ -21,4 +21,5 @@
 //= require select2-full
 //= require gmaps
 //= require sortable
+//= require jquery.autosize
 //= require_tree .

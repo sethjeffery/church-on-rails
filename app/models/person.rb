@@ -1,5 +1,6 @@
 class Person < ApplicationRecord
   include Concerns::Naming
+  include Concerns::Commentable
   attr_accessor :family_name
 
   belongs_to :user,                     dependent: :destroy, autosave: true

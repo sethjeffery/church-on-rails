@@ -1,4 +1,6 @@
 class PersonProcess < ApplicationRecord
+  include Concerns::Commentable
+
   delegate :short_name, :name, to: :person
   delegate :icon, to: :church_process
 

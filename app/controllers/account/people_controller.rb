@@ -12,7 +12,7 @@ class Account::PeopleController < ApplicationController
 
   def new
     @person = Person.new
-    redirect_to edit_account_person_path if current_user.person.present?
+    redirect_to edit_account_person_path if current_person.present?
   end
 
   def create
@@ -38,8 +38,8 @@ class Account::PeopleController < ApplicationController
   end
 
   def require_person
-    redirect_to new_account_person_path if current_user.person.blank? && current_user.confirmed?
-    @person = current_user.person
+    redirect_to new_account_person_path if current_person.blank? && current_user.confirmed?
+    @person = current_person
   end
 
   def create_params

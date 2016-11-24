@@ -10,41 +10,50 @@
            background: :process,
            align: :center %>
 
-<div class="container-sm">
-  <%= form_for([@church_process, @person_process]) do |f| %>
-    <div class="list-group mb-2">
-      <div class="list-group-item list-group-item-process list-group-item-secondary">
-        <% if can?(:read, @church_process) %>
-          <%= link_to "View", @church_process, class: 'btn btn-secondary btn-sm btn-align-middle float-xs-right' %>
-        <% end %>
+<% two_columns = (can?(:read, Comment) && @person_process.comments.present?) || can?(:create, Comment) %>
 
-        <%= fa_icon "#{@church_process.icon} 1x", class: 'mr-xs' %>
-        <%= @church_process %>
-      </div>
+<div class="<%= 'container-sm' unless two_columns %>">
+  <div class="row">
+    <div class="col-xs-12 <%= 'col-lg-7' if two_columns %>">
+      <%= form_for([@church_process, @person_process]) do |f| %>
+        <div class="list-group mb-2">
+          <div class="list-group-item list-group-item-process list-group-item-secondary">
+            <% if can?(:read, @church_process) %>
+              <%= link_to "View", @church_process, class: 'btn btn-secondary btn-sm btn-align-middle float-xs-right' %>
+            <% end %>
 
-      <% @church_process.steps.select(&:present?).each do |step| %>
-        <label class="list-group-item size-xs-small size-sm-normal custom-checkbox custom-control">
-          <%= f.check_box :steps, { name: "person_process[steps][]", class: 'custom-control-input' }, step.parameterize, "" %>
-          <span class="custom-control-indicator"></span>
-          <%= step %>
-        </label>
+            <%= fa_icon "#{@church_process.icon} 1x", class: 'mr-xs' %>
+            <%= @church_process %>
+          </div>
+
+          <% @church_process.steps.select(&:present?).each do |step| %>
+            <label class="list-group-item size-xs-small size-sm-normal custom-checkbox custom-control">
+              <%= f.check_box :steps, { name: "person_process[steps][]", class: 'custom-control-input' }, step.parameterize, "" %>
+              <span class="custom-control-indicator"></span>
+              <%= step %>
+            </label>
+          <% end %>
+
+          <div class="list-group-item list-group-item-secondary">
+            Assignees
+          </div>
+
+          <div class="list-group-item">
+            <p class="size-xs-small">
+              Assign leaders or pastors to help fulfil the process for this person.
+              They will get email notifications when any changes are made to this process.
+            </p>
+
+            <%= f.collection_select :assignee_ids, all_people, :id, :name, { }, multiple: true, data: { selectpicker: true, width: '100%', placeholder: 'Choose assignees' } %>
+
+          </div>
+        </div>
+        <%= render 'shared/form_submit', title: 'Save changes', icon: 'arrow-right' %>
       <% end %>
-
-      <div class="list-group-item list-group-item-secondary">
-        Assignees
-      </div>
-
-      <div class="list-group-item">
-        <p class="size-xs-small">
-          Assign leaders or pastors to help fulfil the process for this person.
-          They will get email notifications when any changes are made to this process.
-        </p>
-
-        <%= f.collection_select :assignee_ids, all_people, :id, :name, { }, multiple: true, data: { selectpicker: true, width: '100%', placeholder: 'Choose assignees' } %>
-
-      </div>
     </div>
 
-    <%= render 'shared/form_submit', title: 'Save changes', icon: 'arrow-right' %>
-  <% end %>
+    <div class="col-xs-12 <%= 'col-lg-5' if two_columns %>">
+      <%= render 'comments/form', resource: @person_process %>
+    </div>
+  </div>
 </div>

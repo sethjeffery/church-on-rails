@@ -1,5 +1,6 @@
 class Event < ApplicationRecord
   include Concerns::Geocoding
+  include Concerns::Commentable
 
   acts_as_schedulable :schedule
   belongs_to :team

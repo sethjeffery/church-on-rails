@@ -45,6 +45,7 @@ gem 'gravatarify'
 gem 'redcarpet'
 gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
+gem 'autosize-rails'
 
 # google maps
 gem 'gmaps-rails'

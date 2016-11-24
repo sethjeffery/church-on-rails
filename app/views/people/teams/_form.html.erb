@@ -67,12 +67,12 @@
           </p>
 
           <p>
-            <strong>View</strong> permissions allow someone to read information (like people's names, contact info),
+            <strong>Read</strong> permissions allow someone to view information (like people's names, contact info),
             but not to change it.
           </p>
 
           <p>
-            <strong>Edit</strong> permissions allow someone to make changes to any existing information. They could
+            <strong>Write</strong> permissions allow someone to create and make changes to any existing information. They could
             change a person's name in the database for example, and add new people, but not remove anything.
           </p>
 
@@ -83,28 +83,34 @@
           <hr/>
         </div>
 
-        <div class="mb-xs">
-          <%= fa_icon 'user 1x mr-xs' %>
-          <span class="">People, Teams, Families</span>
-        </div>
+        <% %w(people process event comment).each do |type| %>
+          <div class="mb-xs mt-sm">
+            <% if type == 'people'  %><%= fa_icon 'user        1x', class: 'mr-xs' %> People, Teams, Families<% end %>
+            <% if type == 'process' %><%= fa_icon 'arrow-right 1x', class: 'mr-xs' %> Processes<% end %>
+            <% if type == 'event'   %><%= fa_icon 'calendar    1x', class: 'mr-xs' %> Events<% end %>
+            <% if type == 'comment' %><%= fa_icon 'comment     1x', class: 'mr-xs' %> Comments<% end %>
+          </div>
 
-        <label class="field custom-checkbox custom-control">
-          <%= f.check_box :people_reader, class: 'custom-control-input' %>
-          <span class="custom-control-indicator"></span>
-          View
-        </label>
+          <div class="size-xs-small">
+            <label class="field custom-checkbox custom-control">
+              <%= f.check_box :"#{type}_reader", class: 'custom-control-input' %>
+              <span class="custom-control-indicator"></span>
+              Read
+            </label>
 
-        <label class="field custom-checkbox custom-control">
-          <%= f.check_box :people_editor, class: 'custom-control-input' %>
-          <span class="custom-control-indicator"></span>
-          Edit
-        </label>
+            <label class="field custom-checkbox custom-control">
+              <%= f.check_box :"#{type}_editor", class: 'custom-control-input' %>
+              <span class="custom-control-indicator"></span>
+              Write
+            </label>
 
-        <label class="field custom-checkbox custom-control">
-          <%= f.check_box :people_admin, class: 'custom-control-input' %>
-          <span class="custom-control-indicator"></span>
-          Manage
-        </label>
+            <label class="field custom-checkbox custom-control">
+              <%= f.check_box :"#{type}_admin", class: 'custom-control-input' %>
+              <span class="custom-control-indicator"></span>
+              Manage
+            </label>
+          </div>
+        <% end %>
       </div>
     <% end %>
   </div>

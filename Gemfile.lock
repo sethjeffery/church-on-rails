@@ -52,6 +52,8 @@ GEM
     arel (7.1.4)
     autoprefixer-rails (6.5.3)
       execjs
+    autosize-rails (1.18.17)
+      rails (>= 3.1)
     awesome_print (1.7.0)
     bcrypt (3.1.11)
     better_errors (2.1.1)
@@ -328,6 +330,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autosize-rails
   awesome_print
   better_errors
   bootstrap (~> 4.0.0.alpha5)

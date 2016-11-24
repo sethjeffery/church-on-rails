@@ -52,6 +52,10 @@ Rails.application.routes.draw do
       end
       resource :person
     end
+
+    scope module: 'comments' do
+      resources :comments
+    end
   end
 
   devise_for :users,

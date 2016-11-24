@@ -1,99 +1,105 @@
 <%= flash_messages container: 'container-sm' %>
+<% two_columns = can?(:manage, team) || (can?(:read, Comment) && team.comments.present?) || can?(:create, Comment) %>
 
-<div class="row">
-
-  <div class="col-lg-6">
-    <div class="list-group mb-2">
-      <div class="list-group-item list-group-item-secondary">
-        <% if can? :update, team %>
-          <%= link_to edit_team_path(team), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
-            <%= fa_icon 'pencil 1x', class: 'mr-xs' %>Edit
-          <% end %>
-        <% end %>
-
-        Team details
-      </div>
-
-      <% if team.description.present? %>
-        <div class="list-group-item">
-          <%= render 'shared/description', description: team.description %>
-        </div>
-      <% end %>
-
-      <% if can? :manage, team %>
-        <% if team.admin? %>
-          <div class="list-group-item">
-            <div class="mb-xs">
-              <%= fa_icon 'star 1x mr-xs' %>
-              Site administration
-            </div>
-            <div class="size-xs-small clearfix">
-              <div class="float-xs-left mr-1"><%= fa_icon 'check' %> Access all areas</div>
-            </div>
-          </div>
-
-        <% elsif team.has_permissions? %>
-          <% if team.has_permissions_for? :people %>
-            <div class="list-group-item">
-              <div class="mb-xs">
-                <%= fa_icon 'user 1x mr-xs' %>
-                People, Teams, Families
-              </div>
-              <div class="size-xs-small clearfix">
-                <% if team.people_reader? %><div class="float-xs-left mr-1"><%= fa_icon 'check' %> View</div><% end %>
-                <% if team.people_editor? %><div class="float-xs-left mr-1"><%= fa_icon 'check' %> Edit</div><% end %>
-                <% if team.people_admin?  %><div class="float-xs-left mr-1"><%= fa_icon 'check' %> Manage</div><% end %>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="col-lg-6">
-    <div class="list-group mb-2">
-      <div class="list-group-item list-group-item-secondary">
-
-        <% if can? :create, TeamMembership %>
-          <%= link_to new_team_team_membership_path(team), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
-            <%= fa_icon 'user 1x', class: 'mr-xs' %>Add person
-          <% end %>
-        <% end %>
-
-        Members
-      </div>
-
-      <%= render 'people/teams/memberships', team: team %>
-    </div>
-
-    <div class="list-group mb-2">
-      <div class="list-group-item list-group-item-secondary">
-
-        <% if can? :create, Event %>
-          <%= link_to new_team_event_path(team), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
-            <%= fa_icon 'calendar 1x', class: 'mr-xs' %>Add event
-          <% end %>
-        <% end %>
-
-        Events
-      </div>
-
-      <%= render partial: 'events/events/event_item', collection: team.events.upcoming.sort_by_closest %>
-    </div>
-
-    <% if can? :manage, team %>
+<div class="<%= 'container-sm' unless two_columns %>">
+  <div class="row">
+    <div class="col-xs-12 <%= 'col-lg-7' if two_columns %>">
       <div class="list-group mb-2">
         <div class="list-group-item list-group-item-secondary">
-          Management
+          <% if can? :update, team %>
+            <%= link_to edit_team_path(team), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+              <%= fa_icon 'pencil 1x', class: 'mr-xs' %>Edit
+            <% end %>
+          <% end %>
+
+          Team details
         </div>
-        <% unless team.admin? %>
+
+        <% if team.description.present? %>
           <div class="list-group-item">
-            <%= fa_icon 'trash 1x', class: 'mr-xs' %>
-            <%= link_to 'Remove team', confirm_destroy_team_path(team) %>
+            <%= render 'shared/description', description: team.description %>
           </div>
         <% end %>
+
+        <% if can? :manage, team %>
+          <% if team.admin? %>
+            <div class="list-group-item">
+              <div class="mb-xs">
+                <%= fa_icon 'star 1x mr-xs' %>
+                Site administration
+              </div>
+              <div class="size-xs-small clearfix">
+                <div class="float-xs-left mr-1"><%= fa_icon 'check' %> Access all areas</div>
+              </div>
+            </div>
+
+          <% elsif team.has_permissions? %>
+            <% if team.has_permissions_for? :people %>
+              <div class="list-group-item">
+                <div class="mb-xs">
+                  <%= fa_icon 'user 1x mr-xs' %>
+                  People, Teams, Families
+                </div>
+                <div class="size-xs-small clearfix">
+                  <% if team.people_reader? %><div class="float-xs-left mr-1"><%= fa_icon 'check' %> View</div><% end %>
+                  <% if team.people_editor? %><div class="float-xs-left mr-1"><%= fa_icon 'check' %> Edit</div><% end %>
+                  <% if team.people_admin?  %><div class="float-xs-left mr-1"><%= fa_icon 'check' %> Manage</div><% end %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
       </div>
-    <% end %>
+
+      <div class="list-group mb-2">
+        <div class="list-group-item list-group-item-secondary">
+
+          <% if can? :create, TeamMembership %>
+            <%= link_to new_team_team_membership_path(team), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+              <%= fa_icon 'user 1x', class: 'mr-xs' %>Add person
+            <% end %>
+          <% end %>
+
+          Members
+        </div>
+
+        <%= render 'people/teams/memberships', team: team %>
+      </div>
+
+      <div class="list-group mb-2">
+        <div class="list-group-item list-group-item-secondary">
+
+          <% if can? :create, Event %>
+            <%= link_to new_team_event_path(team), class: 'float-xs-right btn btn-secondary btn-sm btn-align-middle' do %>
+              <%= fa_icon 'calendar 1x', class: 'mr-xs' %>Add event
+            <% end %>
+          <% end %>
+
+          Events
+        </div>
+
+        <%= render partial: 'events/events/event_item', collection: team.events.upcoming.sort_by_closest %>
+      </div>
+
+    </div>
+
+    <div class="col-xs-12 <%= 'col-lg-5' if two_columns %>">
+      <% if can?(:manage, team) && !team.admin? %>
+        <div class="list-group mb-2">
+          <div class="list-group-item list-group-item-secondary">
+            Management
+          </div>
+          <% unless team.admin? %>
+            <div class="list-group-item">
+              <%= fa_icon 'trash 1x', class: 'mr-xs' %>
+              <%= link_to 'Remove team', confirm_destroy_team_path(team) %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%= render 'comments/form', resource: team %>
+
+    </div>
   </div>
 </div>

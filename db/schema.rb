@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122165817) do
+ActiveRecord::Schema.define(version: 20161123210837) do
 
   create_table "church_processes", force: :cascade do |t|
     t.string   "name"
@@ -19,6 +19,17 @@ ActiveRecord::Schema.define(version: 20161122165817) do
     t.text     "steps"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string   "description"
+    t.integer  "person_id"
+    t.string   "commentable_type"
+    t.integer  "commentable_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+    t.index ["person_id"], name: "index_comments_on_person_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -130,7 +141,7 @@ ActiveRecord::Schema.define(version: 20161122165817) do
     t.datetime "updated_at",                        null: false
     t.boolean  "admin",          default: false
     t.text     "description"
-    t.string   "color",          default: "54aeea"
+    t.string   "color",          default: "c0c0c0"
     t.boolean  "people_editor"
     t.boolean  "people_reader"
     t.boolean  "people_admin"
@@ -141,6 +152,9 @@ ActiveRecord::Schema.define(version: 20161122165817) do
     t.boolean  "event_editor"
     t.boolean  "event_reader"
     t.boolean  "event_admin"
+    t.boolean  "comment_editor"
+    t.boolean  "comment_reader"
+    t.boolean  "comment_admin"
     t.index ["name"], name: "index_teams_on_name"
   end
 
