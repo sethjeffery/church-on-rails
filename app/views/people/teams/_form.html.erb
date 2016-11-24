@@ -14,10 +14,10 @@
 
     <div class="list-group-item">
       <% if @team.new_record? %>
-        <div class="mb-sm">Name</div>
+        Name
       <% end %>
 
-      <div class="input-group <%= 'has-danger' if @team.errors[:name].present? %>">
+      <div class="input-group my-sm <%= 'has-danger' if @team.errors[:name].present? %>">
         <%= f.text_field :name, class: 'form-control', autofocus: true, placeholder: "e.g. Editors, Worship team, Pastors, ...", hide_errors: true %>
         <%= f.hidden_field :icon %>
         <%= f.hidden_field :color %>
@@ -46,9 +46,9 @@
 
     <div class="list-group-item">
       Description
-      <div class="size-xs-small text-light mb-sm">A short description of your team, e.g. what it does or where it meets.</div>
+      <div class="size-xs-small text-light">A short description of your team, e.g. what it does or where it meets.</div>
 
-      <%= f.text_area :description, class: 'form-control', rows: 10 %>
+      <%= f.text_area :description, class: 'form-control my-sm', rows: 4 %>
     </div>
 
     <% if can? :manage, @team %>

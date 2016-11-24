@@ -14,20 +14,18 @@
 
     <div class="list-group-item field-required">
       <%= field_name @event, :name %>
-      <%= f.text_field :name, class: 'form-control mt-sm', autofocus: true %>
+      <%= f.text_field :name, class: 'form-control my-sm', autofocus: true %>
     </div>
 
     <div class="list-group-item">
       Who is this for?
-      <div class="mt-sm">
-        <%= f.collection_select :team_id, Team.all, :id, :name, { include_blank: 'Everyone' }, data: { selectpicker: true, width: '100%' } %>
-      </div>
+      <%= f.collection_select :team_id, Team.all, :id, :name, { include_blank: 'Everyone' }, data: { selectpicker: true, width: '100%' }, class_name: 'my-sm' %>
     </div>
 
     <div class="list-group-item">
       <%= field_name @event, :description %>
       <div class="size-xs-small text-light">You can write more details about your event if you wish.</div>
-      <%= f.text_area :description, class: 'form-control mt-sm', rows: 8 %>
+      <%= f.text_area :description, class: 'form-control my-sm', rows: 4 %>
     </div>
   </div>
 

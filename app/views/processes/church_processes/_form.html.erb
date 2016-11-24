@@ -16,7 +16,7 @@
       <div class="field-required">
         <%= field_name @church_process, :name %>
       </div>
-      <div class="input-group <%= 'has-danger' if @church_process.errors[:name].present? %>">
+      <div class="input-group my-sm <%= 'has-danger' if @church_process.errors[:name].present? %>">
         <%= f.text_field :name, class: 'form-control', autofocus: true, hide_errors: true %>
         <%= f.hidden_field :icon %>
 
@@ -35,7 +35,7 @@
     <div class="list-group-item">
       <%= field_name @church_process, :description %>
       <div class="size-xs-small text-light">You can write more details about your process if you wish.</div>
-      <%= f.text_area :description, class: 'form-control mt-sm', rows: 8 %>
+      <%= f.text_area :description, class: 'form-control my-sm', rows: 4 %>
     </div>
   </div>
 
@@ -57,7 +57,7 @@
           </div>
         <% end %>
       </div>
-      <a class="btn btn-secondary btn-block js-add-step" href="javascript:void(0)">
+      <a class="btn btn-secondary btn-block js-add-step mb-sm" href="javascript:void(0)">
         <%= fa_icon "plus-circle 1x", class: 'mr-xs' %>Add step
       </a>
     </div>

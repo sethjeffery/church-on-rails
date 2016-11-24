@@ -1,0 +1,5 @@
+$('#comments-help').slideUp(300);
+var $el = $("<%= j render(@comment) %>").hide();
+$('#comments').prepend($el);
+$('#comment_description').val('');
+$el.slideDown(300);

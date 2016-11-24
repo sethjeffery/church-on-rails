@@ -1,4 +1,4 @@
-@import 'bootstrap/variables';
+@import 'variables';
 @import 'bootstrap/mixins/hover';
 @import 'bootstrap/mixins/breakpoints';
 
@@ -42,4 +42,9 @@
     padding-top: .25rem;
     padding-bottom: .25rem;
   }
+}
+
+#map {
+  border-left: solid 1px $list-group-border-color;
+  border-right: solid 1px $list-group-border-color;
 }

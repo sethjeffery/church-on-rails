@@ -1,3 +1,5 @@
+@import 'variables';
+
 .title-container {
   color: white;
 
@@ -31,9 +33,9 @@
 }
 
 .title-container-event::after, .title-container-danger::after {
-  background-color: #ea695c;
+  background-color: $brand-danger-light;
 }
 
 .title-container-process::after, .title-container-success::after {
-  background-color: #65d268;
+  background-color: $brand-success-light;
 }

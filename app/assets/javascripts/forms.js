@@ -28,7 +28,9 @@ $(document).on('turbolinks:load', function() {
 
   $('[data-selectpicker]').select2({ theme: 'bootstrap' });
 
-  $('textarea#comment_description').autosize().keydown(function(e) {
+  $('textarea').autosize();
+
+  $('textarea#comment_description').keydown(function(e) {
     if (e.which == 13 && !e.shiftKey) {
       $(this).closest('form').submit();
       e.preventDefault();

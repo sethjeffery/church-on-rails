@@ -1,0 +1,10 @@
+@import 'variables';
+
+.comment {
+  &:not(:last-child) { margin-bottom: .75rem; }
+  padding-top: 1rem;
+
+  + .comment {
+    border-top: solid 1px $input-border-color;
+  }
+}
