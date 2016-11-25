@@ -2,11 +2,7 @@
 <%= form_for([@team, @team_membership]) do |f| %>
 
   <div class="list-group mb-2">
-    <div class="list-group-item active">
-      <%= link_to 'Cancel', @team, class: 'float-xs-right btn btn-outline-primary btn-sm btn-align-middle' %>
-
-      Add to Team
-    </div>
+    <%= render 'shared/list_group_header', title: 'Add to Team', button: { href: @team, title: 'Cancel', btn_class: 'btn-outline-primary' } %>
 
     <div class="list-group-item">
       <div class="mb-1">

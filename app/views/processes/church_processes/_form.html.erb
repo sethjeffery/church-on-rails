@@ -2,15 +2,10 @@
 <%= form_for(@church_process) do |f| %>
 
   <div class="list-group mb-2">
-    <div class="list-group-item active">
-      <% if @church_process.new_record? %>
-        <%= link_to 'Cancel', church_processes_path, class: 'float-xs-right btn btn-outline-primary btn-sm btn-align-middle' %>
-      <% else %>
-        <%= link_to 'Cancel', @church_process, class: 'float-xs-right btn btn-outline-primary btn-sm btn-align-middle' %>
-      <% end %>
-
-      Process details
-    </div>
+    <%= render 'shared/list_group_header', title: 'Details', button: {
+        href: (@church_process.new_record? ? church_processes_path : @church_process),
+        title: 'Cancel',
+        btn_class: 'btn-outline-primary' } %>
 
     <div class="list-group-item">
       <div class="field-required">
@@ -40,9 +35,8 @@
   </div>
 
   <div class="list-group mb-2">
-    <div class="list-group-item active">
-      Steps
-    </div>
+    <%= render 'shared/list_group_header', title: 'Steps' %>
+
     <div class="list-group-item">
       <p class="text-light size-xs-small">
         Write your steps below. Steps are the checklist for your process. As a person goes through this process, you can check them off.

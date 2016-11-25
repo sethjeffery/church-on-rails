@@ -1,18 +1,11 @@
 <%= render 'events/events/title' %>
+<% two_columns = can?(:manage, @event) || has_comments_area?(@event) %>
 
-<div class="<%= 'container-sm' unless two_event_columns? %>">
+<div class="<%= 'container-sm' unless two_columns %>">
   <div class="row">
-    <div class="col-xs-12 <%= 'col-lg-6' if two_event_columns? %>">
+    <div class="col-xs-12 <%= 'col-lg-7' if two_columns %>">
       <div class="list-group mb-2">
-        <div class="list-group-item active">
-          <% if can? :update, @event %>
-            <%= link_to edit_event_path(@event), class: 'btn btn-outline-primary btn-sm float-xs-right btn-align-middle' do %>
-              <%= fa_icon 'pencil 1x' %>
-              Change
-            <% end %>
-          <% end %>
-          Details
-        </div>
+        <%= render 'shared/list_group_header', title: 'Details', button: { icon: :pencil, title: 'Change', href: edit_event_path(@event), can: [:update, @event] } %>
 
         <% if @event.description.present? %>
           <div class="list-group-item">
@@ -28,14 +21,10 @@
           <%= render 'people/teams/team_item', team_item: @event.team %>
         <% end %>
       </div>
-    </div>
 
-    <div class="col-xs-12 col-lg-6">
       <% if @event.full_address.present? %>
         <div class="list-group mb-2">
-          <div class="list-group-item active">
-            Venue
-          </div>
+          <%= render 'shared/list_group_header', title: 'Venue' %>
 
           <% if @event.lat && @event.lng %>
             <%= map_for @event, height: '400px' %>
@@ -48,17 +37,21 @@
         </div>
       <% end %>
 
+    </div>
+
+    <div class="col-xs-12 <%= 'col-lg-5' if two_columns %>">
       <% if can? :manage, @event %>
         <div class="list-group mb-2">
-          <div class="list-group-item active">
-            Management
-          </div>
+          <%= render 'shared/list_group_header', title: 'Management' %>
+
           <div class="list-group-item">
             <%= fa_icon 'trash 1x', class: 'mr-xs' %>
             <%= link_to 'Remove event', confirm_destroy_event_path(@event) %>
           </div>
         </div>
       <% end %>
+
+      <%= render 'comments/comments/form', resource: @event %>
     </div>
   </div>
 </div>

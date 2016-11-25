@@ -1,11 +1,4 @@
 <div class="list-group mb-2" id="family-<%= family.id %>">
-  <div class="list-group-item active">
-    <%= link_to family, class: 'float-xs-right btn btn-primary btn-sm btn-align-middle' do %>
-      <%= fa_icon 'address-card' %> View
-    <% end %>
-
-    <%= family %>
-  </div>
-
+  <%= render 'shared/list_group_header', title: family, button: { icon: 'address-card', title: 'View', href: family } %>
   <%= render 'people/families/memberships', family: family %>
 </div>

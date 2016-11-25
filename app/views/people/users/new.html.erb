@@ -6,9 +6,7 @@
   <%= form_for(@person, url: person_user_path(@person)) do |f| %>
 
     <div class="list-group mb-2">
-      <div class="list-group-item active">
-        Link to User Account
-      </div>
+      <%= render 'shared/list_group_header', title: 'Link to User Account' %>
 
       <div class="list-group-item">
         <div class="mb-1">
@@ -20,7 +18,8 @@
 
     <div class="text-xs-center">
       <button type="submit" class="btn btn-primary btn-lg">
-        <%= fa_icon 'user', class: 'mr-sm' %>Link account
+        <%= fa_icon 'user', class: 'mr-xs' %>
+        Link account
       </button>
     </div>
 

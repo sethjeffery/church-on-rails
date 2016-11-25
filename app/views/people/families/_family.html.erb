@@ -1,56 +1,38 @@
 <%= flash_messages container: 'container-sm' %>
-<% two_columns = can?(:manage, family) || (can?(:read, Comment) && family.comments.present?) || can?(:create, Comment) %>
+<% two_columns = can?(:manage, family) || has_comments_area?(family) %>
 
 <div class="<%= 'container-sm' unless two_columns %>">
   <div class="row">
     <div class="col-xs-12 <%= 'col-lg-7' if two_columns %>">
       <div class="list-group mb-2">
-        <div class="list-group-item active">
-          <% if can? :update, family %>
-            <%= link_to new_family_family_membership_path(family), class: 'float-xs-right btn btn-primary btn-sm btn-align-middle' do %>
-              <%= fa_icon 'user 1x', class: 'mr-xs' %>Add person
-            <% end %>
-          <% end %>
-
-          Members
-        </div>
-
+        <%= render 'shared/list_group_header', title: 'Members', button: { href: new_family_family_membership_path(family), icon: 'user', title: 'Add person', can: [:update, family] } %>
         <%= render 'people/families/memberships', family: family %>
       </div>
 
-      <div class="list-group mb-2">
-        <div class="list-group-item active">
-          <% if can? :update, family %>
-            <%= link_to edit_family_path(family), class: 'float-xs-right btn btn-primary btn-sm btn-align-middle' do %>
-              <%= fa_icon 'pencil 1x', class: 'mr-xs' %>Edit
+      <% if can?(:update, family) || family.full_address.present? %>
+        <div class="list-group mb-2">
+          <%= render 'shared/list_group_header', title: 'Details', button: { href: edit_family_path(family), icon: 'pencil', title: 'Edit', can: [:update, family] } %>
+
+          <% if family.full_address.present? %>
+            <% if family.lat && family.lng %>
+              <%= map_for family, height: '400px' %>
             <% end %>
-          <% end %>
 
-          Details
+            <div class="list-group-item size-xs-small size-sm-normal">
+              <%= fa_icon 'map-marker', class: 'mr-xs' %>
+              <%= family.full_address %>
+            </div>
+          <% end %>
         </div>
-
-        <% if family.full_address.present? %>
-          <% if family.lat && family.lng %>
-            <%= map_for family, height: '400px' %>
-          <% end %>
-
-          <div class="list-group-item size-xs-small size-sm-normal">
-            <%= fa_icon 'map-marker', class: 'mr-xs' %>
-            <%= family.full_address %>
-          </div>
-        <% end %>
-
-      </div>
+      <% end %>
 
     </div>
 
-    <% if can?(:update, family) || family.full_address.present? %>
+    <% if can?(:manage, family) || has_comments_area?(family) %>
       <div class="col-xs-12 <%= 'col-lg-5' if two_columns %>">
         <% if can? :manage, family %>
           <div class="list-group mb-2">
-            <div class="list-group-item active">
-              Management
-            </div>
+            <%= render 'shared/list_group_header', title: 'Management' %>
             <div class="list-group-item">
               <%= fa_icon 'trash 1x', class: 'mr-xs' %>
               <%= link_to 'Remove family', confirm_destroy_family_path(family) %>

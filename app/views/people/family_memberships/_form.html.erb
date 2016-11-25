@@ -2,11 +2,7 @@
 <%= form_for([@family, @family_membership]) do |f| %>
 
   <div class="list-group mb-2">
-    <div class="list-group-item active">
-      <%= link_to 'Cancel', @family, class: 'float-xs-right btn btn-outline-primary btn-sm btn-align-middle' %>
-
-      Add to Family
-    </div>
+    <%= render 'shared/list_group_header', title: 'Add to Family', button: { btn_class: 'btn-outline-primary', title: 'Cancel', href: @family } %>
 
     <div class="list-group-item">
       <div class="mb-1">

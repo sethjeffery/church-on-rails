@@ -1,0 +1,13 @@
+<div class="list-group-item active">
+  <% if local_assigns[:button] && (button[:can].nil? || can?(*button[:can])) %>
+    <%= link_to button[:href], class: "float-xs-right ml-sm btn #{button[:btn_class] || 'btn-primary'} btn-sm btn-align-middle" do %>
+      <%= fa_icon button[:icon] if button[:icon] %>
+      <%= button[:title] %>
+    <% end %>
+  <% end %>
+  <div class="text-ellipsis">
+    <%= fa_icon "#{icon} 1x", class: 'mr-xs' if local_assigns[:icon] %>
+    <%= title if local_assigns[:title] %>
+    <%= yield if block_given? %>
+  </div>
+</div>

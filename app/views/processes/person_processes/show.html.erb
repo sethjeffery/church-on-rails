@@ -10,7 +10,7 @@
            background: :process,
            align: :center %>
 
-<% two_columns = (can?(:read, Comment) && @person_process.comments.present?) || can?(:create, Comment) %>
+<% two_columns = has_comments_area?(@person_process) %>
 
 <div class="<%= 'container-sm' unless two_columns %>">
   <div class="row">

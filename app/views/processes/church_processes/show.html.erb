@@ -1,17 +1,10 @@
 <%= render 'processes/church_processes/title' %>
+<% two_columns = can?(:manage, @church_process) || has_comments_area?(@church_process) %>
 
 <div class="row">
   <div class="col-lg-7">
     <div class="list-group mb-2">
-      <div class="list-group-item active">
-        <% if can? :update, @church_process %>
-          <%= link_to edit_church_process_path(@church_process), class: 'btn btn-primary btn-sm float-xs-right btn-align-middle' do %>
-            <%= fa_icon 'pencil 1x' %>
-            Change
-          <% end %>
-        <% end %>
-        Details
-      </div>
+      <%= render 'shared/list_group_header', title: 'Details', button: { icon: :pencil, title: 'Change', can: [:update, @church_process], href: edit_church_process_path(@church_process) } %>
 
       <% if @church_process.description.present? %>
         <div class="list-group-item">
@@ -30,39 +23,27 @@
     </div>
 
     <div class="list-group mb-2">
-      <div class="list-group-item active">
-        <% if can? :create, PersonProcess %>
-          <%= link_to new_church_process_person_process_path(@church_process), class: 'btn btn-primary btn-sm float-xs-right btn-align-middle' do %>
-            <%= fa_icon 'user 1x' %>
-            Add
-          <% end %>
-        <% end %>
-
-        <div class="hidden-xs-down">
-          People on this process
-        </div>
-        <div class="hidden-sm-up">
-          People
-        </div>
-      </div>
+      <%= render 'shared/list_group_header', button: { icon: :user, title: 'Add', can: [:create, PersonProcess], href: new_church_process_person_process_path(@church_process) } do %>
+        <div class="hidden-xs-down"> People on this process </div>
+        <div class="hidden-sm-up">   People                 </div>
+      <% end %>
 
       <%= render partial: 'processes/person_processes/person_process_item', collection: @church_process.active_processes %>
     </div>
   </div>
 
   <div class="col-lg-5">
-    <%= render 'comments/comments/form', resource: @church_process %>
-
     <% if can? :manage, @church_process %>
       <div class="list-group mb-2">
-        <div class="list-group-item active">
-          Management
-        </div>
+        <%= render 'shared/list_group_header', title: 'Management' %>
+
         <div class="list-group-item">
           <%= fa_icon 'trash 1x', class: 'mr-xs' %>
           <%= link_to 'Remove process', confirm_destroy_church_process_path(@church_process) %>
         </div>
       </div>
     <% end %>
+
+    <%= render 'comments/comments/form', resource: @church_process %>
   </div>
 </div>

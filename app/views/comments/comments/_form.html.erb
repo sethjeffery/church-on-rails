@@ -1,23 +1,14 @@
-<% if (can?(:read, Comment) && resource.comments.present?) || can?(:create, Comment) %>
+<% if has_comments_area? resource %>
   <div class="list-group mb-2">
-    <div class="list-group-item active">
-      Comments
-    </div>
     <div class="list-group-item">
-      <% unless resource.comments.present? %>
-        <p class="text-light size-xs-small" id="comments-help">
-          Leave comments here for yourself or for other staff.
-        </p>
-      <% end %>
-
       <%= form_for :comment, url: comments_path, remote: true do |f| %>
         <%= f.hidden_field :commentable_id, value: resource.id %>
         <%= f.hidden_field :commentable_type, value: resource.class.name %>
-        <%= f.text_area :description, class: 'form-control', rows: 1 %>
+        <%= f.text_area :description, class: 'form-control my-sm', rows: 1, placeholder: 'Add a comment...' %>
         <button type="submit" class="btn btn-primary sr-only">Send</button>
       <% end %>
 
-      <div id="comments" class="mb-sm">
+      <div id="comments">
         <% if resource.comments.present? %>
           <%= render partial: 'comments/comments/comment', collection: resource.comments.includes(:person).order('created_at desc') %>
         <% end %>

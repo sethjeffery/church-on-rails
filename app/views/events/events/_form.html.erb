@@ -2,15 +2,10 @@
 <%= form_for(@event) do |f| %>
 
   <div class="list-group mb-2">
-    <div class="list-group-item active">
-      <% if @event.new_record? %>
-        <%= link_to 'Cancel', @team || events_path, class: 'float-xs-right btn btn-outline-primary btn-sm btn-align-middle' %>
-      <% else %>
-        <%= link_to 'Cancel', @event, class: 'float-xs-right btn btn-outline-primary btn-sm btn-align-middle' %>
-      <% end %>
-
-      Event details
-    </div>
+    <%= render 'shared/list_group_header', title: 'Details', button: {
+        title: 'Cancel',
+        href: (@event.new_record? ? (@team || events_path) : @event),
+        btn_class: 'btn-outline-primary' } %>
 
     <div class="list-group-item field-required">
       <%= field_name @event, :name %>
@@ -30,9 +25,8 @@
   </div>
 
   <div class="list-group mb-2">
-    <div class="list-group-item active">
-      Date and time
-    </div>
+    <%= render 'shared/list_group_header', title: 'Date and time' %>
+
     <div class="list-group-item">
       <p class="text-light size-xs-small">
         Events can be either on a single date, or recurring.
@@ -48,10 +42,7 @@
   </div>
 
   <div class="list-group mb-2">
-    <div class="list-group-item active">
-      Venue
-    </div>
-
+    <%= render 'shared/list_group_header', title: 'Venue' %>
     <%= render 'shared/list_group_item_field', f: f, model: @event, field: :address1 %>
     <%= render 'shared/list_group_item_field', f: f, model: @event, field: :address2 %>
     <%= render 'shared/list_group_item_field', f: f, model: @event, field: :postcode %>

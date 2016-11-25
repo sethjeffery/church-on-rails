@@ -1,19 +1,11 @@
 <%= flash_messages container: 'container-sm' %>
-<%  two_columns = (can?(:manage, person) && person != current_person) || can?(:read, Comment) %>
+<% two_columns = can?(:manage, person) || has_comments_area?(person) %>
 
 <div class="<%= 'container-sm' unless two_columns %>">
   <div class="row">
     <div class="col-xs-12 <%= 'col-lg-7' if two_columns %>">
       <div class="list-group mb-2">
-        <div class="list-group-item active">
-          <% if can? :update, @person %>
-            <%= link_to edit_person_path(@person), class: 'float-xs-right btn btn-primary btn-sm btn-align-middle' do %>
-              <%= fa_icon 'pencil' %> Edit
-            <% end %>
-          <% end %>
-
-          Details
-        </div>
+        <%= render 'shared/list_group_header', title: 'Details', button: { icon: :pencil, title: 'Edit', can: [:update, @person], href: edit_person_path(@person) } %>
 
         <%= list_group_fields class: 'mb-2', fields: {
             :full_name  => @person.full_name,
@@ -30,13 +22,7 @@
       <% if @person.families.blank? %>
         <% if can? :create, FamilyMembership %>
           <div class="list-group mb-2">
-            <div class="list-group-item active">
-              <%= link_to person_families_path(@person), class: 'float-xs-right btn btn-primary btn-sm btn-align-middle' do %>
-                <%= fa_icon 'address-card' %> Join
-              <% end %>
-
-              Family
-            </div>
+            <%= render 'shared/list_group_header', title: 'Family', button: { icon: 'address-card', title: 'Join', href: person_families_path(@person) } %>
           </div>
         <% end %>
       <% else %>
@@ -47,34 +33,14 @@
 
       <% if can? :read, Team %>
         <div class="list-group mb-2">
-          <div class="list-group-item active">
-            <% if can? :create, TeamMembership %>
-              <%= link_to person_teams_path(@person), class: 'float-xs-right btn btn-primary btn-sm btn-align-middle' do %>
-                <%= fa_icon 'users' %> Join
-              <% end %>
-            <% end %>
-
-            Teams
-          </div>
-
-          <div class="list-group">
-            <%= render partial: 'people/teams/team_item', collection: @person.teams %>
-          </div>
+          <%= render 'shared/list_group_header', title: 'Teams', button: { icon: :users, title: 'Join', href: person_families_path(@person), can: [:create, TeamMembership] } %>
+          <%= render partial: 'people/teams/team_item', collection: @person.teams %>
         </div>
       <% end %>
 
       <% if can? :read, PersonProcess %>
         <div class="list-group mb-2">
-          <div class="list-group-item active">
-            <% if can? :create, PersonProcess %>
-              <%= link_to new_person_person_process_path(@person), class: 'float-xs-right btn btn-primary btn-sm btn-align-middle' do %>
-                <%= fa_icon 'arrow-right' %> Start
-              <% end %>
-            <% end %>
-
-            Processes
-          </div>
-
+          <%= render 'shared/list_group_header', title: 'Processes', button: { icon: 'arrow-right', title: 'Start', href: new_person_person_process_path(@person), can: [:create, PersonProcess] } %>
           <%= render partial: 'processes/person_processes/person_process_item', collection: @person.person_processes %>
         </div>
       <% end %>
@@ -83,9 +49,7 @@
     <div class="col-xs-12 <%= 'col-lg-5' if two_columns %>">
       <% if can?(:manage, person) && person != current_person %>
         <div class="list-group mb-2">
-          <div class="list-group-item active">
-            Management
-          </div>
+          <%= render 'shared/list_group_header', title: 'Management' %>
           <% unless person == current_person %>
             <div class="list-group-item">
               <%= fa_icon 'trash 1x', class: 'mr-xs' %>

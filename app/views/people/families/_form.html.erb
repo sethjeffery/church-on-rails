@@ -2,15 +2,10 @@
 <%= form_for(@family) do |f| %>
 
   <div class="list-group mb-2">
-    <div class="list-group-item active">
-      <% if @family.new_record? %>
-        <%= link_to 'Cancel', families_path, class: 'float-xs-right btn btn-outline-primary btn-sm btn-align-middle' %>
-      <% else %>
-        <%= link_to 'Cancel', @family, class: 'float-xs-right btn btn-outline-primary btn-sm btn-align-middle' %>
-      <% end %>
-
-      Details
-    </div>
+    <%= render 'shared/list_group_header', title: 'Details', button: {
+        href: (@family.new_record? ? families_path : @family),
+        title: 'Cancel',
+        btn_class: 'btn-outline-primary' } %>
 
     <%= render 'shared/list_group_item_field', f: f, model: @family, field: :name %>
     <%= render 'shared/list_group_item_field', f: f, model: @family, field: :address1 %>

@@ -8,9 +8,7 @@
 <%= flash_messages %>
 
 <div class="list-group">
-  <div class="list-group-item active">
-    All church processes
-  </div>
+  <%= render 'shared/list_group_header', title: 'All church processes' %>
 
   <% if @church_processes.present? %>
     <%= render partial: 'processes/church_processes/church_process_item', collection: @church_processes %>

@@ -1,19 +1,11 @@
 <%= flash_messages container: 'container-sm' %>
-<% two_columns = can?(:manage, team) || (can?(:read, Comment) && team.comments.present?) || can?(:create, Comment) %>
+<% two_columns = can?(:manage, team) || has_comments_area?(team) %>
 
 <div class="<%= 'container-sm' unless two_columns %>">
   <div class="row">
     <div class="col-xs-12 <%= 'col-lg-7' if two_columns %>">
       <div class="list-group mb-2">
-        <div class="list-group-item active">
-          <% if can? :update, team %>
-            <%= link_to edit_team_path(team), class: 'float-xs-right btn btn-primary btn-sm btn-align-middle' do %>
-              <%= fa_icon 'pencil 1x', class: 'mr-xs' %>Edit
-            <% end %>
-          <% end %>
-
-          Team details
-        </div>
+        <%= render 'shared/list_group_header', title: 'Details', button: { icon: :pencil, title: 'Edit', href: edit_team_path(team), can: [:update, team] } %>
 
         <% if team.description.present? %>
           <div class="list-group-item">
@@ -52,32 +44,12 @@
       </div>
 
       <div class="list-group mb-2">
-        <div class="list-group-item active">
-
-          <% if can? :create, TeamMembership %>
-            <%= link_to new_team_team_membership_path(team), class: 'float-xs-right btn btn-primary btn-sm btn-align-middle' do %>
-              <%= fa_icon 'user 1x', class: 'mr-xs' %>Add person
-            <% end %>
-          <% end %>
-
-          Members
-        </div>
-
+        <%= render 'shared/list_group_header', title: 'Members', button: { icon: :user, title: 'Add person', href: new_team_team_membership_path(team), can: [:create, TeamMembership] } %>
         <%= render 'people/teams/memberships', team: team %>
       </div>
 
       <div class="list-group mb-2">
-        <div class="list-group-item active">
-
-          <% if can? :create, Event %>
-            <%= link_to new_team_event_path(team), class: 'float-xs-right btn btn-primary btn-sm btn-align-middle' do %>
-              <%= fa_icon 'calendar 1x', class: 'mr-xs' %>Add event
-            <% end %>
-          <% end %>
-
-          Events
-        </div>
-
+        <%= render 'shared/list_group_header', title: 'Events', button: { icon: :calendar, title: 'Add event', href: new_team_event_path(team), can: [:create, Event] } %>
         <%= render partial: 'events/events/event_item', collection: team.events.upcoming.sort_by_closest %>
       </div>
 
@@ -86,9 +58,8 @@
     <div class="col-xs-12 <%= 'col-lg-5' if two_columns %>">
       <% if can?(:manage, team) && !team.admin? %>
         <div class="list-group mb-2">
-          <div class="list-group-item active">
-            Management
-          </div>
+          <%= render 'shared/list_group_header', title: 'Management' %>
+
           <% unless team.admin? %>
             <div class="list-group-item">
               <%= fa_icon 'trash 1x', class: 'mr-xs' %>

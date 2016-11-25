@@ -29,7 +29,7 @@ RSpec.describe "Teams" do
 
         click_on team1.name
 
-        expect(page).to have_content 'Team details'
+        expect(page).to have_content 'Details'
         expect(page).to have_content team1.description
 
         # members
@@ -58,7 +58,7 @@ RSpec.describe "Teams" do
         create_list(:person, 5).each{|member| member.join team1 }
 
         visit "/teams/#{team1.id}"
-        expect(page).to have_content 'Team details'
+        expect(page).to have_content 'Details'
 
         # no event access
         expect(page).to have_no_selector 'a.btn', text: /Add event/
@@ -84,7 +84,7 @@ RSpec.describe "Teams" do
         team1 = create(:team, name: 'Team1', description: Faker::Lorem.paragraph)
 
         visit "/teams/#{team1.id}"
-        expect(page).to have_content 'Team details'
+        expect(page).to have_content 'Details'
 
         click_on 'Edit'
         expect(page).to have_content 'Permissions'

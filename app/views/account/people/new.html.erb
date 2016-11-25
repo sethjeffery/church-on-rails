@@ -16,9 +16,7 @@
   <%= form_for(@person, url: account_person_path) do |f| %>
 
     <div class="list-group mb-1">
-      <div class="list-group-item active">
-        Details
-      </div>
+      <%= render 'shared/list_group_header', title: 'Details' %>
       <%= render 'account/people/form_fields', f: f, person: @person, email: false %>
     </div>
 

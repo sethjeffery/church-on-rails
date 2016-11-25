@@ -8,9 +8,8 @@
 <%= flash_messages %>
 
 <div class="list-group">
-  <div class="list-group-item active">
-    Upcoming events
-  </div>
+  <%= render 'shared/list_group_header', title: 'Upcoming events' %>
+
   <% if @events.present? %>
     <%= render partial: 'events/events/event_item', collection: @events %>
   <% else %>
