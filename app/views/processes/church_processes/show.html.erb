@@ -1,7 +1,7 @@
 <%= render 'processes/church_processes/title' %>
 
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-lg-7">
     <div class="list-group mb-2">
       <div class="list-group-item active">
         <% if can? :update, @church_process %>
@@ -28,9 +28,7 @@
         <% end %>
       </ol>
     </div>
-  </div>
 
-  <div class="col-lg-6">
     <div class="list-group mb-2">
       <div class="list-group-item active">
         <% if can? :create, PersonProcess %>
@@ -50,6 +48,10 @@
 
       <%= render partial: 'processes/person_processes/person_process_item', collection: @church_process.active_processes %>
     </div>
+  </div>
+
+  <div class="col-lg-5">
+    <%= render 'comments/comments/form', resource: @church_process %>
 
     <% if can? :manage, @church_process %>
       <div class="list-group mb-2">
