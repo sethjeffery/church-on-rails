@@ -1,8 +1,26 @@
-<div class="list-group-item active">
+<div class="list-group-item active list-group-item-search">
   <%= form_for('Search', url: url_for(resource), method: :get) do |f| %>
     <div class="row">
       <div class="col-sm-6 col-md-7">
         <div class="input-group">
+          <div class="input-group-btn hidden-sm-up">
+            <a href="javascript:void(0)" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+              <%= fa_icon 'user' if resource == :people %>
+              <%= fa_icon 'users' if resource == :teams %>
+              <%= fa_icon 'address-card' if resource == :families %>
+            </a>
+            <div class="dropdown-menu">
+              <%= link_to(people_path, class: 'dropdown-item py-sm') do %>
+                <%= fa_icon 'user 1x', class: 'mr-sm' %> People
+              <% end %>
+              <%= link_to(teams_path, class: 'dropdown-item py-sm') do %>
+                <%= fa_icon 'users 1x', class: 'mr-sm' %> Teams
+              <% end %>
+              <%= link_to(families_path, class: 'dropdown-item py-sm') do %>
+                <%= fa_icon 'address-card 1x', class: 'mr-sm' %> Families
+              <% end %>
+            </div>
+          </div>
           <%= text_field_tag :q, params[:q], class: 'form-control', autofocus: true %>
           <div class="input-group-btn">
             <button type="submit" class="btn btn-primary" onclick="$(this).closest('form').submit();">
@@ -13,7 +31,7 @@
         </div>
       </div>
 
-      <div class="col-sm-6 col-md-5 search-options">
+      <div class="col-sm-6 col-md-5 search-options hidden-xs-down">
         <div class="btn-group">
           <%= link_to(people_path,   class: "btn btn-outline-primary #{'active' if resource == :people   }", title: "People",   data: { tooltip: true }) { fa_icon 'user' } %>
           <%= link_to(teams_path,    class: "btn btn-outline-primary #{'active' if resource == :teams    }", title: "Teams",    data: { tooltip: true }) { fa_icon 'users' } %>
