@@ -22,20 +22,18 @@ class User < ApplicationRecord
     end
   end
 
-  def self.from_omniauth(auth)
-    user = where(provider: auth.provider, uid: auth.uid).first
-    p auth.extra.raw_info.to_h
-    p auth.info.to_h
+  def self.from_omniauth(auth, current_church)
+    user   = find_by(provider: auth.provider, uid: auth.uid) || find_by(email: auth.info.email)
+    return nil unless user || current_church.can_sign_up?
 
-    unless user
-      user = where(email: auth.info.email).first_or_create do |new_user|
-        new_user.provider = auth.provider
-        new_user.uid = auth.uid
-        new_user.email = auth.info.email
-        new_user.password = Devise.friendly_token[0,20]
-      end
-      user.update_attributes(provider: auth.provider, uid: auth.uid) unless user.provider
+    user ||= create do |new_user|
+      new_user.provider = auth.provider
+      new_user.uid = auth.uid
+      new_user.email = auth.info.email
+      new_user.password = Devise.friendly_token[0,20]
     end
+
+    user.update_attributes(provider: auth.provider, uid: auth.uid) unless user.provider
 
     if user.person
       user.person.update_attributes(facebook: auth.uid) unless user.person.facebook

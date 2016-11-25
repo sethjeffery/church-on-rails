@@ -1,5 +1,5 @@
 <%= flash_messages container: 'container-sm' %>
-<% two_columns = can?(:manage, person) || has_comments_area?(person) %>
+<% two_columns = (can?(:manage, person) && person != current_person) || has_comments_area?(person) %>
 
 <div class="<%= 'container-sm' unless two_columns %>">
   <div class="row">

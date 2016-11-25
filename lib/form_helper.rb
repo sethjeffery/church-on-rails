@@ -25,19 +25,19 @@ module ActionView
         end
 
         def render
-          render_as_text icon: 'calendar', data: { format: 'DD MMM YYYY' }
+          render_as_text icon: 'calendar', data: { format: 'DD MMM YYYY' }, value: object.send(@method_name)&.strftime('%d %b %Y')
         end
       end
 
       class TimeSelect < DateSelect # :nodoc:
         def render
-          render_as_text icon: 'clock-o', data: { format: 'HH:mm' }
+          render_as_text icon: 'clock-o', data: { format: 'HH:mm' }, value: object.send(@method_name)&.strftime('%H:%M')
         end
       end
 
       class DateTimeSelect < DateSelect # :nodoc:
         def render
-          render_as_text icon: 'calendar', data: { format: 'DD MMM YYYY HH:mm' }
+          render_as_text icon: 'calendar', data: { format: 'DD MMM YYYY HH:mm' }, value: object.send(@method_name)&.strftime('%d %b %Y %H:%M')
         end
       end
     end

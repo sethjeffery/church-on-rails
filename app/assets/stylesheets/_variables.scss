@@ -1,13 +1,15 @@
+// TYPOGRAPHY
 $headings-font-weight:  300 !default;
 $font-size-h4:          1rem !default;
 
-$tag-font-weight:       400 !default;
-$tag-default-bg:        #999 !default;
 
+// BOOTSTRAP BRAND COLOURS (and additions)
 $brand-primary-light:   #7ebbe7 !default;
 $brand-danger-light: #ea695c;
 $brand-success-light: #65d268;
 
+
+// SPACING HELPERS
 $spacer:   1rem !default;
 $spacer-x: $spacer !default;
 $spacer-y: $spacer !default;
@@ -38,12 +40,34 @@ $spacers: (
   )
 ) !default;
 
-
 $state-danger-text: #b42426 !default;
 $state-danger-bg: #ffecec !default;
 
+
+// LIST GROUPS
 $list-group-border-color:       $brand-primary-light !default;
 $list-group-active-bg:          $brand-primary-light !default;
 $list-group-active-border:      $brand-primary-light !default;
+
+
+// SIDE MENU
+$side-menu-width: 6.5rem;
+$side-menu-width-sm: 3.5rem;
+$side-menu-width-xs: 2.5rem;
+$side-menu-background: #3d3d66;
+$side-menu-color: rgba(255,255,255,0.85);
+$side-menu-hover-color: white;
+$side-menu-border-color: rgba(255,255,255,0.2);
+
+// if you want light scheme...
+// $side-menu-background: white;
+// $side-menu-color: #666;
+// $side-menu-hover-color: #333;
+// $side-menu-border-color: #eee;
+
+// reponsive height thresholds
+$side-menu-max-height-xs: 479px;
+$side-menu-max-height-sm: 659px;
+
 
 @import 'bootstrap/variables';

@@ -6,7 +6,7 @@ class Event < ApplicationRecord
   belongs_to :team
   belongs_to :author, class_name: 'Person'
 
-  scope :upcoming, -> { joins(:schedule).includes(:schedule).where('(until >= ? OR until IS NULL) AND (date >= ? OR rule != ?)', Time.zone.now, Time.zone.now, 'singular') }
+  scope :upcoming, -> { joins(:schedule).includes(:schedule).where('(until >= ? OR until IS NULL) AND (date >= ? OR rule != ?)', Date.current, Date.current, 'singular') }
 
   validates_presence_of :name
 

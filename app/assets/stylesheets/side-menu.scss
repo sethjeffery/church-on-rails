@@ -1,53 +1,72 @@
 @import 'variables';
 @import 'bootstrap/mixins/breakpoints';
 
-$side-menu-width: 6.5rem;
-$side-menu-width-sm: 3.5rem;
-$side-menu-border-color: #e0e0e0;
-
 .side-menu {
   position: fixed;
   top: 0;
   left: 0;
   width: $side-menu-width;
   min-height: 100%;
-  background-color: #f4f4f4;
+  background-color: $side-menu-background;
   text-align: center;
   font-size: 0.875rem;
   border-right: solid 1px $side-menu-border-color;
   padding-bottom: 5.25rem; // approximation to account for bottom item
 
+  @media (max-height: $side-menu-max-height-xs) {
+    width: $side-menu-width-sm;
+    font-size: 0.625rem;
+  }
+
   @include media-breakpoint-down(sm) {
     width: $side-menu-width-sm;
     font-size: 0.625rem;
+  }
+
+  @include media-breakpoint-down(xs) {
+    width: $side-menu-width-xs;
   }
 }
 
 .side-menu-item {
   display: block;
-  color: $body-color;
+  color: $side-menu-color;
+  font-weight: 300;
   padding: 1rem 0;
   margin: 0 0.5rem;
   border-bottom: solid 1px $side-menu-border-color;
 
   &:hover {
     text-decoration: none;
-  }
-
-  &.active .side-menu-item-text {
-    font-weight: bold;
+    color: $side-menu-hover-color;
   }
 
   @include media-breakpoint-down(sm) {
     margin: 0 0.25rem;
+  }
+
+  @media (max-height: $side-menu-max-height-sm) {
+    padding: 0.75rem 0;
+  }
+
+  @media (max-height: $side-menu-max-height-xs) {
+    padding: 0.5rem 0;
   }
 }
 
 .with-side-menu {
   padding-left: $side-menu-width;
 
+  @media (max-height: $side-menu-max-height-xs) {
+    padding-left: $side-menu-width-sm;
+  }
+
   @include media-breakpoint-down(sm) {
     padding-left: $side-menu-width-sm;
+  }
+
+  @include media-breakpoint-down(xs) {
+    padding-left: $side-menu-width-xs;
   }
 }
 
@@ -56,6 +75,10 @@ $side-menu-border-color: #e0e0e0;
   margin-top: 0.25rem;
 
   @include media-breakpoint-down(sm) {
+    display: none;
+  }
+
+  @media (max-height: $side-menu-max-height-sm) {
     display: none;
   }
 }
@@ -69,8 +92,14 @@ $side-menu-border-color: #e0e0e0;
   margin: 0;
 
   .side-menu-item-text {
+    display: block !important;
+
+    @media (max-height: $side-menu-max-height-xs) {
+      font-size: 0.5rem;
+      margin-top: 0;
+    }
+
     @include media-breakpoint-down(sm) {
-      display: block;
       font-size: 0.5rem;
       margin-top: 0;
     }
