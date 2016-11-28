@@ -1,0 +1,15 @@
+<% count = (local_assigns[:query] || klass).count %>
+<% path =   local_assigns[:path] || klass %>
+<% desc =   local_assigns[:desc] || klass.name.downcase.singularize %>
+
+<% if can? :read, klass %>
+  <div class="pictograph">
+    <%= link_to path, class: "btn btn-secondary float-xs-right btn-align-middle btn-sm" do %><%= fa_icon icon %> View<% end %>
+    <h4><%= pluralize count, desc %></h4>
+    <% if count > 20 %>
+      <%= pictograph count, icon, '1x' %>
+    <% else %>
+      <%= pictograph count, icon, '2x' %>
+    <% end %>
+  </div>
+<% end %>

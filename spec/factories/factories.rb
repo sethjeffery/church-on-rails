@@ -38,6 +38,13 @@ FactoryGirl.define do
 
   factory :event do
     name  { Faker::Lorem.sentence }
+    schedule
+  end
+
+  factory :schedule do
+    rule  'singular'
+    date  { Date.tomorrow }
+    time  { Date.tomorrow.midnight }
   end
 
   factory :team do

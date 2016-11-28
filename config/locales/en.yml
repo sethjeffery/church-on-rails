@@ -42,6 +42,15 @@ en:
         person_id: Family member
       team_membership:
         person_id: Team member
+      church:
+        name: Church name
+        signup_enabled: Members can sign themselves up
+        address1: 'Address'
+        address2: 'Town'
+        postcode: 'Post code'
+    help:
+      church:
+        signup_enabled: Uncheck if you don't want a sign up screen where people can join the site without invitation.
     errors:
       models:
         person:

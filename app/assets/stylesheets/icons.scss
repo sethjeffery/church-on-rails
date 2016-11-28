@@ -1,5 +1,5 @@
 .fa-1x {
-  width: 16px;
+  width: 1em;
   text-align: center;
 }
 
@@ -12,5 +12,29 @@
     width: 1em;
     height: 1em;
     text-align: center;
+  }
+}
+
+.fa-pictograph {
+  vertical-align: top;
+  height: 1em;
+  line-height: 1em;
+  width: inherit;
+}
+
+.fa-container {
+  padding-left: 1.5rem;
+
+  > .fa {
+    float: left;
+    margin: 0 -1rem 0 -1.5rem;
+    width: 1rem;
+    height: 1rem;
+    text-align: center;
+    line-height: 1.5em;
+  }
+
+  &.list-group-item {
+    padding-left: 2.5rem;
   }
 }

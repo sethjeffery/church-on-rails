@@ -33,6 +33,9 @@ class Ability
     can :manage, user
     can :manage, user.person
 
+    # Everyone can view the church info
+    can :read, Church
+
     user.teams&.each do |team|
       add_team_abilities(user, team)
     end

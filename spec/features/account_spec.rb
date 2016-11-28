@@ -31,6 +31,7 @@ RSpec.describe "Account" do
     end
 
     it "Autoconnect with existing person" do
+      create(:church)
       create(:person, first_name: 'Bob', last_name: 'Jones', email: user.email)
 
       # Confirm user
@@ -38,8 +39,8 @@ RSpec.describe "Account" do
 
       # Auto-connection is established
       expect(page).to have_no_text 'add your account'
-      expect(page).to have_text 'Bob Jones'
-      expect(current_path).to eq '/account'
+      expect(page).to have_text 'Oasis Church'
+      expect(current_path).to eq '/'
     end
   end
 end

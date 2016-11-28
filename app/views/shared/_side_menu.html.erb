@@ -1,5 +1,10 @@
 <div class="side-menu">
 
+  <a class="side-menu-item <%= 'active' if params[:controller] == 'account/home' %>" href="<%= root_path %>">
+    <%= fa_icon 'home 2x' %>
+    <div class="side-menu-item-text">Home</div>
+  </a>
+
   <% if can? :read, current_user %>
     <a class="side-menu-item <%= 'active' if params[:controller] == 'account/people' %>" href="<%= account_path %>">
       <%= fa_icon 'user-circle-o 2x' %>

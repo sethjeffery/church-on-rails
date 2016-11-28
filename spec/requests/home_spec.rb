@@ -22,9 +22,9 @@ RSpec.describe "Home" do
     let(:user) { create(:user) }
     before { sign_in user }
 
-    it "redirects to account" do
+    it "does not redirect" do
       get "/"
-      expect(response).to redirect_to('/account')
+      expect(response).not_to redirect_to('/users/login')
     end
   end
 end

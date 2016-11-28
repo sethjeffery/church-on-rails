@@ -1,0 +1,41 @@
+<%= render 'account/churches/title' %>
+
+<div class="container-sm">
+  <%= flash_messages %>
+  <%= form_for(current_church, url: account_church_path) do |f| %>
+
+    <div class="list-group mb-2">
+      <%= render 'shared/list_group_header', title: 'Address' %>
+      <%= render 'shared/list_group_item_field', f: f, field: :name, required: true %>
+      <%= render 'shared/list_group_item_field', f: f, field: :address1 %>
+      <%= render 'shared/list_group_item_field', f: f, field: :address2 %>
+      <%= render 'shared/list_group_item_field', f: f, field: :postcode %>
+      <%= render 'shared/list_group_item_field', f: f, field: :country %>
+    </div>
+    <div class="list-group mb-2">
+      <%= render 'shared/list_group_header', title: 'Communication' %>
+      <%= render 'shared/list_group_item_field', f: f, field: :phone, control: :phone_field, icon: :phone %>
+      <%= render 'shared/list_group_item_field', f: f, field: :email, control: :email_field, icon: :envelope %>
+    </div>
+
+    <div class="list-group mb-2">
+      <%= render 'shared/list_group_header', title: 'Registration' %>
+      <%= render 'shared/list_group_item_field', f: f, field: :charity_number %>
+    </div>
+
+    <div class="list-group mb-2">
+      <%= render 'shared/list_group_header', title: 'Settings' %>
+      <div class="list-group-item">
+        <div class="mt-sm">
+          <%= f.fields_for :settings do |s| %>
+            <% Church::SETTINGS.each do |setting, _| %>
+              <%= render 'shared/form_checkbox', f: s, checked: !!current_church.settings[setting], field: setting, help: true, object: current_church %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'shared/form_submit', icon: :home %>
+  <% end %>
+</div>

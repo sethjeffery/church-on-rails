@@ -1,6 +1,6 @@
 <div class="text-xs-center">
   <button type="submit" class="btn btn-primary btn-lg">
     <% if local_assigns[:icon]%><%= fa_icon icon, class: 'mr-xs' %><% end %>
-    <%= title %>
+    <%= local_assigns[:title] || 'Save changes' %>
   </button>
 </div>

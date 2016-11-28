@@ -1,7 +1,11 @@
 class Church < ApplicationRecord
-  DEFAULT_SETTINGS = {
+  include Concerns::Geocoding
+
+  SETTINGS = {
     signup_enabled: true
   }
+
+  validates_presence_of :name
 
   serialize :settings
   after_initialize :initialize_settings
@@ -10,9 +14,13 @@ class Church < ApplicationRecord
     settings[:signup_enabled]
   end
 
+  def to_s
+    name
+  end
+
   protected
 
   def initialize_settings
-    self.settings ||= DEFAULT_SETTINGS
+    self.settings ||= SETTINGS
   end
 end

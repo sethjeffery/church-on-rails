@@ -2,6 +2,8 @@
 
 .title-container {
   color: white;
+  position: relative;
+  z-index: -1;
 
   a {
     color: white;
@@ -10,15 +12,15 @@
 
 .title-overlay {
   position: absolute;
-  left: 0;
-  right: 0;
+  left: -5000px;
+  right: -5000px;
+  bottom: -42px;
   height: 1000px;
-  margin-top: -924px;
   background-color: #54aeea;
   z-index: -1;
 
   .title-container-short & {
-    margin-top: -950px;
+    bottom: -14px;
   }
 }
 
@@ -29,7 +31,7 @@
 }
 
 .title-container-short::after {
-  margin-top: -950px;
+  bottom: -14px;
 }
 
 .title-container-event::after, .title-container-danger::after {

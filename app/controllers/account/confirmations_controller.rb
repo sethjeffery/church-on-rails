@@ -4,11 +4,11 @@ class Account::ConfirmationsController < Devise::ConfirmationsController
   end
 
   def after_confirmation_path_for(resource_name, resource)
-    if signed_in?(resource_name)
-      signed_in_root_path(resource)
+    sign_in(resource) unless signed_in?(resource_name)
+    if resource.person.present?
+      root_path
     else
-      sign_in(resource) # auto-login after confirmation
-      new_session_path(resource_name)
+      new_account_person_path
     end
    end
 end

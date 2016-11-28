@@ -29,6 +29,10 @@ module ApplicationHelper
     ActionView::Helpers::Tags::Translator.new(object, object.class.name.underscore, method, scope: "helpers.label").translate
   end
 
+  def field_help(object, method)
+    ActionView::Helpers::Tags::Translator.new(object, object.class.name.underscore, method, scope: "activerecord.help").translate
+  end
+
   def field_error(object, method)
     if object.errors[method].present?
       content_tag :div, class: "size-xs-tiny font-weight-normal text-danger my-xs" do

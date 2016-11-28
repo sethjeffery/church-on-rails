@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'bootstrap/mixins/hover';
 @import 'bootstrap/mixins/breakpoints';
 
 .side-menu {
@@ -36,7 +37,7 @@
   margin: 0 0.5rem;
   border-bottom: solid 1px $side-menu-border-color;
 
-  &:hover {
+  @include hover-focus-active {
     text-decoration: none;
     color: $side-menu-hover-color;
   }

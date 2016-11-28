@@ -7,7 +7,16 @@
       <% if content.present? %>
         <%= content %>
       <% else %>
-        <%= f.send (local_assigns[:control] || :text_field), field, class: 'form-control', placeholder: local_assigns[:placeholder] %>
+        <% if local_assigns[:icon] %>
+          <div class="input-group">
+            <label class="input-group-addon" for="<%= f.object_name %>_<%= field %>">
+              <%= fa_icon "#{icon} 1x" %>
+            </label>
+            <%= f.send (local_assigns[:control] || :text_field), field, class: 'form-control', placeholder: local_assigns[:placeholder] %>
+          </div>
+        <% else %>
+          <%= f.send (local_assigns[:control] || :text_field), field, class: 'form-control', placeholder: local_assigns[:placeholder] %>
+        <% end %>
       <% end %>
     </div>
   </div>

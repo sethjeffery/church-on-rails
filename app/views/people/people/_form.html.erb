@@ -11,9 +11,5 @@
     <%= render 'people/people/form_team_membership', f: f %>
   <% end %>
 
-  <div class="text-xs-center">
-    <button type="submit" class="btn btn-primary btn-lg">
-      <%= fa_icon 'user', class: 'mr-sm' %><%= @person.new_record? ? 'Add member' : 'Save changes' %>
-    </button>
-  </div>
+  <%= render 'shared/form_submit', title: (@person.new_record? ? 'Add member' : 'Save changes'), icon: :user %>
 <% end %>

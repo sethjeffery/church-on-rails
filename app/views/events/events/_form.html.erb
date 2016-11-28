@@ -43,10 +43,10 @@
 
   <div class="list-group mb-2">
     <%= render 'shared/list_group_header', title: 'Venue' %>
-    <%= render 'shared/list_group_item_field', f: f, model: @event, field: :address1 %>
-    <%= render 'shared/list_group_item_field', f: f, model: @event, field: :address2 %>
-    <%= render 'shared/list_group_item_field', f: f, model: @event, field: :postcode %>
-    <%= render 'shared/list_group_item_field', f: f, model: @event, field: :country %>
+    <%= render 'shared/list_group_item_field', f: f, field: :address1 %>
+    <%= render 'shared/list_group_item_field', f: f, field: :address2 %>
+    <%= render 'shared/list_group_item_field', f: f, field: :postcode %>
+    <%= render 'shared/list_group_item_field', f: f, field: :country %>
   </div>
 
   <%= render 'shared/form_submit', title: (@event.new_record? ? 'Create event' : 'Save changes'), icon: 'calendar' %>
