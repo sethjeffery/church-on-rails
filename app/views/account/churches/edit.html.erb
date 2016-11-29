@@ -38,11 +38,7 @@
       <%= render 'shared/list_group_header', title: 'Settings' %>
       <div class="list-group-item">
         <div class="mt-sm">
-          <%= f.fields_for :settings do |s| %>
-            <% Church::SETTINGS.each do |setting, _| %>
-              <%= render 'shared/form_checkbox', f: s, checked: current_church.settings[setting].in?(['1', true]), field: setting, help: true, object: current_church %>
-            <% end %>
-          <% end %>
+          <%= render 'shared/form_checkbox', f: f, field: :can_sign_up, help: true %>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@
     </div>
 
     <h1 class="mb-0"><%= current_church %></h1>
-    <div class="title-overlay" style="background-image: url('<%= current_church.cover.url(:md) %>');"></div>
+    <div class="title-overlay" style="background-image: url('<%= current_church.cover.url %>');"></div>
   </div>
 <% else %>
   <%= render 'shared/title', title: current_church.name, icon: :home %>

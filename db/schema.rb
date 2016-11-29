@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161128221222) do
+ActiveRecord::Schema.define(version: 20161129082537) do
 
   create_table "church_processes", force: :cascade do |t|
     t.string   "name"
@@ -30,19 +30,19 @@ ActiveRecord::Schema.define(version: 20161128221222) do
     t.string   "charity_number"
     t.string   "phone"
     t.string   "email"
-    t.text     "settings"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.float    "latitude"
     t.float    "longitude"
     t.string   "cover_file_name"
     t.string   "cover_content_type"
     t.integer  "cover_file_size"
     t.datetime "cover_updated_at"
+    t.boolean  "can_sign_up",        default: true
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string   "description"
+    t.text     "description"
     t.integer  "person_id"
     t.string   "commentable_type"
     t.integer  "commentable_id"
@@ -167,7 +167,7 @@ ActiveRecord::Schema.define(version: 20161128221222) do
     t.datetime "updated_at",                        null: false
     t.boolean  "admin",          default: false
     t.text     "description"
-    t.string   "color",          default: "c0c0c0"
+    t.string   "color",          default: "54aeea"
     t.boolean  "people_editor"
     t.boolean  "people_reader"
     t.boolean  "people_admin"

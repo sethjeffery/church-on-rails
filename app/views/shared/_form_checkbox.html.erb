@@ -1,6 +1,6 @@
 <% object = local_assigns[:object] || f.object %>
 <label class="size-xs-small size-sm-normal custom-checkbox custom-control">
-  <%= f.check_box field, class: 'custom-control-input', checked: local_assigns[:checked] %>
+  <%= f.check_box field, class: 'custom-control-input' %>
   <span class="custom-control-indicator"></span>
   <%= field_name object, field %>
   <% if local_assigns[:help] %><div class="text-light size-xs-tiny"><%= field_help object, field %></div><% end %>
