@@ -28,7 +28,9 @@ Rails.application.routes.draw do
       end
       resources :people, concerns: :paginatable do
         get :confirm_destroy, on: :member
-        resource :user
+        resource :user do
+          resource :password
+        end
         resource :teams, controller: :person_teams
         resource :families, controller: :person_families
         resources :person_processes, path: 'processes'

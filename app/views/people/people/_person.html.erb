@@ -1,65 +1,71 @@
 <%= flash_messages container: 'container-sm' %>
-<% two_columns = (can?(:manage, person) && person != current_person) || has_comments_area?(person) %>
+<% two_columns = can?(:manage, person) || has_comments_area?(person) %>
 
 <div class="<%= 'container-sm' unless two_columns %>">
   <div class="row">
     <div class="col-xs-12 <%= 'col-lg-7' if two_columns %>">
       <div class="list-group mb-2">
-        <%= render 'shared/list_group_header', title: 'Details', button: { icon: :pencil, title: 'Edit', can: [:update, @person], href: edit_person_path(@person) } %>
+        <%= render 'shared/list_group_header', title: 'Details', button: { icon: :pencil, title: 'Edit', can: [:update, person], href: edit_person_path(person) } %>
 
         <%= list_group_fields class: 'mb-2', fields: {
-            :full_name  => @person.full_name,
-            'DOB'       => @person.dob&.strftime('%d %b %Y'),
-            :email      => (link_to(@person.email, "mailto:#{@person.email}", class: 'dotted') if @person.email),
-            :phone      => @person.phone,
-            :gender     => gender_icon(@person),
-            :account    => (fa_icon('check 1x') if @person.user),
-            :facebook   => (link_to(fa_icon('facebook-square 1x', class: 'mr-sm') + "fb.com/#{@person.facebook}", "https://fb.com/#{@person.facebook}", target: '_blank') if @person.facebook),
-            :twitter    => (link_to(fa_icon('twitter-square  1x', class: 'mr-sm') + "twitter.com/#{@person.twitter}", "https://twitter.com/#{@person.twitter}", target: '_blank') if @person.twitter)
+            :full_name  => person.full_name,
+            'DOB'       => person.dob&.strftime('%d %b %Y'),
+            :email      => (link_to(person.email, "mailto:#{person.email}", class: 'dotted') if person.email),
+            :phone      => person.phone,
+            :gender     => gender_icon(person),
+            :account    => (fa_icon('check 1x') if person.user),
+            :facebook   => (link_to(fa_icon('facebook-square 1x', class: 'mr-sm') + "fb.com/#{person.facebook}", "https://fb.com/#{person.facebook}", target: '_blank') if person.facebook),
+            :twitter    => (link_to(fa_icon('twitter-square  1x', class: 'mr-sm') + "twitter.com/#{person.twitter}", "https://twitter.com/#{person.twitter}", target: '_blank') if person.twitter)
         } %>
       </div>
 
-      <% if @person.families.blank? %>
+      <% if person.families.blank? %>
         <% if can? :create, FamilyMembership %>
           <div class="list-group mb-2">
-            <%= render 'shared/list_group_header', title: 'Family', button: { icon: 'address-card', title: 'Join', href: person_families_path(@person) } %>
+            <%= render 'shared/list_group_header', title: 'Family', button: { icon: 'address-card', title: 'Join', href: person_families_path(person) } %>
           </div>
         <% end %>
       <% else %>
-        <% @person.families.each do |family| %>
+        <% person.families.each do |family| %>
           <%= render 'people/families/family_list_group', family: family %>
         <% end %>
       <% end %>
 
       <% if can? :read, Team %>
         <div class="list-group mb-2">
-          <%= render 'shared/list_group_header', title: 'Teams', button: { icon: :users, title: 'Join', href: person_families_path(@person), can: [:create, TeamMembership] } %>
-          <%= render partial: 'people/teams/team_item', collection: @person.teams %>
+          <%= render 'shared/list_group_header', title: 'Teams', button: { icon: :users, title: 'Join', href: person_families_path(person), can: [:create, TeamMembership] } %>
+          <%= render partial: 'people/teams/team_item', collection: person.teams %>
         </div>
       <% end %>
 
       <% if can? :read, PersonProcess %>
         <div class="list-group mb-2">
-          <%= render 'shared/list_group_header', title: 'Processes', button: { icon: 'arrow-right', title: 'Start', href: new_person_person_process_path(@person), can: [:create, PersonProcess] } %>
-          <%= render partial: 'processes/person_processes/person_process_item', collection: @person.person_processes %>
+          <%= render 'shared/list_group_header', title: 'Processes', button: { icon: 'arrow-right', title: 'Start', href: new_person_person_process_path(person), can: [:create, PersonProcess] } %>
+          <%= render partial: 'processes/person_processes/person_process_item', collection: person.person_processes %>
         </div>
       <% end %>
     </div>
 
     <div class="col-xs-12 <%= 'col-lg-5' if two_columns %>">
-      <% if can?(:manage, person) && person != current_person %>
+      <% if can?(:manage, person) %>
         <div class="list-group mb-2">
           <%= render 'shared/list_group_header', title: 'Management' %>
+          <% if person.user.present? %>
+            <div class="list-group-item">
+              <%= fa_icon 'lock 1x', class: 'mr-xs' %>
+              <%= link_to 'Change password', person_user_password_path(person) %>
+            </div>
+          <% end %>
           <% unless person == current_person %>
             <div class="list-group-item">
               <%= fa_icon 'trash 1x', class: 'mr-xs' %>
-              <%= link_to 'Remove person', confirm_destroy_person_path(@person) %>
+              <%= link_to 'Remove person', confirm_destroy_person_path(person) %>
             </div>
           <% end %>
         </div>
       <% end %>
 
-      <%= render 'comments/comments/form', resource: @person %>
+      <%= render 'comments/comments/form', resource: person %>
     </div>
   </div>
 </div>

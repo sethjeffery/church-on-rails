@@ -42,5 +42,27 @@ RSpec.describe "Account" do
       expect(page).to have_text 'Oasis Church'
       expect(current_path).to eq '/'
     end
+
+    it "Change password" do
+      create(:church)
+      create(:person, first_name: 'Bob', last_name: 'Jones', email: user.email, user: user)
+      user.confirm
+
+      visit "/account"
+      expect(page).to have_content 'Bob Jones'
+      expect(page).to have_content 'Management'
+      click_on "Change password"
+
+      fill_in "New password", with: 'newpass123'
+      click_on "Change password"
+      expect(page).to have_content 'Management'
+
+      click_on 'Sign out'
+
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: 'newpass123'
+      click_on 'Log in'
+      expect(page).to have_content 'Signed in successfully'
+    end
   end
 end

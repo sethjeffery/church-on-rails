@@ -144,8 +144,9 @@ RSpec.describe "People" do
         expect(page).to have_selector 'a.btn', :text => /Start/
         expect(page).to have_selector 'a.btn', :text => /Edit/
 
-        # cannot remove people
+        # cannot do admin stuff
         expect(page).to have_no_selector 'Remove person'
+        expect(page).to have_no_selector 'Change password'
 
         click_on 'Edit'
         fill_in 'First name', with: 'aaaaaa'
@@ -177,6 +178,23 @@ RSpec.describe "People" do
         expect(page).to have_content "#{person.name} has been removed"
         visit '/people'
         expect(page).to have_no_content person.name
+      end
+
+      it 'can change password' do
+        person = create(:person)
+
+        visit "/people/#{person.id}"
+        expect(page).to have_no_content 'Change password'
+
+        person.update_attributes user: create(:user)
+        visit "/people/#{person.id}"
+        expect(page).to have_content 'Change password'
+
+        click_on 'Change password'
+        fill_in 'New password', with: 'pass123'
+        click_on 'Change password'
+
+        expect(page).to have_content "Password updated successfully"
       end
     end
   end
