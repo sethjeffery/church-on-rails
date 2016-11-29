@@ -1,10 +1,4 @@
-<% if can? :create, Person %>
-  <%= link_to new_person_path, class: 'btn btn-primary float-xs-right' do %>
-    <%= fa_icon 'plus-circle' %> New
-  <% end %>
-<% end %>
-
-<%= render 'shared/title', title: 'People' %>
+<%= render 'shared/title', title: 'People', btn: { can: [:create, Person], href: new_person_path } %>
 <%= flash_messages %>
 
 <div class="list-group">

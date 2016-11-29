@@ -1,10 +1,4 @@
-<% if can? :create, ChurchProcess %>
-  <%= link_to new_church_process_path, class: 'btn btn-success float-xs-right' do %>
-    <%= fa_icon 'plus-circle' %> New
-  <% end %>
-<% end %>
-
-<%= render 'shared/title', title: 'Processes', background: :process %>
+<%= render 'shared/title', title: 'Processes', color: :process, btn: { can: [:create, ChurchProcess], href: new_church_process_path, btn_class: 'btn-success' } %>
 <%= flash_messages %>
 
 <div class="list-group">

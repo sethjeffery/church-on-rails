@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161126204539) do
+ActiveRecord::Schema.define(version: 20161128221222) do
 
   create_table "church_processes", force: :cascade do |t|
     t.string   "name"
@@ -31,14 +31,18 @@ ActiveRecord::Schema.define(version: 20161126204539) do
     t.string   "phone"
     t.string   "email"
     t.text     "settings"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "cover_file_name"
+    t.string   "cover_content_type"
+    t.integer  "cover_file_size"
+    t.datetime "cover_updated_at"
   end
 
   create_table "comments", force: :cascade do |t|
-    t.text     "description"
+    t.string   "description"
     t.integer  "person_id"
     t.string   "commentable_type"
     t.integer  "commentable_id"
@@ -97,13 +101,17 @@ ActiveRecord::Schema.define(version: 20161126204539) do
     t.string   "suffix"
     t.string   "middle_name"
     t.date     "dob"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "email"
     t.string   "phone"
     t.string   "gender"
     t.string   "facebook"
     t.string   "twitter"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["first_name"], name: "index_people_on_first_name"
     t.index ["last_name"], name: "index_people_on_last_name"
     t.index ["user_id"], name: "index_people_on_user_id"
@@ -159,7 +167,7 @@ ActiveRecord::Schema.define(version: 20161126204539) do
     t.datetime "updated_at",                        null: false
     t.boolean  "admin",          default: false
     t.text     "description"
-    t.string   "color",          default: "54aeea"
+    t.string   "color",          default: "c0c0c0"
     t.boolean  "people_editor"
     t.boolean  "people_reader"
     t.boolean  "people_admin"

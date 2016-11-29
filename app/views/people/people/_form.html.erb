@@ -6,6 +6,16 @@
     <%= render 'people/people/form_fields', f: f, person: @person %>
   </div>
 
+  <div class="list-group mb-2">
+    <%= render 'shared/list_group_header', title: 'Photo' %>
+    <div class="list-group-item">
+      <label class="custom-control custom-file">
+        <%= f.file_field :avatar, class: 'custom-file-input' %>
+        <span class="custom-file-control"></span>
+      </label>
+    </div>
+  </div>
+
   <% if @person.new_record? %>
     <%= render 'people/people/form_family_membership', f: f %>
     <%= render 'people/people/form_team_membership', f: f %>

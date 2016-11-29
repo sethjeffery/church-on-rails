@@ -1,10 +1,4 @@
-<% if can? :create, Event %>
-  <%= link_to new_event_path, class: 'btn btn-danger float-xs-right' do %>
-    <%= fa_icon 'plus-circle' %> New
-  <% end %>
-<% end %>
-
-<%= render 'shared/title', title: 'Events', background: :event %>
+<%= render 'shared/title', title: 'Events', color: :event, btn: { can: [:create, Event], href: new_event_path, btn_class: 'btn-danger' } %>
 <%= flash_messages %>
 
 <div class="list-group">

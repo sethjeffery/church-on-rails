@@ -1,10 +1,4 @@
-<% if can? :create, Team %>
-  <%= link_to new_team_path, class: 'btn btn-primary float-xs-right' do %>
-    <%= fa_icon 'plus-circle' %> New
-  <% end %>
-<% end %>
-
-<%= render 'shared/title', title: 'Teams' %>
+<%= render 'shared/title', title: 'Teams', btn: { can: [:create, Team], href: new_team_path } %>
 <%= flash_messages %>
 
 <div class="list-group">

@@ -6,7 +6,6 @@
 
 <%= render 'shared/title',
            title: (local_assigns[:title] || @person.to_s),
-           background: local_assigns[:background],
+           color: local_assigns[:color],
            short: local_assigns[:short],
-           icon: local_assigns[:icon],
-           align: :center %>
+           icon: local_assigns[:icon] %>

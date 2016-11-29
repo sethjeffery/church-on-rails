@@ -13,10 +13,13 @@ class Person < ApplicationRecord
   has_many :teams,                      through: :team_memberships, inverse_of: :people
   has_many :assigned_person_processes,  through: :person_process_assignees, class_name: 'PersonProcess', inverse_of: :assignees
 
+  has_attached_file :avatar, styles: { xl: "192x192#", md: "72x72#", thumb: "48x48#" }
+
   validates_presence_of :first_name, :last_name
   validates_inclusion_of :gender, in: %w( m f ), allow_nil: true
   validates_format_of :facebook, with: /\A[\w\d\.]+\z/, allow_nil: true
   validates_format_of :twitter, with: /\A@[\w\d\._]+\z/, allow_nil: true
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   before_validation :copy_changes_to_user
   before_validation :sanitize_names
@@ -38,6 +41,16 @@ class Person < ApplicationRecord
 
     else
       raise "Unexpected type #{group.class.name}"
+    end
+  end
+
+  def avatar_url(size)
+    if size >= 192
+      avatar.url(:xl)
+    elsif size >= 72
+      avatar.url(:md)
+    else
+      avatar.url(:thumb)
     end
   end
 

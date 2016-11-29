@@ -17,7 +17,7 @@ class Account::ChurchesController < ApplicationController
   end
 
   def church_params
-    params.require(:church).permit(:name, :address1, :address2, :postcode, :country,
-                                   :phone, :email)
+    params.require(:church).permit(:name, :address1, :address2, :postcode, :country, :cover,
+                                   :phone, :email, :charity_number, settings: Church::SETTINGS.keys)
   end
 end

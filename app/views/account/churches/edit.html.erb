@@ -5,6 +5,16 @@
   <%= form_for(current_church, url: account_church_path) do |f| %>
 
     <div class="list-group mb-2">
+      <%= render 'shared/list_group_header', title: 'Photo' %>
+      <div class="list-group-item">
+        <label class="custom-control custom-file">
+          <%= f.file_field :cover, class: 'custom-file-input' %>
+          <span class="custom-file-control"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="list-group mb-2">
       <%= render 'shared/list_group_header', title: 'Address' %>
       <%= render 'shared/list_group_item_field', f: f, field: :name, required: true %>
       <%= render 'shared/list_group_item_field', f: f, field: :address1 %>
@@ -12,6 +22,7 @@
       <%= render 'shared/list_group_item_field', f: f, field: :postcode %>
       <%= render 'shared/list_group_item_field', f: f, field: :country %>
     </div>
+
     <div class="list-group mb-2">
       <%= render 'shared/list_group_header', title: 'Communication' %>
       <%= render 'shared/list_group_item_field', f: f, field: :phone, control: :phone_field, icon: :phone %>
@@ -29,7 +40,7 @@
         <div class="mt-sm">
           <%= f.fields_for :settings do |s| %>
             <% Church::SETTINGS.each do |setting, _| %>
-              <%= render 'shared/form_checkbox', f: s, checked: !!current_church.settings[setting], field: setting, help: true, object: current_church %>
+              <%= render 'shared/form_checkbox', f: s, checked: current_church.settings[setting].in?(['1', true]), field: setting, help: true, object: current_church %>
             <% end %>
           <% end %>
         </div>

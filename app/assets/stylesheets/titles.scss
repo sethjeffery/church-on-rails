@@ -3,7 +3,11 @@
 .title-container {
   color: white;
   position: relative;
-  z-index: -1;
+
+  h2, .avatar {
+    position: relative;
+    z-index: 0;
+  }
 
   a {
     color: white;
@@ -12,12 +16,15 @@
 
 .title-overlay {
   position: absolute;
-  left: -5000px;
-  right: -5000px;
+  left: 50%;
+  margin-left: -50vw;
   bottom: -42px;
-  height: 1000px;
+  width: 100vw;
+  height: 300px;
   background-color: #54aeea;
-  z-index: -1;
+  background-position: center;
+  background-size: cover;
+  z-index: -2;
 
   .title-container-short & {
     bottom: -14px;
@@ -27,7 +34,7 @@
 .title-container::after {
   @extend .title-overlay;
   content: '';
-  z-index: -2;
+  z-index: -3;
 }
 
 .title-container-short::after {
@@ -40,4 +47,11 @@
 
 .title-container-process::after, .title-container-success::after {
   background-color: $brand-success-light;
+}
+
+.title-background-image {
+  text-shadow: 0 1px 5px rgba(0,0,0,0.5), 0 1px 2px black;
+  .avatar {
+    background-color: rgba(0,0,0,0.25);
+  }
 }

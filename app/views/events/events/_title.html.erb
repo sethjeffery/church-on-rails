@@ -1,6 +1,5 @@
 <%= render 'shared/title',
            icon: :calendar,
-           align: :center,
            title: (local_assigns[:title] || @event),
            short: local_assigns[:short],
-           background: (local_assigns[:background] || :event) %>
+           color: (local_assigns[:color] || :event) %>
