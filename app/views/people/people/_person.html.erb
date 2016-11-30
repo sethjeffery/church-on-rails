@@ -13,26 +13,23 @@
             :email      => (link_to(person.email, "mailto:#{person.email}", class: 'dotted') if person.email),
             :phone      => person.phone,
             :gender     => gender_icon(person),
-            :facebook   => (link_to(fa_icon('facebook-square 1x', class: 'mr-sm') + "fb.com/#{person.facebook}", "https://fb.com/#{person.facebook}", target: '_blank') if person.facebook),
-            :twitter    => (link_to(fa_icon('twitter-square  1x', class: 'mr-sm') + "twitter.com/#{person.twitter}", "https://twitter.com/#{person.twitter}", target: '_blank') if person.twitter)
+            :facebook   => (link_to(fa_icon('facebook-square') + "fb.com/#{person.facebook}",     "https://fb.com/#{person.facebook}",     target: '_blank', class: 'fa-container') if person.facebook),
+            :twitter    => (link_to(fa_icon('twitter-square ') + "twitter.com/#{person.twitter}", "https://twitter.com/#{person.twitter}", target: '_blank', class: 'fa-container') if person.twitter)
         } %>
 
-        <% if person.user.present? || can?(:manage, User) %>
-          <div class="list-group-item">
-            <div class="row">
-              <div class="col-sm-4 text-light size-xs-small size-sm-normal"><%= field_name person, :account %></div>
-              <div class="col-sm-8">
-                <% if person.user.present? %>
-                  <%= fa_icon 'user-circle-o 1x', class: 'mr-sm' %><%= person.user.email %>
-                <% elsif can?(:manage, User) %>
-                  <%= link_to new_person_user_path(person), class: 'btn btn-secondary btn-sm btn-align-middle' do %>
-                    <%= fa_icon 'user-circle-o' %>
-                    Add login account
-                  <% end %>
-                <% end %>
-              </div>
-            </div>
-          </div>
+        <% if can?(:manage, User) || person.user.present? %>
+          <%= list_group_field :account do %>
+
+            <% if person.user.present? %>
+              <%= fa_container(person.user.email, 'user-circle-o') %>
+            <% elsif can?(:manage, User) %>
+              <%= link_to new_person_user_path(person), class: 'btn btn-secondary btn-sm btn-align-middle' do %>
+                <%= fa_icon 'user-circle-o' %>
+                Add login account
+              <% end %>
+            <% end %>
+
+          <% end %>
         <% end %>
       </div>
 
@@ -67,18 +64,14 @@
       <% if can?(:manage, person) %>
         <div class="list-group mb-2">
           <%= render 'shared/list_group_header', title: 'Management' %>
-          <% if person.user.present? %>
-            <div class="list-group-item">
-              <%= fa_icon 'lock 1x', class: 'mr-xs' %>
-              <%= link_to 'Change password', person_user_password_path(person) %>
-            </div>
-          <% end %>
-          <% unless person == current_person %>
-            <div class="list-group-item">
-              <%= fa_icon 'trash 1x', class: 'mr-xs' %>
-              <%= link_to 'Remove person', confirm_destroy_person_path(person) %>
-            </div>
-          <% end %>
+
+          <%= fa_container :lock, class: 'list-group-item' do %>
+            <%= link_to 'Change password', person_user_password_path(person) %>
+          <% end if person.user.present? %>
+
+          <%= fa_container :trash, class: 'list-group-item' do %>
+            <%= link_to 'Remove person', confirm_destroy_person_path(person) %>
+          <% end unless person == current_person %>
         </div>
       <% end %>
 

@@ -21,7 +21,7 @@ module UsersHelper
 
   def avatar_url(person, size: 48)
     return person.avatar_url(size) if person.avatar.present?
-    return "https://graph.facebook.com/#{person.facebook}/picture?type=#{size > 72 ? 'large' : 'normal'}" if person.facebook
+    return "https://graph.facebook.com/#{person.facebook}/picture?type=#{size > 72 ? 'large' : 'normal'}" if person.facebook.to_i.to_s == person.facebook
     return "https://twitter.com/#{person.twitter}/profile_image?size=#{size > 72 ? 'original' : 'normal'}" if person.twitter
     gravatar_url(person&.email, size: size, default: :mm)
   end

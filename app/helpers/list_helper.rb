@@ -27,8 +27,9 @@ module ListHelper
     end
   end
 
-  def list_group_field(field, value)
-    <<-HTML
+  def list_group_field(field, value=nil, &block)
+    value = capture(&block) if block_given?
+    html = <<-HTML
       <div class="list-group-item">
         <div class="row">
           <div class="col-sm-4 text-light size-xs-small size-sm-normal">#{ field.is_a?(Symbol) ? field.to_s.humanize : field }</div>
@@ -36,5 +37,6 @@ module ListHelper
         </div>
       </div>
     HTML
+    html.html_safe
   end
 end

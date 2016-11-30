@@ -80,7 +80,7 @@ class Person < ApplicationRecord
 
   def sanitize_facebook
     if facebook.present?
-      self.facebook.gsub!(/^https?:\/\/(www\.)?(facebook|fb)\.com\//, '')
+      self.facebook.gsub!(/^https?:\/\/(?:www\.)?(?:facebook|fb)\.com\/([\w\d\.]+).*$/, "\\1")
     else
       self.facebook = nil
     end
@@ -88,7 +88,7 @@ class Person < ApplicationRecord
 
   def sanitize_twitter
     if twitter.present?
-      self.twitter.gsub!(/^https?:\/\/(www\.)?(twitter)\.com\//, '@')
+      self.twitter.gsub!(/^https?:\/\/(?:www\.)?(?:twitter)\.com\/@?([\w\d\._]+).*/, "@\\1")
       self.twitter = "@" + twitter unless self.twitter.start_with?('@')
     else
       self.twitter = nil
