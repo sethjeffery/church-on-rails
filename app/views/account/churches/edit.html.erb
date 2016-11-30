@@ -16,11 +16,11 @@
 
     <div class="list-group mb-2">
       <%= render 'shared/list_group_header', title: 'Address' %>
-      <%= render 'shared/list_group_item_field', f: f, field: :name, required: true %>
-      <%= render 'shared/list_group_item_field', f: f, field: :address1 %>
-      <%= render 'shared/list_group_item_field', f: f, field: :address2 %>
-      <%= render 'shared/list_group_item_field', f: f, field: :postcode %>
-      <%= render 'shared/list_group_item_field', f: f, field: :country %>
+      <%= render 'shared/list_group_item_field', f: f, field: :name, required: true, autocapitalize: :words %>
+      <%= render 'shared/list_group_item_field', f: f, field: :address1, autocapitalize: :words %>
+      <%= render 'shared/list_group_item_field', f: f, field: :address2, autocapitalize: :words %>
+      <%= render 'shared/list_group_item_field', f: f, field: :postcode, autocapitalize: :characters %>
+      <%= render 'shared/list_group_item_field', f: f, field: :country,  autocapitalize: :words %>
     </div>
 
     <div class="list-group mb-2">

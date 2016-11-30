@@ -3,7 +3,7 @@ class People::PasswordsController < ApplicationController
 
   def update
     if @person.user.update_attributes(password: user_params[:password])
-      sign_in(@person.user, bypass: true) if @person.user.id == current_user.id
+      bypass_sign_in(@person.user) if @person.user.id == current_user.id
       redirect_to person_path(@person), notice: "Password updated successfully."
     else
       render :show

@@ -11,7 +11,7 @@
 
       <% if can?(:update, family) || family.full_address.present? %>
         <div class="list-group mb-2">
-          <%= render 'shared/list_group_header', title: 'Details', button: { href: edit_family_path(family), icon: 'pencil', title: 'Edit', can: [:update, family] } %>
+          <%= render 'shared/list_group_header', title: 'Address', button: { href: edit_family_path(family), icon: 'pencil', title: 'Edit', can: [:update, family] } %>
 
           <% if family.full_address.present? %>
             <% if family.lat && family.lng %>

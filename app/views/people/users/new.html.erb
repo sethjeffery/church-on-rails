@@ -3,25 +3,47 @@
 <div class="container-sm">
 
   <%= flash_messages %>
-  <%= form_for(@person, url: person_user_path(@person)) do |f| %>
+  <%= form_for(@user, url: person_user_path(@person)) do |f| %>
 
     <div class="list-group mb-2">
-      <%= render 'shared/list_group_header', title: 'Link to User Account' %>
+      <%= render 'shared/list_group_header', title: 'Add login account' %>
 
       <div class="list-group-item">
-        <div class="mb-1">
-          <%= f.collection_select :user_id, User.all, :id, :email, { include_blank: true }, class: 'form-control',
-                                  data: { selectpicker: true, placeholder: 'Choose a user account' } %>
+        <% unless @user.email.present? %>
+          <div class="size-xs-small mb-sm">
+            Enter the person's email address, which will be their login.
+          </div>
+        <% end %>
+
+        <div class="input-group <%= 'has-danger' if @user.errors[:email].present? %>">
+          <label class="input-group-addon" for="user_email">
+            <span class="fa fa-envelope fa-1x"></span>
+          </label>
+          <%= f.email_field :email, autocomplete: "off", autofocus: true, class: 'form-control', placeholder: 'Email', hide_errors: true %>
+        </div>
+        <%= field_error(@user, :email) %>
+      </div>
+
+      <div class="list-group-item">
+        <div class="size-xs-small mb-sm">
+          Please provide a password for this account.
+        </div>
+        <div class="input-group <%= 'has-danger' if @user.errors[:password].present? %>">
+          <label class="input-group-addon" for="user_password">
+            <span class="fa fa-lock fa-1x"></span>
+          </label>
+          <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password', hide_errors: true %>
+        </div>
+        <%= field_error(@user, :password) %>
+
+        <div class="size-xs-small mt-1">
+          We will send a confirmation email to their address once you create the account by clicking below.
         </div>
       </div>
+
     </div>
 
-    <div class="text-xs-center">
-      <button type="submit" class="btn btn-primary btn-lg">
-        <%= fa_icon 'user', class: 'mr-xs' %>
-        Link account
-      </button>
-    </div>
+    <%= render 'shared/form_submit', title: 'Add account', icon: 'user-circle-o' %>
 
   <% end %>
 

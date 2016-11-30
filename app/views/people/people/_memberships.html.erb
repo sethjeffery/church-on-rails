@@ -1,0 +1,18 @@
+<% person.team_memberships.joins(:team).includes(:team).order('name').each do |membership| %>
+  <div
+    class="list-group-item clearfix size-xs-small size-sm-normal list-group-item-team"
+    style="border-left-color: <%= '#' + membership.team.color %>;"
+    id="team_membership-<%= membership.id %>">
+
+    <% if can? :destroy, membership %>
+      <%= button_to [membership.team, membership], method: :delete, remote: true, class: 'btn btn-link py-0 px-xs float-xs-right text-light', data: { confirm: "Really remove #{membership.person} from #{membership.team}?" } do %>
+        <%= fa_icon('times') %>
+      <% end %>
+    <% end %>
+
+    <div class="fa-container">
+      <%= fa_icon "#{membership.team.icon} 1x" %>
+      <%= link_to membership.team, membership.team %>
+    </div>
+  </div>
+<% end %>

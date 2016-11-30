@@ -9,7 +9,7 @@
 
     <div class="list-group-item field-required">
       <%= field_name @event, :name %>
-      <%= f.text_field :name, class: 'form-control my-sm', autofocus: true %>
+      <%= f.text_field :name, class: 'form-control my-sm', autofocus: true, required: true, autocapitalize: :sentences %>
     </div>
 
     <div class="list-group-item">
@@ -43,10 +43,10 @@
 
   <div class="list-group mb-2">
     <%= render 'shared/list_group_header', title: 'Venue' %>
-    <%= render 'shared/list_group_item_field', f: f, field: :address1 %>
-    <%= render 'shared/list_group_item_field', f: f, field: :address2 %>
-    <%= render 'shared/list_group_item_field', f: f, field: :postcode %>
-    <%= render 'shared/list_group_item_field', f: f, field: :country %>
+    <%= render 'shared/list_group_item_field', f: f, field: :address1, autocapitalize: :words %>
+    <%= render 'shared/list_group_item_field', f: f, field: :address2, autocapitalize: :words %>
+    <%= render 'shared/list_group_item_field', f: f, field: :postcode, autocapitalize: :characters %>
+    <%= render 'shared/list_group_item_field', f: f, field: :country,  autocapitalize: :words %>
   </div>
 
   <%= render 'shared/form_submit', title: (@event.new_record? ? 'Create event' : 'Save changes'), icon: 'calendar' %>

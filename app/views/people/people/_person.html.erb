@@ -13,10 +13,27 @@
             :email      => (link_to(person.email, "mailto:#{person.email}", class: 'dotted') if person.email),
             :phone      => person.phone,
             :gender     => gender_icon(person),
-            :account    => (fa_icon('check 1x') if person.user),
             :facebook   => (link_to(fa_icon('facebook-square 1x', class: 'mr-sm') + "fb.com/#{person.facebook}", "https://fb.com/#{person.facebook}", target: '_blank') if person.facebook),
             :twitter    => (link_to(fa_icon('twitter-square  1x', class: 'mr-sm') + "twitter.com/#{person.twitter}", "https://twitter.com/#{person.twitter}", target: '_blank') if person.twitter)
         } %>
+
+        <% if person.user.present? || can?(:manage, User) %>
+          <div class="list-group-item">
+            <div class="row">
+              <div class="col-sm-4 text-light size-xs-small size-sm-normal"><%= field_name person, :account %></div>
+              <div class="col-sm-8">
+                <% if person.user.present? %>
+                  <%= fa_icon 'user-circle-o 1x', class: 'mr-sm' %><%= person.user.email %>
+                <% elsif can?(:manage, User) %>
+                  <%= link_to new_person_user_path(person), class: 'btn btn-secondary btn-sm btn-align-middle' do %>
+                    <%= fa_icon 'user-circle-o' %>
+                    Add login account
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
 
       <% if person.families.blank? %>
@@ -33,8 +50,8 @@
 
       <% if can? :read, Team %>
         <div class="list-group mb-2">
-          <%= render 'shared/list_group_header', title: 'Teams', button: { icon: :users, title: 'Join', href: person_families_path(person), can: [:create, TeamMembership] } %>
-          <%= render partial: 'people/teams/team_item', collection: person.teams %>
+          <%= render 'shared/list_group_header', title: 'Teams', button: { icon: :users, title: 'Join', href: person_teams_path(person), can: [:create, TeamMembership] } %>
+          <%= render 'people/people/memberships', person: person %>
         </div>
       <% end %>
 

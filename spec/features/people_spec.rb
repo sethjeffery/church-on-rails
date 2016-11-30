@@ -196,6 +196,22 @@ RSpec.describe "People" do
 
         expect(page).to have_content "Password updated successfully"
       end
+
+      it 'can attach new users to accounts' do
+        person = create(:person)
+        visit "/people/#{person.id}"
+
+        click_on "Add login account"
+        fill_in 'Email', with: 'new_account@example.com'
+        fill_in 'Password', with: 'pass123'
+        click_on 'Add account'
+
+        click_on 'Sign out'
+        fill_in 'Email', with: 'new_account@example.com'
+        fill_in 'Password', with: 'pass123'
+        click_on 'Log in'
+        expect(page).to have_content 'Signed in successfully'
+      end
     end
   end
 end

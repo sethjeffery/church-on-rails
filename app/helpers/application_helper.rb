@@ -34,7 +34,7 @@ module ApplicationHelper
   end
 
   def field_error(object, method)
-    if object.errors[method].present?
+    if object && object.errors[method].present?
       content_tag :div, class: "size-xs-tiny font-weight-normal text-danger my-xs" do
         field_name(object, method) << ' ' << object.errors[method].uniq.join(', ')
       end
