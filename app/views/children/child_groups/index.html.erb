@@ -1,0 +1,42 @@
+<%= render 'shared/title', title: 'Children Groups', btn: { can: [:create, ChildGroup], href: new_child_group_path } %>
+<%= flash_messages %>
+
+<div class="list-group">
+  <%= render 'shared/search_header', resource: :child_groups, options: [] %>
+
+  <% if @child_groups.present? %>
+    <% @child_groups.each do |child_group| %>
+      <%= list_group_item child_group, url: child_group do %>
+
+        <div class="row">
+          <div class="col-sm-6 text-ellipsis">
+            <%= icon_for child_group, '1x', class: 'mr-xs' %>
+            <%= child_group %>
+          </div>
+          <div class="col-sm-6 text-ellipsis text-light size-xs-small">
+            <%= pluralize child_group.child_group_memberships.count, 'child' %>
+          </div>
+        </div>
+
+      <% end %>
+    <% end %>
+  <% else %>
+    <div class="list-group-item list-group-item-padded">
+      <h1>It's Sunday morning. Where is your child?</h1>
+      <p>
+        Child groups allow you not just to list your various children's ministries, but also provide a means
+        for parents to check-in and check-out their children quickly on a laptop or iPad, so that it's
+        easy to know where all your children are.
+      </p>
+      <% if can? :create, ChildGroup %>
+        <p>
+          <%= link_to "Create a child group", new_child_group_path %> to start registering children.
+        </p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div class="text-xs-center mt-1">
+  <%= paginate @child_groups, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
+</div>

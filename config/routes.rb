@@ -50,6 +50,10 @@ Rails.application.routes.draw do
       end
     end
 
+    scope module: 'children' do
+      resources :child_groups, path: 'children/groups'
+    end
+
     namespace :account do
       get '/' => 'people#show'
       get 'welcome' => 'people#welcome', as: :welcome
