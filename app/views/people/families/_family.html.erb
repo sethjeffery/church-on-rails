@@ -5,13 +5,13 @@
   <div class="row">
     <div class="col-xs-12 <%= 'col-lg-7' if two_columns %>">
       <div class="list-group mb-2">
-        <%= render 'shared/list_group_header', title: 'Members', button: { href: new_family_family_membership_path(family), icon: 'user', title: 'Add person', can: [:update, family] } %>
+        <%= render 'shared/list_group_header', title: 'Members', button: { href: new_family_family_membership_path(family), icon: Person, title: 'Add person', can: [:update, family] } %>
         <%= render 'people/families/memberships', family: family %>
       </div>
 
       <% if can?(:update, family) || family.full_address.present? %>
         <div class="list-group mb-2">
-          <%= render 'shared/list_group_header', title: 'Address', button: { href: edit_family_path(family), icon: 'pencil', title: 'Edit', can: [:update, family] } %>
+          <%= render 'shared/list_group_header', title: 'Address', button: { href: edit_family_path(family), icon: :edit, title: 'Edit', can: [:update, family] } %>
 
           <% if family.full_address.present? %>
             <% if family.lat && family.lng %>
@@ -19,7 +19,7 @@
             <% end %>
 
             <div class="list-group-item size-xs-small size-sm-normal">
-              <%= fa_icon 'map-marker', class: 'mr-xs' %>
+              <%= icon_for 'map-marker', class: 'mr-xs' %>
               <%= family.full_address %>
             </div>
           <% end %>
@@ -33,10 +33,9 @@
         <% if can? :manage, family %>
           <div class="list-group mb-2">
             <%= render 'shared/list_group_header', title: 'Management' %>
-            <div class="list-group-item">
-              <%= fa_icon 'trash 1x', class: 'mr-xs' %>
+            <%= fa_container :trash, class: 'list-group-item' do %>
               <%= link_to 'Remove family', confirm_destroy_family_path(family) %>
-            </div>
+            <% end %>
           </div>
         <% end %>
 

@@ -6,12 +6,12 @@
 
     <% if can? :destroy, membership %>
       <%= button_to [membership.team, membership], method: :delete, remote: true, class: 'btn btn-link py-0 px-xs float-xs-right text-light', data: { confirm: "Really remove #{membership.person} from #{membership.team}?" } do %>
-        <%= fa_icon('times') %>
+        <%= icon_for :x %>
       <% end %>
     <% end %>
 
     <div class="fa-container">
-      <%= fa_icon "#{membership.team.icon} 1x" %>
+      <%= icon_for membership.team, '1x' %>
       <%= link_to membership.team, membership.team %>
     </div>
   </div>

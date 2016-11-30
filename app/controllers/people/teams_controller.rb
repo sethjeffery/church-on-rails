@@ -33,7 +33,10 @@ module People
     def create_params
       if can? :manage, @team
         blanks_to_nil params.require(:team).permit :name, :description, :icon, :color,
-                                                   :people_reader, :people_editor, :people_admin
+                                                   :people_reader,  :people_editor,   :people_admin,
+                                                   :event_reader,   :event_editor,    :event_admin,
+                                                   :process_reader, :process_editor,  :process_admin,
+                                                   :comment_reader, :comment_editor,  :comment_admin
       else
         blanks_to_nil params.require(:team).permit :name, :description
       end

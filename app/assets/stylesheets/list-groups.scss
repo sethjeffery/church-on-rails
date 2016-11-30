@@ -35,6 +35,10 @@
   @include media-breakpoint-up(md) {
     padding: 3rem;
   }
+
+  @include media-breakpoint-down(xs) {
+    font-size: 0.875rem;
+  }
 }
 
 .list-group-item-team {
@@ -61,4 +65,9 @@
       border-bottom-left-radius: $input-border-radius;
     }
   }
+}
+
+.list-group {
+  box-shadow: 0 0 0 1px rgba(#fafafa,0.75);
+  border-radius: $input-border-radius;
 }

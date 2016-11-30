@@ -4,7 +4,7 @@
 <div class="row">
   <div class="col-lg-7">
     <div class="list-group mb-2">
-      <%= render 'shared/list_group_header', title: 'Details', button: { icon: :pencil, title: 'Change', can: [:update, @church_process], href: edit_church_process_path(@church_process) } %>
+      <%= render 'shared/list_group_header', title: 'Details', button: { icon: :edit, title: 'Change', can: [:update, @church_process], href: edit_church_process_path(@church_process) } %>
 
       <% if @church_process.description.present? %>
         <div class="list-group-item">
@@ -15,7 +15,7 @@
       <ol class="list-group-item list-steps">
         <% @church_process.steps.select(&:present?).each do |step| %>
           <li class="list-step size-xs-small size-sm-normal">
-            <%= fa_icon 'check-square-o 1x', class: 'mr-xs' %>
+            <%= icon_for 'check-square-o', '1x', class: 'mr-xs' %>
             <%= step %>
           </li>
         <% end %>
@@ -23,7 +23,7 @@
     </div>
 
     <div class="list-group mb-2">
-      <%= render 'shared/list_group_header', button: { icon: :user, title: 'Add', can: [:create, PersonProcess], href: new_church_process_person_process_path(@church_process) } do %>
+      <%= render 'shared/list_group_header', button: { icon: PersonProcess, title: 'Add', can: [:create, PersonProcess], href: new_church_process_person_process_path(@church_process) } do %>
         <div class="hidden-xs-down"> People on this process </div>
         <div class="hidden-sm-up">   People                 </div>
       <% end %>
@@ -37,10 +37,9 @@
       <div class="list-group mb-2">
         <%= render 'shared/list_group_header', title: 'Management' %>
 
-        <div class="list-group-item">
-          <%= fa_icon 'trash 1x', class: 'mr-xs' %>
+        <%= fa_container 'trash', class: 'list-group-item' do %>
           <%= link_to 'Remove process', confirm_destroy_church_process_path(@church_process) %>
-        </div>
+        <% end %>
       </div>
     <% end %>
 

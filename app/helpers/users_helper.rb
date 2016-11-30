@@ -13,9 +13,9 @@ module UsersHelper
 
   def gender_icon(person, opts={})
     if person&.gender == 'm'
-      fa_icon 'male 1x', opts
+      icon_for 'male 1x', opts
     elsif person&.gender == 'f'
-      fa_icon 'female 1x', opts
+      icon_for 'female 1x', opts
     end
   end
 

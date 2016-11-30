@@ -10,6 +10,7 @@ $(document).on 'turbolinks:load', ->
 
   $('[data-toggle=icon]').click (e) ->
     e.preventDefault()
-    icon = $(@).data('icon')
-    $icon.val icon
-    $(@).parents('.input-group-btn').find('> a .fa').removeClass().addClass('fa fa-' + icon + ' fa-1x')
+    $el = $(@)
+    icon = $el.data('icon')
+    $icon.val $el.data('value') or icon
+    $el.parents('.input-group-btn').find('> a .fa').removeClass().addClass('fa fa-' + icon + ' fa-1x')

@@ -7,7 +7,7 @@
   <% if local_assigns[:icon] %>
     <div class="mb-sm">
       <span class="avatar avatar-xl avatar-icon">
-        <%= fa_icon icon %>
+        <%= icon_for icon %>
       </span>
     </div>
   <% end %>
@@ -16,7 +16,7 @@
     <% if local_assigns[:btn] %>
       <% if !btn[:can] || can?(*btn[:can]) %>
         <%= link_to btn[:href], class: "btn float-xs-right #{btn[:btn_class] || 'btn-primary'}" do %>
-          <%= fa_icon 'plus-circle' %> New
+          <%= icon_for 'plus-circle' %> New
         <% end %>
       <% end %>
     <% end %>

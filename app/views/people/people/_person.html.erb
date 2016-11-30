@@ -13,18 +13,18 @@
             :email      => (link_to(person.email, "mailto:#{person.email}", class: 'dotted') if person.email),
             :phone      => person.phone,
             :gender     => gender_icon(person),
-            :facebook   => (link_to(fa_icon('facebook-square') + "fb.com/#{person.facebook}",     "https://fb.com/#{person.facebook}",     target: '_blank', class: 'fa-container') if person.facebook),
-            :twitter    => (link_to(fa_icon('twitter-square ') + "twitter.com/#{person.twitter}", "https://twitter.com/#{person.twitter}", target: '_blank', class: 'fa-container') if person.twitter)
+            :facebook   => (link_to(icon_for(:facebook) + "fb.com/#{person.facebook}",     "https://fb.com/#{person.facebook}",     target: '_blank', class: 'fa-container') if person.facebook),
+            :twitter    => (link_to(icon_for(:twitter) + "twitter.com/#{person.twitter}", "https://twitter.com/#{person.twitter}", target: '_blank', class: 'fa-container') if person.twitter)
         } %>
 
         <% if can?(:manage, User) || person.user.present? %>
           <%= list_group_field :account do %>
 
             <% if person.user.present? %>
-              <%= fa_container(person.user.email, 'user-circle-o') %>
+              <%= fa_container(person.user.email, person.user) %>
             <% elsif can?(:manage, User) %>
               <%= link_to new_person_user_path(person), class: 'btn btn-secondary btn-sm btn-align-middle' do %>
-                <%= fa_icon 'user-circle-o' %>
+                <%= icon_for User %>
                 Add login account
               <% end %>
             <% end %>
@@ -36,7 +36,7 @@
       <% if person.families.blank? %>
         <% if can? :create, FamilyMembership %>
           <div class="list-group mb-2">
-            <%= render 'shared/list_group_header', title: 'Family', button: { icon: 'address-card', title: 'Join', href: person_families_path(person) } %>
+            <%= render 'shared/list_group_header', title: 'Family', button: { icon: Family, title: 'Join', href: person_families_path(person) } %>
           </div>
         <% end %>
       <% else %>
@@ -47,14 +47,14 @@
 
       <% if can? :read, Team %>
         <div class="list-group mb-2">
-          <%= render 'shared/list_group_header', title: 'Teams', button: { icon: :users, title: 'Join', href: person_teams_path(person), can: [:create, TeamMembership] } %>
+          <%= render 'shared/list_group_header', title: 'Teams', button: { icon: Team, title: 'Join', href: person_teams_path(person), can: [:create, TeamMembership] } %>
           <%= render 'people/people/memberships', person: person %>
         </div>
       <% end %>
 
       <% if can? :read, PersonProcess %>
         <div class="list-group mb-2">
-          <%= render 'shared/list_group_header', title: 'Processes', button: { icon: 'arrow-right', title: 'Start', href: new_person_person_process_path(person), can: [:create, PersonProcess] } %>
+          <%= render 'shared/list_group_header', title: 'Processes', button: { icon: PersonProcess, title: 'Start', href: new_person_person_process_path(person), can: [:create, PersonProcess] } %>
           <%= render partial: 'processes/person_processes/person_process_item', collection: person.person_processes %>
         </div>
       <% end %>

@@ -14,10 +14,10 @@
         <div class="list-group mb-2">
           <%= render 'shared/list_group_header', title: 'Database' %>
           <div class="list-group-item">
-            <%= render 'account/churches/pictograph', klass: Person, icon: :user %>
-            <%= render 'account/churches/pictograph', klass: Team, icon: :users %>
-            <%= render 'account/churches/pictograph', klass: Event, query: Event.upcoming, icon: :calendar, desc: 'upcoming event' %>
-            <%= render 'account/churches/pictograph', klass: ChurchProcess, query: PersonProcess.active, icon: 'arrow-right', desc: 'active process' %>
+            <%= render 'account/churches/pictograph', klass: Person %>
+            <%= render 'account/churches/pictograph', klass: Team %>
+            <%= render 'account/churches/pictograph', klass: Event, query: Event.upcoming, desc: 'upcoming event' %>
+            <%= render 'account/churches/pictograph', klass: ChurchProcess, query: PersonProcess.active, desc: 'active process' %>
           </div>
         </div>
       <% end %>
@@ -32,10 +32,9 @@
             <%= map_for current_church, height: '300px' %>
           <% end %>
 
-          <div class="list-group-item size-xs-small size-sm-normal fa-container">
-            <%= fa_icon 'map-marker 1x', class: 'mr-xs' %>
+          <%= fa_container 'map-marker', class: "list-group-item size-xs-small size-sm-normal fa-container" do %>
             <%= current_church.full_address %>
-          </div>
+          <% end %>
         <% else %>
           <div class="list-group-item list-group-item-padded">
             <% if can? :update, current_church %>
@@ -56,13 +55,13 @@
         <% end %>
         <% if current_church.phone? %>
           <div class="list-group-item size-xs-small size-sm-normal fa-container">
-            <%= fa_icon 'phone 1x', class: 'mr-xs' %>
+            <%= icon_for :phone, '1x', class: 'mr-xs' %>
             <%= link_to current_church.phone, "tel:#{current_church.phone}", class: 'dotted' %>
           </div>
         <% end %>
         <% if current_church.email? %>
           <div class="list-group-item size-xs-small size-sm-normal fa-container">
-            <%= fa_icon 'envelope 1x', class: 'mr-xs' %>
+            <%= icon_for :email, '1x', class: 'mr-xs' %>
             <%= link_to current_church.email, "mailto:#{current_church.email}", class: 'dotted' %>
           </div>
         <% end %>

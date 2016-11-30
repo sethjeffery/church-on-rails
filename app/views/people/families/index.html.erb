@@ -2,7 +2,7 @@
 <%= flash_messages %>
 
 <div class="list-group">
-  <%= render 'shared/search_header', resource: :families %>
+  <%= render 'shared/search_header', resource: :families, options: [:people, :families, :teams] %>
 
   <% if @families.present? %>
     <% @families.each do |family| %>
@@ -10,7 +10,7 @@
 
         <div class="row">
           <div class="col-sm-6 text-ellipsis">
-            <%= fa_icon 'address-card 1x', class: 'mr-xs' %>
+            <%= icon_for family, '1x', class: 'mr-xs' %>
             <%= family %>
           </div>
           <div class="col-sm-6 text-ellipsis text-light size-xs-small">

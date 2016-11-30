@@ -2,7 +2,7 @@
   <div class="<%= 'avatar-container' unless @person %> clearfix">
     <% if @person %>
       <div class="float-sm-left">
-        <%= fa_icon "#{person_process_item.icon} 1x", class: 'mr-xs' %>
+        <%= icon_for person_process_item, '1x', class: 'mr-xs' %>
         <%= link_to person_process_item.church_process, [@person, person_process_item], class: 'size-xs-small size-sm-normal' %>
       </div>
     <% else %>
@@ -16,9 +16,9 @@
       <span class="size-xs-small">
         <% person_process_item.church_process.steps.each do |step| %>
           <% if person_process_item.completed_step?(step) %>
-            <%= fa_icon 'square', class: 'text-success' %>
+            <%= icon_for 'square', class: 'text-success' %>
           <% else %>
-            <%= fa_icon 'square', class: 'text-lighter' %>
+            <%= icon_for 'square', class: 'text-lighter' %>
           <% end %>
         <% end %>
       </span>

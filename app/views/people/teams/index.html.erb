@@ -2,14 +2,15 @@
 <%= flash_messages %>
 
 <div class="list-group">
-  <%= render 'shared/search_header', resource: :teams %>
+  <%= render 'shared/search_header', resource: :teams, options: [:people, :families, :teams] %>
 
   <% @teams.each do |team| %>
     <a href="<%= url_for(team) %>" class="list-group-item clearfix size-xs-small size-sm-normal list-group-item-action list-group-item-team" style="<%= "border-left-color: ##{team.color};" if team.color %>">
       <div class="row">
         <div class="col-sm-6 text-ellipsis">
-          <%= fa_icon "#{team.icon} 1x", class: 'mr-xs'%>
-          <%= team %>
+          <%= fa_container team do %>
+            <%= team %>
+          <% end %>
         </div>
         <div class="col-sm-6 text-ellipsis text-light size-xs-small">
           <%= pluralize team.team_memberships.to_a.count, 'member' %>

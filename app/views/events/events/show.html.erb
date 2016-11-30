@@ -30,10 +30,9 @@
             <%= map_for @event, height: '400px' %>
           <% end %>
 
-          <div class="list-group-item size-xs-small size-sm-normal">
-            <%= fa_icon 'map-marker 1x', class: 'mr-xs' %>
+          <%= fa_container 'map-marker', class: 'list-group-item size-xs-small size-sm-normal' do %>
             <%= @event.full_address %>
-          </div>
+          <% end %>
         </div>
       <% end %>
 
@@ -44,10 +43,9 @@
         <div class="list-group mb-2">
           <%= render 'shared/list_group_header', title: 'Management' %>
 
-          <div class="list-group-item">
-            <%= fa_icon 'trash 1x', class: 'mr-xs' %>
+          <%= fa_container :trash, class: 'list-group-item' do %>
             <%= link_to 'Remove event', confirm_destroy_event_path(@event) %>
-          </div>
+          <% end %>
         </div>
       <% end %>
 

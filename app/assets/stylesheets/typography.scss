@@ -16,6 +16,12 @@
   text-overflow: ellipsis;
 }
 
+h1 {
+  @include media-breakpoint-down(xs) {
+    font-size: 2rem;
+  }
+}
+
 h4 {
   text-transform: uppercase;
   font-weight: 600;

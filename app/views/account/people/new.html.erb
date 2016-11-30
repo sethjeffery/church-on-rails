@@ -20,10 +20,6 @@
       <%= render 'account/people/form_fields', f: f, person: @person, email: false %>
     </div>
 
-    <div class="text-xs-center">
-      <button type="submit" class="btn btn-primary btn-lg">
-        <%= fa_icon 'user', class: 'mr-sm' %>Save changes
-      </button>
-    </div>
+    <%= render 'shared/form_submit', title: 'Save changes', icon: @person %>
   <% end %>
 </div>

@@ -17,7 +17,7 @@
         <% if local_assigns[:icon] %>
           <div class="input-group">
             <label class="input-group-addon" for="<%= f.object_name %>_<%= field %>">
-              <%= fa_icon "#{icon} 1x" %>
+              <%= icon_for icon, '1x' %>
             </label>
             <%= f.send (local_assigns[:control] || :text_field), field, args %>
           </div>

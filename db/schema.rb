@@ -10,7 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161129082537) do
+ActiveRecord::Schema.define(version: 20161130100535) do
+
+  create_table "child_group_checkins", force: :cascade do |t|
+    t.integer  "child_group_membership_id"
+    t.datetime "checked_in_at"
+    t.datetime "checked_out_at"
+    t.integer  "checked_in_by_id"
+    t.integer  "checked_out_by_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["checked_in_by_id"], name: "index_child_group_checkins_on_checked_in_by_id"
+    t.index ["checked_out_by_id"], name: "index_child_group_checkins_on_checked_out_by_id"
+    t.index ["child_group_membership_id"], name: "index_child_group_checkins_on_child_group_membership_id"
+  end
+
+  create_table "child_group_memberships", force: :cascade do |t|
+    t.integer  "child_group_id"
+    t.integer  "person_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["child_group_id"], name: "index_child_group_memberships_on_child_group_id"
+    t.index ["person_id"], name: "index_child_group_memberships_on_person_id"
+  end
+
+  create_table "child_groups", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "age_group"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "church_processes", force: :cascade do |t|
     t.string   "name"
@@ -171,7 +201,7 @@ ActiveRecord::Schema.define(version: 20161129082537) do
     t.boolean  "people_editor"
     t.boolean  "people_reader"
     t.boolean  "people_admin"
-    t.string   "icon",           default: "users"
+    t.string   "icon",           default: "team"
     t.boolean  "process_editor"
     t.boolean  "process_reader"
     t.boolean  "process_admin"

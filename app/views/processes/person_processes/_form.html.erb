@@ -1,7 +1,7 @@
 <%= form_for([@church_process, @person, @person_process]) do |f| %>
   <div class="list-group mb-2">
     <% if @person_process.church_process %>
-      <%= render 'shared/list_group_header', title: @person_process.church_process, icon: @person_process.icon, button: {
+      <%= render 'shared/list_group_header', title: @person_process.church_process, icon: @person_process, button: {
           href: @person_process.church_process,
           title: (@person_process.new_record? ? 'Cancel' : 'View process'),
           btn_class: 'btn-outline-primary' } %>

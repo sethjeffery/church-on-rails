@@ -4,12 +4,12 @@
 
 <% if can? :read, klass %>
   <div class="pictograph">
-    <%= link_to path, class: "btn btn-secondary float-xs-right btn-align-middle btn-sm" do %><%= fa_icon icon %> View<% end %>
+    <%= link_to path, class: "btn btn-secondary float-xs-right btn-align-middle btn-sm" do %><%= icon_for klass %> View<% end %>
     <h4><%= pluralize count, desc %></h4>
     <% if count > 20 %>
-      <%= pictograph count, icon, '1x' %>
+      <%= pictograph count, klass, '1x' %>
     <% else %>
-      <%= pictograph count, icon, '2x' %>
+      <%= pictograph count, klass, '2x' %>
     <% end %>
   </div>
 <% end %>

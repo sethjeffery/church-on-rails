@@ -12,10 +12,5 @@
     </div>
   </div>
 
-  <div class="text-xs-center">
-    <button type="submit" class="btn btn-primary btn-lg">
-      <%= fa_icon 'user', class: 'mr-sm' %>Add member
-    </button>
-  </div>
-
+  <%= render 'shared/form_submit', title: 'Add member', icon: Person %>
 <% end %>

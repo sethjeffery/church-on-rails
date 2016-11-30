@@ -1,43 +1,44 @@
 <div class="list-group-item active list-group-item-search">
   <%= form_for('Search', url: url_for(resource), method: :get) do |f| %>
     <div class="row">
-      <div class="col-sm-6 col-md-7">
+      <div class="<% 'col-sm-6' if local_assigns[:options].present? %> col-md-7">
         <div class="input-group">
-          <div class="input-group-btn hidden-sm-up">
-            <a href="javascript:void(0)" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
-              <%= fa_icon 'user' if resource == :people %>
-              <%= fa_icon 'users' if resource == :teams %>
-              <%= fa_icon 'address-card' if resource == :families %>
-            </a>
-            <div class="dropdown-menu">
-              <%= link_to(people_path, class: 'dropdown-item py-sm') do %>
-                <%= fa_icon 'user 1x', class: 'mr-sm' %> People
-              <% end %>
-              <%= link_to(teams_path, class: 'dropdown-item py-sm') do %>
-                <%= fa_icon 'users 1x', class: 'mr-sm' %> Teams
-              <% end %>
-              <%= link_to(families_path, class: 'dropdown-item py-sm') do %>
-                <%= fa_icon 'address-card 1x', class: 'mr-sm' %> Families
-              <% end %>
+          <% if local_assigns[:options].present? %>
+            <div class="input-group-btn hidden-sm-up">
+              <a href="javascript:void(0)" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+                <%= icon_for resource %>
+              </a>
+              <div class="dropdown-menu">
+                <% local_assigns[:options].each do |option| %>
+                  <%= link_to(option, class: 'dropdown-item py-sm') do %>
+                    <%= icon_for option, '1x', class: 'mr-xs' %>
+                    <%= option.to_s.humanize %>
+                  <% end %>
+                <% end %>
+              </div>
             </div>
-          </div>
+          <% end %>
           <%= text_field_tag :q, params[:q], class: 'form-control', autofocus: true %>
           <div class="input-group-btn">
             <button type="submit" class="btn btn-primary" onclick="$(this).closest('form').submit();">
               <span class="sr-only">Search</span>
-              <%= fa_icon 'search 1x' %>
+              <%= icon_for :search %>
             </button>
           </div>
         </div>
       </div>
 
-      <div class="col-sm-6 col-md-5 search-options hidden-xs-down">
-        <div class="btn-group">
-          <%= link_to(people_path,   class: "btn btn-outline-primary #{'active' if resource == :people   }", title: "People",   data: { tooltip: true }) { fa_icon 'user' } %>
-          <%= link_to(teams_path,    class: "btn btn-outline-primary #{'active' if resource == :teams    }", title: "Teams",    data: { tooltip: true }) { fa_icon 'users' } %>
-          <%= link_to(families_path, class: "btn btn-outline-primary #{'active' if resource == :families }", title: "Families", data: { tooltip: true }) { fa_icon 'address-card' } %>
+      <% if local_assigns[:options].present? %>
+        <div class="col-sm-6 col-md-5 search-options hidden-xs-down">
+          <div class="btn-group">
+            <% options.each do |option| %>
+              <%= link_to(option, class: "btn btn-outline-primary #{'active' if resource == option }", title: option.to_s.humanize, data: { tooltip: true }) do %>
+                <%= icon_for option %>
+              <% end %>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
   <% end %>
 </div>

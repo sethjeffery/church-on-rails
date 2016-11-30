@@ -2,7 +2,7 @@
 <%= flash_messages %>
 
 <div class="list-group">
-  <%= render 'shared/search_header', resource: :people %>
+  <%= render 'shared/search_header', resource: :people, options: [:people, :families, :teams] %>
 
   <% if @people.empty? %>
     <%= render 'people/people/empty' %>
@@ -20,8 +20,8 @@
 
           <div class="float-sm-right">
             <% person.teams.each do |team| %>
-              <span style="color: <%= '#' + team.color %>;", data-tooltip title="<%= team %>">
-                <%= fa_icon "#{team.icon} 1x", class: 'ml-sm' %>
+              <span style="color: <%= '#' + team.color %>;" data-tooltip title="<%= team %>">
+                <%= icon_for team, '1x', class: 'ml-sm' %>
               </span>
             <% end %>
           </div>

@@ -1,5 +1,5 @@
 <%= render 'shared/title',
-           icon: (@church_process&.icon || 'arrow-right'),
+           icon: (@church_process || ChurchProcess),
            title: (local_assigns[:title] || @church_process),
            short: local_assigns[:short],
            color: (local_assigns[:color] || :process) %>

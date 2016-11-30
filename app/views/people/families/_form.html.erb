@@ -14,10 +14,5 @@
     <%= render 'shared/list_group_item_field', f: f, field: :country,  autocapitalize: :words %>
   </div>
 
-  <div class="text-xs-center">
-    <button type="submit" class="btn btn-primary btn-lg">
-      <%= fa_icon 'address-card', class: 'mr-sm' %><%= @family.new_record? ? 'Make new family' : 'Save changes' %>
-    </button>
-  </div>
-
+  <%= render 'shared/form_submit', title: (@family.new_record? ? 'Make new family' : 'Save changes'), icon: @family %>
 <% end %>

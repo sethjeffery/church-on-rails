@@ -16,28 +16,24 @@
         <% if can? :manage, team %>
           <% if team.admin? %>
             <div class="list-group-item">
-              <div class="mb-xs">
-                <%= fa_icon 'star 1x mr-xs' %>
-                Site administration
-              </div>
-              <div class="size-xs-small clearfix">
+              <%= fa_container 'Site administration', :star %>
+              <%= fa_container '', class: "size-xs-small clearfix" do %>
                 <div class="float-xs-left mr-1"><%= fa_icon 'check' %> Access all areas</div>
-              </div>
+              <% end %>
             </div>
 
           <% elsif team.has_permissions? %>
-            <% if team.has_permissions_for? :people %>
-              <div class="list-group-item">
-                <div class="mb-xs">
-                  <%= fa_icon 'user 1x mr-xs' %>
-                  People, Teams, Families
+            <% { people: 'People, Teams, Families', process: 'Processes', event: 'Events', comment: 'Comments' }.each do |type, title| %>
+              <% if team.has_permissions_for? type %>
+                <div class="list-group-item">
+                  <%= fa_container title, type %>
+                  <%= fa_container '', class: 'size-xs-small clearfix' do %>
+                    <% if team.try(:"#{type}_reader?") %><div class="float-xs-left mr-1"><%= icon_for :eye %> View</div><% end %>
+                    <% if team.try(:"#{type}_editor?") %><div class="float-xs-left mr-1"><%= icon_for :pencil %> Edit</div><% end %>
+                    <% if team.try(:"#{type}_admin?")  %><div class="float-xs-left mr-1"><%= icon_for :star %> Manage</div><% end %>
+                  <% end %>
                 </div>
-                <div class="size-xs-small clearfix">
-                  <% if team.people_reader? %><div class="float-xs-left mr-1"><%= fa_icon 'check' %> View</div><% end %>
-                  <% if team.people_editor? %><div class="float-xs-left mr-1"><%= fa_icon 'check' %> Edit</div><% end %>
-                  <% if team.people_admin?  %><div class="float-xs-left mr-1"><%= fa_icon 'check' %> Manage</div><% end %>
-                </div>
-              </div>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
@@ -61,10 +57,9 @@
           <%= render 'shared/list_group_header', title: 'Management' %>
 
           <% unless team.admin? %>
-            <div class="list-group-item">
-              <%= fa_icon 'trash 1x', class: 'mr-xs' %>
+            <%= fa_container :trash, class: 'list-group-item' do %>
               <%= link_to 'Remove team', confirm_destroy_team_path(team) %>
-            </div>
+            <% end %>
           <% end %>
         </div>
       <% end %>

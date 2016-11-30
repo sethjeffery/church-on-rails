@@ -18,10 +18,10 @@
         <%= f.hidden_field :color %>
 
         <div class="input-group-btn dropdown">
-          <a class="btn btn-secondary" data-toggle="dropdown"><%= fa_icon "#{@team.icon} 1x" %></a>
+          <a class="btn btn-secondary" data-toggle="dropdown"><%= icon_for @team, '1x' %></a>
           <div class="dropdown-menu dropdown-menu-icons dropdown-menu-right">
             <% Team::ICONS.each do |icon| %>
-              <%= link_to raw(fa_icon("#{icon} 2x")), '#', class: "dropdown-item dropdown-item-icon text-xs-center", data: { toggle: 'icon', icon: icon } %>
+              <%= link_to raw(icon_for(icon, '2x')), '#', class: "dropdown-item dropdown-item-icon text-xs-center", data: { toggle: 'icon', icon: icon_name_for(icon), value: icon } %>
             <% end %>
           </div>
         </div>
@@ -29,10 +29,10 @@
         <div class="input-group-btn dropdown">
           <div class="dropdown-menu dropdown-menu-icons dropdown-menu-right">
             <% Team::COLORS.each do |color| %>
-              <%= link_to raw(fa_icon("square 2x")), '#', class: "dropdown-item dropdown-item-icon text-xs-center", data: { toggle: 'color', color: color }, style: "color: ##{color}" %>
+              <%= link_to raw(icon_for(:square, '2x')), '#', class: "dropdown-item dropdown-item-icon text-xs-center", data: { toggle: 'color', color: color }, style: "color: ##{color}" %>
             <% end %>
           </div>
-          <a class="btn btn-secondary" data-toggle="dropdown" style="color: <%= '#' + @team.color %>;"><%= fa_icon "square 1x" %></a>
+          <a class="btn btn-secondary" data-toggle="dropdown" style="color: <%= '#' + @team.color %>;"><%= icon_for :square, "1x" %></a>
         </div>
       </div>
 
@@ -51,7 +51,7 @@
         Permissions
         <div class="size-xs-small text-light mb-1">
           Should team members receive special permissions on this website?
-          <a href="#permissions-info" title="Click for more info" data-tooltip data-trigger="hover" data-toggle="collapse"><%= fa_icon 'info-circle' %></a>
+          <a href="#permissions-info" title="Click for more info" data-tooltip data-trigger="hover" data-toggle="collapse"><%= icon_for 'info-circle' %></a>
         </div>
 
         <div class="collapse" id="permissions-info">
@@ -80,10 +80,10 @@
 
         <% %w(people process event comment).each do |type| %>
           <div class="mb-xs mt-sm">
-            <% if type == 'people'  %><%= fa_icon 'user        1x', class: 'mr-xs' %> People, Teams, Families<% end %>
-            <% if type == 'process' %><%= fa_icon 'arrow-right 1x', class: 'mr-xs' %> Processes<% end %>
-            <% if type == 'event'   %><%= fa_icon 'calendar    1x', class: 'mr-xs' %> Events<% end %>
-            <% if type == 'comment' %><%= fa_icon 'comment     1x', class: 'mr-xs' %> Comments<% end %>
+            <% if type == 'people'  %><%= icon_for type, class: 'mr-xs' %> People, Teams, Families<% end %>
+            <% if type == 'process' %><%= icon_for type, class: 'mr-xs' %> Processes<% end %>
+            <% if type == 'event'   %><%= icon_for type, class: 'mr-xs' %> Events<% end %>
+            <% if type == 'comment' %><%= icon_for type, class: 'mr-xs' %> Comments<% end %>
           </div>
 
           <div class="size-xs-small">
@@ -110,10 +110,5 @@
     <% end %>
   </div>
 
-  <div class="text-xs-center">
-    <button type="submit" class="btn btn-primary btn-lg">
-      <%= fa_icon 'users', class: 'mr-sm' %><%= @team.new_record? ? 'Make new team' : 'Save changes' %>
-    </button>
-  </div>
-
+  <%= render 'shared/form_submit', title: (@team.new_record? ? 'Make new team' : 'Save changes'), icon: @team %>
 <% end %>
