@@ -3,6 +3,7 @@ class CreateChildGroupMemberships < ActiveRecord::Migration[5.0]
     create_table :child_group_memberships do |t|
       t.references :child_group, foreign_key: true
       t.references :person, foreign_key: true
+      t.boolean :checked_in, default: false
 
       t.timestamps
     end

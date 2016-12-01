@@ -1,0 +1,29 @@
+<%= render 'shared/title', title: "Add child", icon: @child_group_membership %>
+
+<div class="container-sm">
+  <%= form_for @child_group_membership, url: child_group_child_group_memberships_path(@child_group) do |f| %>
+    <div class="list-group mb-2">
+      <%= render 'shared/list_group_header', title: 'Child', button: { btn_class: 'btn-outline-primary', title: 'Cancel', href: @child_group_membership.child_group } %>
+
+      <div class="list-group-item">
+        <div class="">
+          Choose a child from the database, or register a new one.
+        </div>
+        <div class="my-sm">
+          <%= f.select :person_id, [['< Register new child >', 'New']] + Person.all.map{|person| [ person.name, person.id ] }, { include_blank: true },
+                       class: 'form-control',
+                       data: { selectpicker: true, placeholder: 'Choose a person', :'allow-clear' => true } %>
+        </div>
+      </div>
+    </div>
+
+    <div class="list-group mb-2" id="child_group_membership_new_child">
+      <%= render 'shared/list_group_header', title: 'Add child' %>
+      <%= f.fields_for @child_group_membership.person do |p| %>
+        <%= render 'children/people/form_fields', f: p %>
+      <% end %>
+    </div>
+
+    <%= render 'shared/form_submit', icon: @child_group_membership, title: "Add child" %>
+  <% end %>
+</div>

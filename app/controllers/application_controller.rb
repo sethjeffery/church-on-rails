@@ -14,6 +14,6 @@ class ApplicationController < ActionController::Base
   end
 
   def blanks_to_nil(strong_params)
-    strong_params.to_h.map{|k, v| v.blank? ? [k, nil] : [k, v]}.to_h.with_indifferent_access
+    strong_params.to_h.map{|k, v| v.blank? ? [k, nil] : [k, v]}.to_h.with_indifferent_access if strong_params
   end
 end

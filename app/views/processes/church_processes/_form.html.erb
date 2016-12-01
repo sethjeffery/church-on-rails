@@ -8,7 +8,7 @@
         btn_class: 'btn-outline-primary' } %>
 
     <div class="list-group-item">
-      <div class="field-required">
+      <div class="text-required">
         <%= field_name @church_process, :name %>
       </div>
       <div class="input-group my-sm <%= 'has-danger' if @church_process.errors[:name].present? %>">

@@ -1,4 +1,4 @@
-<%= render 'shared/title', title: 'Children Groups', btn: { can: [:create, ChildGroup], href: new_child_group_path } %>
+<%= render 'shared/title', title: "Children's Groups", btn: { can: [:create, ChildGroup], href: new_child_group_path } %>
 <%= flash_messages %>
 
 <div class="list-group">
@@ -24,13 +24,13 @@
     <div class="list-group-item list-group-item-padded">
       <h1>It's Sunday morning. Where is your child?</h1>
       <p>
-        Child groups allow you not just to list your various children's ministries, but also provide a means
+        Children's groups allow you not just to list your various children's ministries, but also provide a means
         for parents to check-in and check-out their children quickly on a laptop or iPad, so that it's
         easy to know where all your children are.
       </p>
       <% if can? :create, ChildGroup %>
         <p>
-          <%= link_to "Create a child group", new_child_group_path %> to start registering children.
+          <%= link_to "Create a children's group", new_child_group_path %> to start registering children.
         </p>
       <% end %>
     </div>

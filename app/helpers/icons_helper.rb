@@ -24,6 +24,7 @@ module IconsHelper
       when :person_process then 'arrow-right'
       when :event then 'calendar'
       when :child_group then 'child'
+      when :child_group_membership then 'user-plus'
       when :comment then 'comment'
 
       # other common nouns

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161130100535) do
+ActiveRecord::Schema.define(version: 20161201221918) do
 
   create_table "child_group_checkins", force: :cascade do |t|
     t.integer  "child_group_membership_id"
@@ -28,8 +28,9 @@ ActiveRecord::Schema.define(version: 20161130100535) do
   create_table "child_group_memberships", force: :cascade do |t|
     t.integer  "child_group_id"
     t.integer  "person_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.boolean  "checked_in",     default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.index ["child_group_id"], name: "index_child_group_memberships_on_child_group_id"
     t.index ["person_id"], name: "index_child_group_memberships_on_person_id"
   end
@@ -193,15 +194,15 @@ ActiveRecord::Schema.define(version: 20161130100535) do
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.boolean  "admin",          default: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.boolean  "admin",           default: false
     t.text     "description"
-    t.string   "color",          default: "54aeea"
+    t.string   "color",           default: "54aeea"
     t.boolean  "people_editor"
     t.boolean  "people_reader"
     t.boolean  "people_admin"
-    t.string   "icon",           default: "team"
+    t.string   "icon",            default: "team"
     t.boolean  "process_editor"
     t.boolean  "process_reader"
     t.boolean  "process_admin"
@@ -211,6 +212,9 @@ ActiveRecord::Schema.define(version: 20161130100535) do
     t.boolean  "comment_editor"
     t.boolean  "comment_reader"
     t.boolean  "comment_admin"
+    t.boolean  "children_editor"
+    t.boolean  "children_reader"
+    t.boolean  "children_admin"
     t.index ["name"], name: "index_teams_on_name"
   end
 

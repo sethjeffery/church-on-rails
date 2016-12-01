@@ -2,13 +2,18 @@
 @import 'bootstrap/mixins/breakpoints';
 @import 'bootstrap/mixins/hover';
 
+.btn-align-middle {
+  margin-top: -7px;
+  margin-bottom: -7px;
+  vertical-align: top;
+}
+
 .btn-sm {
   line-height: 18px;
 
   &.btn-align-middle {
     margin-top: -2px;
     margin-bottom: -2px;
-    vertical-align: top;
   }
 }
 

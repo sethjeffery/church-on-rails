@@ -33,7 +33,7 @@ module People
 
     def load_and_authorize_team
       @team = Team.find(params[:team_id])
-      authorize! :edit, @team
+      authorize! :update, @team
     end
   end
 end

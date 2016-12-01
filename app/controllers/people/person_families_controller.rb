@@ -21,7 +21,7 @@ module People
 
     def load_and_authorize_person
       @person = Person.find(params[:person_id])
-      authorize! :edit, @person
+      authorize! :update, @person
     end
 
     def start_family

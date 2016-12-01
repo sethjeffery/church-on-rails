@@ -43,6 +43,9 @@ class Person < ApplicationRecord
     elsif group.is_a? Team
       join_team group, args
 
+    elsif group.is_a? ChildGroup
+      join_child_group group, args
+
     else
       raise "Unexpected type #{group.class.name}"
     end
@@ -56,6 +59,16 @@ class Person < ApplicationRecord
     else
       avatar.url(:thumb)
     end
+  end
+
+  def age(t = Date.current)
+    return unless dob
+    months = (t.year * 12 + t.month) - (dob.year * 12 + dob.month)
+    months -= 1 if t.day < dob.day
+
+    # months / 12 will give the number of years
+    # months % 12 will give the number of months
+    readable_age(months / 12, months % 12)
   end
 
   protected
@@ -78,6 +91,10 @@ class Person < ApplicationRecord
     family_memberships.create({ family: family }.merge(args))
   end
 
+  def join_child_group(group, args={})
+    child_group_memberships.create({ child_group: group }.merge(args))
+  end
+
   def capitalize(name)
     name.slice(0,1).capitalize + name.slice(1..-1)
   end
@@ -96,6 +113,16 @@ class Person < ApplicationRecord
       self.twitter = "@" + twitter unless self.twitter.start_with?('@')
     else
       self.twitter = nil
+    end
+  end
+
+  def readable_age(years, months)
+    if years > 1
+      "#{years} #{'year'.pluralize(years)} old"
+    elsif years > 0
+      "#{24 + months} months old"
+    else
+      "#{months} #{'month'.pluralize(months)} old"
     end
   end
 end

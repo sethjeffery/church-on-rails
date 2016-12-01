@@ -7,7 +7,7 @@
 
 <div class="list-group-item">
   <div class="row">
-    <div class="col-sm-5 <%= 'field-required' if defined?(required) %>"><%= f.label field, local_assigns[:label], class: 'form-control-static mb-0' %></div>
+    <div class="col-sm-5 <%= 'text-required' if defined?(required) %>"><%= f.label field, local_assigns[:label], class: 'form-control-static mb-0' %></div>
     <div class="col-sm-7">
 
       <% content = yield %>

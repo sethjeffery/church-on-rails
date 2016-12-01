@@ -33,6 +33,7 @@ en:
       schedule:
       person:
         dob: 'Date of birth'
+        family_ids: 'Family'
       team:
       family:
         address1: 'Address'
@@ -59,3 +60,11 @@ en:
               invalid: "must be a username or URL"
             twitter:
               invalid: "must be a username or URL"
+  datetime:
+    distance_in_words:
+      about_x_years:
+        one: '1 year'
+        other: '%{count} years'
+      over_x_years:
+        one: '1 year'
+        other: '%{count} years'

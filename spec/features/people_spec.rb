@@ -54,12 +54,12 @@ RSpec.describe "People" do
         expect(page).to have_content "Full name #{person.full_name}"
         expect(current_path).to eq "/people/#{person.id}"
         expect(page).to have_content "Teams"
-        expect(page).to have_content "Families"
         expect(page).to have_content team.name
 
         # no editing access
         expect(page).to have_no_selector 'a.btn', :text => /Join/
         expect(page).to have_no_selector 'a.btn', :text => /Edit/
+        expect(page).to have_no_content "Family"
 
         # no processes access
         expect(page).to have_no_content "Processes"
@@ -140,6 +140,7 @@ RSpec.describe "People" do
         visit "/people/#{person.id}"
         expect(page).to have_content "Full name #{person.full_name}"
         expect(page).to have_content team.name
+        expect(page).to have_content "Family"
         expect(page).to have_selector 'a.btn', :text => /Join/
         expect(page).to have_selector 'a.btn', :text => /Start/
         expect(page).to have_selector 'a.btn', :text => /Edit/

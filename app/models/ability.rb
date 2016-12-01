@@ -64,5 +64,20 @@ class Ability
       can :create, klass if team.event_editor?
       can :manage, klass if team.event_admin?
     end
+
+    [ChildGroup].each do |klass|
+      can :read,    klass if team.children_reader?
+      can :update,  klass if team.children_editor?
+      can :create,  klass if team.children_editor?
+      can :manage,  klass if team.children_admin?
+    end
+
+    [ChildGroupMembership, ChildGroupCheckin].each do |klass|
+      can :read,    klass if team.children_reader?
+      can :update,  klass if team.children_editor?
+      can :create,  klass if team.children_editor?
+      can :destroy, klass if team.children_editor?
+      can :manage,  klass if team.children_admin?
+    end
   end
 end

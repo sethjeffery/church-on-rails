@@ -9,9 +9,7 @@ $(document).on 'turbolinks:load', ->
 
   $familyIds.change ->
     value = $(this).val()
-    if !value
-      $familyName.hide().val ''
-    else if value == 'New'
+    if value == 'New'
       $familyName.show().val $lastName.val()
     else
       $familyName.hide().val ''

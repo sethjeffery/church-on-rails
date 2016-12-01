@@ -1,0 +1,31 @@
+<%= form_for @child_group do |f| %>
+  <div class="list-group mb-2">
+    <%= render 'shared/list_group_header', title: 'Details' %>
+
+    <div class="list-group-item">
+      <%= f.label :name, class: 'mb-0 text-required' %>
+      <div class="size-xs-small text-light">
+        For example: Creche, Kids, or your unique children's ministry name.
+      </div>
+      <%= f.text_field :name, class: 'form-control my-sm', autocapitalize: 'words', required: true %>
+    </div>
+
+    <div class="list-group-item">
+      <%= f.label :age_group, class: 'mb-0' %>
+      <div class="size-xs-small text-light">
+        For example: 0-3s, Year 8, 21+ ...
+      </div>
+      <%= f.text_field :age_group, class: 'form-control my-sm', autocapitalize: 'words' %>
+    </div>
+
+    <div class="list-group-item">
+      <%= f.label :description, class: 'mb-0' %>
+      <div class="size-xs-small text-light">
+        A short description of your children's group.
+      </div>
+      <%= f.text_area :description, class: 'form-control my-sm' %>
+    </div>
+  </div>
+
+  <%= render 'shared/form_submit', icon: @child_group, title: (@child_group.new_record? ? "Create children's group" : "Save changes") %>
+<% end %>

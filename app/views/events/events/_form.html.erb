@@ -7,7 +7,7 @@
         href: (@event.new_record? ? (@team || events_path) : @event),
         btn_class: 'btn-outline-primary' } %>
 
-    <div class="list-group-item field-required">
+    <div class="list-group-item text-required">
       <%= field_name @event, :name %>
       <%= f.text_field :name, class: 'form-control my-sm', autofocus: true, required: true, autocapitalize: :sentences %>
     </div>

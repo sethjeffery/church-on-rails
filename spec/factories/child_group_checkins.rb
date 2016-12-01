@@ -1,9 +1,14 @@
 FactoryGirl.define do
   factory :child_group_checkin do
-    child_group_membership nil
-    checked_in_at "2016-11-30 07:46:40"
-    checked_out_at "2016-11-30 07:46:40"
-    checked_in_by nil
-    checked_out_by nil
+    child_group_membership
+
+    trait :checked_in do
+      checked_in_at { Time.now }
+    end
+
+    trait :checked_out do
+      checked_in_at { Time.now }
+      checked_out_at { Time.now }
+    end
   end
 end

@@ -33,7 +33,7 @@ module People
 
     def load_and_authorize_family
       @family = Family.find(params[:family_id])
-      authorize! :edit, @family
+      authorize! :update, @family
     end
   end
 end
