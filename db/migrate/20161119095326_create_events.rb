@@ -8,7 +8,7 @@ class CreateEvents < ActiveRecord::Migration[5.0]
       t.string :address2
       t.string :postcode
       t.string :country
-      t.string :description
+      t.text :description
 
       t.timestamps
     end

@@ -37,16 +37,16 @@ ActiveRecord::Schema.define(version: 20161201221918) do
 
   create_table "child_groups", force: :cascade do |t|
     t.string   "name"
-    t.string   "description"
     t.string   "age_group"
+    t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
   create_table "church_processes", force: :cascade do |t|
     t.string   "name"
-    t.string   "description"
     t.string   "icon",        default: "arrow-right"
+    t.text     "description"
     t.text     "steps"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20161201221918) do
     t.string   "address2"
     t.string   "postcode"
     t.string   "country"
-    t.string   "description"
+    t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.float    "latitude"
