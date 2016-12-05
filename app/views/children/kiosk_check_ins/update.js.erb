@@ -1,0 +1,6 @@
+$("#child_group_membership_<%= @child_group_membership.id %> [data-tooltip]").tooltip('dispose');
+setTimeout(function() {
+  var $el = $("<%= j render("children/child_group_memberships/list_group_item", list_group_item: @child_group_membership) %>");
+  $("#child_group_membership_<%= @child_group_membership.id %>").replaceWith($el);
+  $el.find('[data-tooltip]').tooltip();
+}, 50);

@@ -3,10 +3,20 @@
 
 .text-light {
   color: #909090;
+
+  .active & {
+    color: inherit;
+    opacity: 0.75;
+  }
 }
 
 .text-lighter {
   color: #ccc;
+
+  .active & {
+    color: inherit;
+    opacity: 0.4;
+  }
 }
 
 .text-ellipsis {
@@ -31,10 +41,11 @@ h4 {
 
 @each $breakpoint in map-keys($grid-breakpoints) {
   @include media-breakpoint-up($breakpoint) {
-    .size-#{$breakpoint}-tiny   { font-size: 0.75rem !important; line-height: 1.5; }
+    .size-#{$breakpoint}-tiny   { font-size: 0.75rem  !important; line-height: 1.5; }
     .size-#{$breakpoint}-small  { font-size: 0.875rem !important; line-height: 1.5; }
-    .size-#{$breakpoint}-normal { font-size: 1rem !important; line-height: 1.5; }
-    .size-#{$breakpoint}-large  { font-size: 1.25rem !important; line-height: 1.5; }
+    .size-#{$breakpoint}-normal { font-size: 1rem     !important; line-height: 1.5; }
+    .size-#{$breakpoint}-large  { font-size: 1.25rem  !important; line-height: 1.5; }
+    .size-#{$breakpoint}-huge   { font-size: 1.5rem   !important; line-height: 1.5; }
   }
 }
 

@@ -61,13 +61,35 @@
 .list-group-item-search {
   #q {
     @include media-breakpoint-up(sm) {
-      border-top-left-radius: $input-border-radius;
-      border-bottom-left-radius: $input-border-radius;
+      border-top-left-radius: $list-group-border-radius;
+      border-bottom-left-radius: $list-group-border-radius;
     }
   }
 }
 
 .list-group {
   box-shadow: 0 0 0 1px rgba(#fafafa,0.75);
-  border-radius: $input-border-radius;
+  border-radius: $list-group-border-radius;
+}
+
+.list-group-item-form {
+  .list-group-item {
+    border-radius: 0;
+  }
+
+  &:first-child .list-group-item {
+    border-top-left-radius: $list-group-border-radius;
+    border-top-right-radius: $list-group-border-radius;
+  }
+
+  &:last-child .list-group-item {
+    border-bottom-left-radius: $list-group-border-radius;
+    border-bottom-right-radius: $list-group-border-radius;
+  }
+}
+
+a.list-group-item.active {
+  @include hover-focus-active {
+    background-color: darken($list-group-active-bg, 10%);
+  }
 }

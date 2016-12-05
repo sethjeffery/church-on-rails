@@ -1,0 +1,43 @@
+<%= render 'children/kiosks/title', title: 'Pick up', icon: 'sign-out' %>
+
+<h2 class="text-xs-center"><%= @child_group_membership.person %></h2>
+<h4 class="text-xs-center text-light"><%= Time.now.strftime('%H:%M') %></h4>
+
+<hr/>
+
+<div class="container-sm mb-2">
+
+  <div class="size-md-large">Who is picking up <%= @child_group_membership.person %>?</div>
+
+  <div class="list-group my-1">
+    <% @child_group_membership
+           .person
+           .families
+           .flat_map(&:heads)
+           .reject{|head| head == @child_group_membership.person }
+           .uniq.each do |person| %>
+      <%= button_to child_group_kiosk_check_out_path(@child_group_membership.child_group, @child_group_membership.id),
+                    method: :put,
+                    params: { checked_in_by_id: person.id },
+                    form_class: 'list-group-item-form',
+                    class: "list-group-item p-2 size-xs-large size-md-huge list-group-item-action" do %>
+        <div class="avatar-md-container">
+          <%= avatar_tag person, class: 'avatar-md' %>
+          <div class="pl-sm"><%= person %></div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <%= button_to child_group_kiosk_check_out_path(@child_group_membership.child_group, @child_group_membership.id),
+                  method: :put,
+                  form_class: 'list-group-item-form',
+                  class: "list-group-item p-2 size-xs-large size-md-huge list-group-item-action" do %>
+      <div class="avatar-md-container">
+        <%= icon_for 'question-circle-o', class: 'avatar avatar-md' %>
+        <div class="pl-sm">Non-family member</div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to 'Cancel', child_group_kiosk_path(@child_group_membership.child_group), class: 'btn-block btn btn-secondary btn-lg mt-1 mb-2' %>
+</div>

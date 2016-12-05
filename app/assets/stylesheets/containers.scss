@@ -12,7 +12,8 @@
 
 .container-xs {
   margin: auto;
-  max-width: 380px;
+  max-width: 400px;
+  padding: 0 15px;
 }
 
 .container-login {
@@ -32,6 +33,7 @@
 }
 
 .container-sm {
+  padding: 0 15px;
   margin: auto;
-  max-width: 510px;
+  max-width: 540px;
 }

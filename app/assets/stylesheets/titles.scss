@@ -25,10 +25,6 @@
   background-position: center;
   background-size: cover;
   z-index: -2;
-
-  .title-container-short & {
-    bottom: -14px;
-  }
 }
 
 .title-container::after {
@@ -37,8 +33,12 @@
   z-index: -3;
 }
 
-.title-container-short::after {
+.title-container-short::after, .title-container-short .title-overlay {
   bottom: -14px;
+}
+
+.title-container-0::after, .title-container-0 .title-overlay {
+  bottom: 0;
 }
 
 .title-container-event::after, .title-container-danger::after {

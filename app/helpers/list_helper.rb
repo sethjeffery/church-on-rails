@@ -39,4 +39,8 @@ module ListHelper
     HTML
     html.html_safe
   end
+
+  def alphabetize(list)
+    list.sort_by(&:name).group_by { |item| item.name[0].upcase }
+  end
 end

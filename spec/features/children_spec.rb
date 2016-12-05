@@ -76,6 +76,33 @@ RSpec.describe "Children" do
 
         expect(page).to have_content child.name
       end
+
+      it 'can check in/out children' do
+        group = create(:child_group)
+        child = create(:person)
+        family = create(:family)
+        parent = create(:person)
+        child.join group
+        child.join family
+        parent.join family, head: true
+
+        visit "/children/groups/#{group.id}"
+
+        click_on 'Kiosk / Tablet mode'
+
+        expect(page).to have_selector    '.list-group-item', text: /#{child.name}/
+        expect(page).to have_no_selector '.list-group-item.active', text: /#{child.name}/
+
+        click_on child.name
+        click_on parent.name
+        expect(page).to have_selector    '.list-group-item.active', text: /#{parent.name} #{child.name}/
+
+        click_on child.name
+        click_on 'Non-family member'
+        expect(page).to have_no_selector '.list-group-item.active', text: /#{child.name}/
+
+        click_on 'Close'
+      end
     end
 
     context 'with admin permissions' do

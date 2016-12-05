@@ -1,23 +1,46 @@
 <div class="list-group-item" id="child_group_membership_<%= list_group_item.id %>">
-  <div class="avatar-container">
+  <div class="avatar-container clearfix">
     <%= avatar_tag list_group_item.person %>
-    <div class="row">
-      <div class="col-sm-5">
-        <%= link_to list_group_item, list_group_item.person %>
-      </div>
-      <div class="col-sm-7 text-light">
-        <% if can?(:destroy, list_group_item) %>
-          <%= button_to [list_group_item.child_group, list_group_item], method: :delete, remote: true, class: 'btn btn-link btn-align-middle px-xs float-xs-right text-light', data: { confirm: "Really remove #{list_group_item.person} from #{list_group_item.child_group}?" } do %>
+
+    <div class="float-xs-right">
+      <% if can?(:update, list_group_item.child_group) %>
+        <% if list_group_item.checked_in? %>
+          <%= button_to(child_group_kiosk_check_out_path(list_group_item.child_group, list_group_item.id),
+                        method: :put,
+                        remote: true,
+                        data: { tooltip: true},
+                        form_class: 'float-xs-left mr-sm',
+                        class: 'btn btn-outline-success btn-sm btn-align-middle',
+                        title: 'Check out') { icon_for 'sign-out' } %>
+        <% else %>
+          <%= button_to(child_group_kiosk_check_in_path(list_group_item.child_group, list_group_item.id),
+                        method: :put,
+                        remote: true,
+                        data: { tooltip: true},
+                        form_class: 'float-xs-left mr-sm',
+                        class: 'btn btn-outline-primary btn-sm btn-align-middle',
+                        title: 'Check in') { icon_for 'sign-in' } %>
+        <% end %>
+      <% end %>
+
+      <% if can?(:destroy, list_group_item) %>
+        <div class="float-xs-left">
+          <%= button_to [list_group_item.child_group, list_group_item], method: :delete, remote: true, class: 'btn btn-link btn-align-middle px-xs text-light', data: { confirm: "Really remove #{list_group_item.person} from #{list_group_item.child_group}?" } do %>
             <%= icon_for :x %>
           <% end %>
-        <% end %>
-
-        <% if list_group_item.person.dob %>
-          <span class="size-xs-tiny">
-            <%= list_group_item.person.age %>
-          </span>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
+
+    <%= link_to list_group_item, list_group_item.person, class: "float-sm-left mr-sm size-xs-small size-sm-normal #{'text-success' if list_group_item.checked_in?}" %>
+
+    <% if list_group_item.person.dob %>
+      <div class="float-sm-right mr-1">
+        <span class="size-xs-tiny text-light">
+          <%= list_group_item.person.age %>
+        </span>
+      </div>
+    <% end %>
+
   </div>
 </div>

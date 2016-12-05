@@ -1,5 +1,5 @@
 <%= render 'children/child_groups/title' %>
-<% two_columns = false %>
+<% two_columns = can?(:manage, @child_group) || can?(:update, @child_group) %>
 
 <div class="<%= 'container-sm' unless two_columns %>">
   <div class="row">
@@ -23,12 +23,17 @@
                                                                             can: [:create, ChildGroupMembership],
                                                                             href: new_child_group_child_group_membership_path(@child_group) } %>
 
-        <%= render partial: 'children/child_group_memberships/list_group_item', collection: @child_group.child_group_memberships.includes(:person) %>
+        <%= render partial: 'children/child_group_memberships/list_group_item', collection: @child_group.child_group_memberships.includes(:person).joins(:person).order('first_name, last_name') %>
       </div>
     </div>
 
     <div class="col-xs-12 <%= 'col-lg-5' if two_columns %>">
-
+      <div class="list-group mb-2">
+        <%= render 'shared/list_group_header', title: 'Manage' %>
+        <%= fa_container :tablet, class: 'list-group-item' do %>
+          <%= link_to 'Kiosk / Tablet mode', child_group_kiosk_path(@child_group) %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

@@ -53,6 +53,10 @@ Rails.application.routes.draw do
     scope module: 'children' do
       get 'children', to: redirect('children/groups')
       resources :child_groups, path: 'children/groups' do
+        resource :kiosk do
+          resources :check_ins, controller: :kiosk_check_ins
+          resources :check_outs, controller: :kiosk_check_outs
+        end
         resources :child_group_memberships, path: 'memberships'
       end
     end

@@ -68,7 +68,7 @@
 
           <p>
             <strong>Write</strong> permissions allow someone to create and make changes to any existing information. They could
-            change a person's name in the database for example, and add new people, but not remove anything.
+            change a person's name in the database for example, and add new people, but cannot delete them.
           </p>
 
           <p>
@@ -78,12 +78,13 @@
           <hr/>
         </div>
 
-        <% %w(people process event comment).each do |type| %>
+        <% %w(people process event comment children).each do |type| %>
           <div class="mb-xs mt-sm">
             <% if type == 'people'  %><%= icon_for type, class: 'mr-xs' %> People, Teams, Families<% end %>
             <% if type == 'process' %><%= icon_for type, class: 'mr-xs' %> Processes<% end %>
             <% if type == 'event'   %><%= icon_for type, class: 'mr-xs' %> Events<% end %>
             <% if type == 'comment' %><%= icon_for type, class: 'mr-xs' %> Comments<% end %>
+            <% if type == 'children' %><%= icon_for type, class: 'mr-xs' %> Children's Groups<% end %>
           </div>
 
           <div class="size-xs-small">
