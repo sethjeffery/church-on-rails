@@ -40,7 +40,11 @@ module ListHelper
     html.html_safe
   end
 
-  def alphabetize(list)
+  def by_first_letter(list)
     list.sort_by(&:name).group_by { |item| item.name[0].upcase }
+  end
+
+  def by_date(list)
+    list.sort_by(&:checked_in_at).group_by{|checkin| checkin.checked_in_at.strftime('%-d %b %Y')}.sort.reverse
   end
 end

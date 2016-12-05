@@ -1,0 +1,21 @@
+@import 'variables';
+@import 'bootstrap/mixins/breakpoints';
+
+.check-in, .check-out {
+  padding-left: 4rem;
+}
+
+.check-in-time, .check-out-time {
+  margin-left: -4rem;
+  float: left;
+}
+
+@include media-breakpoint-down(xs) {
+  .check-in, .check-out {
+    padding-left: 3.25rem;
+  }
+
+  .check-in-time, .check-out-time {
+    margin-left: -3.25rem;
+  }
+}

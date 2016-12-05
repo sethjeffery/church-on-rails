@@ -2,7 +2,7 @@
   <%= link_to(@child_group, class: 'btn btn-secondary float-xs-right btn-lg') { icon_for(:x) + content_tag(:div, 'Close', class: 'sr-only') } %>
   <h1><%= @child_group %></h1>
 
-  <% alphabetize(@child_group.child_group_memberships.includes(:person)).each do |letter, memberships| %>
+  <% by_first_letter(@child_group.child_group_memberships.includes(:person)).each do |letter, memberships| %>
     <% if memberships.present? %>
       <h2 class="my-1 pt-1"><%= letter %></h2>
     <% else %>

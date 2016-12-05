@@ -18,7 +18,7 @@
                         remote: true,
                         data: { tooltip: true},
                         form_class: 'float-xs-left mr-sm',
-                        class: 'btn btn-outline-primary btn-sm btn-align-middle',
+                        class: 'btn btn-outline-warning btn-sm btn-align-middle',
                         title: 'Check in') { icon_for 'sign-in' } %>
         <% end %>
       <% end %>
@@ -32,7 +32,7 @@
       <% end %>
     </div>
 
-    <%= link_to list_group_item, list_group_item.person, class: "float-sm-left mr-sm size-xs-small size-sm-normal #{'text-success' if list_group_item.checked_in?}" %>
+    <%= link_to list_group_item, [list_group_item.child_group, list_group_item], class: "float-sm-left mr-sm size-xs-small size-sm-normal #{'text-warning' if list_group_item.checked_in?}" %>
 
     <% if list_group_item.person.dob %>
       <div class="float-sm-right mr-1">

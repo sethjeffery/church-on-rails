@@ -1,0 +1,10 @@
+<% unless local_assigns[:icon] %>
+  <div class="text-xs-center mb-sm">
+    <%= avatar_tag @child_group_membership.person, class: 'avatar-xl' %>
+  </div>
+<% end %>
+
+<%= render 'shared/title',
+           title: local_assigns[:title] || @child_group_membership.person,
+           href: local_assigns[:href],
+           icon: local_assigns[:title] %>

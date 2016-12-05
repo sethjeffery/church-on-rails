@@ -22,7 +22,7 @@
     <% end %>
 
     <h2 class="mb-0 <%= "text-xs-#{align}" if local_assigns[:align] %> <%= 'float-xs-left' if local_assigns[:btn] %>">
-      <%= link_to_if !!local_assigns[:link], title, local_assigns[:link] %>
+      <%= link_to_if !!local_assigns[:href], title, local_assigns[:href] %>
     </h2>
   </div>
 

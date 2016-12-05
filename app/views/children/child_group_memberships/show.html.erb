@@ -1,0 +1,45 @@
+<%= render 'children/child_group_memberships/title', href: @child_group_membership.person %>
+
+<div class="container-sm">
+  <div class="list-group mb-2">
+    <%= render 'shared/list_group_header',
+               title: 'Check-in History',
+               button: { title: 'Cancel', href: @child_group_membership.child_group, btn_class: 'btn-outline-primary' } %>
+    <% by_date(@child_group_membership.child_group_checkins).each do |date, checkins| %>
+      <div class="list-group-item size-xs-small size-sm-normal">
+        <h4><%= date %></h4>
+        <% checkins.each_with_index do |checkin, index| %>
+
+          <% if index > 0 %>
+            <hr class="my-sm" />
+          <% end %>
+
+          <div class="check-in">
+            <div class="check-in-time"><%= checkin.checked_in_at.strftime('%H:%M') %></div>
+            <span class="text-warning">
+              <%= icon_for 'sign-in' %>
+              <span class="hidden-xs-down">Checked in</span>
+            </span>
+
+            <% if checkin.checked_in_by %>
+              by <%= link_to_if can?(:read, checkin.checked_in_by), checkin.checked_in_by, checkin.checked_in_by %>
+            <% end %>
+          </div>
+
+          <% if checkin.checked_out_at %>
+            <div class="check-out">
+              <div class="check-out-time"><%= checkin.checked_out_at.strftime('%H:%M') %></div>
+              <span class="text-success">
+                <%= icon_for 'sign-out' %>
+                <span class="hidden-xs-down">Picked up</span>
+              </span>
+              <% if checkin.checked_out_by %>
+                by <%= link_to_if can?(:read, checkin.checked_out_by), checkin.checked_out_by, checkin.checked_out_by %>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
