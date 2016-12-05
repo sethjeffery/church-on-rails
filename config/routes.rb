@@ -34,6 +34,7 @@ Rails.application.routes.draw do
         resource :teams, controller: :person_teams
         resource :families, controller: :person_families
         resources :person_processes, path: 'processes'
+        resources :merges
       end
     end
 
