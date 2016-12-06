@@ -1,4 +1,9 @@
 <div class="text-xs-center">
+  <% if local_assigns[:cancel_href] %>
+    <a href="<%= cancel_href %>" class="btn btn-secondary btn-lg">
+      <%= local_assigns[:cancel] || 'Cancel' %>
+    </a>
+  <% end %>
   <button type="submit" class="btn btn-primary btn-lg">
     <% if local_assigns[:icon]%><%= icon_for icon, class: 'mr-xs' %><% end %>
     <%= local_assigns[:title] || 'Save changes' %>

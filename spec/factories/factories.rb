@@ -16,6 +16,10 @@ FactoryGirl.define do
     end
   end
 
+  factory :person_process_assignee do
+    person_process
+  end
+
   factory :user do
     email         { Faker::Internet.email }
     password      { Faker::Internet.password }

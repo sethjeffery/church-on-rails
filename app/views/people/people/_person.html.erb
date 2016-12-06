@@ -69,6 +69,10 @@
             <%= link_to 'Change password', person_user_password_path(person) %>
           <% end if person.user.present? %>
 
+          <%= fa_container 'handshake-o', class: 'list-group-item' do %>
+            <%= link_to 'Merge with another person', person_merge_path(person) %>
+          <% end %>
+
           <%= fa_container :trash, class: 'list-group-item' do %>
             <%= link_to 'Remove person', confirm_destroy_person_path(person) %>
           <% end unless person == current_person %>

@@ -100,4 +100,14 @@ RSpec.describe Person do
       end
     end
   end
+
+  context '#merge_into' do
+    let(:target) { double }
+
+    it 'uses MergePersonJob' do
+      allow(MergePersonJob).to receive(:perform_now)
+      subject.merge_into(target)
+      expect(MergePersonJob).to have_received(:perform_now).with(subject, target)
+    end
+  end
 end

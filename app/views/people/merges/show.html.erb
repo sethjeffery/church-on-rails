@@ -1,0 +1,24 @@
+<%= render 'people/people/title', short: true %>
+
+<%= form_for :merge, url: person_merge_path(@person), method: :put do |f| %>
+  <div class="container-sm">
+    <p class="mt-2">
+      You can merge this person into another. Any team and family memberships
+      will be copied over, and any duplicate fields (like name) will be replaced
+      with the person you merge into.
+    </p>
+
+    <div class="list-group mb-2">
+      <%= render 'shared/list_group_header', title: 'Merge into...',
+                 button: { title: 'Cancel', btn_class: 'btn-outline-primary', href: @person } %>
+
+      <div class="list-group-item">
+        <%= f.collection_select :merger_id, Person.where.not(id: @person.id).order(:first_name, :last_name).all, :id, :name,
+                                { include_blank: true },
+                                { data: { selectpicker: true, width: '100%', placeholder: "Choose a person" }} %>
+      </div>
+    </div>
+
+    <%= render 'shared/form_submit', icon: 'handshake-o', title: 'Merge!' %>
+  </div>
+<% end %>

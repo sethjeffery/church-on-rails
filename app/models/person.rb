@@ -71,6 +71,10 @@ class Person < ApplicationRecord
     readable_age(months / 12, months % 12)
   end
 
+  def merge_into(target)
+    MergePersonJob.perform_now(self, target)
+  end
+
   protected
 
   def copy_changes_to_user
