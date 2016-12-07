@@ -10,18 +10,18 @@
 
 .list-group-item.active {
   .btn-outline-primary {
-    color: white;
-    border-color: rgba(255,255,255,0.5);
-
-    &:hover {
-      color: $brand-primary;
-      background-color: white;
-    }
+    font-size: 0.75rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 
-  .btn-secondary {
-    border-color: $input-border-color;
-    background-clip: padding-box;
+  @include plain-hover-focus {
+    background-color: transparent;
+    border: transparent;
+    border-bottom: solid .25rem lighten($brand-primary, 15%);
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    color: $brand-primary;
   }
 }
 
@@ -58,21 +58,14 @@
   border-right: solid 1px $list-group-border-color;
 }
 
-.list-group-item-search {
-  #q {
-    @include media-breakpoint-up(sm) {
-      border-top-left-radius: $list-group-border-radius;
-      border-bottom-left-radius: $list-group-border-radius;
-    }
-  }
-}
+#q {
 
-.list-group {
-  box-shadow: 0 0 0 1px rgba(#fafafa,0.75);
-  border-radius: $list-group-border-radius;
 }
 
 .list-group-item-form {
+  padding: 0 .5rem;
+  background-color: $gray-lightest;
+
   .list-group-item {
     border-radius: 0;
   }
@@ -85,6 +78,26 @@
   &:last-child .list-group-item {
     border-bottom-left-radius: $list-group-border-radius;
     border-bottom-right-radius: $list-group-border-radius;
+  }
+
+  .input-group {
+    .input-group-addon:first-child {
+      padding-right: .675rem;
+    }
+
+    .input-group-addon, .form-control {
+      border-color: transparent;
+      background-color: transparent;
+    }
+
+    .input-group-btn {
+      margin-right: .5rem;
+    }
+    .form-control {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      padding-left: 0;
+    }
   }
 }
 

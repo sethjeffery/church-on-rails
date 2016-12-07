@@ -4,12 +4,10 @@
     <%= render 'layouts/head' %>
   </head>
 
-  <body class="<%= 'with-side-menu' if side_menu? %>">
-    <% if side_menu? %>
-      <%= render 'shared/side_menu' %>
-    <% end %>
+  <body>
+    <%= render 'shared/navbar' %>
 
-    <div class="container py-1">
+    <div class="container mb-2">
       <%= yield %>
     </div>
   </body>

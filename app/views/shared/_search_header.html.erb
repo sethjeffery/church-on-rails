@@ -1,44 +1,15 @@
-<div class="list-group-item active list-group-item-search">
+<div class="list-group-item list-group-item-form">
   <%= form_for('Search', url: url_for(resource), method: :get) do |f| %>
-    <div class="row">
-      <div class="<% 'col-sm-6' if local_assigns[:options].present? %> col-md-7">
-        <div class="input-group">
-          <% if local_assigns[:options].present? %>
-            <div class="input-group-btn hidden-sm-up">
-              <a href="javascript:void(0)" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
-                <%= icon_for resource %>
-              </a>
-              <div class="dropdown-menu">
-                <% local_assigns[:options].each do |option| %>
-                  <%= link_to(option, class: 'dropdown-item py-sm') do %>
-                    <%= icon_for option, '1x', class: 'mr-xs' %>
-                    <%= option.to_s.humanize %>
-                  <% end %>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
-          <%= text_field_tag :q, params[:q], class: 'form-control', autofocus: true %>
-          <div class="input-group-btn">
-            <button type="submit" class="btn btn-primary" onclick="$(this).closest('form').submit();">
-              <span class="sr-only">Search</span>
-              <%= icon_for :search %>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <% if local_assigns[:options].present? %>
-        <div class="col-sm-6 col-md-5 search-options hidden-xs-down">
-          <div class="btn-group">
-            <% options.each do |option| %>
-              <%= link_to(option, class: "btn btn-outline-primary #{'active' if resource == option }", title: option.to_s.humanize, data: { tooltip: true }) do %>
-                <%= icon_for option %>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+    <div class="input-group">
+      <label class="input-group-addon" for="q">
+        <%= icon_for :search %>
+      </label>
+      <%= text_field_tag :q, params[:q], class: 'form-control', autofocus: true %>
     </div>
+
+    <button type="submit" class="sr-only" onclick="$(this).closest('form').submit();">
+      <span class="sr-only">Search</span>
+      <%= icon_for :search %>
+    </button>
   <% end %>
 </div>

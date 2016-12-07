@@ -1,8 +1,4 @@
 module ApplicationHelper
-  def side_menu?
-    user_signed_in?
-  end
-
   def markdown(text)
     options = {
       filter_html:     true,

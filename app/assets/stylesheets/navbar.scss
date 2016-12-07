@@ -1,0 +1,211 @@
+@import 'variables';
+@import 'bootstrap/mixins/hover';
+@import 'bootstrap/mixins/breakpoints';
+
+.navbar {
+  padding: 0;
+
+  > [class^=bg-] {
+    padding: $navbar-padding-y $navbar-padding-x;
+    z-index: 1;
+    position: relative;
+  }
+}
+
+.navbar-brand {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  line-height: 1.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1rem;
+  margin-right: 0;
+  font-weight: $headings-font-weight;
+
+  @include media-breakpoint-down(sm) {
+    width: calc(100vw - 110px);
+  }
+
+  @include media-breakpoint-up(sm) {
+    width: auto;
+    font-size: 1.25rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.5rem;
+  }
+}
+
+.navbar-transition {
+  transition: top 0.3s;
+
+  .nav-item-search, .nav-item-account {
+    transition: top .3s;
+
+    .nav-link { transition: padding .3s, border-top-left-radius .3s, border-top-right-radius .3s; }
+    .fa { transition: font-size .3s; }
+  }
+}
+
+.navbar-light .navbar-nav {
+  .open > .nav-link,
+  .active > .nav-link,
+  .nav-link.open,
+  .nav-link.active {
+    @include plain-hover-focus {
+      background-color: $navbar-light-active-color;
+      color: white;
+    }
+  }
+}
+
+.navbar-dark .navbar-nav {
+  .open > .nav-link,
+  .active > .nav-link,
+  .nav-link.open,
+  .nav-link.active {
+    @include plain-hover-focus {
+      background-color: $navbar-dark-active-color;
+      color: $brand-primary;
+    }
+  }
+}
+
+.navbar .navbar-nav {
+  .nav-item {
+    position: relative;
+    top: 0;
+  }
+
+  .nav-link {
+    line-height: 1.25rem;
+    text-align: center;
+    border-radius: 22px;
+    padding: 0.75rem 1rem;
+
+    @include hover-focus {
+      background-color: $darken;
+    }
+
+    .fa {
+      font-size: 1.5rem;
+      line-height: 1.25rem;
+    }
+
+    .avatar {
+      margin-top: -6px;
+      margin-bottom: -6px;
+      width: 2rem;
+      height: 2rem;
+      transition: margin .3s, width .3s, height .3s;
+    }
+
+    .fa, .avatar {
+      vertical-align: top;
+
+      @include media-breakpoint-up(md) {
+        + .nav-text { margin-left: 0.25rem; }
+      }
+    }
+
+    + .nav-link {
+      margin-left: .5rem;
+    }
+  }
+
+  .dropdown.open > .nav-link {
+    // flatten border-radius against dropdown menu
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .nav-text-large {
+    @include media-breakpoint-up(md) {
+      font-size: 1.25rem;
+    }
+  }
+
+  .dropdown-menu {
+    margin-top: 0;
+    border-radius: 22px 0 22px 22px;
+    border-color: white;
+    padding: 0.5rem;
+
+    .fa-container {
+      margin-left: -.75rem;
+      padding-left: 2.5rem;
+
+      // do not over-extend on mobile
+      max-width: calc(100vw - 7rem);
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      .fa {
+        line-height: 1.5rem;
+        font-size: 1.25rem;
+        margin-left: -2.25rem;
+      }
+    }
+  }
+
+  .dropdown-item {
+    padding: 0.5rem 1rem;
+    border-radius: 1000px;
+    margin: 0.25rem 0;
+    line-height: 1.5rem;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  body {
+    padding-top: 120px;
+  }
+
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1050;
+
+    &.navbar-short {
+      top: -76px;
+
+      .nav-item-search {
+        top: 63px;
+
+        .nav-link {
+          padding: 0.5rem 1rem;
+        }
+
+        .fa {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .navbar.navbar-short .nav-item-account {
+    top: 63px;
+
+    .nav-link {
+      padding: .5rem 1rem .5rem .75rem;
+      border-top-left-radius: 18px;
+      border-top-right-radius: 18px;
+    }
+
+    .fa {
+      font-size: 1rem;
+    }
+
+    .avatar {
+      margin-top: -2px;
+      margin-bottom: -2px;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+}

@@ -1,0 +1,127 @@
+@import 'variables';
+@import 'bootstrap/mixins/breakpoints';
+@import 'bootstrap/mixins/hover';
+
+.nav-material-tabs {
+  white-space: nowrap;
+  overflow-x: auto;
+  box-shadow: 0 0 5px rgba(0,0,0,0.25);
+
+  .container {
+    padding-left: 1.75rem;
+  }
+
+  .nav-item {
+    display: inline-block;
+    vertical-align: bottom;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nav-link {
+    transition: background-color 0.15s;
+    text-transform: uppercase;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: $navbar-dark-color;
+
+    &::after {
+      content: '';
+      position: absolute;
+      background-color: rgba($brand-success, 50%);
+      left: 50%;
+      bottom: 0;
+      height: 3px;
+      width: 0;
+      display: block;
+      transition: left 0.3s, width 0.3s;
+    }
+
+    @include hover-focus {
+      &::after {
+        left: 0;
+        width: 100%;
+      }
+    }
+
+    &:active {
+      background-color: $darken;
+    }
+
+    @include hover-focus-active {
+      color: $navbar-dark-hover-color;
+    }
+  }
+
+  .open > .nav-link,
+  .active > .nav-link,
+  .nav-link.open,
+  .nav-link.active,
+  .nav-link:active
+  {
+    color: $navbar-dark-active-color;
+
+    &::after {
+      left: 0;
+      width: 100%;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    .container {
+      padding-left: 2rem;
+    }
+
+    .nav-link {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  @include media-breakpoint-only(sm) {
+    .nav-link {
+      padding-left: 2.75rem;
+      padding-right: 2.75rem;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    position: absolute;
+    transform: translateY(-100%);
+    left: 0;
+    right: 0;
+    background-color: $brand-primary;
+    border-top: solid 1px $darken;
+
+    .nav-material-tabs-divider {
+      border-top: solid 1px $darken;
+    }
+
+    .navbar-transition & {
+      transition: transform .3s;
+    }
+
+    .container {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .nav-item {
+      display: block;
+    }
+
+    .nav-link {
+      display: block;
+
+      &::after {
+        display: none;
+      }
+    }
+
+    &.open {
+      transform: translateY(0);
+    }
+  }
+}

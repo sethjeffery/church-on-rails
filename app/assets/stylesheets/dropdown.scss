@@ -1,3 +1,5 @@
+@import 'variables';
+
 .dropdown-item-icon {
   padding: 0.5rem 0.25rem;
   display: inline-block;
@@ -11,4 +13,8 @@
   width: 250px;
   padding: 4px;
   white-space: normal;
+}
+
+.dropdown-menu {
+  box-shadow: 0 1px .25rem $darken;
 }

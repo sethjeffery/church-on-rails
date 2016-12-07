@@ -1,4 +1,4 @@
-<div class="title-container mb-1 text-xs-center
+<div class="title-container text-xs-center py-2
           <%= "title-container-short"         if local_assigns[:short] %>
           <%= "title-container-#{color}"      if local_assigns[:color].is_a?(Symbol) %>
           <%= "title-background-image"        if local_assigns[:image].present? %>
@@ -15,8 +15,8 @@
   <div class="clearfix">
     <% if local_assigns[:btn] %>
       <% if !btn[:can] || can?(*btn[:can]) %>
-        <%= link_to btn[:href], class: "btn float-xs-right #{btn[:btn_class] || 'btn-primary'}" do %>
-          <%= icon_for 'plus-circle' %> New
+        <%= link_to btn[:href], class: "btn btn-lg float-xs-right #{btn[:btn_class] || 'btn-success'}" do %>
+          <%= icon_for 'plus' %> New
         <% end %>
       <% end %>
     <% end %>

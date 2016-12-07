@@ -1,11 +1,5 @@
 <% if current_church.cover.present? %>
-  <div class="title-container mb-1 pt-3 text-xs-center title-background-image">
-    <div class="mb-sm">
-      <span class="avatar avatar-xl avatar-icon">
-        <%= icon_for current_church %>
-      </span>
-    </div>
-
+  <div class="title-container mb-1 pb-1 text-xs-center title-background-image">
     <h1 class="mb-0"><%= current_church %></h1>
     <div class="title-overlay" style="background-image: url('<%= current_church.cover.url %>');"></div>
   </div>

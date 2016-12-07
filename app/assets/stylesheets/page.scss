@@ -3,13 +3,12 @@ html {
 }
 
 body {
-  background-color: #fafafa;
-  background-image: image-url('church-vector.png');
+  background-image: image-url('church-faded.png');
   background-size: 140px 160px;
   background-position: 90% bottom;
   background-repeat: no-repeat;
 }
 
-html, body {
+html {
   overflow-x: hidden;
 }
