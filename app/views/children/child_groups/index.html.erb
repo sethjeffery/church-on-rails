@@ -1,3 +1,4 @@
+<% content_for :menu, :children %>
 <%= render 'shared/title', title: "Children's Groups", btn: { can: [:create, ChildGroup], href: new_child_group_path } %>
 <%= flash_messages %>
 
@@ -6,18 +7,15 @@
 
   <% if @child_groups.present? %>
     <% @child_groups.each do |child_group| %>
-      <%= list_group_item child_group, url: child_group do %>
-
+      <%= fa_container :child_group, class: 'list-group-item list-group-item-action', tag: :a, href: url_for(child_group) do %>
         <div class="row">
           <div class="col-sm-6 text-ellipsis">
-            <%= icon_for child_group, '1x', class: 'mr-xs' %>
             <%= child_group %>
           </div>
           <div class="col-sm-6 text-ellipsis text-light size-xs-small">
             <%= pluralize child_group.child_group_memberships.count, 'child' %>
           </div>
         </div>
-
       <% end %>
     <% end %>
   <% else %>

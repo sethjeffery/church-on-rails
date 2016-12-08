@@ -1,0 +1,97 @@
+@import 'variables';
+@import 'bootstrap/mixins/clearfix';
+@import 'bootstrap/mixins/breakpoints';
+@import 'bootstrap/mixins/hover';
+
+$width-md: (map-get($container-max-widths, md) - $grid-gutter-width-base);
+$width-lg: (map-get($container-max-widths, lg) - $grid-gutter-width-base);
+$width-xl: (map-get($container-max-widths, xl) - $grid-gutter-width-base);
+
+.side-and-details {
+  @include clearfix;
+}
+
+.side-and-details--details {
+  margin-bottom: 2rem;
+  padding-top: .5rem;
+
+  @include media-breakpoint-up(md) {
+    float: left;
+    width: $width-md * .75;
+    margin-left: $width-md * .25;
+    margin-right: $width-md * -.75;
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: $width-lg * .6;
+    margin-left: $width-lg * .2;
+    margin-right: $width-lg * -.6;
+  }
+
+  @include media-breakpoint-up(xl) {
+    width: $width-xl * .6;
+    margin-left: $width-xl * .2;
+    margin-right: $width-xl * -.6;
+  }
+}
+
+.side-and-details--side {
+  text-align: center;
+
+  @include media-breakpoint-up(md) {
+    float: left;
+    width: $width-md * .3;
+    margin-left: $width-md * -.05;
+    margin-right: $width-md * -.3;
+    text-align: right;
+    padding-right: 2rem;
+    position: fixed;
+    transition: margin-top 0.3s;
+
+    .navbar-short + .container & {
+      margin-top: -76px;
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: $width-lg * .25;
+    margin-left:  $width-lg * -.05;
+    margin-right: $width-lg * -.25;
+  }
+
+  @include media-breakpoint-up(xl) {
+    width: $width-xl * .25;
+    margin-left:  $width-xl * -.05;
+    margin-right: $width-xl * -.25;
+  }
+
+  .nav {
+    @include clearfix();
+
+    .nav-divider {
+      border-top: solid 1px $darken;
+    }
+
+    .nav-link {
+      position: relative;
+      padding: .5rem 1rem;
+      border-radius: 0;
+      color: $brand-info;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+
+      @include hover-focus {
+        color: darken($brand-info, 10%);
+      }
+    }
+
+    .nav-link.active,
+    .nav-item.open .nav-link {
+      @include plain-hover-focus {
+        color: darken($brand-info, 20%);
+        background-color: transparent;
+        font-weight: 600;
+      }
+    }
+  }
+}

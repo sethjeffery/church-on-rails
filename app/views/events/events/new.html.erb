@@ -1,10 +1,30 @@
-<%= render 'events/events/title', title: 'New Event', short: :true, color: :event %>
+<% content_for :menu, :events %>
 
-<div class="container-sm">
-  <p class="size-xs-small mt-2">
-    Events are scheduled times for your teams or church to meet up. They can be either
-    on a single date or recurring.
-  </p>
+<div class="side-and-details mt-1">
+  <div class="side-and-details--side">
+    <ul class="nav nav-stacked">
+      <li class="nav-item">
+        <%= link_to events_path, class: 'nav-link' do %>
+          Events
+          <%= icon_for Event, '1x', class: 'hidden-sm-down pl-sm' %>
+        <% end %>
+      </li>
+      <li class="nav-divider"></li>
+      <li class="nav-item">
+        <%= link_to new_event_path, class: 'nav-link active' do %>
+          New event
+          <%= icon_for 'plus', '1x', class: 'hidden-sm-down pl-sm' %>
+        <% end %>
+      </li>
+    </ul>
+  </div>
 
-  <%= render 'events/events/form' %>
+  <div class="side-and-details--details">
+    <p>
+      Events are scheduled times for your teams or church to meet up. They can be either
+      on a single date or recurring.
+    </p>
+
+    <%= render 'events/events/form' %>
+  </div>
 </div>

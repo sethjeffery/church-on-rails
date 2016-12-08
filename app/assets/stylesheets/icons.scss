@@ -36,7 +36,15 @@
   }
 
   &.list-group-item {
-    padding-left: 2.75rem;
+    padding-left: 3.25rem;
+
+    &.list-group-item-team {
+      padding-left: 3rem;
+    }
+
+    > .fa {
+      margin-left: -2.25rem;
+    }
   }
 }
 

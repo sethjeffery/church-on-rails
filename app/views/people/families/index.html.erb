@@ -1,3 +1,4 @@
+<% content_for :menu, :families %>
 <%= render 'shared/title', title: 'Families', btn: { can: [:create, Family], href: new_family_path } %>
 <%= flash_messages %>
 
@@ -6,11 +7,9 @@
 
   <% if @families.present? %>
     <% @families.each do |family| %>
-      <%= list_group_item family, url: family do %>
-
+      <%= fa_container family, class: 'list-group-item list-group-item-action', tag: :a, href: url_for(family) do %>
         <div class="row">
           <div class="col-sm-6 text-ellipsis">
-            <%= icon_for family, '1x', class: 'mr-xs' %>
             <%= family %>
           </div>
           <div class="col-sm-6 text-ellipsis text-light size-xs-small">

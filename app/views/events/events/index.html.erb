@@ -1,9 +1,8 @@
-<%= render 'shared/title', title: 'Events', color: :event, btn: { can: [:create, Event], href: new_event_path, btn_class: 'btn-danger' } %>
+<% content_for :menu, :events %>
+<%= render 'shared/title', title: 'Events', btn: { can: [:create, Event], href: new_event_path } %>
 <%= flash_messages %>
 
 <div class="list-group">
-  <%= render 'shared/list_group_header', title: 'Upcoming events' %>
-
   <% if @events.present? %>
     <%= render partial: 'events/events/event_item', collection: @events %>
   <% else %>

@@ -15,7 +15,7 @@
   <div class="clearfix">
     <% if local_assigns[:btn] %>
       <% if !btn[:can] || can?(*btn[:can]) %>
-        <%= link_to btn[:href], class: "btn btn-lg float-xs-right #{btn[:btn_class] || 'btn-success'}" do %>
+        <%= link_to btn[:href], class: "btn btn-lg float-xs-right #{btn[:btn_class] || 'btn-info'}" do %>
           <%= icon_for 'plus' %> New
         <% end %>
       <% end %>
