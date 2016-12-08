@@ -1,8 +1,4 @@
-<% content_for :menu, :people %>
-
-<%= render 'people/people/menu', active: :trash do %>
-  <h2>Remove Person</h2>
-
+<%= render 'people/people/menu', active: :trash, title: 'Remove person' do %>
   <div class="alert alert-info mb-2">
     <p class="text-xs-center mt-2">
       If you do this, <strong><%= @person %></strong> will be removed from the database.

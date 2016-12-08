@@ -1,6 +1,9 @@
-<%= render 'people/people/title' %>
-
-<div class="container-sm">
+<%= render 'people/people/menu', active: :user, title: @person do %>
+  <p class="alert alert-info">
+    Giving a user an account will allow them to log into this website. By default, users can only
+    see their own profile. Adding people to <%= link_to 'teams', teams_path %> can increase
+    their priviliges.
+  </p>
 
   <%= flash_messages %>
   <%= form_for(@user, url: person_user_path(@person)) do |f| %>
@@ -44,7 +47,6 @@
     </div>
 
     <%= render 'shared/form_submit', title: 'Add account', icon: 'user-circle-o' %>
-
   <% end %>
 
-</div>
+<% end %>

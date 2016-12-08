@@ -1,37 +1,40 @@
 <% content_for :menu, :people %>
-<%= render 'shared/title', title: 'People', btn: { can: [:create, Person], href: new_person_path } %>
-<%= flash_messages %>
 
-<div class="list-group">
-  <%= render 'shared/search_header', resource: :people, options: [:people, :families, :teams] %>
+<div class="container">
+  <%= render 'shared/title', title: 'People', btn: { can: [:create, Person], href: new_person_path } %>
+  <%= flash_messages %>
 
-  <% if @people.empty? %>
-    <%= render 'people/people/empty' %>
-  <% end %>
+  <div class="list-group">
+    <%= render 'shared/search_header', resource: :people, options: [:people, :families, :teams] %>
 
-  <% @people.each do |person| %>
-    <%= list_group_item person, url: person do %>
-      <div class="avatar-container">
-        <%= avatar_tag person %>
+    <% if @people.empty? %>
+      <%= render 'people/people/empty' %>
+    <% end %>
 
-        <div class="clearfix">
-          <div class="float-sm-left text-ellipsis">
-            <%= person.name %>
-          </div>
+    <% @people.each do |person| %>
+      <%= list_group_item person, url: person do %>
+        <div class="avatar-container">
+          <%= avatar_tag person %>
 
-          <div class="float-sm-right">
-            <% person.teams.each do |team| %>
-              <span style="color: <%= '#' + team.color %>;" data-tooltip title="<%= team %>">
-                <%= icon_for team, '1x', class: 'ml-sm' %>
-              </span>
-            <% end %>
+          <div class="clearfix">
+            <div class="float-sm-left text-ellipsis">
+              <%= person.name %>
+            </div>
+
+            <div class="float-sm-right">
+              <% person.teams.each do |team| %>
+                <span style="color: <%= '#' + team.color %>;" data-tooltip title="<%= team %>">
+                  <%= icon_for team, '1x', class: 'ml-sm' %>
+                </span>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
 
-<div class="text-xs-center mt-1">
-  <%= paginate @people, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
+  <div class="text-xs-center mt-1">
+    <%= paginate @people, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
+  </div>
 </div>

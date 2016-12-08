@@ -1,6 +1,3 @@
-<% content_for :menu, :people %>
-
-<%= render 'people/people/menu', active: @person  do %>
-  <h2><%= @person %></h2>
+<%= render 'people/people/menu', active: @person, title: @person do %>
   <%= render @person %>
 <% end %>

@@ -1,71 +1,74 @@
 <% content_for :menu, :church %>
 <%= render 'account/churches/title' %>
 
-<% can_view_stats = can?(:read, Person) || can?(:read, Team) || can?(:read, Event) || can?(:read, ChurchProcess) %>
-<% two_columns = can_view_stats %>
+<div class="container">
 
-<div class="container-sm">
-  <%= flash_messages container: 'container-sm' %>
-</div>
+  <% can_view_stats = can?(:read, Person) || can?(:read, Team) || can?(:read, Event) || can?(:read, ChurchProcess) %>
+  <% two_columns = can_view_stats %>
 
-<div class="<%= 'container-sm' unless two_columns %>">
-  <div class="row">
-    <div class="col-xs-12 <%= 'col-lg-7' if two_columns %>">
-      <% if can_view_stats %>
+  <div class="container-sm">
+    <%= flash_messages container: 'container-sm' %>
+  </div>
+
+  <div class="<%= 'container-sm' unless two_columns %>">
+    <div class="row">
+      <div class="col-xs-12 <%= 'col-lg-7' if two_columns %>">
+        <% if can_view_stats %>
+          <div class="list-group mb-2">
+            <%= render 'shared/list_group_header', title: 'Database' %>
+            <div class="list-group-item">
+              <%= render 'account/churches/pictograph', klass: Person %>
+              <%= render 'account/churches/pictograph', klass: Team %>
+              <%= render 'account/churches/pictograph', klass: Event, query: Event.upcoming, desc: 'upcoming event' %>
+              <%= render 'account/churches/pictograph', klass: ChurchProcess, query: PersonProcess.active, desc: 'active process' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-xs-12 <%= 'col-lg-5' if two_columns %>">
         <div class="list-group mb-2">
-          <%= render 'shared/list_group_header', title: 'Database' %>
-          <div class="list-group-item">
-            <%= render 'account/churches/pictograph', klass: Person %>
-            <%= render 'account/churches/pictograph', klass: Team %>
-            <%= render 'account/churches/pictograph', klass: Event, query: Event.upcoming, desc: 'upcoming event' %>
-            <%= render 'account/churches/pictograph', klass: ChurchProcess, query: PersonProcess.active, desc: 'active process' %>
-          </div>
-        </div>
-      <% end %>
-    </div>
+          <%= render 'shared/list_group_header', title: 'Address', button: { href: edit_account_church_path, icon: 'pencil', title: 'Edit', can: [:update, current_church] } %>
 
-    <div class="col-xs-12 <%= 'col-lg-5' if two_columns %>">
-      <div class="list-group mb-2">
-        <%= render 'shared/list_group_header', title: 'Address', button: { href: edit_account_church_path, icon: 'pencil', title: 'Edit', can: [:update, current_church] } %>
-
-        <% if current_church.full_address.present? %>
-          <% if current_church.lat && current_church.lng %>
-            <%= map_for current_church, height: '300px' %>
-          <% end %>
-
-          <%= fa_container 'map-marker', class: "list-group-item size-xs-small size-sm-normal fa-container" do %>
-            <%= current_church.full_address %>
-          <% end %>
-        <% else %>
-          <div class="list-group-item list-group-item-padded">
-            <% if can? :update, current_church %>
-              <h2>No address</h2>
-              <p>
-                You have not set your church address yet. We highly recommend you <%= link_to "fill it in now", edit_account_church_path %>.
-              </p>
-            <% else %>
-              <h2>No address</h2>
-              <p>
-                The administrator has not set your church address yet. We apologise for this embarrassing inconvenience.
-              </p>
-              <p>
-                <%= link_to "View your account page", account_person_path %>
-              </p>
+          <% if current_church.full_address.present? %>
+            <% if current_church.lat && current_church.lng %>
+              <%= map_for current_church, height: '300px' %>
             <% end %>
-          </div>
-        <% end %>
-        <% if current_church.phone? %>
-          <div class="list-group-item size-xs-small size-sm-normal fa-container">
-            <%= icon_for :phone, '1x', class: 'mr-xs' %>
-            <%= link_to current_church.phone, "tel:#{current_church.phone}", class: 'dotted' %>
-          </div>
-        <% end %>
-        <% if current_church.email? %>
-          <div class="list-group-item size-xs-small size-sm-normal fa-container">
-            <%= icon_for :email, '1x', class: 'mr-xs' %>
-            <%= link_to current_church.email, "mailto:#{current_church.email}", class: 'dotted' %>
-          </div>
-        <% end %>
+
+            <%= fa_container 'map-marker', class: "list-group-item size-xs-small size-sm-normal fa-container" do %>
+              <%= current_church.full_address %>
+            <% end %>
+          <% else %>
+            <div class="list-group-item list-group-item-padded">
+              <% if can? :update, current_church %>
+                <h2>No address</h2>
+                <p>
+                  You have not set your church address yet. We highly recommend you <%= link_to "fill it in now", edit_account_church_path %>.
+                </p>
+              <% else %>
+                <h2>No address</h2>
+                <p>
+                  The administrator has not set your church address yet. We apologise for this embarrassing inconvenience.
+                </p>
+                <p>
+                  <%= link_to "View your account page", account_person_path %>
+                </p>
+              <% end %>
+            </div>
+          <% end %>
+          <% if current_church.phone? %>
+            <div class="list-group-item size-xs-small size-sm-normal fa-container">
+              <%= icon_for :phone, '1x', class: 'mr-xs' %>
+              <%= link_to current_church.phone, "tel:#{current_church.phone}", class: 'dotted' %>
+            </div>
+          <% end %>
+          <% if current_church.email? %>
+            <div class="list-group-item size-xs-small size-sm-normal fa-container">
+              <%= icon_for :email, '1x', class: 'mr-xs' %>
+              <%= link_to current_church.email, "mailto:#{current_church.email}", class: 'dotted' %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

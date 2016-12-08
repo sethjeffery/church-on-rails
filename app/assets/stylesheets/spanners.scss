@@ -1,0 +1,21 @@
+@import 'variables';
+
+.spanner {
+  position: relative;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    display: block;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -50vw;
+    width: 100vw;
+    background-color: $gray-lightest;
+    position: absolute;
+  }
+}
