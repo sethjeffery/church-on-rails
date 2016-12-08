@@ -2,7 +2,7 @@ class People::MergesController < ApplicationController
   before_action :load_and_authorize_person
 
   def update
-    if merge_params[:merger_id]
+    if merge_params[:merger_id].present?
       merger = Person.find(merge_params[:merger_id])
       @person.merge_into(merger)
       redirect_to merger, notice: "Records merged successfully."

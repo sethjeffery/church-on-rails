@@ -35,6 +35,7 @@ module IconsHelper
       when :email then 'envelope'
       when :password then 'lock'
       when :edit then 'pencil'
+      when :merge then 'handshake-o'
 
       # treat anything left as a FontAwesome icon name
       else resource.dasherize

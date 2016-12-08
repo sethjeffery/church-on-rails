@@ -1,5 +1,10 @@
-<%= render 'processes/church_processes/title', title: 'Start a process' %>
+<%= render 'people/people/menu', active: :process do %>
+  <h2>Start a Process</h2>
 
-<div class="container-sm">
+  <p class="alert alert-info">
+    Processes are your church's way of connecting to people. You can start a follow-up process for first-time visitors,
+    or for members wanting to join a particular team.
+  </p>
+
   <%= render 'processes/person_processes/form' %>
-</div>
+<% end %>

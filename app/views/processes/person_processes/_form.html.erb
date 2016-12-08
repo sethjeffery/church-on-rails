@@ -6,7 +6,7 @@
           title: (@person_process.new_record? ? 'Cancel' : 'View process'),
           btn_class: 'btn-outline-primary' } %>
     <% else %>
-      <%= render 'shared/list_group_header', title: 'Process', button: { href: @person, title: 'Cancel', btn_class: 'btn-outline-primary' } %>
+      <%= render 'shared/list_group_header', title: 'Process', icon: :process %>
     <% end %>
 
     <% if @person_process.new_record? %>
@@ -38,8 +38,10 @@
         </label>
       <% end %>
     <% end %>
+  </div>
 
-    <%= render 'shared/list_group_header', title: 'Assignees' %>
+  <div class="list-group mb-2">
+    <%= render 'shared/list_group_header', title: 'Assignees', icon: :person %>
 
     <div class="list-group-item">
       <p class="size-xs-small">

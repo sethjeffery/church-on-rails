@@ -1,0 +1,24 @@
+<div class="side-and-details mt-1">
+  <div class="side-and-details--details">
+    <%= yield %>
+  </div>
+
+  <div class="side-and-details--side">
+    <ul class="nav nav-stacked">
+      <% items.compact.each do |item| %>
+        <% if item.blank? || item == '-' %>
+          <li class="nav-divider"></li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to item[:href], class: "nav-link #{'active' if item[:active] || local_assigns[:active] == item[:icon]}" do %>
+              <div class="fa-container fa-container-right">
+                <%= icon_for item[:icon], '1x', class: 'hidden-sm-down' %>
+                <%= item[:title] %>
+              </div>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>

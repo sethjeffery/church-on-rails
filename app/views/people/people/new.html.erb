@@ -1,10 +1,15 @@
 <% content_for :menu, :people %>
-<%= render 'shared/title', title: 'New member', short: :true %>
 
-<div class="container-sm">
-  <p class="size-xs-small mt-2">
+<%= render 'shared/side_and_details',
+           items: [{ title: 'People', icon: :search, href: :people },
+                   '-',
+                   { title: 'New member', icon: 'plus', href: new_person_path, active: true }
+] do %>
+  <h2>New Member</h2>
+
+  <p class="alert alert-info">
     Enter the member details below. Most fields are optional, but the more you enter, the more useful the database will be.
   </p>
 
   <%= render 'people/people/form' %>
-</div>
+<% end %>

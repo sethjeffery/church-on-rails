@@ -1,7 +1,6 @@
 <% if can?(:create, TeamMembership) %>
   <div class="list-group mb-2">
-    <%= render 'shared/list_group_header', title: 'Add to Teams',
-               button: ({ href: @person, title: 'Cancel', btn_class: 'btn-outline-primary' } unless @person.new_record?) %>
+    <%= render 'shared/list_group_header', title: 'Add to Teams' %>
 
     <div class="list-group-item">
       <%= f.collection_select :team_ids, Team.all, :id, :name, { }, multiple: true, class: 'form-control', data: { selectpicker: true, placeholder: 'Choose Teams' } %>

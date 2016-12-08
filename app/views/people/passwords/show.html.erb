@@ -1,12 +1,12 @@
-<%= render 'people/people/title' %>
+<%= render 'people/people/menu', active: :password do %>
+  <h2><%= @person %></h2>
 
-<div class="container-sm">
   <%= form_for @person.user, url: person_user_password_path(@person) do |f| %>
     <div class="list-group mb-2">
-      <%= render 'shared/list_group_header', title: 'Change password', button: { href: @person, title: 'Cancel', btn_class: 'btn-outline-primary' } %>
+      <%= render 'shared/list_group_header', title: 'Change password' %>
       <%= render 'shared/list_group_item_field', f: f, field: :password, control: :password_field, label: 'New password' %>
     </div>
 
     <%= render 'shared/form_submit', icon: :lock, title: 'Change password' %>
   <% end %>
-</div>
+<% end %>

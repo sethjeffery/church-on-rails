@@ -2,7 +2,7 @@
 <%= form_for(@person) do |f| %>
 
   <div class="list-group mb-2">
-    <%= render 'shared/list_group_header', title: 'Details', button: { title: 'Cancel', btn_class: 'btn-outline-primary', href: (@person.new_record? ? people_path : account_or_person_path(@person)) } %>
+    <%= render 'shared/list_group_header', title: 'Details' %>
     <%= render 'people/people/form_fields', f: f, person: @person %>
   </div>
 

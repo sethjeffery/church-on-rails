@@ -13,56 +13,65 @@ $width-xl: (map-get($container-max-widths, xl) - $grid-gutter-width-base);
 
 .side-and-details--details {
   margin-bottom: 2rem;
-  padding-top: .5rem;
+  padding-top: .375rem;
 
   @include media-breakpoint-up(md) {
     float: left;
     width: $width-md * .75;
     margin-left: $width-md * .25;
-    margin-right: $width-md * -.75;
+    margin-right: $width-md * -1;
   }
 
   @include media-breakpoint-up(lg) {
     width: $width-lg * .6;
-    margin-left: $width-lg * .2;
-    margin-right: $width-lg * -.6;
+    margin-left: $width-lg * .25;
+    margin-right: $width-lg * -.85;
   }
 
   @include media-breakpoint-up(xl) {
     width: $width-xl * .6;
     margin-left: $width-xl * .2;
-    margin-right: $width-xl * -.6;
+    margin-right: $width-xl * -.8;
   }
 }
 
 .side-and-details--side {
   text-align: center;
+  font-size: 0.875rem;
+  margin-bottom: 2rem;
 
   @include media-breakpoint-up(md) {
     float: left;
-    width: $width-md * .3;
-    margin-left: $width-md * -.05;
-    margin-right: $width-md * -.3;
+    font-size: 0.75rem;
     text-align: right;
     padding-right: 2rem;
-    position: fixed;
     transition: margin-top 0.3s;
 
+    width: $width-md * .30;
+    margin-left: $width-md * -.05;
+    margin-right: $width-md * -.25;
+
     .navbar-short + .container & {
-      margin-top: -76px;
+      margin-top: -56px;
+    }
+
+    @media (min-height: 600px) {
+      position: fixed;
     }
   }
 
   @include media-breakpoint-up(lg) {
+    font-size: 0.875rem;
     width: $width-lg * .25;
-    margin-left:  $width-lg * -.05;
+    margin-left:  $width-lg * 0;
     margin-right: $width-lg * -.25;
   }
 
   @include media-breakpoint-up(xl) {
-    width: $width-xl * .25;
-    margin-left:  $width-xl * -.05;
-    margin-right: $width-xl * -.25;
+    padding-right: 3rem;
+    width: $width-xl * .22;
+    margin-left:  $width-xl * -.02;
+    margin-right: $width-xl * -.20;
   }
 
   .nav {
@@ -70,18 +79,24 @@ $width-xl: (map-get($container-max-widths, xl) - $grid-gutter-width-base);
 
     .nav-divider {
       border-top: solid 1px $darken;
+      margin-top: .25rem;
+      margin-bottom: .25rem;
     }
 
     .nav-link {
+      line-height: 1.25rem;
       position: relative;
-      padding: .5rem 1rem;
+      padding: .5rem;
       border-radius: 0;
       color: $brand-info;
       text-transform: uppercase;
-      font-size: 0.875rem;
 
       @include hover-focus {
         color: darken($brand-info, 10%);
+      }
+
+      .fa {
+        line-height: 1.25rem;
       }
     }
 

@@ -1,6 +1,6 @@
 <% content_for :menu, :people %>
-<%= render 'people/people/title' %>
 
-<div class="container-sm">
+<%= render 'people/people/menu', active: :edit do %>
+  <h2><%= @person %></h2>
   <%= render 'people/people/form' %>
-</div>
+<% end %>

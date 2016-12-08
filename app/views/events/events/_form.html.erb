@@ -2,10 +2,7 @@
 <%= form_for(@event) do |f| %>
 
   <div class="list-group mb-2">
-    <%= render 'shared/list_group_header', title: 'Details', button: {
-        title: 'Cancel',
-        href: (@event.new_record? ? (@team || events_path) : @event),
-        btn_class: 'btn-outline-primary' } %>
+    <%= render 'shared/list_group_header', title: 'Details' %>
 
     <div class="list-group-item text-required">
       <%= field_name @event, :name %>

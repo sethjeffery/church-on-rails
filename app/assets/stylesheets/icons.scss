@@ -44,7 +44,17 @@
 
     > .fa {
       margin-left: -2.25rem;
+      line-height: 1.5rem;
     }
+  }
+}
+
+.fa-container-right {
+  padding-left: 0;
+  padding-right: 1.5rem;
+  > .fa {
+    float: right;
+    margin: 0 -2rem 0 -1rem;
   }
 }
 

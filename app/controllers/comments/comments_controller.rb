@@ -3,7 +3,7 @@ class Comments::CommentsController < ApplicationController
 
   def create
     @comment.person = current_person
-    #@comment.save
+    @comment.save
   end
 
   protected

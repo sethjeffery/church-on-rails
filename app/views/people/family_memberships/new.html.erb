@@ -1,5 +1,4 @@
-<%= render 'people/families/title' %>
-
-<div class="container-sm">
+<%= render 'people/people/menu', active: :family do %>
+  <h2>Join a family</h2>
   <%= render 'people/family_memberships/form' %>
-</div>
+<% end %>

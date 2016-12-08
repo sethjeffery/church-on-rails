@@ -1,5 +1,10 @@
-<%= render 'people/people/title' %>
+<%= render 'people/people/menu', active: :family do %>
+  <h2>Join a Family</h2>
 
-<div class="container-sm">
+  <p class="alert alert-info">
+    Families are an essential connection of the database to people. Defining families allows you to
+    group people in the same family together at a specific home address.
+  </p>
+
   <%= render 'people/person_families/form' %>
-</div>
+<% end %>

@@ -1,18 +1,18 @@
 <% content_for :menu, :people %>
-<%= render 'people/people/title', color: :danger %>
 
-<div class="container-xs">
-  <div class="list-group mb-2">
-    <%= render 'shared/list_group_header', title: 'Remove person' %>
+<%= render 'people/people/menu', active: :trash do %>
+  <h2>Remove Person</h2>
 
-    <div class="list-group-item">
-      <p>
-        If you do this, <strong><%= @person %></strong> will be removed from the database.
-        Are you absolutely sure?
-      </p>
+  <div class="alert alert-info mb-2">
+    <p class="text-xs-center mt-2">
+      If you do this, <strong><%= @person %></strong> will be removed from the database.
+    </p>
+    <p class="text-xs-center mb-2">
+      Are you absolutely sure?
+    </p>
 
-      <%= link_to 'No, stop!', @person, class: 'btn btn-secondary btn-block btn-lg mb-sm' %>
+    <div class="container-xs">
       <%= button_to 'Yes, do it.', @person, method: :delete, class: 'btn btn-danger btn-block btn-lg mb-sm' %>
     </div>
   </div>
-</div>
+<% end %>

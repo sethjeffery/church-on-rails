@@ -2,9 +2,30 @@
 
 .comment {
   &:not(:last-child) { margin-bottom: .75rem; }
-  padding-top: 1rem;
 
-  + .comment {
-    border-top: solid 1px $input-border-color;
+  padding-top: 1rem;
+  border-top: solid 1px $input-border-color;
+
+  &:first-child {
+    margin-top: 1.25rem;
+  }
+
+  .comment-date {
+    color: lighten($gray-light, 15%);
+  }
+
+  &:hover .comment-date {
+    color: $gray;
+  }
+}
+
+#comments-form {
+  margin: -$list-group-item-padding-x;
+
+  textarea {
+    border-width: 0;
+    border-radius: $list-group-border-radius;
+    padding-left: $list-group-item-padding-x;
+    padding-right: $list-group-item-padding-x;
   }
 }

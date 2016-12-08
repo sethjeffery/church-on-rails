@@ -1,12 +1,12 @@
 <div class="comment">
-  <div class="float-xs-right hidden-xs-down">
-    <span class="size-xs-tiny text-light"><%= comment.created_at&.strftime '%d %b %Y, %H:%M' %></span>
+  <div class="float-xs-right size-xs-small hidden-xs-down">
+    <span class="size-xs-tiny comment-date"><%= comment.created_at&.strftime '%d %b %Y, %H:%M' %></span>
   </div>
-  <div class="avatar-md-container">
-    <%= avatar_tag comment.person, class: 'avatar-md' %>
-    <span class="ellipsis size-xs-small"><%= comment.person %></span>
+  <div class="avatar-container size-xs-small ">
+    <%= avatar_tag comment.person %>
+    <span class="ellipsis"><%= comment.person %></span>
   </div>
-  <div class="avatar-md-container pt-0">
+  <div class="avatar-container pt-0">
     <%= markdown comment.description %>
   </div>
 </div>

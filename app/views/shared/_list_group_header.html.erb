@@ -1,12 +1,12 @@
-<div class="list-group-item active">
+<div class="list-group-item active <%= 'fa-container' if local_assigns[:icon] %>">
   <% if local_assigns[:button] && (button[:can].nil? || can?(*button[:can])) %>
-    <%= link_to button[:href], class: "float-xs-right ml-sm btn #{button[:btn_class] || 'btn-primary'} btn-sm btn-align-middle" do %>
+    <%= link_to button[:href], class: "float-xs-right ml-sm btn #{button[:btn_class] || 'btn-secondary'} btn-sm btn-align-middle" do %>
       <%= icon_for button[:icon] if button[:icon] %>
       <%= button[:title] %>
     <% end %>
   <% end %>
+  <%= icon_for icon if local_assigns[:icon] %>
   <div class="text-ellipsis">
-    <%= icon_for icon, '1x', class: 'mr-xs' if local_assigns[:icon] %>
     <%= title if local_assigns[:title] %>
     <%= yield if block_given? %>
   </div>

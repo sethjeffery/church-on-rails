@@ -1,7 +1,7 @@
 <% if has_comments_area? resource %>
   <div class="list-group mb-2">
     <div class="list-group-item">
-      <%= form_for :comment, url: comments_path, remote: true do |f| %>
+      <%= form_for :comment, url: comments_path, remote: true, html: { id: 'comments-form' } do |f| %>
         <%= f.hidden_field :commentable_id, value: resource.id %>
         <%= f.hidden_field :commentable_type, value: resource.class.name %>
         <%= f.text_area :description, class: 'form-control my-sm', rows: 1, placeholder: 'Add a comment...' %>

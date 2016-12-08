@@ -1,16 +1,15 @@
-<%= render 'people/people/title', short: true %>
+<%= render 'people/people/menu', active: :merge do %>
+  <%= form_for :merge, url: person_merge_path(@person), method: :put do |f| %>
+    <h2>Merge People</h2>
 
-<%= form_for :merge, url: person_merge_path(@person), method: :put do |f| %>
-  <div class="container-sm">
-    <p class="mt-2">
+    <p class="alert alert-info">
       You can merge this person into another. Any team and family memberships
       will be copied over, and any duplicate fields (like name) will be replaced
       with the person you merge into.
     </p>
 
     <div class="list-group mb-2">
-      <%= render 'shared/list_group_header', title: 'Merge into...',
-                 button: { title: 'Cancel', btn_class: 'btn-outline-primary', href: @person } %>
+      <%= render 'shared/list_group_header', title: "Merge #{@person.first_name} into..." %>
 
       <div class="list-group-item">
         <%= f.collection_select :merger_id, Person.where.not(id: @person.id).order(:first_name, :last_name).all, :id, :name,
@@ -20,5 +19,5 @@
     </div>
 
     <%= render 'shared/form_submit', icon: 'handshake-o', title: 'Merge!' %>
-  </div>
+  <% end %>
 <% end %>

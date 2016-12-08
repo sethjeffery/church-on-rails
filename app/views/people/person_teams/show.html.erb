@@ -1,5 +1,10 @@
-<%= render 'people/people/title' %>
+<%= render 'people/people/menu', active: :team do %>
+  <h2>Join Teams</h2>
 
-<div class="container-sm">
+  <p class="alert alert-info">
+    A team represents any group of people in your church, whether they are a team of volunteers,
+    a home group, or a role on the website.
+  </p>
+
   <%= render 'people/person_teams/form' %>
-</div>
+<% end %>
