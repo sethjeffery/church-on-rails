@@ -17,7 +17,7 @@
       <%= render partial: 'children/child_group_memberships/list_group_item', collection: @child_group.child_group_memberships.includes(:person).joins(:person).order('first_name, last_name') %>
     </div>
   <% else %>
-    <div class="alert alert-info">
+    <div class="alert alert-info py-2">
       <div class="size-xs-large">There are no children in this group at the moment.</div>
       Would you like to <%= link_to "add some", new_child_group_child_group_membership_path(@child_group) %>?
     </div>

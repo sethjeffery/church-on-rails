@@ -1,0 +1,8 @@
+<% content_for :menu, :church %>
+
+<%= render 'shared/side_and_details',
+           title: local_assigns[:title],
+           active: local_assigns[:active],
+           items: [ { title: 'Church',      icon: :home,    href: root_path },
+                   ({ title: 'Edit',        icon: :edit,    href: edit_account_church_path}   if can?(:update, current_church)),
+] { yield } %>

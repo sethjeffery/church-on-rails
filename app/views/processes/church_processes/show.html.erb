@@ -1,28 +1,35 @@
 <%= render 'menu', title: @church_process, active: @church_process do %>
 
-  <div class="list-group mb-2">
-    <%= render 'shared/list_group_header', title: 'Details' %>
+  <% if @church_process.description.present? || @church_process.steps.present? %>
+    <div class="list-group mb-2">
+      <%= render 'shared/list_group_header', title: 'Details' %>
 
-    <% if @church_process.description.present? %>
-      <div class="list-group-item">
-        <%= render 'shared/description', description: @church_process.description %>
-      </div>
-    <% end %>
-
-    <ol class="list-group-item list-steps">
-      <% @church_process.steps.select(&:present?).each do |step| %>
-        <li class="list-step size-xs-small size-sm-normal">
-          <%= icon_for 'check-square-o', '1x', class: 'mr-xs' %>
-          <%= step %>
-        </li>
+      <% if @church_process.description.present? %>
+        <div class="list-group-item">
+          <%= render 'shared/description', description: @church_process.description %>
+        </div>
       <% end %>
-    </ol>
-  </div>
+
+      <ol class="list-group-item list-steps">
+        <% @church_process.steps.select(&:present?).each do |step| %>
+          <li class="list-step size-xs-small size-sm-normal">
+            <%= icon_for 'check-square-o', '1x', class: 'mr-xs' %>
+            <%= step %>
+          </li>
+        <% end %>
+      </ol>
+    </div>
+  <% end %>
 
   <% if @church_process.active_processes.present? %>
     <div class="list-group mb-2">
       <%= render 'shared/list_group_header', title: 'People on this process' %>
       <%= render partial: 'processes/person_processes/person_process_item', collection: @church_process.active_processes %>
+    </div>
+  <% else %>
+    <div class="alert alert-info py-2">
+      <div class="size-xs-large">There are no people on this process yet.</div>
+      Would you like to <%= link_to "start the process", new_church_process_person_process_path(@church_process) %> for someone?
     </div>
   <% end %>
 
