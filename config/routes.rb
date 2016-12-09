@@ -54,6 +54,7 @@ Rails.application.routes.draw do
     scope module: 'children' do
       get 'children', to: redirect('children/groups')
       resources :child_groups, path: 'children/groups' do
+        get :confirm_destroy, on: :member
         resource :kiosk do
           resources :check_ins, controller: :kiosk_check_ins
           resources :check_outs, controller: :kiosk_check_outs

@@ -1,0 +1,16 @@
+<%= render 'menu', active: :destroy, title: 'Remove group' do %>
+  <div class="alert alert-info py-2 text-xs-center">
+    <p>
+      If you do this, <strong><%= @child_group %></strong> will be removed from the database.
+      Any children will stay in the database but no longer in this group.
+    </p>
+
+    <p class="size-xs-large">
+      Are you sure?
+    </p>
+
+    <div class="container-xs">
+      <%= button_to 'Yes, do it.', @child_group, method: :delete, class: 'btn btn-danger btn-block btn-lg' %>
+    </div>
+  </div>
+<% end %>

@@ -20,6 +20,12 @@ class Children::ChildGroupsController < ApplicationController
       render :edit
     end
   end
+
+  def destroy
+    @child_group.destroy
+    redirect_to child_groups_path, notice: "#{@child_group} has been removed from the database."
+  end
+
   private
 
   def create_params

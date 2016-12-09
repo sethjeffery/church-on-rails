@@ -11,8 +11,15 @@
     </div>
   <% end %>
 
-  <div class="list-group mb-2">
-    <%= render 'shared/list_group_header', title: 'Children' %>
-    <%= render partial: 'children/child_group_memberships/list_group_item', collection: @child_group.child_group_memberships.includes(:person).joins(:person).order('first_name, last_name') %>
-  </div>
+  <% if @child_group.child_group_memberships.present? %>
+    <div class="list-group mb-2">
+      <%= render 'shared/list_group_header', title: 'Children' %>
+      <%= render partial: 'children/child_group_memberships/list_group_item', collection: @child_group.child_group_memberships.includes(:person).joins(:person).order('first_name, last_name') %>
+    </div>
+  <% else %>
+    <div class="alert alert-info">
+      <div class="size-xs-large">There are no children in this group at the moment.</div>
+      Would you like to <%= link_to "add some", new_child_group_child_group_membership_path(@child_group) %>?
+    </div>
+  <% end %>
 <% end %>
