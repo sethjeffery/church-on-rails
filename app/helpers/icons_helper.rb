@@ -62,12 +62,12 @@ module IconsHelper
   # Like typical view helpers, this method can take two forms, block or string content.
   #
   #  @example String syntax
-  #    fa_container("Content", "icon", { ... })
+  #    icon_container("Content", "icon", { ... })
   #
   #  @example Block syntax
-  #    fa_container("icon", { ... })  do "Content" end
+  #    icon_container("icon", { ... })  do "Content" end
   #
-  def fa_container(content_or_icon, icon_or_args={}, args={}, &block)
+  def icon_container(content_or_icon, icon_or_args={}, args={}, &block)
     if icon_or_args.is_a?(Hash)
       args = icon_or_args
       icon_or_args = content_or_icon

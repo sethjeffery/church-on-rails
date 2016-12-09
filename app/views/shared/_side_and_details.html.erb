@@ -1,7 +1,14 @@
 <div class="container">
   <div class="side-and-details mt-1">
     <div class="side-and-details--details">
-      <% if local_assigns[:title] %><h2><%= title %></h2><% end %>
+      <% if local_assigns[:title] %>
+        <h2>
+          <% if local_assigns[:title].is_a?(Person) %>
+            <%= avatar_tag local_assigns[:title], class: 'avatar-md float-xs-right' %>
+          <% end %>
+          <%= title %>
+        </h2>
+      <% end %>
       <%= yield %>
     </div>
 

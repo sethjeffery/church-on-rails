@@ -10,9 +10,8 @@
       <% end %>
     <% end %>
 
-    <div class="fa-container">
-      <%= icon_for membership.team, '1x' %>
-      <%= link_to membership.team, membership.team %>
-    </div>
+    <%= icon_container membership.team do %>
+      <%= link_to membership.team, membership.team, class: 'ml-xs' %>
+    <% end %>
   </div>
 <% end %>

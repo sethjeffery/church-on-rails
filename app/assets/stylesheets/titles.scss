@@ -34,17 +34,23 @@
   z-index: -3;
 }
 
-.title-container-event::after, .title-container-danger::after {
-  background-color: $brand-danger-light;
+.title-container-info {
+  background-color: $brand-info-light;
+  color: white;
 }
 
-.title-container-process::after, .title-container-success::after {
-  background-color: $brand-success-light;
+.title-container-danger {
+  background-color: $brand-danger;
+  color: white;
+}
+
+.title-container-success {
+  background-color: $brand-success;
+  color: white;
 }
 
 .title-background-image {
   color: white;
-  padding-top: 8rem;
 
   .avatar {
     background-color: rgba(0,0,0,0.25);

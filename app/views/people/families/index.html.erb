@@ -9,7 +9,7 @@
 
     <% if @families.present? %>
       <% @families.each do |family| %>
-        <%= fa_container family, class: 'list-group-item list-group-item-action', tag: :a, href: url_for(family) do %>
+        <%= icon_container family, class: 'list-group-item list-group-item-action', tag: :a, href: url_for(family) do %>
           <div class="row">
             <div class="col-sm-6 text-ellipsis">
               <%= family %>

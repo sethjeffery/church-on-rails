@@ -15,7 +15,7 @@
     <%= list_group_field :account do %>
 
       <% if person.user.present? %>
-        <%= fa_container(person.user.email, person.user) %>
+        <%= icon_container(person.user.email, person.user) %>
       <% elsif can?(:manage, User) %>
         <%= link_to new_person_user_path(person), class: 'btn btn-secondary btn-sm btn-align-middle' do %>
           <%= icon_for User %>
@@ -33,7 +33,7 @@
 
 <% if can?(:read, Team) && person.team_memberships.present? %>
   <div class="list-group mb-2">
-    <%= render 'shared/list_group_header', title: 'Teams' %>
+    <%= render 'shared/list_group_header', title: 'Teams', icon: :team %>
     <%= render 'people/people/memberships', person: person %>
   </div>
 <% end %>

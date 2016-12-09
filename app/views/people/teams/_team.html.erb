@@ -12,8 +12,8 @@
   <% if can? :manage, team %>
     <% if team.admin? %>
       <div class="list-group-item">
-        <%= fa_container 'Site administration', :star %>
-        <%= fa_container '', class: "size-xs-small clearfix" do %>
+        <%= icon_container 'Site administration', :star %>
+        <%= icon_container '', class: "size-xs-small clearfix" do %>
           <div class="float-xs-left mr-1"><%= fa_icon 'check' %> Access all areas</div>
         <% end %>
       </div>
@@ -22,8 +22,8 @@
       <% { people: 'People, Teams, Families', process: 'Processes', event: 'Events', comment: 'Comments' }.each do |type, title| %>
         <% if team.has_permissions_for? type %>
           <div class="list-group-item">
-            <%= fa_container title, type %>
-            <%= fa_container '', class: 'size-xs-small clearfix' do %>
+            <%= icon_container title, type %>
+            <%= icon_container '', class: 'size-xs-small clearfix' do %>
               <% if team.try(:"#{type}_reader?") %><div class="float-xs-left mr-1"><%= icon_for :eye %> View</div><% end %>
               <% if team.try(:"#{type}_editor?") %><div class="float-xs-left mr-1"><%= icon_for :pencil %> Edit</div><% end %>
               <% if team.try(:"#{type}_admin?")  %><div class="float-xs-left mr-1"><%= icon_for :star %> Manage</div><% end %>

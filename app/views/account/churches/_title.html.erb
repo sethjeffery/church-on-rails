@@ -1,8 +1,10 @@
 <% if current_church.cover.present? %>
-  <div class="title-container mb-1 pb-1 text-xs-center title-background-image">
-    <h1 class="mb-0"><%= current_church %></h1>
+  <div class="title-container mb-1 pb-1 pt-3 text-xs-center title-background-image">
+    <h1 class="mb-0 mt-3 pt-3"><%= current_church %></h1>
     <div class="title-overlay" style="background-image: url('<%= current_church.cover.url %>');"></div>
   </div>
 <% else %>
-  <%= render 'shared/title', title: current_church.name, icon: :home %>
+  <div class="title-container mb-1 pb-1 pt-3 text-xs-center title-container-info">
+    <h1 class="mb-0"><%= current_church %></h1>
+  </div>
 <% end %>

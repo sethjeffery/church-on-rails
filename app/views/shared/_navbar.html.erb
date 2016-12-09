@@ -24,10 +24,10 @@
               </div>
               <div class="dropdown-divider"></div>
               <%= link_to account_path, class: 'dropdown-item' do %>
-                <%= fa_container 'Profile', current_user %>
+                <%= icon_container 'Profile', current_user %>
               <% end %>
               <%= link_to destroy_user_session_path, class: 'dropdown-item' do %>
-                <%= fa_container 'Log out', 'sign-out' %>
+                <%= icon_container 'Log out', 'sign-out' %>
               <% end %>
             </div>
           </li>

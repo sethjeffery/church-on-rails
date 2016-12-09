@@ -8,7 +8,7 @@
     <%= render 'shared/search_header', resource: :teams, options: [:people, :families, :teams] %>
 
     <% @teams.each do |team| %>
-      <%= fa_container team,
+      <%= icon_container team,
                        class: 'list-group-item list-group-item-action list-group-item-team', tag: :a, href: url_for(team),
                        style: ("border-left-color: ##{team.color};" if team.color) do %>
         <div class="row">
