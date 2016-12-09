@@ -1,4 +1,4 @@
-<%= render 'people/people/title', title: 'Your profile', short: @person.new_record?, icon: 'user-circle-o' %>
+<%= render 'people/people/title', title: 'Your profile' %>
 
 <div class="container-xs">
   <% if @person.new_record? %>
@@ -15,9 +15,19 @@
   <%= flash_messages %>
   <%= form_for(@person, url: account_person_path) do |f| %>
 
-    <div class="list-group mb-1">
+    <div class="list-group mb-2">
       <%= render 'shared/list_group_header', title: 'Details' %>
       <%= render 'account/people/form_fields', f: f, person: @person, email: false %>
+    </div>
+
+    <div class="list-group mb-2">
+      <%= render 'shared/list_group_header', title: 'Photo' %>
+      <div class="list-group-item">
+        <label class="custom-control custom-file">
+          <%= f.file_field :avatar, class: 'custom-file-input' %>
+          <span class="custom-file-control"></span>
+        </label>
+      </div>
     </div>
 
     <%= render 'shared/form_submit', title: 'Save changes', icon: @person %>

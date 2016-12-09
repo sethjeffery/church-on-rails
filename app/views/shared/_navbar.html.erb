@@ -50,6 +50,10 @@
           <% end if can?(:read, current_church) %>
 
           <%= content_tag :div, class: "nav-item #{'active' if content_for(:menu) == 'people'}" do %>
+            <%= link_to 'Profile', account_path, class: 'nav-link' %>
+          <% end unless can?(:read, Person) %>
+
+          <%= content_tag :div, class: "nav-item #{'active' if content_for(:menu) == 'people'}" do %>
             <%= link_to 'People', people_path, class: 'nav-link' %>
           <% end if can?(:read, Person) %>
 

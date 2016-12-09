@@ -159,7 +159,7 @@
 
 @include media-breakpoint-up(md) {
   body:not(.kiosk) {
-    border-top: solid 120px $brand-primary;
+    padding-top: 120px;
   }
 
   .navbar {

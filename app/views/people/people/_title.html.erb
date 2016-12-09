@@ -1,9 +1,3 @@
-<% unless local_assigns[:icon] %>
-  <div class="text-xs-center mb-sm">
-    <%= avatar_tag @person, class: 'avatar-xl' %>
-  </div>
-<% end %>
-
 <%= render 'shared/title',
            title: (local_assigns[:title] || @person.to_s),
            color: local_assigns[:color],

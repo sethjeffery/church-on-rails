@@ -1,2 +1,3 @@
-<%= render 'people/people/title' %>
-<%= render 'people/people/person', person: @person %>
+<%= render 'people/people/menu', active: @person, title: @person do %>
+  <%= render 'people/people/person', person: @person %>
+<% end %>
