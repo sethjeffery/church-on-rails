@@ -1,0 +1,18 @@
+<% content_for :menu, :events %>
+
+<% if @event.try(:persisted?) %>
+  <%= render 'shared/side_and_details',
+             title: local_assigns[:title],
+             active: local_assigns[:active],
+             items: [{ title: 'Events', icon: :search, href: :events },
+                     '-',
+                     ({ title: @event,          icon: @event,   href: @event }),
+                     ({ title: 'Edit',          icon: :edit,    href: edit_event_path(@event)}             if can?(:update, @event)),
+                     ({ title: 'Remove event',  icon: :destroy, href: confirm_destroy_event_path(@event)}  if can?(:destroy, @event))
+  ] { yield } %>
+<% else %>
+  <%= render 'shared/side_and_details',
+             title: local_assigns[:title],
+             active: local_assigns[:active],
+             items: [{ title: 'Events', icon: :search, href: :events }, '-', { title: 'New event', icon: :new, href: new_event_path}] { yield } %>
+<% end %>

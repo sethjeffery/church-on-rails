@@ -1,5 +1,3 @@
-<%= render 'events/events/title' %>
-
-<div class="container-sm">
-  <%= render 'events/events/form' %>
-</div>
+<%= render 'menu', title: @event, active: :edit do %>
+  <%= render 'form' %>
+<% end %>

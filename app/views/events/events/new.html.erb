@@ -1,9 +1,5 @@
-<% content_for :menu, :events %>
-<%= render 'shared/side_and_details', items: [{ title: 'Events', icon: :search, href: :events },
-                                              '-',
-                                              { title: 'New event', icon: 'plus', href: new_event_path, active: true }] do %>
+<%= render 'menu', title: 'New event', active: :new do %>
 
-  <h2>New Event</h2>
   <p>
     Events are scheduled times for your teams or church to meet up. They can be either
     on a single date or recurring.

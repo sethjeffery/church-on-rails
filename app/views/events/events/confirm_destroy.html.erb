@@ -1,17 +1,16 @@
-<%= render 'events/events/title', color: :danger %>
+<%= render 'menu', title: 'Remove event', active: :destroy do %>
+  <div class="alert alert-info py-2 text-xs-center">
 
-<div class="container-xs">
-  <div class="list-group mb-2">
-    <%= render 'shared/list_group_header', title: 'Remove event' %>
+    <p>
+      If you do this, <strong><%= @event %></strong> will be removed from the database.
+    </p>
 
-    <div class="list-group-item">
-      <p>
-        If you do this, <strong><%= @event %></strong> will be removed from the database.
-        Are you sure?
-      </p>
+    <p class="size-xs-large">
+      Are you sure?
+    </p>
 
-      <%= link_to 'No, stop!', @event, class: 'btn btn-secondary btn-block btn-lg mb-sm' %>
+    <div class="container-xs">
       <%= button_to 'Yes, do it.', @event, method: :delete, class: 'btn btn-danger btn-block btn-lg mb-sm' %>
     </div>
   </div>
-</div>
+<% end %>

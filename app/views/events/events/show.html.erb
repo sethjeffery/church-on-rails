@@ -1,55 +1,36 @@
-<%= render 'events/events/title' %>
-<% two_columns = can?(:manage, @event) || has_comments_area?(@event) %>
+<%= render 'menu', title: @event, active: @event do %>
 
-<div class="<%= 'container-sm' unless two_columns %>">
-  <div class="row">
-    <div class="col-xs-12 <%= 'col-lg-7' if two_columns %>">
-      <div class="list-group mb-2">
-        <%= render 'shared/list_group_header', title: 'Details', button: { icon: :pencil, title: 'Change', href: edit_event_path(@event), can: [:update, @event] } %>
+  <div class="list-group mb-2">
+    <%= render 'shared/list_group_header', title: 'Details' %>
 
-        <% if @event.description.present? %>
-          <div class="list-group-item">
-            <%= render 'shared/description', description: @event.description %>
-          </div>
-        <% end %>
-
-        <div class="list-group-item py-sm">
-          <%= render "events/schedules/#{@event.schedule.rule}", schedule: @event.schedule %>
-        </div>
-
-        <% if @event.team %>
-          <%= render 'people/teams/team_item', team_item: @event.team %>
-        <% end %>
+    <% if @event.description.present? %>
+      <div class="list-group-item">
+        <%= render 'shared/description', description: @event.description %>
       </div>
+    <% end %>
 
-      <% if @event.full_address.present? %>
-        <div class="list-group mb-2">
-          <%= render 'shared/list_group_header', title: 'Venue' %>
-
-          <% if @event.lat && @event.lng %>
-            <%= map_for @event, height: '400px' %>
-          <% end %>
-
-          <%= fa_container 'map-marker', class: 'list-group-item size-xs-small size-sm-normal' do %>
-            <%= @event.full_address %>
-          <% end %>
-        </div>
-      <% end %>
-
+    <div class="list-group-item py-sm">
+      <%= render "events/schedules/#{@event.schedule.rule}", schedule: @event.schedule %>
     </div>
 
-    <div class="col-xs-12 <%= 'col-lg-5' if two_columns %>">
-      <% if can? :manage, @event %>
-        <div class="list-group mb-2">
-          <%= render 'shared/list_group_header', title: 'Management' %>
-
-          <%= fa_container :trash, class: 'list-group-item' do %>
-            <%= link_to 'Remove event', confirm_destroy_event_path(@event) %>
-          <% end %>
-        </div>
-      <% end %>
-
-      <%= render 'comments/comments/form', resource: @event %>
-    </div>
+    <% if @event.team %>
+      <%= render 'people/teams/team_item', team_item: @event.team %>
+    <% end %>
   </div>
-</div>
+
+  <% if @event.full_address.present? %>
+    <div class="list-group mb-2">
+      <%= render 'shared/list_group_header', title: 'Venue' %>
+
+      <% if @event.lat && @event.lng %>
+        <%= map_for @event, height: '400px' %>
+      <% end %>
+
+      <%= fa_container 'map-marker', class: 'list-group-item size-xs-small size-sm-normal' do %>
+        <%= @event.full_address %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= render 'comments/comments/form', resource: @event %>
+<% end %>

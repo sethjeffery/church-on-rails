@@ -1,27 +1,30 @@
 <% content_for :menu, :events %>
-<%= render 'shared/title', title: 'Events', btn: { can: [:create, Event], href: new_event_path } %>
-<%= flash_messages %>
 
-<div class="list-group">
-  <% if @events.present? %>
-    <%= render partial: 'events/events/event_item', collection: @events %>
-  <% else %>
-    <div class="list-group-item list-group-item-padded">
-      <h1>Get together.</h1>
-      <p>
-        Events are ways for you to specify meetings and special events either for your teams
-        or for the whole church. Events can be recurring (like a regular small group) or
-        once off (like a special occasion).
-      </p>
-      <% if can? :create, Event %>
+<div class="container">
+  <%= render 'shared/title', title: 'Events', btn: { can: [:create, Event], href: new_event_path } %>
+  <%= flash_messages %>
+
+  <div class="list-group">
+    <% if @events.present? %>
+      <%= render partial: 'events/events/event_item', collection: @events %>
+    <% else %>
+      <div class="list-group-item list-group-item-padded">
+        <h1>Get together.</h1>
         <p>
-          <%= link_to "Create an event", new_event_path %> and get everyone together.
+          Events are ways for you to specify meetings and special events either for your teams
+          or for the whole church. Events can be recurring (like a regular small group) or
+          once off (like a special occasion).
         </p>
-      <% end %>
-    </div>
-  <% end %>
-</div>
+        <% if can? :create, Event %>
+          <p>
+            <%= link_to "Create an event", new_event_path %> and get everyone together.
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 
-<div class="text-xs-center mt-1">
-  <%= paginate @events, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
+  <div class="text-xs-center mt-1">
+    <%= paginate @events, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
+  </div>
 </div>
