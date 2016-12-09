@@ -51,7 +51,7 @@ en:
         postcode: 'Post code'
     help:
       church:
-        can_sign_up: Uncheck if you don't want a sign up screen where people can join the site without invitation.
+        can_sign_up: Switch off if you don't want a sign up screen where people can join the site without invitation.
     errors:
       models:
         person:
