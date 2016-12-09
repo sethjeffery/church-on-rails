@@ -1,5 +1,3 @@
-<%= render 'processes/church_processes/title', title: 'Start a process' %>
-
-<div class="container-sm">
-  <%= render 'processes/person_processes/form' %>
-</div>
+<%= render 'processes/church_processes/menu', title: 'Start process', active: :person_process do %>
+  <%= render 'form' %>
+<% end %>

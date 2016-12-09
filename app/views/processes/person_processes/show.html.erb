@@ -1,24 +1,3 @@
-<div class="text-xs-center mb-sm">
-  <%= link_to @person_process.person do %>
-    <%= avatar_tag @person_process.person, class: 'avatar-xl' %>
-  <% end %>
-</div>
-
-<%= render 'shared/title',
-           title: @person_process.person,
-           href: @person_process.person,
-           color: :process %>
-
-<% two_columns = has_comments_area?(@person_process) %>
-
-<div class="<%= 'container-sm' unless two_columns %>">
-  <div class="row">
-    <div class="col-xs-12 <%= 'col-lg-7' if two_columns %>">
-      <%= render 'processes/person_processes/form' %>
-    </div>
-
-    <div class="col-xs-12 <%= 'col-lg-5' if two_columns %>">
-      <%= render 'comments/comments/form', resource: @person_process %>
-    </div>
-  </div>
-</div>
+<%= render 'processes/church_processes/menu', title: @person_process, active: @person_process.person do %>
+  <%= render 'form' %>
+<% end %>

@@ -1,48 +1,30 @@
-<%= render 'processes/church_processes/title' %>
-<% two_columns = can?(:manage, @church_process) || has_comments_area?(@church_process) %>
+<%= render 'menu', title: @church_process, active: @church_process do %>
 
-<div class="row">
-  <div class="col-lg-7">
-    <div class="list-group mb-2">
-      <%= render 'shared/list_group_header', title: 'Details', button: { icon: :edit, title: 'Change', can: [:update, @church_process], href: edit_church_process_path(@church_process) } %>
+  <div class="list-group mb-2">
+    <%= render 'shared/list_group_header', title: 'Details' %>
 
-      <% if @church_process.description.present? %>
-        <div class="list-group-item">
-          <%= render 'shared/description', description: @church_process.description %>
-        </div>
-      <% end %>
-
-      <ol class="list-group-item list-steps">
-        <% @church_process.steps.select(&:present?).each do |step| %>
-          <li class="list-step size-xs-small size-sm-normal">
-            <%= icon_for 'check-square-o', '1x', class: 'mr-xs' %>
-            <%= step %>
-          </li>
-        <% end %>
-      </ol>
-    </div>
-
-    <div class="list-group mb-2">
-      <%= render 'shared/list_group_header', button: { icon: PersonProcess, title: 'Add', can: [:create, PersonProcess], href: new_church_process_person_process_path(@church_process) } do %>
-        <div class="hidden-xs-down"> People on this process </div>
-        <div class="hidden-sm-up">   People                 </div>
-      <% end %>
-
-      <%= render partial: 'processes/person_processes/person_process_item', collection: @church_process.active_processes %>
-    </div>
-  </div>
-
-  <div class="col-lg-5">
-    <% if can? :manage, @church_process %>
-      <div class="list-group mb-2">
-        <%= render 'shared/list_group_header', title: 'Management' %>
-
-        <%= fa_container 'trash', class: 'list-group-item' do %>
-          <%= link_to 'Remove process', confirm_destroy_church_process_path(@church_process) %>
-        <% end %>
+    <% if @church_process.description.present? %>
+      <div class="list-group-item">
+        <%= render 'shared/description', description: @church_process.description %>
       </div>
     <% end %>
 
-    <%= render 'comments/comments/form', resource: @church_process %>
+    <ol class="list-group-item list-steps">
+      <% @church_process.steps.select(&:present?).each do |step| %>
+        <li class="list-step size-xs-small size-sm-normal">
+          <%= icon_for 'check-square-o', '1x', class: 'mr-xs' %>
+          <%= step %>
+        </li>
+      <% end %>
+    </ol>
   </div>
-</div>
+
+  <% if @church_process.active_processes.present? %>
+    <div class="list-group mb-2">
+      <%= render 'shared/list_group_header', title: 'People on this process' %>
+      <%= render partial: 'processes/person_processes/person_process_item', collection: @church_process.active_processes %>
+    </div>
+  <% end %>
+
+  <%= render 'comments/comments/form', resource: @church_process %>
+<% end %>

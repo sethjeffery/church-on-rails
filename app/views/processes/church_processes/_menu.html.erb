@@ -1,0 +1,34 @@
+<% content_for :menu, :processes %>
+
+<% if @church_process.try(:persisted?) %>
+  <% if @person_process.try(:persisted?) %>
+    <%= render 'shared/side_and_details',
+               title: local_assigns[:title],
+               active: local_assigns[:active],
+               items: [{ title: "Processes", icon: :search, href: :church_processes },
+                       '-',
+                       ({ title: @church_process,   icon: @church_process,  href: @church_process }),
+                       ({ title: 'Edit',            icon: :edit,            href: edit_church_process_path(@church_process)}               if can?(:update, @church_process)),
+                       ({ title: 'Start process',   icon: :person_process,  href: new_church_process_person_process_path(@church_process)} if can?(:create, PersonProcess)),
+                       ({ title: 'Remove process',  icon: :destroy,         href: confirm_destroy_church_process_path(@church_process)}    if can?(:destroy, @church_process)),
+                       '-',
+                       { title: @person_process,   icon: @person_process.person,  href: church_process_person_process_path(@church_process, @person_process)}
+    ] { yield } %>
+  <% else %>
+    <%= render 'shared/side_and_details',
+               title: local_assigns[:title],
+               active: local_assigns[:active],
+               items: [{ title: "Processes", icon: :search, href: :church_processes },
+                       '-',
+                       ({ title: @church_process,   icon: @church_process,  href: @church_process }),
+                       ({ title: 'Edit',            icon: :edit,            href: edit_church_process_path(@church_process)}               if can?(:update, @church_process)),
+                       ({ title: 'Start process',   icon: :person_process,  href: new_church_process_person_process_path(@church_process)} if can?(:create, PersonProcess)),
+                       ({ title: 'Remove process',  icon: :destroy,         href: confirm_destroy_church_process_path(@church_process)}    if can?(:destroy, @church_process))
+    ] { yield } %>
+  <% end %>
+<% else %>
+  <%= render 'shared/side_and_details',
+             title: local_assigns[:title],
+             active: local_assigns[:active],
+             items: [{ title: 'Process', icon: :search, href: :church_processes }, '-', { title: "New process", icon: :new, href: new_church_process_path}] { yield } %>
+<% end %>

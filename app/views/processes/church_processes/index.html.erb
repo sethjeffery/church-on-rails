@@ -1,27 +1,29 @@
-<%= render 'shared/title', title: 'Processes', color: :process, btn: { can: [:create, ChurchProcess], href: new_church_process_path, btn_class: 'btn-success' } %>
-<%= flash_messages %>
+<% content_for :menu, :processes %>
 
-<div class="list-group">
-  <%= render 'shared/list_group_header', title: 'All church processes' %>
+<div class="container">
+  <%= render 'shared/title', title: 'Processes', btn: { can: [:create, ChurchProcess], href: new_church_process_path } %>
+  <%= flash_messages %>
 
-  <% if @church_processes.present? %>
-    <%= render partial: 'processes/church_processes/church_process_item', collection: @church_processes %>
-  <% else %>
-    <div class="list-group-item list-group-item-padded">
-      <h1>Never lose a connection.</h1>
-      <p>
-        Processes are your church's way of connecting to people. You can start a follow-up process for first-time visitors,
-        or for members wanting to join a particular team.
-      </p>
-      <% if can? :create, ChurchProcess %>
+  <div class="list-group">
+    <% if @church_processes.present? %>
+      <%= render partial: 'processes/church_processes/church_process_item', collection: @church_processes %>
+    <% else %>
+      <div class="list-group-item list-group-item-padded">
+        <h1>Never lose a connection.</h1>
         <p>
-          <%= link_to "Create a process", new_church_process_path %> and start connecting people.
+          Processes are your church's way of connecting to people. You can start a follow-up process for first-time visitors,
+          or for members wanting to join a particular team.
         </p>
-      <% end %>
-    </div>
-  <% end %>
-</div>
+        <% if can? :create, ChurchProcess %>
+          <p>
+            <%= link_to "Create a process", new_church_process_path %> and start connecting people.
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 
-<div class="text-xs-center mt-1">
-  <%= paginate @church_processes, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
+  <div class="text-xs-center mt-1">
+    <%= paginate @church_processes, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
+  </div>
 </div>

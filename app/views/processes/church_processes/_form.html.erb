@@ -2,10 +2,7 @@
 <%= form_for(@church_process) do |f| %>
 
   <div class="list-group mb-2">
-    <%= render 'shared/list_group_header', title: 'Details', button: {
-        href: (@church_process.new_record? ? church_processes_path : @church_process),
-        title: 'Cancel',
-        btn_class: 'btn-outline-primary' } %>
+    <%= render 'shared/list_group_header', title: 'Details' %>
 
     <div class="list-group-item">
       <div class="text-required">

@@ -21,7 +21,7 @@ module IconsHelper
       when :team  then 'users'
       when :family then 'address-card'
       when :church_process then 'arrow-right'
-      when :person_process then 'arrow-right'
+      when :person_process then 'flag'
       when :event then 'calendar'
       when :child_group then 'child'
       when :child_group_membership then 'user-plus'
