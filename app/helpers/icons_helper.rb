@@ -36,6 +36,9 @@ module IconsHelper
       when :password then 'lock'
       when :edit then 'pencil'
       when :merge then 'handshake-o'
+      when :new then 'plus'
+      when :index then 'search'
+      when :destroy then 'times'
 
       # treat anything left as a FontAwesome icon name
       else resource.dasherize

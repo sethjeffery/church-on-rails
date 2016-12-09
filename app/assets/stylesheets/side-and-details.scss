@@ -12,7 +12,6 @@ $width-xl: (map-get($container-max-widths, xl) - $grid-gutter-width-base);
 }
 
 .side-and-details--details {
-  margin-bottom: 2rem;
   padding-top: .375rem;
 
   @include media-breakpoint-up(md) {
@@ -45,18 +44,19 @@ $width-xl: (map-get($container-max-widths, xl) - $grid-gutter-width-base);
     font-size: 0.75rem;
     text-align: right;
     padding-right: 2rem;
-    transition: margin-top 0.3s;
 
     width: $width-md * .30;
     margin-left: $width-md * -.05;
     margin-right: $width-md * -.25;
 
-    .navbar-short + .container & {
-      margin-top: -56px;
-    }
-
     @media (min-height: 600px) {
+      transition: margin-top 0.3s;
       position: fixed;
+      margin-top: 0;
+
+      .navbar-short + div & {
+        margin-top: -56px;
+      }
     }
   }
 

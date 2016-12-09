@@ -22,8 +22,8 @@
   @include plain-hover-focus {
     background-color: transparent;
     border: transparent;
-    border-bottom: solid .25rem $brand-primary;
-    color: $brand-primary;
+    border-bottom: solid .25rem $brand-info;
+    color: darken($brand-primary, 10%);
   }
 
   .btn {

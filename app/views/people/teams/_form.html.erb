@@ -2,10 +2,7 @@
 <%= form_for(@team) do |f| %>
 
   <div class="list-group mb-2">
-    <%= render 'shared/list_group_header', title: 'Details', button: {
-        href: (@team.new_record? ? teams_path : @team),
-        title: 'Cancel',
-        btn_class: 'btn-outline-primary' } %>
+    <%= render 'shared/list_group_header', title: 'Details' %>
 
     <div class="list-group-item">
       <% if @team.new_record? %>

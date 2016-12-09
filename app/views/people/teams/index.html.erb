@@ -1,26 +1,29 @@
 <% content_for :menu, :teams %>
-<%= render 'shared/title', title: 'Teams', btn: { can: [:create, Team], href: new_team_path } %>
-<%= flash_messages %>
 
-<div class="list-group">
-  <%= render 'shared/search_header', resource: :teams, options: [:people, :families, :teams] %>
+<div class="container">
+  <%= render 'shared/title', title: 'Teams', btn: { can: [:create, Team], href: new_team_path } %>
+  <%= flash_messages %>
 
-  <% @teams.each do |team| %>
-    <%= fa_container team,
-                     class: 'list-group-item list-group-item-action list-group-item-team', tag: :a, href: url_for(team),
-                     style: ("border-left-color: ##{team.color};" if team.color) do %>
-      <div class="row">
-        <div class="col-sm-6 text-ellipsis">
-          <%= team %>
+  <div class="list-group">
+    <%= render 'shared/search_header', resource: :teams, options: [:people, :families, :teams] %>
+
+    <% @teams.each do |team| %>
+      <%= fa_container team,
+                       class: 'list-group-item list-group-item-action list-group-item-team', tag: :a, href: url_for(team),
+                       style: ("border-left-color: ##{team.color};" if team.color) do %>
+        <div class="row">
+          <div class="col-sm-6 text-ellipsis">
+            <%= team %>
+          </div>
+          <div class="col-sm-6 text-ellipsis text-light size-xs-small">
+            <%= pluralize team.team_memberships.to_a.count, 'member' %>
+          </div>
         </div>
-        <div class="col-sm-6 text-ellipsis text-light size-xs-small">
-          <%= pluralize team.team_memberships.to_a.count, 'member' %>
-        </div>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
 
-<div class="text-xs-center mt-1">
-  <%= paginate @teams, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
+  <div class="text-xs-center mt-1">
+    <%= paginate @teams, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
+  </div>
 </div>

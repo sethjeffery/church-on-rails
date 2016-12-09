@@ -1,5 +1,8 @@
-<%= render 'people/teams/title' %>
+<%= render 'people/teams/menu', active: :person, title: 'Add member' do %>
+  <p class="alert alert-info">
+    Adding people to your team allows you to group and manage your church groups.
+    You can also use it to give team permissions to members of the site.
+  </p>
 
-<div class="container-sm">
-  <%= render 'people/team_memberships/form' %>
-</div>
+  <%= render 'form' %>
+<% end %>

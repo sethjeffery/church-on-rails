@@ -1,12 +1,7 @@
-<%= render 'people/people/menu',
-           title: 'New member',
-           items: [{ title: 'People', icon: :search, href: :people },
-                   '-',
-                   { title: 'New member', icon: 'plus', href: new_person_path, active: true }
-] do %>
+<%= render 'menu', title: 'New member', active: :new do %>
   <p class="alert alert-info">
     Enter the member details below. Most fields are optional, but the more you enter, the more useful the database will be.
   </p>
 
-  <%= render 'people/people/form' %>
+  <%= render 'form' %>
 <% end %>

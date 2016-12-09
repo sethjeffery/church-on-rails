@@ -1,71 +1,52 @@
 <%= flash_messages container: 'container-sm' %>
-<% two_columns = can?(:manage, team) || has_comments_area?(team) %>
 
-<div class="<%= 'container-sm' unless two_columns %>">
-  <div class="row">
-    <div class="col-xs-12 <%= 'col-lg-7' if two_columns %>">
-      <div class="list-group mb-2">
-        <%= render 'shared/list_group_header', title: 'Details', button: { icon: :pencil, title: 'Edit', href: edit_team_path(team), can: [:update, team] } %>
+<div class="list-group mb-2">
+  <%= render 'shared/list_group_header', title: 'Details' %>
 
-        <% if team.description.present? %>
+  <% if team.description.present? %>
+    <div class="list-group-item">
+      <%= render 'shared/description', description: team.description %>
+    </div>
+  <% end %>
+
+  <% if can? :manage, team %>
+    <% if team.admin? %>
+      <div class="list-group-item">
+        <%= fa_container 'Site administration', :star %>
+        <%= fa_container '', class: "size-xs-small clearfix" do %>
+          <div class="float-xs-left mr-1"><%= fa_icon 'check' %> Access all areas</div>
+        <% end %>
+      </div>
+
+    <% elsif team.has_permissions? %>
+      <% { people: 'People, Teams, Families', process: 'Processes', event: 'Events', comment: 'Comments' }.each do |type, title| %>
+        <% if team.has_permissions_for? type %>
           <div class="list-group-item">
-            <%= render 'shared/description', description: team.description %>
+            <%= fa_container title, type %>
+            <%= fa_container '', class: 'size-xs-small clearfix' do %>
+              <% if team.try(:"#{type}_reader?") %><div class="float-xs-left mr-1"><%= icon_for :eye %> View</div><% end %>
+              <% if team.try(:"#{type}_editor?") %><div class="float-xs-left mr-1"><%= icon_for :pencil %> Edit</div><% end %>
+              <% if team.try(:"#{type}_admin?")  %><div class="float-xs-left mr-1"><%= icon_for :star %> Manage</div><% end %>
+            <% end %>
           </div>
         <% end %>
-
-        <% if can? :manage, team %>
-          <% if team.admin? %>
-            <div class="list-group-item">
-              <%= fa_container 'Site administration', :star %>
-              <%= fa_container '', class: "size-xs-small clearfix" do %>
-                <div class="float-xs-left mr-1"><%= fa_icon 'check' %> Access all areas</div>
-              <% end %>
-            </div>
-
-          <% elsif team.has_permissions? %>
-            <% { people: 'People, Teams, Families', process: 'Processes', event: 'Events', comment: 'Comments' }.each do |type, title| %>
-              <% if team.has_permissions_for? type %>
-                <div class="list-group-item">
-                  <%= fa_container title, type %>
-                  <%= fa_container '', class: 'size-xs-small clearfix' do %>
-                    <% if team.try(:"#{type}_reader?") %><div class="float-xs-left mr-1"><%= icon_for :eye %> View</div><% end %>
-                    <% if team.try(:"#{type}_editor?") %><div class="float-xs-left mr-1"><%= icon_for :pencil %> Edit</div><% end %>
-                    <% if team.try(:"#{type}_admin?")  %><div class="float-xs-left mr-1"><%= icon_for :star %> Manage</div><% end %>
-                  <% end %>
-                </div>
-              <% end %>
-            <% end %>
-          <% end %>
-        <% end %>
-      </div>
-
-      <div class="list-group mb-2">
-        <%= render 'shared/list_group_header', title: 'Members', button: { icon: :user, title: 'Add person', href: new_team_team_membership_path(team), can: [:create, TeamMembership] } %>
-        <%= render 'people/teams/memberships', team: team %>
-      </div>
-
-      <div class="list-group mb-2">
-        <%= render 'shared/list_group_header', title: 'Events', button: { icon: :calendar, title: 'Add event', href: new_team_event_path(team), can: [:create, Event] } %>
-        <%= render partial: 'events/events/event_item', collection: team.events.upcoming.sort_by_closest %>
-      </div>
-
-    </div>
-
-    <div class="col-xs-12 <%= 'col-lg-5' if two_columns %>">
-      <% if can?(:manage, team) && !team.admin? %>
-        <div class="list-group mb-2">
-          <%= render 'shared/list_group_header', title: 'Management' %>
-
-          <% unless team.admin? %>
-            <%= fa_container :trash, class: 'list-group-item' do %>
-              <%= link_to 'Remove team', confirm_destroy_team_path(team) %>
-            <% end %>
-          <% end %>
-        </div>
       <% end %>
-
-      <%= render 'comments/comments/form', resource: team %>
-
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 </div>
+
+<% if team.team_memberships.present? %>
+  <div class="list-group mb-2">
+    <%= render 'shared/list_group_header', title: 'Members' %>
+    <%= render 'people/teams/memberships', team: team %>
+  </div>
+<% end %>
+
+<% if team.events.present? %>
+  <div class="list-group mb-2">
+    <%= render 'shared/list_group_header', title: 'Events' %>
+    <%= render partial: 'events/events/event_item', collection: team.events.upcoming.sort_by_closest %>
+  </div>
+<% end %>
+
+<%= render 'comments/comments/form', resource: team %>
