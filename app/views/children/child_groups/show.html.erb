@@ -1,39 +1,18 @@
-<%= render 'children/child_groups/title' %>
-<% two_columns = can?(:manage, @child_group) || can?(:update, @child_group) %>
-
-<div class="<%= 'container-sm' unless two_columns %>">
-  <div class="row">
-    <div class="col-xs-12 <%= 'col-lg-7' if two_columns %>">
-      <div class="list-group mb-2">
-        <%= render 'shared/list_group_header', title: 'Details', button: { title: 'Edit', icon: :edit, can: [:update, @child_group], href: edit_child_group_path(@child_group) } %>
-
-        <% if @child_group.age_group.present? || @child_group.description.present? %>
-          <div class="list-group-item">
-            <% if @child_group.age_group.present? %>
-              <h3><%= @child_group.age_group %></h3>
-            <% end %>
-            <%= markdown @child_group.description %>
-          </div>
+<%= render 'menu', title: @child_group, active: @child_group do %>
+  <% if @child_group.age_group.present? || @child_group.description.present? %>
+    <%= render 'shared/list_group_header', title: 'Details' %>
+    <div class="list-group mb-2">
+      <div class="list-group-item">
+        <% if @child_group.age_group.present? %>
+          <h3><%= @child_group.age_group %></h3>
         <% end %>
-      </div>
-
-      <div class="list-group mb-2">
-        <%= render 'shared/list_group_header', title: 'Children', button: { icon: ChildGroupMembership,
-                                                                            title: 'Add child',
-                                                                            can: [:create, ChildGroupMembership],
-                                                                            href: new_child_group_child_group_membership_path(@child_group) } %>
-
-        <%= render partial: 'children/child_group_memberships/list_group_item', collection: @child_group.child_group_memberships.includes(:person).joins(:person).order('first_name, last_name') %>
+        <%= render 'shared/description', description: @child_group.description %>
       </div>
     </div>
+  <% end %>
 
-    <div class="col-xs-12 <%= 'col-lg-5' if two_columns %>">
-      <div class="list-group mb-2">
-        <%= render 'shared/list_group_header', title: 'Manage' %>
-        <%= fa_container :tablet, class: 'list-group-item' do %>
-          <%= link_to 'Kiosk / Tablet mode', child_group_kiosk_path(@child_group) %>
-        <% end %>
-      </div>
-    </div>
+  <div class="list-group mb-2">
+    <%= render 'shared/list_group_header', title: 'Children' %>
+    <%= render partial: 'children/child_group_memberships/list_group_item', collection: @child_group.child_group_memberships.includes(:person).joins(:person).order('first_name, last_name') %>
   </div>
-</div>
+<% end %>

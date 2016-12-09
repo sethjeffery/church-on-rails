@@ -1,11 +1,9 @@
-<%= render 'shared/title', title: "New Children's Group", short: true %>
-
-<div class="container-sm mt-2">
-  <p class="size-xs-small">
+<%= render 'menu', title: "New group", active: :new do %>
+  <p class="alert alert-info">
     Children's groups provide a means
     for parents to check-in and check-out their children quickly on a laptop or iPad, so that it's
     easy to know where all your children are.
   </p>
 
-  <%= render 'children/child_groups/form' %>
-</div>
+  <%= render 'form' %>
+<% end %>

@@ -1,10 +1,7 @@
-<%= render 'children/child_group_memberships/title', href: @child_group_membership.person %>
-
-<div class="container-sm">
+<%= render 'menu', title: @child_group_membership.person, active: @child_group_membership.person do %>
   <div class="list-group mb-2">
-    <%= render 'shared/list_group_header',
-               title: 'Check-in History',
-               button: { title: 'Cancel', href: @child_group_membership.child_group, btn_class: 'btn-outline-primary' } %>
+    <%= render 'shared/list_group_header', title: 'Check-in History' %>
+
     <% by_date(@child_group_membership.child_group_checkins).each do |date, checkins| %>
       <div class="list-group-item size-xs-small size-sm-normal">
         <h4><%= date %></h4>
@@ -42,4 +39,4 @@
       </div>
     <% end %>
   </div>
-</div>
+<% end %>

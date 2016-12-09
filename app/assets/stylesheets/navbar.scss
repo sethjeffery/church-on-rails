@@ -158,7 +158,7 @@
 }
 
 @include media-breakpoint-up(md) {
-  body {
+  body:not(.kiosk) {
     padding-top: 120px;
   }
 

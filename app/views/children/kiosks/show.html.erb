@@ -1,5 +1,5 @@
 <div class="container py-2">
-  <%= link_to(@child_group, class: 'btn btn-secondary float-xs-right btn-lg') { icon_for(:x) + content_tag(:div, 'Close', class: 'sr-only') } %>
+  <%= link_to(@child_group, class: 'btn btn-secondary float-xs-right btn-lg btn-subtle btn-align-middle') { icon_for('list') + content_tag(:div, 'Close', class: 'sr-only') } %>
   <h1><%= @child_group %></h1>
 
   <% by_first_letter(@child_group.child_group_memberships.includes(:person)).each do |letter, memberships| %>

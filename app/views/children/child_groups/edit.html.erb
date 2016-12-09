@@ -1,5 +1,3 @@
-<%= render 'children/child_groups/title' %>
-
-<div class="container-sm mt-2">
-  <%= render 'children/child_groups/form' %>
-</div>
+<%= render 'menu', title: @child_group, active: :edit do %>
+  <%= render 'form' %>
+<% end %>

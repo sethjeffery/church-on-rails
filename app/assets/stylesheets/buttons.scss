@@ -30,3 +30,8 @@
 .btn-lg {
   box-shadow: 0 .125rem .5rem rgba(0,0,0,0.125);
 }
+
+.btn-subtle {
+  border-color: transparent;
+  color: $gray-light;
+}

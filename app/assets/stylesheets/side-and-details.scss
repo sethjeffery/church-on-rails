@@ -35,7 +35,6 @@ $width-xl: (map-get($container-max-widths, xl) - $grid-gutter-width-base);
 }
 
 .side-and-details--side {
-  text-align: center;
   font-size: 0.875rem;
   margin-bottom: 2rem;
 
@@ -48,6 +47,15 @@ $width-xl: (map-get($container-max-widths, xl) - $grid-gutter-width-base);
     width: $width-md * .30;
     margin-left: $width-md * -.05;
     margin-right: $width-md * -.25;
+
+    .fa-container {
+      padding-left: 0;
+      padding-right: 1.5rem;
+      > .fa {
+        float: right;
+        margin: 0 -2rem 0 -1rem;
+      }
+    }
 
     @media (min-height: 600px) {
       transition: margin-top 0.3s;

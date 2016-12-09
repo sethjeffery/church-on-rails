@@ -1,9 +1,12 @@
-<%= render 'shared/title', title: "Add child", icon: @child_group_membership %>
+<%= render 'menu', title: 'Add child', active: :person do %>
 
-<div class="container-sm">
+  <p class="alert alert-info">
+    Adding children to your group allows parents to check in their child, and then pick them up later.
+  </p>
+
   <%= form_for @child_group_membership, url: child_group_child_group_memberships_path(@child_group) do |f| %>
     <div class="list-group mb-2">
-      <%= render 'shared/list_group_header', title: 'Child', button: { btn_class: 'btn-outline-primary', title: 'Cancel', href: @child_group_membership.child_group } %>
+      <%= render 'shared/list_group_header', title: 'Child' %>
 
       <div class="list-group-item">
         <div class="">
@@ -26,4 +29,5 @@
 
     <%= render 'shared/form_submit', icon: @child_group_membership, title: "Add child" %>
   <% end %>
-</div>
+
+<% end %>
