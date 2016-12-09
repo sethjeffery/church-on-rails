@@ -1,5 +1,3 @@
-<%= render 'people/families/title' %>
-
-<div class="container-sm">
+<%= render 'people/families/menu', active: :edit, title: @family do %>
   <%= render 'people/families/form' %>
-</div>
+<% end %>

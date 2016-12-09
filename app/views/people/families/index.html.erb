@@ -1,40 +1,43 @@
 <% content_for :menu, :families %>
-<%= render 'shared/title', title: 'Families', btn: { can: [:create, Family], href: new_family_path } %>
-<%= flash_messages %>
 
-<div class="list-group">
-  <%= render 'shared/search_header', resource: :families, options: [:people, :families, :teams] %>
+<div class="container">
+  <%= render 'shared/title', title: 'Families', btn: { can: [:create, Family], href: new_family_path } %>
+  <%= flash_messages %>
 
-  <% if @families.present? %>
-    <% @families.each do |family| %>
-      <%= fa_container family, class: 'list-group-item list-group-item-action', tag: :a, href: url_for(family) do %>
-        <div class="row">
-          <div class="col-sm-6 text-ellipsis">
-            <%= family %>
+  <div class="list-group">
+    <%= render 'shared/search_header', resource: :families, options: [:people, :families, :teams] %>
+
+    <% if @families.present? %>
+      <% @families.each do |family| %>
+        <%= fa_container family, class: 'list-group-item list-group-item-action', tag: :a, href: url_for(family) do %>
+          <div class="row">
+            <div class="col-sm-6 text-ellipsis">
+              <%= family %>
+            </div>
+            <div class="col-sm-6 text-ellipsis text-light size-xs-small">
+              <%= family.people.map(&:short_name).join(', ') %>
+            </div>
           </div>
-          <div class="col-sm-6 text-ellipsis text-light size-xs-small">
-            <%= family.people.map(&:short_name).join(', ') %>
-          </div>
-        </div>
 
+        <% end %>
       <% end %>
-    <% end %>
-  <% else %>
-    <div class="list-group-item list-group-item-padded">
-      <h1>Start a family.</h1>
-      <p>
-        Families are an essential connection of the database to people. Defining families allows you to
-        group people in the same family together at a specific home address.
-      </p>
-      <% if can? :create, Family %>
+    <% else %>
+      <div class="list-group-item list-group-item-padded">
+        <h1>Start a family.</h1>
         <p>
-          <%= link_to "Create a family", new_family_path %> for your church members.
+          Families are an essential connection of the database to people. Defining families allows you to
+          group people in the same family together at a specific home address.
         </p>
-      <% end %>
-    </div>
-  <% end %>
-</div>
+        <% if can? :create, Family %>
+          <p>
+            <%= link_to "Create a family", new_family_path %> for your church members.
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 
-<div class="text-xs-center mt-1">
-  <%= paginate @families, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
+  <div class="text-xs-center mt-1">
+    <%= paginate @families, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
+  </div>
 </div>

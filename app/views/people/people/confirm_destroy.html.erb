@@ -1,14 +1,15 @@
 <%= render 'people/people/menu', active: :trash, title: 'Remove person' do %>
-  <div class="alert alert-info mb-2">
-    <p class="text-xs-center mt-2">
+  <div class="alert alert-info py-2 text-xs-cente">
+    <p>
       If you do this, <strong><%= @person %></strong> will be removed from the database.
     </p>
-    <p class="text-xs-center mb-2">
+
+    <p class="size-xs-large">
       Are you absolutely sure?
     </p>
 
     <div class="container-xs">
-      <%= button_to 'Yes, do it.', @person, method: :delete, class: 'btn btn-danger btn-block btn-lg mb-sm' %>
+      <%= button_to 'Yes, do it.', @person, method: :delete, class: 'btn btn-danger btn-block btn-lg' %>
     </div>
   </div>
 <% end %>

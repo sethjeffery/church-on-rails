@@ -2,11 +2,7 @@
 <%= form_for(@family) do |f| %>
 
   <div class="list-group mb-2">
-    <%= render 'shared/list_group_header', title: 'Details', button: {
-        href: (@family.new_record? ? families_path : @family),
-        title: 'Cancel',
-        btn_class: 'btn-outline-primary' } %>
-
+    <%= render 'shared/list_group_header', title: 'Details' %>
     <%= render 'shared/list_group_item_field', f: f, field: :name,     autocapitalize: :words, required: true %>
     <%= render 'shared/list_group_item_field', f: f, field: :address1, autocapitalize: :words %>
     <%= render 'shared/list_group_item_field', f: f, field: :address2, autocapitalize: :words %>

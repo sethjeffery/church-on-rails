@@ -1,18 +1,16 @@
-<%= render 'people/families/title', color: :danger %>
+<%= render 'people/families/menu', active: :trash, title: 'Remove family' do %>
+  <div class="alert alert-info py-2 text-xs-center">
+    <p>
+      If you do this, <strong><%= @family %></strong> will be removed from the database.
+      Any family members will remain in the database but will not be connected to a family.
+    </p>
 
-<div class="container-xs">
-  <div class="list-group mb-2">
-    <%= render 'shared/list_group_header', title: 'Remove family' %>
+    <p class="size-xs-large">
+      Are you sure?
+    </p>
 
-    <div class="list-group-item">
-      <p>
-        If you do this, <strong><%= @family %></strong> will be removed from the database.
-        Any family members will remain in the database but will not be connected to a family.
-        Are you sure?
-      </p>
-
-      <%= link_to 'No, stop!', @family, class: 'btn btn-secondary btn-block btn-lg mb-sm' %>
-      <%= button_to 'Yes, do it.', @family, method: :delete, class: 'btn btn-danger btn-block btn-lg mb-sm' %>
+    <div class="container-xs">
+      <%= button_to 'Yes, do it.', @family, method: :delete, class: 'btn btn-danger btn-block btn-lg' %>
     </div>
   </div>
-</div>
+<% end %>

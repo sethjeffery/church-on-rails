@@ -1,48 +1,25 @@
 <%= flash_messages container: 'container-sm' %>
-<% two_columns = can?(:manage, family) || has_comments_area?(family) %>
 
-<div class="<%= 'container-sm' unless two_columns %>">
-  <div class="row">
-    <div class="col-xs-12 <%= 'col-lg-7' if two_columns %>">
-      <div class="list-group mb-2">
-        <%= render 'shared/list_group_header', title: 'Members', button: { href: new_family_family_membership_path(family), icon: Person, title: 'Add person', can: [:update, family] } %>
-        <%= render 'people/families/memberships', family: family %>
-      </div>
+<div class="list-group mb-2">
+  <%= render 'shared/list_group_header', title: 'Members' %>
+  <%= render 'people/families/memberships', family: family %>
+</div>
 
-      <% if can?(:update, family) || family.full_address.present? %>
-        <div class="list-group mb-2">
-          <%= render 'shared/list_group_header', title: 'Address', button: { href: edit_family_path(family), icon: :edit, title: 'Edit', can: [:update, family] } %>
+<% if family.full_address.present? %>
+  <div class="list-group mb-2">
+    <%= render 'shared/list_group_header', title: 'Address' %>
 
-          <% if family.full_address.present? %>
-            <% if family.lat && family.lng %>
-              <%= map_for family, height: '400px' %>
-            <% end %>
-
-            <div class="list-group-item size-xs-small size-sm-normal">
-              <%= icon_for 'map-marker', class: 'mr-xs' %>
-              <%= family.full_address %>
-            </div>
-          <% end %>
-        </div>
+    <% if family.full_address.present? %>
+      <% if family.lat && family.lng %>
+        <%= map_for family, height: '400px' %>
       <% end %>
 
-    </div>
-
-    <% if can?(:manage, family) || has_comments_area?(family) %>
-      <div class="col-xs-12 <%= 'col-lg-5' if two_columns %>">
-        <% if can? :manage, family %>
-          <div class="list-group mb-2">
-            <%= render 'shared/list_group_header', title: 'Management' %>
-            <%= fa_container :trash, class: 'list-group-item' do %>
-              <%= link_to 'Remove family', confirm_destroy_family_path(family) %>
-            <% end %>
-          </div>
-        <% end %>
-
-        <%= render 'comments/comments/form', resource: family %>
-
+      <div class="list-group-item size-xs-small size-sm-normal">
+        <%= icon_for 'map-marker', class: 'mr-xs' %>
+        <%= family.full_address %>
       </div>
     <% end %>
-
   </div>
-</div>
+<% end %>
+
+<%= render 'comments/comments/form', resource: family %>

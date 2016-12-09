@@ -1,5 +1,13 @@
-<%= render 'shared/title', title: 'New Family' %>
+<%= render 'people/families/menu',
+           title: 'New family',
+           items: [{ title: 'Families', icon: :search, href: :families },
+                   '-',
+                   { title: 'New family', icon: 'plus', href: new_family_path, active: true }
+] do %>
+  <p class="alert alert-info">
+    Families are an essential connection of the database to people. Defining families allows you to
+    group people in the same family together at a specific home address.
+  </p>
 
-<div class="container-sm">
   <%= render 'people/families/form' %>
-</div>
+<% end %>
