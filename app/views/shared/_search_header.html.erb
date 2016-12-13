@@ -1,6 +1,6 @@
 <div class="list-group-item list-group-item-form">
   <%= form_for('Search', url: url_for(resource), method: :get) do |f| %>
-    <div class="input-group">
+    <div class="input-group input-group-search">
       <label class="input-group-addon" for="q">
         <%= icon_for :search %>
       </label>
@@ -11,5 +11,24 @@
       <span class="sr-only">Search</span>
       <%= icon_for :search %>
     </button>
+
+    <%# Not ready yet .... %>
+    <div class="my-sm mx-1 hidden-xs-up">
+      <h4 class="text-light size-xs-small">Advanced</h4>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="input-group">
+            <label class="input-group-addon" for="family_name"><%= icon_for :family %></label>
+            <%#= text_field_tag :family_name, params[:family_name], class: 'form-control', placeholder: 'Family name' %>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="input-group">
+            <label class="input-group-addon" for="team_id"><%= icon_for :team %></label>
+            <%#= f.collection_select :team_id, all_teams, :id, :name, { include_blank: true }, class: 'form-control', data: { selectpicker: true, placeholder: "Team", width: '100%' } %>
+          </div>
+        </div>
+      </div>
+    </div>
   <% end %>
 </div>

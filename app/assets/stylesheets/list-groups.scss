@@ -86,7 +86,7 @@
     border-bottom-right-radius: $list-group-border-radius;
   }
 
-  .input-group {
+  .input-group-search {
     .input-group-addon:first-child {
       padding-right: .675rem;
     }
@@ -96,9 +96,11 @@
       background-color: transparent;
     }
 
-    .input-group-btn {
-      margin-right: .5rem;
+    .input-group-btn .btn {
+      border-top-left-radius: $btn-border-radius;
+      border-bottom-left-radius: $btn-border-radius;
     }
+
     .form-control {
       padding-top: 1rem;
       padding-bottom: 1rem;

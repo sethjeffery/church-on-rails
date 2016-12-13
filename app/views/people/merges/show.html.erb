@@ -1,8 +1,9 @@
 <%= render 'people/people/menu', active: :merge, title: 'Merge people' do %>
   <p class="alert alert-info">
-    You can merge this person into another. Any team and family memberships
-    will be copied over, and any duplicate fields (like name) will be replaced
-    with the person you merge into.
+    You can merge this person into another if you accidentally made duplicate records.
+    Any team and family memberships
+    will be combined, and any duplicate fields (like name) will be replaced
+    with the record you merge into.
   </p>
 
   <%= form_for :merge, url: person_merge_path(@person), method: :put do |f| %>

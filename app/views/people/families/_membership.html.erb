@@ -1,0 +1,26 @@
+<% family = local_assigns[:family] || @family || membership.family %>
+
+<div class="list-group-item clearfix <%= 'size-xs-small' unless membership.head? %>" id="family_membership-<%= membership.id %>">
+  <% if can?(:destroy, membership) %>
+    <%= button_to [family, membership], method: :delete, remote: true, class: 'btn btn-link py-0 px-xs float-xs-right text-light', data: { confirm: "Really remove #{membership.person} from #{family}?" } do %>
+      <%= icon_for :x %>
+    <% end %>
+  <% end %>
+
+  <% if can?(:update, membership) %>
+    <%= button_to [family, membership],
+                  method: :put,
+                  params: { family_membership: { head: !membership.head? } },
+                  data: { tooltip: true },
+                  title: membership.head? ? "Parent/Head" : "Child",
+                  remote: true,
+                  class: "btn #{membership.head? ? 'btn-primary' : 'btn-secondary'} btn-align-middle btn-sm mr-sm float-xs-right" do %>
+      <%= icon_for 'id-card-o' %>
+    <% end %>
+  <% end %>
+
+  <div class="avatar-container">
+    <%= avatar_tag membership.person %>
+    <%= link_to_if can?(:read, membership.person), membership.person, membership.person %>
+  </div>
+</div>

@@ -24,6 +24,10 @@ class People::FamilyMembershipsController < ApplicationController
     end
   end
 
+  def update
+    @family_membership.update_attributes(create_params)
+  end
+
   private
 
   def create_params

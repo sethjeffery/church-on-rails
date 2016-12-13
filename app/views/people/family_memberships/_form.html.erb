@@ -4,17 +4,15 @@
     <%= render 'shared/list_group_header', title: 'Add to Family' %>
 
     <div class="list-group-item">
-      <div class="mb-1">
+      <div class="my-sm">
         <%= f.collection_select :person_id, Person.all, :id, :name, { include_blank: true }, class: 'form-control',
                                 data: { selectpicker: true, placeholder: 'Choose a member' } %>
       </div>
 
-      <div class="text-xs-center">
-        <label class="field custom-checkbox custom-control mb-0">
-          <%= f.check_box :head, class: 'custom-control-input' %>
-          <span class="custom-control-indicator"></span>
-          Head of household
-        </label>
+    </div>
+    <div class="list-group-item">
+      <div class="mt-sm">
+        <%= render 'shared/form_switch', f: f, field: :head, name: 'Parent/Guardian', help: "Marks this family member as being responsible for children." %>
       </div>
     </div>
   </div>

@@ -3,8 +3,10 @@
     <%= render 'shared/list_group_header', title: 'Add to Family' %>
 
     <div class="list-group-item" id="family-picker">
-      <%= f.select :family_ids, [['< Start new family >', 'New']] + Family.all.map{|family| [ family.name, family.id ] }, { include_blank: true }, class: 'form-control', data: { selectpicker: true, placeholder: 'Choose a Family', :'allow-clear' => true } %>
-      <%= f.text_field :family_name, class: 'form-control mt-sm', placeholder: 'Family name' %>
+      <div class="my-sm">
+        <%= f.select :family_ids, [['< Start new family >', 'New']] + Family.all.map{|family| [ family.name, family.id ] }, { include_blank: true }, class: 'form-control', data: { selectpicker: true, placeholder: 'Choose a Family', :'allow-clear' => true } %>
+        <%= f.text_field :family_name, class: 'form-control mt-1', placeholder: 'Family name' %>
+      </div>
     </div>
   </div>
 <% end %>
