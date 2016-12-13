@@ -28,3 +28,18 @@ $(document).on 'turbolinks:load', ->
 
   # Auto-size all text areas
   $('textarea').autosize()
+
+  # Color pickers
+  $('[data-toggle=color]').click (e) ->
+    e.preventDefault()
+    color = $(@).data('color')
+    $el.parents('form').find("input[name*='[icon]']").val color
+    $(@).parents('.input-group-btn').find('> a').css(color: '#' + color)
+
+  # Icon pickers
+  $('[data-toggle=icon]').click (e) ->
+    e.preventDefault()
+    $el = $(@)
+    icon = $el.data('icon')
+    $el.parents('form').find("input[name*='[icon]']").val $el.data('value') or icon
+    $el.parents('.input-group-btn').find('> a .fa').removeClass().addClass('fa fa-' + icon + ' fa-1x')

@@ -1,0 +1,30 @@
+<% args = { class: 'form-control',
+            placeholder: local_assigns[:placeholder],
+            autocapitalize: local_assigns[:autocapitalize],
+            required: local_assigns[:required],
+            autofocus: local_assigns[:autofocus],
+            autocomplete: local_assigns[:autocomplete] } %>
+
+<div class="<%= local_assigns[:wrapper_class] %>">
+  <div class="<%= 'text-required' if defined?(required) %> <%= 'col-sm-5' unless local_assigns[:inline] %>">
+    <%= f.label field, local_assigns[:label], class: local_assigns[:label_class] %>
+  </div>
+
+  <div class="<%= 'col-sm-7' unless local_assigns[:inline] %>">
+    <% content = yield %>
+    <% if content.present? %>
+      <%= content %>
+    <% else %>
+      <% if local_assigns[:icon] %>
+        <div class="input-group">
+          <label class="input-group-addon" for="<%= f.object_name %>_<%= field %>">
+            <%= icon_for icon, '1x' %>
+          </label>
+          <%= f.send (local_assigns[:control] || :text_field), field, args %>
+        </div>
+      <% else %>
+        <%= f.send (local_assigns[:control] || :text_field), field, args %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

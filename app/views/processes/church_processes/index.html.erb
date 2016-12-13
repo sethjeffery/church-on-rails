@@ -2,7 +2,6 @@
 
 <div class="container">
   <%= render 'shared/title', title: 'Processes', btn: { can: [:create, ChurchProcess], href: new_church_process_path } %>
-  <%= flash_messages %>
 
   <div class="list-group">
     <% if @church_processes.present? %>

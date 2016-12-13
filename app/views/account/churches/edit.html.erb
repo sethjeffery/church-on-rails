@@ -1,7 +1,6 @@
 <%= render 'title' %>
 
 <%= render 'menu', active: :edit do %>
-  <%= flash_messages %>
   <%= form_for(current_church, url: account_church_path) do |f| %>
 
     <div class="list-group mb-2">

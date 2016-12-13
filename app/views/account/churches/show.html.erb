@@ -3,12 +3,9 @@
 
 <div class="container">
 
+  <%= flash_messages container: 'container-sm' %>
   <% can_view_stats = can?(:read, Person) || can?(:read, Team) || can?(:read, Event) || can?(:read, ChurchProcess) %>
   <% two_columns = can_view_stats %>
-
-  <div class="container-sm">
-    <%= flash_messages container: 'container-sm' %>
-  </div>
 
   <div class="<%= 'container-sm' unless two_columns %>">
     <div class="row">

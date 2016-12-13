@@ -12,10 +12,12 @@ class Person < ApplicationRecord
   has_many :child_group_memberships,    dependent: :destroy
   has_many :child_group_checkins,       dependent: :destroy, inverse_of: :checked_in_by,  class_name: 'ChildGroupCheckin', foreign_key: :checked_in_by_id
   has_many :child_group_checkouts,      dependent: :destroy, inverse_of: :checked_out_by, class_name: 'ChildGroupCheckin', foreign_key: :checked_out_by_id
+  has_many :property_joins,             dependent: :destroy, as: :propertyable
   has_many :families,                   through: :family_memberships, inverse_of: :people
   has_many :teams,                      through: :team_memberships, inverse_of: :people
   has_many :assigned_person_processes,  through: :person_process_assignees, class_name: 'PersonProcess', inverse_of: :assignees
   has_many :child_groups,               through: :child_group_memberships
+  has_many :properties,                 through: :property_joins
 
   has_attached_file :avatar, styles: { xl: "192x192#", md: "72x72#", thumb: "48x48#" }
 

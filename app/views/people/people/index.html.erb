@@ -2,7 +2,6 @@
 
 <div class="container">
   <%= render 'shared/title', title: 'People', btn: { can: [:create, Person], href: new_person_path } %>
-  <%= flash_messages %>
 
   <div class="list-group">
     <%= render 'shared/search_header', resource: :people, options: [:people, :families, :teams] %>

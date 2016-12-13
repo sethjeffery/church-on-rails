@@ -1,30 +1,8 @@
-<% args = { class: 'form-control',
-            placeholder: local_assigns[:placeholder],
-            autocapitalize: local_assigns[:autocapitalize],
-            required: local_assigns[:required],
-            autofocus: local_assigns[:autofocus],
-            autocomplete: local_assigns[:autocomplete] } %>
-
-<div class="list-group-item">
-  <div class="row">
-    <div class="col-sm-5 <%= 'text-required' if defined?(required) %>"><%= f.label field, local_assigns[:label], class: 'form-control-static mb-0' %></div>
-    <div class="col-sm-7">
-
-      <% content = yield %>
-      <% if content.present? %>
-        <%= content %>
-      <% else %>
-        <% if local_assigns[:icon] %>
-          <div class="input-group">
-            <label class="input-group-addon" for="<%= f.object_name %>_<%= field %>">
-              <%= icon_for icon, '1x' %>
-            </label>
-            <%= f.send (local_assigns[:control] || :text_field), field, args %>
-          </div>
-        <% else %>
-          <%= f.send (local_assigns[:control] || :text_field), field, args %>
-        <% end %>
-      <% end %>
-    </div>
+<% if local_assigns[:inline] %>
+  <%= render 'shared/field', local_assigns.merge(wrapper_class: "list-group-item  #{local_assigns[:wrapper_class]}") { yield } %>
+<% else %>
+  <div class="list-group-item <%= local_assigns[:wrapper_class] %>">
+    <%= render 'shared/field', local_assigns.merge(label_class: local_assigns[:label_class] || 'form-control-static mb-0',
+                                                   wrapper_class: "row") { yield } %>
   </div>
-</div>
+<% end %>

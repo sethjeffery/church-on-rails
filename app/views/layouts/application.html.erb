@@ -8,6 +8,7 @@
     <%= render 'shared/navbar' %>
 
     <div class="mb-2">
+      <%= flash_messages container: 'container-sm' %>
       <%= yield %>
     </div>
   </body>

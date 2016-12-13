@@ -1,5 +1,8 @@
 module AlertsHelper
   def flash_messages(args={})
+    return if @shown_flash_messages
+    @shown_flash_messages = true
+
     if flash[:alert]
       html = content_tag :div, flash[:alert],   class: 'alert alert-danger'
     elsif flash[:info]

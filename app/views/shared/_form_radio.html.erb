@@ -1,0 +1,7 @@
+<% object = local_assigns[:object] || f.object %>
+<label class="size-xs-small size-sm-normal custom-<%= local_assigns[:type] || 'radio' %> custom-control">
+  <%= f.radio_button field, value, class: 'custom-control-input' %>
+  <span class="custom-control-indicator"></span>
+  <%= field_name object, "#{field}_#{value}" %>
+  <% if local_assigns[:help] %><div class="text-light size-xs-tiny"><%= field_help object, "#{field}_#{value}" %></div><% end %>
+</label>
