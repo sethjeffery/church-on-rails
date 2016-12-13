@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161201221918) do
+ActiveRecord::Schema.define(version: 20161209223433) do
 
   create_table "child_group_checkins", force: :cascade do |t|
     t.integer  "child_group_membership_id"
@@ -166,6 +166,27 @@ ActiveRecord::Schema.define(version: 20161201221918) do
     t.datetime "updated_at",        null: false
     t.index ["church_process_id"], name: "index_person_processes_on_church_process_id"
     t.index ["person_id"], name: "index_person_processes_on_person_id"
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.string   "name"
+    t.string   "format",      default: "flag"
+    t.text     "list"
+    t.string   "icon",        default: "property"
+    t.string   "description"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  create_table "property_joins", force: :cascade do |t|
+    t.string   "propertyable_type"
+    t.integer  "propertyable_id"
+    t.integer  "property_id"
+    t.string   "value"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["property_id"], name: "index_property_joins_on_property_id"
+    t.index ["propertyable_type", "propertyable_id"], name: "index_property_joins_on_propertyable_type_and_propertyable_id"
   end
 
   create_table "schedules", force: :cascade do |t|

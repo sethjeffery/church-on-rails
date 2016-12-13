@@ -110,4 +110,21 @@ RSpec.describe Person do
       expect(MergePersonJob).to have_received(:perform_now).with(subject, target)
     end
   end
+
+  describe '#update_properties' do
+    let(:property) { create(:property) }
+
+    it 'expects a hash' do
+      expect { subject.update_properties('oops') }.to raise_error(NoMethodError)
+      expect { subject.update_properties({}) }.not_to raise_error
+    end
+
+    it 'adds flags' do
+      expect {
+        subject.update_properties({ property.id.to_s => "1" })
+      }.to change {
+        subject.properties.where(name: property.name).count
+      }.by(1)
+    end
+  end
 end

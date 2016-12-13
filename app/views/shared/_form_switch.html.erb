@@ -1,1 +1,1 @@
-<%= render 'shared/form_checkbox', type: :switch, object: local_assigns[:object], field: field, f: f, help: local_assigns[:help] %>
+<%= render 'shared/form_checkbox', local_assigns.merge(type: :switch) %>

@@ -5,6 +5,19 @@
     <%= render 'people/people/form_fields', f: f, person: @person %>
   </div>
 
+  <% if all_properties.present? %>
+    <div class="list-group mb-2">
+      <%= f.fields_for :properties do |p| %>
+        <%= render 'shared/list_group_header', title: 'Custom properties' %>
+        <% all_properties.each do |property| %>
+          <div class="list-group-item">
+            <%= render 'people/properties/form_item', property: property, f: p, person: @person %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
   <div class="list-group mb-2">
     <%= render 'shared/list_group_header', title: 'Photo' %>
     <div class="list-group-item">

@@ -36,6 +36,9 @@ Rails.application.routes.draw do
         resources :person_processes, path: 'processes'
         resource :merge
       end
+      resources :properties, concerns: :paginatable do
+        get :confirm_destroy, on: :member
+      end
     end
 
     scope module: 'events' do

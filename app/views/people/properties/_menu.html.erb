@@ -1,0 +1,18 @@
+<% content_for :menu, :properties %>
+
+<% if @property.try(:persisted?) %>
+  <%= render 'shared/side_and_details',
+             title: local_assigns[:title],
+             active: local_assigns[:active],
+             items: local_assigns[:items] || [{ title: 'Properties', icon: :search, href: :properties },
+                                              '-',
+                                              ({ title: @property,  icon: @property,       href: @property }),
+                                              ({ title: 'Edit',     icon: :edit,           href: edit_property_path(@property)} if can?(:update, @property)),
+                                              ({ title: 'Remove',   icon: :destroy,        href: confirm_destroy_property_path(@property)} if can?(:destroy, @property))
+  ] { yield } %>
+<% else %>
+  <%= render 'shared/side_and_details',
+             title: local_assigns[:title],
+             active: local_assigns[:active],
+             items: [{ title: 'Properties', icon: :search, href: :properties }, '-', { title: 'New property', icon: :new, href: new_property_path}] { yield } %>
+<% end %>

@@ -1,0 +1,32 @@
+<% content_for :menu, :properties %>
+
+<div class="container">
+  <%= render 'shared/title', title: 'Properties', btn: { can: [:create, Property], href: new_property_path } %>
+
+  <div class="list-group">
+    <%= render 'shared/search_header', resource: :properties %>
+
+    <% if @properties.present? %>
+      <% @properties.each do |property| %>
+        <%= icon_container property, property, class: 'list-group-item list-group-item-action', tag: :a, href: url_for(property) %>
+      <% end %>
+    <% else %>
+      <div class="list-group-item list-group-item-padded">
+        <h1>Extend and customise your data.</h1>
+        <p>
+          Properties are your way to extend your database with new custom fields of your own choosing.
+          You can assign special properties to people in your database and then query by them later.
+        </p>
+        <% if can? :create, Property %>
+          <p>
+            <%= link_to "Create a property", new_property_path %> to start customising.
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="text-xs-center mt-1">
+    <%= paginate @properties, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
+  </div>
+</div>

@@ -4,6 +4,10 @@ textarea.form-control {
   line-height: 1.75;
 }
 
+.custom-control {
+  line-height: 1.25;
+}
+
 .custom-control.list-group-item {
   margin-left: 0;
   padding-left: 3rem;
@@ -15,7 +19,7 @@ textarea.form-control {
 }
 
 .custom-switch {
-  padding-left: 3rem;
+  padding-left: 3.5rem;
 
   .custom-control-indicator {
     border-radius: 1000px;
@@ -24,7 +28,7 @@ textarea.form-control {
     background-color: $gray-light;
     box-shadow: inset 0 2px 2px $darken;
     transition: background-color .3s;
-    top: .125rem;
+    top: 0;
 
     &::before {
       content: '';

@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-sm-5 form-control-static">
+    <%= icon_container property do %>
+      <%= f.label property.id, property.name, class: 'mb-0' %>
+    <% end %>
+  </div>
+
+  <div class="col-sm-7">
+    <% if property.flag? %>
+      <div class="form-control-static">
+        <label class="custom-switch custom-control mb-0">
+          <%= f.check_box property.id, class: 'custom-control-input', checked: local_assigns[:person]&.has_property?(property.id) %>
+          <span class="custom-control-indicator"></span>
+          &nbsp;
+        </label>
+      </div>
+    <% else %>
+      <%= f.text_field property.id, class: 'form-control', value: local_assigns[:person]&.property(property.id) %>
+    <% end %>
+  </div>
+</div>
+
+<% if property.description.present? %>
+  <div class="size-xs-tiny text-light mt-sm"><%= markdown property.description %></div>
+<% end %>

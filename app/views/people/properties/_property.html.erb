@@ -1,0 +1,20 @@
+<% if @property.description.present? %>
+  <div class="list-group mb-2">
+    <div class="list-group-item">
+      <%= render 'shared/description', description: @property.description %>
+    </div>
+  </div>
+<% end %>
+
+<div class="list-group mb-2">
+  <%= render 'shared/list_group_header', title: 'People' %>
+  <% if @property.property_joins.present? %>
+    <%= render partial: 'people/property_joins/person_join', collection: @property.property_joins.includes(:propertyable) %>
+  <% else %>
+    <div class="list-group-item list-group-item-padded">
+      <h2>Assign this property.</h2>
+      There is no one with this property yet.
+      <% if can?(:update, Person) %>To assign it, <%= link_to 'find a person', people_path %> and edit their details.<% end %>
+    </div>
+  <% end %>
+</div>

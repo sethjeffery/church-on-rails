@@ -1,0 +1,44 @@
+<%= form_for(@property) do |f| %>
+
+  <div class="list-group mb-2">
+    <%= render 'shared/list_group_header', title: 'Details' %>
+
+    <div class="list-group-item">
+      <div class="text-required">
+        <%= field_name @property, :name %>
+      </div>
+      <div class="input-group my-sm <%= 'has-danger' if @property.errors[:name].present? %>">
+        <%= f.text_field :name, class: 'form-control', autofocus: true, hide_errors: true %>
+        <%= f.hidden_field :icon %>
+
+        <div class="input-group-btn dropdown">
+          <div class="dropdown-menu dropdown-menu-icons dropdown-menu-right">
+            <% Property::ICONS.each do |icon| %>
+              <%= link_to raw(icon_for(icon, '2x')), '#', class: "dropdown-item dropdown-item-icon text-xs-center", data: { toggle: 'icon', icon: icon_name_for(icon), value: icon } %>
+            <% end %>
+          </div>
+          <a class="btn btn-secondary" data-toggle="dropdown"><%= icon_for @property, '1x' %></a>
+        </div>
+      </div>
+      <%= field_error(@property, :name) %>
+    </div>
+
+    <%= render 'shared/list_group_item_field', f: f, field: :description, control: :text_area, inline: true %>
+  </div>
+
+  <div class="list-group mb-2">
+    <%= render 'shared/list_group_header', title: 'Type' %>
+    <div class="list-group-item">
+      <div>
+        <%= render 'shared/form_radio', f: f, field: :format, value: :flag, help: true %>
+      </div>
+      <div>
+        <%= render 'shared/form_radio', f: f, field: :format, value: :text, help: true %>
+      </div>
+      <div>
+        <%= render 'shared/form_radio', f: f, field: :format, value: :list, help: true %>
+      </div>
+    </div>
+  </div>
+  <%= render 'shared/form_submit', title: (@property.new_record? ? 'Add property' : 'Save changes'), icon: :property %>
+<% end %>

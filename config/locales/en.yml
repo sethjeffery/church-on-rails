@@ -49,9 +49,17 @@ en:
         address1: 'Address'
         address2: 'Town'
         postcode: 'Post code'
+      property:
+        format_flag: Flag
+        format_text: Text
+        format_list: List
     help:
       church:
         can_sign_up: Switch off if you don't want a sign up screen where people can join the site without invitation.
+      property:
+        format_flag: A simple property that is either present on a database field or not.
+        format_text: A property that allows you to assign a text value to it. e.g. a reference number.
+        format_list: A property that allows you to choose an item from a list.
     errors:
       models:
         person:

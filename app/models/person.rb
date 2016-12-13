@@ -77,6 +77,28 @@ class Person < ApplicationRecord
     MergePersonJob.perform_now(self, target)
   end
 
+  def update_properties(properties)
+    properties.each do |id, value|
+      property = Property.find(id)
+      if value.blank? || (value == '0' && property.flag?)
+        self.property_joins.where(property_id: id.to_i).delete_all
+      else
+        join = self.property_joins.find_or_initialize_by(property_id: id.to_i)
+        join.propertyable = self
+        join.value = value
+        join.save
+      end
+    end
+  end
+
+  def has_property?(id)
+    property_joins.where(property_id: id.to_i).exists?
+  end
+
+  def property(id)
+    property_joins.where(property_id: id.to_i).first&.value
+  end
+
   protected
 
   def copy_changes_to_user

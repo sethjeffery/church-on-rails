@@ -19,7 +19,7 @@ class People::PeopleController < ApplicationController
   end
 
   def update
-    if @person.update_attributes(create_params)
+    if @person.update_attributes(create_params) and @person.update_properties(property_params)
       redirect_to show_path
     else
       render :edit
@@ -45,6 +45,10 @@ class People::PeopleController < ApplicationController
     hash = blanks_to_nil(params.require(:person).permit(*fields))
     hash.delete(:family_ids) if hash[:family_ids] == "New"
     hash
+  end
+
+  def property_params
+    params.require(:person).require(:properties).permit!
   end
 
   def show_path

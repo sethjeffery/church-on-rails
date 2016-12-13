@@ -1,0 +1,16 @@
+<%= render 'menu', active: :destroy, title: 'Remove property' do %>
+  <div class="alert alert-info py-2 text-xs-center">
+    <p>
+      If you do this, <strong><%= @property %></strong> will be removed from the database.
+      Any members with this property will no longer have it assigned.
+    </p>
+
+    <p class="size-xs-large">
+      Are you sure?
+    </p>
+
+    <div class="container-xs">
+      <%= button_to 'Yes, do it.', @property, method: :delete, class: 'btn btn-danger btn-block btn-lg' %>
+    </div>
+  </div>
+<% end %>

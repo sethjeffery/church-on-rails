@@ -1,0 +1,17 @@
+<% property = local_assigns[:property] || @property || person_join.property %>
+<% propertyable = person_join.propertyable %>
+
+<%= icon_container property, class: 'list-group-item' do %>
+  <% if property.flag? %>
+    <%= link_to_if can?(:read, propertyable), propertyable, propertyable %>
+  <% else %>
+    <div class="row">
+      <div class="col-sm-6">
+        <%= link_to_if can?(:read, propertyable), propertyable, propertyable %>
+      </div>
+      <div class="col-sm-6 text-light size-xs-small size-md-normal">
+        <%= person_join.value %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
