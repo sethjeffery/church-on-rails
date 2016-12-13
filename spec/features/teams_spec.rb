@@ -38,9 +38,9 @@ RSpec.describe "Teams" do
         end
 
         # no write access
-        expect(page).to have_no_selector 'a.btn', text: /Edit/
-        expect(page).to have_no_selector 'a.btn', text: /Add person/
-        expect(page).to have_no_selector 'a.btn', text: /Add event/
+        expect(page).to have_no_selector 'a.nav-link', text: /Edit/
+        expect(page).to have_no_selector 'a.nav-link', text: /Add person/
+        expect(page).to have_no_selector 'a.nav-link', text: /Add team event/
 
         person = team1.people.first
         click_on person.name
@@ -61,7 +61,7 @@ RSpec.describe "Teams" do
         expect(page).to have_content 'Details'
 
         # no event access
-        expect(page).to have_no_selector 'a.btn', text: /Add event/
+        expect(page).to have_no_selector 'a.nav-link', text: /Add team event/
 
         click_on 'Edit'
         fill_in 'team_name', with: 'Administrators'
@@ -131,7 +131,7 @@ RSpec.describe "Teams" do
 
         visit "/teams/#{team1.id}"
 
-        click_on 'Add event'
+        click_on 'Add team event'
         fill_in 'event_name', with: 'Party'
         fill_in 'event_description', with: 'like it is 1999'
 

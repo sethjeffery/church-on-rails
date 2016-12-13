@@ -50,14 +50,14 @@ RSpec.describe "Account" do
 
       visit "/account"
       expect(page).to have_content 'Bob Jones'
-      expect(page).to have_content 'Management'
       click_on "Change password"
 
-      fill_in "New password", with: 'newpass123'
-      click_on "Change password"
-      expect(page).to have_content 'Management'
+      within '.side-and-details--details' do
+        fill_in "New password", with: 'newpass123'
+        click_on "Change password"
+      end
 
-      click_on 'Sign out'
+      visit '/users/logout'
 
       fill_in 'Email', with: user.email
       fill_in 'Password', with: 'newpass123'

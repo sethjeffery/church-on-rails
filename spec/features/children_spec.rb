@@ -36,8 +36,8 @@ RSpec.describe "Children" do
         end
 
         # no write access
-        expect(page).to have_no_selector 'a.btn', text: /Edit/
-        expect(page).to have_no_selector 'a.btn', text: /Add child/
+        expect(page).to have_no_selector 'a.nav-link', text: /Edit/
+        expect(page).to have_no_selector 'a.nav-link', text: /Add child/
       end
     end
 
@@ -54,8 +54,8 @@ RSpec.describe "Children" do
         expect(page).to have_content 'Group1'
 
         # has write access
-        expect(page).to have_selector 'a.btn', text: /Edit/
-        expect(page).to have_selector 'a.btn', text: /Add child/
+        expect(page).to have_selector 'a.nav-link', text: /Edit/
+        expect(page).to have_selector 'a.nav-link', text: /Add child/
 
         # no delete access
         expect(page).to have_no_selector '.list-group-item form.button_to'
@@ -71,8 +71,11 @@ RSpec.describe "Children" do
 
       it 'can add children' do
         click_on 'Add child'
-        select child.name, from: 'child_group_membership[person_id]'
-        click_on 'Add child'
+
+        within '.side-and-details--details' do
+          select child.name, from: 'child_group_membership[person_id]'
+          click_on 'Add child'
+        end
 
         expect(page).to have_content child.name
       end

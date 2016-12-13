@@ -24,7 +24,7 @@ class People::PropertiesController < ApplicationController
 
   def destroy
     @property.destroy
-    redirect_to properties_path
+    redirect_to properties_path, notice: "#{@property} has been removed from the database."
   end
 
   private

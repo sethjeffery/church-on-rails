@@ -48,7 +48,7 @@ class People::PeopleController < ApplicationController
   end
 
   def property_params
-    params.require(:person).require(:properties).permit!
+    params.require(:person).permit![:properties] || {}
   end
 
   def show_path

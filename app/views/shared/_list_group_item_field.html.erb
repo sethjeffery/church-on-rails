@@ -1,8 +1,8 @@
 <% if local_assigns[:inline] %>
-  <%= render 'shared/field', local_assigns.merge(wrapper_class: "list-group-item  #{local_assigns[:wrapper_class]}") { yield } %>
+  <%= render 'shared/field', local_assigns.merge(wrapper_class: "list-group-item  #{local_assigns[:wrapper_class]}") do yield end %>
 <% else %>
   <div class="list-group-item <%= local_assigns[:wrapper_class] %>">
     <%= render 'shared/field', local_assigns.merge(label_class: local_assigns[:label_class] || 'form-control-static mb-0',
-                                                   wrapper_class: "row") { yield } %>
+                                                   wrapper_class: "row") do yield end %>
   </div>
 <% end %>

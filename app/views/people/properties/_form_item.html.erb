@@ -9,7 +9,7 @@
     <% if property.flag? %>
       <div class="form-control-static">
         <label class="custom-switch custom-control mb-0">
-          <%= f.check_box property.id, class: 'custom-control-input', checked: local_assigns[:person]&.has_property?(property.id) %>
+          <%= f.check_box property.id, class: 'custom-control-input', checked: local_assigns[:person]&.has_property?(property.id), title: property.name %>
           <span class="custom-control-indicator"></span>
           &nbsp;
         </label>

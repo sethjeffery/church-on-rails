@@ -19,20 +19,25 @@ RSpec.describe "People" do
 
         visit "/people"
 
-        people[0...20].each do |other|
-          expect(page).to have_text other.name
-        end
-        people[21...25].each do |other|
-          expect(page).to have_no_text other.name
+        within '.container .list-group' do
+          people[0...20].each do |other|
+            expect(page).to have_text other.name
+          end
+          people[21...25].each do |other|
+            expect(page).to have_no_text other.name
+          end
         end
 
         # next page
         click_on '2'
-        people[0...20].each do |other|
-          expect(page).to have_no_text other.name
-        end
-        people[21...25].each do |other|
-          expect(page).to have_text other.name
+
+        within '.container .list-group' do
+          people[0...20].each do |other|
+            expect(page).to have_no_text other.name
+          end
+          people[21...25].each do |other|
+            expect(page).to have_text other.name
+          end
         end
 
         # search
@@ -41,8 +46,11 @@ RSpec.describe "People" do
         fill_in 'q', with: 'xxxxx'
         click_on 'Search'
         expect(page).to have_text person.name
-        people.select{|other_person| other_person != person}.each do |other|
-          expect(page).to have_no_text other.name
+
+        within '.container .list-group' do
+          people.select{|other_person| other_person != person}.each do |other|
+            expect(page).to have_no_text other.name
+          end
         end
 
         # click on person
@@ -57,18 +65,18 @@ RSpec.describe "People" do
         expect(page).to have_content team.name
 
         # no editing access
-        expect(page).to have_no_selector 'a.btn', :text => /Join/
-        expect(page).to have_no_selector 'a.btn', :text => /Edit/
-        expect(page).to have_no_content "Family"
+        expect(page).to have_no_selector 'a.nav-link', :text => /Edit/
+        expect(page).to have_no_selector 'a.nav-link', :text => /Join teams/
+        expect(page).to have_no_selector 'a.nav-link', :text => /Join a family/
 
         # no processes access
         expect(page).to have_no_content "Processes"
-        expect(page).to have_no_selector 'a.btn', :text => /Start/
+        expect(page).to have_no_selector 'a.nav-link', :text => /Start/
       end
 
       it 'can edit own account' do
         visit "/people/#{user.person.id}"
-        expect(page).to have_selector 'a.btn', :text => /Edit/
+        expect(page).to have_selector 'a.nav-link', :text => /Edit/
       end
 
       it 'can view family members' do
@@ -140,10 +148,10 @@ RSpec.describe "People" do
         visit "/people/#{person.id}"
         expect(page).to have_content "Full name #{person.full_name}"
         expect(page).to have_content team.name
-        expect(page).to have_content "Family"
-        expect(page).to have_selector 'a.btn', :text => /Join/
-        expect(page).to have_selector 'a.btn', :text => /Start/
-        expect(page).to have_selector 'a.btn', :text => /Edit/
+        expect(page).to have_selector 'a.nav-link', :text => /Join a family/
+        expect(page).to have_selector 'a.nav-link', :text => /Join teams/
+        expect(page).to have_selector 'a.nav-link', :text => /Start/
+        expect(page).to have_selector 'a.nav-link', :text => /Edit/
 
         # cannot do admin stuff
         expect(page).to have_no_selector 'Remove person'
@@ -192,8 +200,11 @@ RSpec.describe "People" do
         expect(page).to have_content 'Change password'
 
         click_on 'Change password'
-        fill_in 'New password', with: 'pass123'
-        click_on 'Change password'
+
+        within '.side-and-details--details' do
+          fill_in 'New password', with: 'pass123'
+          click_on 'Change password'
+        end
 
         expect(page).to have_content "Password updated successfully"
       end
@@ -202,12 +213,15 @@ RSpec.describe "People" do
         person = create(:person)
         visit "/people/#{person.id}"
 
-        click_on "Add login account"
+        within '.side-and-details--details' do
+          click_on "Add login account"
+        end
+
         fill_in 'Email', with: 'new_account@example.com'
         fill_in 'Password', with: 'pass123'
         click_on 'Add account'
 
-        click_on 'Sign out'
+        visit '/users/logout'
         fill_in 'Email', with: 'new_account@example.com'
         fill_in 'Password', with: 'pass123'
         click_on 'Log in'

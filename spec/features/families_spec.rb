@@ -39,7 +39,7 @@ RSpec.describe "Families" do
         # no edit or destroy
         expect(page).to have_no_selector '.list-group-item form.button_to'
         expect(page).to have_no_content 'Edit'
-        expect(page).to have_no_content 'Add person'
+        expect(page).to have_no_content 'Add member'
       end
     end
 
@@ -64,10 +64,13 @@ RSpec.describe "Families" do
         expect(page).to have_content '1 The Street, The Neighbourhood, AB1 2CD, United Kingdom'
 
         new_person = create(:person)
-        click_on "Add person"
-        expect(page).to have_content 'Add to Family'
-        select new_person.name, from: 'family_membership[person_id]'
-        click_on 'Add member'
+        click_on "Add member"
+
+        within '.side-and-details--details' do
+          expect(page).to have_content 'Add to Family'
+          select new_person.name, from: 'family_membership[person_id]'
+          click_on 'Add member'
+        end
 
         expect(page).to have_no_content 'Add to Family'
         expect(page).to have_content new_person.name

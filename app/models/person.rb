@@ -15,7 +15,7 @@ class Person < ApplicationRecord
   has_many :property_joins,             dependent: :destroy, as: :propertyable
   has_many :families,                   through: :family_memberships, inverse_of: :people
   has_many :teams,                      through: :team_memberships, inverse_of: :people
-  has_many :assigned_person_processes,  through: :person_process_assignees, class_name: 'PersonProcess', inverse_of: :assignees
+  has_many :assigned_person_processes,  through: :person_process_assignees, class_name: 'PersonProcess', source: :person_process
   has_many :child_groups,               through: :child_group_memberships
   has_many :properties,                 through: :property_joins
 
