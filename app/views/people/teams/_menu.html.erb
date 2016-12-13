@@ -10,7 +10,7 @@
                      ({ title: 'Edit',            icon: :edit,   href: edit_team_path(@team)}                if can?(:update, @team)),
                      ({ title: 'Add member',      icon: :person, href: new_team_team_membership_path(@team)} if can?(:create, TeamMembership)),
                      ({ title: 'Add team event',  icon: :event,  href: new_team_event_path(@team)}           if can?(:create, Event)),
-                     ({ title: 'Remove team',     icon: :destroy,  href: confirm_destroy_team_path(@team)}     if can?(:destroy, @team))
+                     ({ title: 'Remove',          icon: :destroy,  href: confirm_destroy_team_path(@team)}     if can?(:destroy, @team))
   ] { yield } %>
 <% else %>
   <%= render 'shared/side_and_details',

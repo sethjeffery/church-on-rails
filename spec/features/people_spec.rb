@@ -154,7 +154,7 @@ RSpec.describe "People" do
         expect(page).to have_selector 'a.nav-link', :text => /Edit/
 
         # cannot do admin stuff
-        expect(page).to have_no_selector 'Remove person'
+        expect(page).to have_no_selector 'Remove'
         expect(page).to have_no_selector 'Change password'
 
         click_on 'Edit'
@@ -181,7 +181,7 @@ RSpec.describe "People" do
         person = create(:person)
 
         visit "/people/#{person.id}"
-        click_on 'Remove person'
+        click_on 'Remove'
         click_on 'Yes, do it.'
 
         expect(page).to have_content "#{person.name} has been removed"

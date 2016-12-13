@@ -124,4 +124,18 @@
       transform: translateY(0);
     }
   }
+
+  @include media-breakpoint-up(md) {
+    .navbar-transition & {
+      .container {
+        transition: padding-left .3s;
+      }
+    }
+
+    .navbar.navbar-short & {
+      .container {
+        padding-left: 0;
+      }
+    }
+  }
 }

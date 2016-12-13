@@ -3,8 +3,12 @@
     <div class="side-and-details--details">
       <% if local_assigns[:title] %>
         <h2>
-          <% if local_assigns[:title].is_a?(Person) %>
-            <%= avatar_tag local_assigns[:title], class: 'avatar-md float-xs-right' %>
+          <% if title.is_a?(Person) %>
+            <%= avatar_tag local_assigns[:title], class: 'float-xs-right' %>
+          <% elsif title.respond_to?(:icon) && title.respond_to?(:color) %>
+            <%= icon_for title, class: 'float-xs-right', style: "background-color: ##{title.color}; color: white;" %>
+          <% elsif title.respond_to?(:icon) %>
+            <%= icon_for title, class: 'float-xs-right' %>
           <% end %>
           <%= title %>
         </h2>

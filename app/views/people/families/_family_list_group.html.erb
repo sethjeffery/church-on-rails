@@ -1,4 +1,4 @@
 <div class="list-group mb-2" id="family-<%= family.id %>">
-  <%= render 'shared/list_group_header', icon: :family, title: family, button: { title: 'View', href: family } %>
+  <%= render 'shared/list_group_header', icon: :family, title: family, button: { title: 'View', href: family, can: [:read, family] } %>
   <%= render 'people/families/memberships', family: family %>
 </div>

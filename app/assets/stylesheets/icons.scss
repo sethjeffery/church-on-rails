@@ -1,20 +1,11 @@
+@import 'variables';
+
 .fa-1x {
   width: 1em;
   text-align: center;
 }
 
-.fa-2x-container {
-  padding-left: 3em;
-
-  > .fa {
-    float: left;
-    margin: 0 -1em 0 -1.5em;
-    width: 1em;
-    height: 1em;
-    text-align: center;
-  }
-}
-
+// Used for statistics
 .fa-pictograph {
   vertical-align: top;
   height: 1em;
@@ -22,6 +13,7 @@
   width: inherit;
 }
 
+// An fa-container is a special icon+text container
 .fa-container {
   padding-left: 1.5rem;
   display: block;
@@ -49,6 +41,19 @@
   }
 }
 
+.fa-2x-container {
+  padding-left: 3em;
+
+  > .fa {
+    float: left;
+    margin: 0 -1em 0 -1.5em;
+    width: 1em;
+    height: 1em;
+    text-align: center;
+  }
+}
+
+// Menu bar animates into an X
 .bars {
   &, &::before, &::after {
     content: '';
@@ -90,4 +95,24 @@
       transition: margin .1s, transform .4s;
     }
   }
+}
+
+// Special icons inside headers
+h2 .fa {
+  padding: 0.5em 0;
+  font-size: .75em;
+  background-color: $gray-light;
+  color: white;
+  border-radius: 100%;
+  width: 2em;
+  height: 2em;
+  text-align: center;
+  margin: -.25em 0;
+}
+
+h2 .avatar {
+  width: 2.75rem;
+  height: 2.75rem;
+  margin: -.25rem 0;
+  font-size: 2.75rem;
 }

@@ -14,7 +14,7 @@
                                               ({ title: 'Change password',   icon: :password,       href: person_user_password_path(@person)}      if can?(:manage, @person) && @person.user.present?),
                                               ({ title: 'Add login account', icon: :user,           href: new_person_user_path(@person)}           if can?(:manage, @person) && @person.user.blank?),
                                               ({ title: 'Merge people',      icon: :merge,          href: person_merge_path(@person)}              if can?(:manage, Person)),
-                                              ({ title: 'Remove person',     icon: :destroy,        href: confirm_destroy_person_path(@person)}    if can?(:manage, @person))
+                                              ({ title: 'Remove',            icon: :destroy,        href: confirm_destroy_person_path(@person)}    if can?(:manage, @person))
   ] { yield } %>
 <% else %>
   <%= render 'shared/side_and_details',

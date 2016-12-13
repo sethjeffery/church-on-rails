@@ -112,7 +112,7 @@ RSpec.describe "Teams" do
         team = create(:team)
 
         visit "/teams/#{team.id}"
-        click_on 'Remove team'
+        click_on 'Remove'
         click_on 'Yes, do it.'
 
         expect(page).to have_content "#{team} has been removed"

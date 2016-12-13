@@ -74,13 +74,13 @@
           <hr/>
         </div>
 
-        <% %w(people process event comment children).each do |type| %>
+        <% %i(people process event comment children).each do |type| %>
           <div class="mb-xs mt-sm">
-            <% if type == 'people'  %><%= icon_for type, class: 'mr-xs' %> People, Teams, Families<% end %>
-            <% if type == 'process' %><%= icon_for type, class: 'mr-xs' %> Processes<% end %>
-            <% if type == 'event'   %><%= icon_for type, class: 'mr-xs' %> Events<% end %>
-            <% if type == 'comment' %><%= icon_for type, class: 'mr-xs' %> Comments<% end %>
-            <% if type == 'children' %><%= icon_for type, class: 'mr-xs' %> Children's Groups<% end %>
+            <%= icon_container "People, Teams, Families", type if type == :people %>
+            <%= icon_container "Processes",               type if type == :process %>
+            <%= icon_container "Events",                  type if type == :event %>
+            <%= icon_container "Comments",                type if type == :comment %>
+            <%= icon_container "Children's Groups",       type if type == :children %>
           </div>
 
           <div class="size-xs-small">

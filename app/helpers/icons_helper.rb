@@ -27,6 +27,7 @@ module IconsHelper
       when :child_group_membership then 'user-plus'
       when :comment then 'comment'
       when :property then 'toggle-on'
+      when :child then 'child'
 
       # other common nouns
       when :x then 'times'
