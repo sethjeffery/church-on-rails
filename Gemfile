@@ -71,6 +71,7 @@ group :development, :test do
   gem 'guard-rspec', require: false
   gem 'capybara'
   gem 'faker'
+  gem 'webmock'
 end
 
 group :development do
