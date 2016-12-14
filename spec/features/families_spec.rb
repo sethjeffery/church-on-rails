@@ -37,7 +37,7 @@ RSpec.describe "Families" do
         end
 
         # no edit or destroy
-        expect(page).to have_no_selector '.list-group-item form.button_to'
+        expect(page).to have_no_selector '.list-group-item form.button_to .btn-link'
         expect(page).to have_no_content 'Edit'
         expect(page).to have_no_content 'Add member'
       end
@@ -77,7 +77,7 @@ RSpec.describe "Families" do
         expect(family.reload.people).to include new_person
 
         # no destroy
-        expect(page).to have_no_selector '.list-group-item form.button_to'
+        expect(page).to have_no_selector '.list-group-item form.button_to .btn-link'
       end
     end
 
@@ -92,7 +92,7 @@ RSpec.describe "Families" do
         member.join family
 
         visit "/families/#{family.id}"
-        find(:css, '.list-group-item form.button_to button').click
+        find(:css, '.list-group-item form.button_to .btn-link').click
 
         expect(page).to have_no_content member.name
         expect(family.reload.people).not_to include member
@@ -102,7 +102,7 @@ RSpec.describe "Families" do
         family = create(:family)
 
         visit "/families/#{family.id}"
-        click_on 'Remove family'
+        click_on 'Remove'
         click_on 'Yes, do it.'
 
         expect(page).to have_content "#{family} has been removed"

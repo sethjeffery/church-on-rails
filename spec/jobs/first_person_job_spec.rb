@@ -6,7 +6,7 @@ RSpec.describe FirstPersonJob, type: :job do
 
   context 'with present teams and users' do
     it 'does nothing' do
-      create(:team)
+      create(:team, admin: true)
       expect {
         perform_now
       }.not_to change { Team.count }

@@ -9,7 +9,7 @@
                                               ({ title: @family,         icon: @family,   href: @family }),
                                               ({ title: 'Edit',          icon: :edit,     href: edit_family_path(@family)}                  if can?(:update, @family)),
                                               ({ title: 'Add member',    icon: :person,   href: new_family_family_membership_path(@family)} if can?(:create, FamilyMembership)),
-                                              ({ title: 'Remove family', icon: :destroy,  href: confirm_destroy_family_path(@family)}       if can?(:destroy, @family))
+                                              ({ title: 'Remove',        icon: :destroy,  href: confirm_destroy_family_path(@family)}       if can?(:destroy, @family))
   ] { yield } %>
 <% else %>
   <%= render 'shared/side_and_details',

@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_church
-    @current_church ||= Church.first || Church.new
+    @current_church ||= Church.first || Church.new(name: 'Church-on-Rails')
   end
 
   def blanks_to_nil(strong_params)

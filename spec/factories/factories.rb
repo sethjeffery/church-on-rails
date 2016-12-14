@@ -9,8 +9,9 @@ FactoryGirl.define do
     church_process
 
     trait :active do
-      complete { false }
+      complete { nil }
     end
+
     trait :complete do
       complete { true }
     end
