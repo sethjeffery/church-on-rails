@@ -4,9 +4,7 @@
     <%= render 'shared/list_group_header', title: 'Details' %>
 
     <div class="list-group-item">
-      <div class="text-required">
-        <%= field_name @church_process, :name %>
-      </div>
+      <%= f.label :name, class: 'text-required mb-0' %>
       <div class="input-group my-sm <%= 'has-danger' if @church_process.errors[:name].present? %>">
         <%= f.text_field :name, class: 'form-control', autofocus: true, hide_errors: true %>
         <%= f.hidden_field :icon %>

@@ -6,8 +6,8 @@
             autocomplete: local_assigns[:autocomplete] } %>
 
 <div class="<%= local_assigns[:wrapper_class] %>">
-  <div class="<%= 'text-required' if defined?(required) %> <%= 'col-sm-5' unless local_assigns[:inline] %>">
-    <%= f.label field, local_assigns[:label], class: local_assigns[:label_class] %>
+  <div class="<%= 'col-sm-5' unless local_assigns[:inline] %>">
+    <%= f.label field, local_assigns[:label], class: "#{'text-required' if defined?(required)} #{local_assigns[:label_class]}" %>
   </div>
 
   <div class="<%= 'col-sm-7' unless local_assigns[:inline] %>">

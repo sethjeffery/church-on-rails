@@ -3,8 +3,8 @@
   <div class="list-group mb-2">
     <%= render 'shared/list_group_header', title: 'Details' %>
 
-    <div class="list-group-item text-required">
-      <%= field_name @event, :name %>
+    <div class="list-group-item">
+      <%= f.label :name, class: 'mb-0 text-required' %>
       <%= f.text_field :name, class: 'form-control my-sm', autofocus: true, required: true, autocapitalize: :sentences %>
     </div>
 
