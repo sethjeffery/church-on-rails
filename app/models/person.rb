@@ -51,6 +51,7 @@ class Person < ApplicationRecord
     else
       raise "Unexpected type #{group.class.name}"
     end
+    self
   end
 
   def avatar_url(size)
@@ -97,6 +98,10 @@ class Person < ApplicationRecord
 
   def property(id)
     property_joins.where(property_id: id.to_i).first&.value
+  end
+
+  def start(church_process)
+    person_processes.create({ church_process: church_process })
   end
 
   protected

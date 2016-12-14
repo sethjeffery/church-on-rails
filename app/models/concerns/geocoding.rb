@@ -20,7 +20,7 @@ module Concerns
 
     included do
       geocoded_by :full_address
-      after_validation :geocode unless Rails.env.test?
+      after_validation :geocode, unless: ->{ Rails.env.test? || Geocoder.config.lookup == :test }
     end
   end
 end

@@ -11,7 +11,7 @@ class PersonProcess < ApplicationRecord
 
   serialize :steps
 
-  scope :active,   -> { where("complete != ?", true) }
+  scope :active,   -> { where(complete: nil) }
   scope :complete, -> { where(complete: true) }
 
   validates_presence_of :person, :church_process
