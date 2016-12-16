@@ -42,3 +42,12 @@
     text-decoration: underline;
   }
 }
+
+.btn {
+  @include hover-focus {
+    .text-light {
+      color: inherit;
+      opacity: 0.8;
+    }
+  }
+}

@@ -19,3 +19,13 @@
     margin-left: -3.25rem;
   }
 }
+
+.name-with-phone {
+  line-height: 1.25;
+  margin-top: -.5em;
+  margin-bottom: -.5em;
+
+  @include media-breakpoint-up(md) {
+    margin-top: -.6em;
+  }
+}

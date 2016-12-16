@@ -93,16 +93,16 @@ RSpec.describe "Children" do
 
         click_on 'Kiosk / Tablet mode'
 
-        expect(page).to have_selector    '.list-group-item', text: /#{child.name}/
-        expect(page).to have_no_selector '.list-group-item.active', text: /#{child.name}/
+        expect(page).to have_selector    '.btn-secondary', text: /#{child.name}/
+        expect(page).to have_no_selector '.btn-outline-warning', text: /#{child.name}/
 
         click_on child.name
         click_on parent.name
-        expect(page).to have_selector    '.list-group-item.active', text: /#{parent.name} #{child.name}/
+        expect(page).to have_selector    '.btn-outline-warning', text: /#{parent.name} #{child.name}/
 
         click_on child.name
         click_on 'Non-family member'
-        expect(page).to have_no_selector '.list-group-item.active', text: /#{child.name}/
+        expect(page).to have_no_selector '.btn-outline-warning', text: /#{child.name}/
 
         click_on 'Close'
       end

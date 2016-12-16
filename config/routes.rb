@@ -66,6 +66,13 @@ Rails.application.routes.draw do
       end
     end
 
+    namespace :kiosk do
+      resources :child_groups, path: 'children/groups'
+      resources :people, path: 'children'
+      resources :check_ins
+      resources :check_outs
+    end
+
     namespace :account do
       get '/' => 'people#show'
       get 'welcome' => 'people#welcome', as: :welcome

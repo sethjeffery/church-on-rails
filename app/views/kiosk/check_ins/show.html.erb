@@ -1,0 +1,44 @@
+<%= render 'kiosk/child_groups/title', title: "Check in #{@child_group_membership.person.first_name}", icon: 'sign-in' %>
+<h4 class="text-xs-center text-light"><%= Time.now.strftime('%H:%M') %></h4>
+
+<hr/>
+
+<div class="container-sm mb-2">
+
+  <div class="size-md-large">Who is checking in <%= @child_group_membership.person %>?</div>
+
+  <% @child_group_membership
+         .person
+         .families
+         .flat_map(&:heads)
+         .reject{|head| head == @child_group_membership.person }
+         .uniq.each do |person| %>
+    <%= button_to kiosk_check_in_path(@child_group_membership.id),
+                  method: :put,
+                  form_class: 'mt-1',
+                  params: { checked_in_by_id: person.id },
+                  class: "btn btn-block btn-outline-primary btn-lg size-xs-normal size-sm-large size-md-huge text-xs-left p-2" do %>
+      <div class="avatar-md-container">
+        <%= avatar_tag person, class: 'avatar-md' %>
+        <div class="pl-sm <%= 'name-with-phone' if person.phone.present? %>">
+          <div class="text-ellipsis"><%= person %></div>
+          <% if person.phone.present? %>
+            <div class="text-light size-xs-small size-md-normal text-ellipsis"><%= person.phone %></div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= button_to kiosk_check_in_path(@child_group_membership.id),
+                method: :put,
+                form_class: 'mt-1',
+                class: "btn btn-block btn-secondary btn-lg size-xs-normal size-sm-large size-md-huge text-xs-left p-2" do %>
+    <div class="avatar-md-container">
+      <%= icon_for 'question-circle-o', class: 'avatar avatar-md' %>
+      <div class="pl-sm">Non-family member</div>
+    </div>
+  <% end %>
+
+  <%= link_to 'Cancel', kiosk_child_group_path(@child_group_membership.child_group), class: 'btn-block btn btn-secondary btn-lg size-xs-normal size-md-large mt-1 mb-2' %>
+</div>

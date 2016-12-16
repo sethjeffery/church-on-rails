@@ -1,0 +1,34 @@
+<div class="container py-2">
+  <div class="float-xs-right">
+    <%= link_to(@child_group, class: 'btn btn-secondary btn-lg btn-subtle btn-align-middle') { icon_for(:x) + content_tag(:div, 'Close', class: 'sr-only') } %>
+  </div>
+
+  <h1><%= @child_group %></h1>
+
+  <% by_first_letter(@child_group.child_group_memberships.includes(:person)).each do |letter, memberships| %>
+    <h2 class="my-1 pt-1 ml-2 pl-sm"><%= letter %></h2>
+
+    <% memberships.each do |membership| %>
+      <% if membership.checked_in? %>
+        <%= link_to kiosk_check_out_path(membership), class: "btn btn-outline-warning btn-block text-xs-left p-2 size-md-huge clearfix" do %>
+          <div class="avatar-md-container">
+            <%= avatar_tag membership.person, class: 'avatar-md' %>
+            <div class="float-xs-right mx-1">
+              <span class="float-xs-left hidden-xs-down size-xs-normal text-light"><%= membership.child_group_checkins.last.checked_in_by %></span>
+              <%= icon_for 'sign-out', class: 'ml-1' %>
+            </div>
+            <div class="pl-sm"><%= membership.person %></div>
+          </div>
+        <% end %>
+      <% else %>
+        <%= link_to kiosk_check_in_path(membership), class: "btn btn-secondary btn-block text-xs-left p-2 size-md-huge" do %>
+          <div class="avatar-md-container">
+            <%= avatar_tag membership.person, class: 'avatar-md' %>
+            <div class="float-xs-right mx-1"><%= icon_for 'sign-in' %></div>
+            <div class="pl-sm"><%= membership.person %></div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

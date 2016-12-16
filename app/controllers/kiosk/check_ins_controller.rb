@@ -1,4 +1,4 @@
-class Children::KioskCheckInsController < ApplicationController
+class Kiosk::CheckInsController < ApplicationController
   before_action :load_and_authorize_child_group_membership
   layout 'kiosk'
 
@@ -10,7 +10,7 @@ class Children::KioskCheckInsController < ApplicationController
     checked_in_by = params[:checked_in_by_id] ? Person.find(params[:checked_in_by_id]) : nil
     if @child_group_membership.check_in(checked_in_by)
       respond_to do |format|
-        format.html { redirect_to child_group_kiosk_path(@child_group_membership.child_group) }
+        format.html { redirect_to kiosk_child_group_path(@child_group_membership.child_group) }
         format.js
       end
     else

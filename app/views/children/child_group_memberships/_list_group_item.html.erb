@@ -5,7 +5,7 @@
     <div class="float-xs-right">
       <% if can?(:update, list_group_item.child_group) %>
         <% if list_group_item.checked_in? %>
-          <%= button_to(child_group_kiosk_check_out_path(list_group_item.child_group, list_group_item.id),
+          <%= button_to(kiosk_check_out_path(list_group_item.id),
                         method: :put,
                         remote: true,
                         data: { tooltip: true},
@@ -13,7 +13,7 @@
                         class: 'btn btn-outline-success btn-sm btn-align-middle',
                         title: 'Check out') { icon_for 'sign-out' } %>
         <% else %>
-          <%= button_to(child_group_kiosk_check_in_path(list_group_item.child_group, list_group_item.id),
+          <%= button_to(kiosk_check_in_path(list_group_item.id),
                         method: :put,
                         remote: true,
                         data: { tooltip: true},
