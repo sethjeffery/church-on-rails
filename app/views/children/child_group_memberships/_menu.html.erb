@@ -9,7 +9,7 @@
                      ({ title: @child_group_membership.child_group, icon: @child_group_membership.child_group,  href: @child_group_membership.child_group }),
                      ({ title: 'Edit',                              icon: :edit,                                href: edit_child_group_path(@child_group_membership.child_group)}                       if can?(:update, @child_group_membership.child_group)),
                      ({ title: 'Add child',                         icon: :person,                              href: new_child_group_child_group_membership_path(@child_group_membership.child_group)} if can?(:create, ChildGroupMembership)),
-                     ({ title: 'Kiosk / Tablet mode',               icon: :laptop,                              href: child_group_kiosk_path(@child_group_membership.child_group)}),
+                     ({ title: 'Kiosk / Tablet mode',               icon: :laptop,                              href: kiosk_child_group_path(@child_group_membership.child_group)}),
                      ({ title: 'Remove group',                      icon: :destroy,                             href: confirm_destroy_child_group_path(@child_group)}                                   if can?(:destroy, @child_group)),
                      '-',
                      ({ title: @child_group_membership.person.first_name, icon: @child_group_membership.person,       href: child_group_child_group_membership_path(@child_group_membership.child_group, @child_group_membership)})
