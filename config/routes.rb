@@ -58,10 +58,6 @@ Rails.application.routes.draw do
       get 'children', to: redirect('children/groups')
       resources :child_groups, path: 'children/groups' do
         get :confirm_destroy, on: :member
-        resource :kiosk do
-          resources :check_ins, controller: :kiosk_check_ins
-          resources :check_outs, controller: :kiosk_check_outs
-        end
         resources :child_group_memberships, path: 'memberships'
       end
     end
