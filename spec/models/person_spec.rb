@@ -127,4 +127,61 @@ RSpec.describe Person do
       }.by(1)
     end
   end
+
+  describe '#track' do
+    subject { create(:person) }
+
+    it 'tracks a given event type for the person' do
+      expect {
+        subject.track(:new_action, data: { bar: 'baz' })
+      }.to change {
+        subject.actions.of_type(:new_action).count
+      }.by(1)
+    end
+  end
+
+  describe '#track_unique' do
+    subject { create(:person) }
+
+    it 'adds a new type for the person' do
+      expect {
+        subject.track_unique(:new_action, data: { bar: 'baz' })
+      }.to change {
+        subject.actions.of_type(:new_action).count
+      }.by(1)
+    end
+
+    it 'updates an existing type for the person' do
+      subject.track(:joined, data: { joined_at: Time.now - 1.day })
+      action = subject.actions.of_type(:joined).first
+
+      expect {
+        subject.track_unique(:joined, data: { joined_at: Time.now })
+      }.to change {
+        action.reload.data[:joined_at]
+      }
+    end
+
+    it 'does not add new actions of the same type for the person' do
+      subject.track(:joined, data: { joined_at: Time.now - 1.day })
+
+      expect {
+        subject.track_unique(:joined, data: { joined_at: Time.now })
+      }.not_to change {
+        subject.actions.count
+      }
+    end
+  end
+
+  describe '#after_save' do
+    it 'tracks joined_at' do
+      expect {
+        subject.update_attributes joined_at: Date.today
+      }.to change {
+        subject.actions.of_type(:joined).count
+      }.by(1)
+
+      expect(subject.actions.of_type(:joined).first.created_at).to eq Date.today.midnight
+    end
+  end
 end

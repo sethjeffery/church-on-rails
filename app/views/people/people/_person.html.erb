@@ -1,7 +1,8 @@
 <div class="list-group mb-2 mt-1">
-  <%= list_group_fields class: 'mb-2', fields: {
+  <%= list_group_fields class: 'mb-2', object: person, fields: {
       :full_name  => person.full_name,
-      'DOB'       => person.dob&.strftime('%d %b %Y'),
+      :dob        => person.dob&.strftime('%d %b %Y'),
+      :joined_at  => person.joined_at&.strftime('%d %b %Y'),
       :email      => (link_to(person.email, "mailto:#{person.email}", class: 'dotted') if person.email),
       :phone      => person.phone,
       :gender     => gender_icon(person),
@@ -10,7 +11,7 @@
   } %>
 
   <% if can?(:manage, User) || person.user.present? %>
-    <%= list_group_field :account do %>
+    <%= list_group_field person, :account do %>
 
       <% if person.user.present? %>
         <%= icon_container(person.user.email, person.user) %>

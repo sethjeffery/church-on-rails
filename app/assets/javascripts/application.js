@@ -22,4 +22,6 @@
 //= require gmaps
 //= require sortable
 //= require jquery.autosize
+//= require Chart.bundle
+//= require chartkick
 //= require_tree .

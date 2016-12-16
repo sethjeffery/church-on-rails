@@ -15,10 +15,9 @@ RSpec.describe "Church" do
         expect(page).to have_content "The administrator has not set your church address yet"
         expect(page).to have_no_selector 'a.btn', :text => /Edit/
 
-        expect(page).to have_no_content 'people'
-        expect(page).to have_no_content 'upcoming event'
-        expect(page).to have_no_content 'team'
-        expect(page).to have_no_content 'active process'
+        expect(page).to have_no_content 'Age distribution'
+        expect(page).to have_no_content 'Gender distribution'
+        expect(page).to have_no_content 'Joined members'
       end
     end
 
@@ -39,7 +38,7 @@ RSpec.describe "Church" do
         fill_in 'Email', with: 'test@example.com'
         click_on 'Save changes'
 
-        expect(page).to have_content '1 The Street, District, AB1 2CD, United Kingdom'
+        expect(page).to have_content '1 The StreetDistrictAB1 2CDUnited Kingdom'
         expect(page).to have_no_content 'No address'
         expect(page).to have_content '01234567890'
         expect(page).to have_content 'test@example.com'
@@ -54,10 +53,9 @@ RSpec.describe "Church" do
         user.person.join create(:team, admin: true)
         visit '/'
 
-        expect(page).to have_content '7 people'
-        expect(page).to have_content '1 upcoming event'
-        expect(page).to have_content '3 teams'
-        expect(page).to have_content '1 active process'
+        expect(page).to have_content 'Age distribution'
+        expect(page).to have_content 'Gender distribution'
+        expect(page).to have_content 'Joined members'
       end
     end
   end

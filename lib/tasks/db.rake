@@ -25,7 +25,10 @@ namespace :db do
                                         last_name: Faker::Name.last_name,
                                         middle_name: (Faker::Name.first_name if rand > 0.8),
                                         email: (Faker::Internet.email if rand > 0.5),
-                                        dob: (Faker::Date.birthday if rand > 0.25)
+                                        dob: (Faker::Date.birthday if rand > 0.25),
+                                        joined_at: (Date.current - rand(3000).days if rand > 0.1),
+                                        created_at: Time.now - rand(30000).minutes,
+                                        gender: %w(m f).sample
     end
 
     def create_family(args={})

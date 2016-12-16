@@ -7,7 +7,8 @@ module PeopleHelper
     end
   end
 
-  def all_people
-    Person.all.order(:first_name, :last_name)
+  def all_people(*fields)
+    fields = [:first_name, :last_name] if fields.blank?
+    Person.select(fields).order(:first_name, :last_name)
   end
 end

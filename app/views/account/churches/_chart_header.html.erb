@@ -1,0 +1,23 @@
+<div class="list-group-item active clearfix">
+  <div class="text-ellipsis float-xs-left">
+    <%= title %>
+  </div>
+  <% if local_assigns[:group_by_date] %>
+    <div class="float-xs-right">
+      <div class="btn-group">
+        <a class="btn btn-link btn-sm btn-align-middle" href="#">
+          <span class="hidden-xs-down">Weekly</span>
+          <span class="hidden-sm-up">W</span>
+        </a>
+        <a class="btn btn-link active btn-sm btn-align-middle" href="#">
+          <span class="hidden-xs-down">Monthly</span>
+          <span class="hidden-sm-up">M</span>
+        </a>
+        <a class="btn btn-link btn-sm btn-align-middle" href="#">
+          <span class="hidden-xs-down">Yearly</span>
+          <span class="hidden-sm-up">Y</span>
+        </a>
+      </div>
+    </div>
+  <% end %>
+</div>

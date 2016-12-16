@@ -35,3 +35,10 @@
   border-color: transparent;
   color: $gray-light;
 }
+
+.btn-link {
+  &.active {
+    color: $body-color;
+    text-decoration: underline;
+  }
+}

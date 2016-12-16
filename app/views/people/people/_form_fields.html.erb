@@ -15,6 +15,10 @@
   <%= f.date_select :dob, data: { :'view-mode' => 'years', :'show-clear' => true } %>
 <% end %>
 
+<%= render 'shared/list_group_item_field', f: f, field: :joined_at do %>
+  <%= f.date_select :joined_at, data: { :'show-clear' => true } %>
+<% end %>
+
 <%= render 'shared/list_group_item_field', f: f, field: :email, control: :email_field do %>
   <%= f.email_field :email, class: 'form-control' %>
   <%= field_error f.object.user, :email %>

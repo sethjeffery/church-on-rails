@@ -13,6 +13,8 @@ class Person < ApplicationRecord
   has_many :child_group_checkins,       dependent: :destroy, inverse_of: :checked_in_by,  class_name: 'ChildGroupCheckin', foreign_key: :checked_in_by_id
   has_many :child_group_checkouts,      dependent: :destroy, inverse_of: :checked_out_by, class_name: 'ChildGroupCheckin', foreign_key: :checked_out_by_id
   has_many :property_joins,             dependent: :destroy, as: :propertyable
+  has_many :actions,                    dependent: :nullify, inverse_of: :actor, foreign_key: :actor_id
+  has_many :actionable_actions,         dependent: :nullify, as: :actionable, class_name: 'Action'
   has_many :families,                   through: :family_memberships, inverse_of: :people
   has_many :teams,                      through: :team_memberships, inverse_of: :people
   has_many :assigned_person_processes,  through: :person_process_assignees, class_name: 'PersonProcess', source: :person_process
@@ -27,6 +29,8 @@ class Person < ApplicationRecord
   validates_format_of :twitter, with: /\A@[\w\d\._]+\z/, allow_nil: true
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
+  after_save        :track_joined, if: :joined_at_changed?
+  after_create      :track_added
   before_validation :copy_changes_to_user
   before_validation :sanitize_names
   before_validation :sanitize_facebook
@@ -66,12 +70,23 @@ class Person < ApplicationRecord
 
   def age(t = Date.current)
     return unless dob
-    months = (t.year * 12 + t.month) - (dob.year * 12 + dob.month)
-    months -= 1 if t.day < dob.day
+    months = months_old(t)
 
     # months / 12 will give the number of years
     # months % 12 will give the number of months
     readable_age(months / 12, months % 12)
+  end
+
+  def months_old(t = Date.current)
+    return unless dob
+    months = (t.year * 12 + t.month) - (dob.year * 12 + dob.month)
+    months -= 1 if t.day < dob.day
+    months
+  end
+
+  def years_old(t = Date.current)
+    return unless dob
+    months_old(t) / 12
   end
 
   def merge_into(target)
@@ -102,6 +117,20 @@ class Person < ApplicationRecord
 
   def start(church_process)
     person_processes.create({ church_process: church_process })
+  end
+
+  def icon
+    icon = gender == 'f' ? :female : :male
+    icon = :child if dob && years_old < 18
+    icon
+  end
+
+  def track(type, args={})
+    actions.create({ action_type: type }.merge(args))
+  end
+
+  def track_unique(type, args={})
+    actions.of_type(type).first&.update_attributes(args) || track(type, args)
   end
 
   protected
@@ -157,5 +186,17 @@ class Person < ApplicationRecord
     else
       "#{months} #{'month'.pluralize(months)} old"
     end
+  end
+
+  def track_joined
+    if joined_at
+      track_unique :joined, created_at: joined_at
+    else
+      actions.of_type(type).delete_all
+    end
+  end
+
+  def track_added
+    track_unique :added, created_at: created_at
   end
 end

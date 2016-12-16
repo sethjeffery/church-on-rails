@@ -16,4 +16,8 @@ class ApplicationController < ActionController::Base
   def blanks_to_nil(strong_params)
     strong_params.to_h.map{|k, v| v.blank? ? [k, nil] : [k, v]}.to_h.with_indifferent_access if strong_params
   end
+
+  def track(type, args={})
+    Action.create!({ action_type: type }.merge(args))
+  end
 end

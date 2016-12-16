@@ -1,15 +1,18 @@
-<% count = (local_assigns[:query] || klass).count %>
-<% path =   local_assigns[:path] || klass %>
-<% desc =   local_assigns[:desc] || klass.name.downcase.singularize %>
+<% if can?(:read, klass) %>
+  <% query = local_assigns[:query] || klass.all %>
+  <% count = local_assigns[:query].to_a.count %>
+  <% path  = local_assigns[:path] || klass %>
+  <% desc  = local_assigns[:desc] || klass.name.downcase.singularize %>
 
-<% if can? :read, klass %>
-  <div class="pictograph">
-    <%= link_to path, class: "btn btn-secondary float-xs-right btn-align-middle btn-sm" do %><%= icon_for klass %> View<% end %>
-    <h4><%= pluralize count, desc %></h4>
-    <% if count > 20 %>
-      <%= pictograph count, klass, '1x' %>
-    <% else %>
-      <%= pictograph count, klass, '2x' %>
+  <div class="list-group-item">
+    <div class="my-sm">
+      <%= link_to 'View', path, class: "btn btn-secondary float-xs-right btn-align-middle btn-sm" %>
+      <h4><%= icon_for klass %> <%= pluralize count, desc %></h4>
+    </div>
+
+    <% query.each do |item| %>
+      <% size = count > 20 ? '' : '2x' %>
+      <%= icon_for item, size %>
     <% end %>
   </div>
 <% end %>

@@ -38,7 +38,7 @@ class People::PeopleController < ApplicationController
   end
 
   def create_params
-    fields      = [ :first_name, :middle_name, :last_name, :prefix, :suffix, :dob, :gender, :email, :phone, :facebook, :twitter, :avatar ]
+    fields      = [ :first_name, :middle_name, :last_name, :prefix, :suffix, :dob, :gender, :email, :phone, :facebook, :twitter, :avatar, :joined_at ]
     fields.concat [ :family_name, :family_ids, family_ids: []]    if can? :create, FamilyMembership
     fields.concat [ :team_ids, team_ids: []]                      if can? :create, TeamMembership
 

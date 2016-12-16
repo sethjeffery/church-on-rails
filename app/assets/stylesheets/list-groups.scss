@@ -62,6 +62,9 @@
 #map {
   border-left: solid 1px $list-group-border-color;
   border-right: solid 1px $list-group-border-color;
+  &:last-child {
+    border-bottom: solid 1px $list-group-border-color;
+  }
 }
 
 #q {

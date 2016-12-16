@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161209223433) do
+ActiveRecord::Schema.define(version: 20161215211923) do
+
+  create_table "actions", force: :cascade do |t|
+    t.string   "action_type"
+    t.integer  "actor_id"
+    t.string   "actionable_type"
+    t.integer  "actionable_id"
+    t.text     "data"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["action_type", "created_at"], name: "index_actions_on_action_type_and_created_at"
+    t.index ["actionable_type", "actionable_id"], name: "index_actions_on_actionable_type_and_actionable_id"
+    t.index ["actor_id", "action_type"], name: "index_actions_on_actor_id_and_action_type"
+    t.index ["actor_id"], name: "index_actions_on_actor_id"
+  end
 
   create_table "child_group_checkins", force: :cascade do |t|
     t.integer  "child_group_membership_id"
@@ -143,7 +157,9 @@ ActiveRecord::Schema.define(version: 20161209223433) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.date     "joined_at"
     t.index ["first_name"], name: "index_people_on_first_name"
+    t.index ["gender"], name: "index_people_on_gender"
     t.index ["last_name"], name: "index_people_on_last_name"
     t.index ["user_id"], name: "index_people_on_user_id"
   end
