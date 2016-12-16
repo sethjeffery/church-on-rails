@@ -9,6 +9,6 @@ module PeopleHelper
 
   def all_people(*fields)
     fields = [:first_name, :last_name] if fields.blank?
-    Person.select(fields).order(:first_name, :last_name)
+    Person.select(fields).order(:search_name)
   end
 end

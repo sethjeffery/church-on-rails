@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161215211923) do
+ActiveRecord::Schema.define(version: 20161216122018) do
 
   create_table "actions", force: :cascade do |t|
     t.string   "action_type"
@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(version: 20161215211923) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.date     "joined_at"
+    t.string   "search_name"
     t.index ["first_name"], name: "index_people_on_first_name"
     t.index ["gender"], name: "index_people_on_gender"
     t.index ["last_name"], name: "index_people_on_last_name"

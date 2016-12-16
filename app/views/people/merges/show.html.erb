@@ -8,10 +8,10 @@
 
   <%= form_for :merge, url: person_merge_path(@person), method: :put do |f| %>
     <div class="list-group mb-2">
-      <%= render 'shared/list_group_header', title: "Merge #{@person.first_name} into..." %>
+      <%= render 'shared/list_group_header', title: "Merge #{@person.short_name} into..." %>
 
       <div class="list-group-item">
-        <%= f.collection_select :merger_id, Person.where.not(id: @person.id).order(:first_name, :last_name).all, :id, :name,
+        <%= f.collection_select :merger_id, Person.where.not(id: @person.id).order(:search_name).all, :id, :name,
                                 { include_blank: true },
                                 { data: { selectpicker: true, width: '100%', placeholder: "Choose a person" }} %>
       </div>

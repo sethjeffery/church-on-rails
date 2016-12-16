@@ -15,7 +15,7 @@ RSpec.describe "People" do
 
       it "can browse people" do
         create_list(:person, 25)
-        people = Person.all.order(:first_name, :last_name)
+        people = Person.all.order(:search_name)
 
         visit "/people"
 

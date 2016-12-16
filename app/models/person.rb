@@ -35,6 +35,7 @@ class Person < ApplicationRecord
   before_validation :sanitize_names
   before_validation :sanitize_facebook
   before_validation :sanitize_twitter
+  before_validation :update_search_name
 
   def start_family(family_name)
     join Family.create(name: family_name), head: true
@@ -198,5 +199,9 @@ class Person < ApplicationRecord
 
   def track_added
     track_unique :added, created_at: created_at
+  end
+
+  def update_search_name
+    self.search_name = name.downcase
   end
 end

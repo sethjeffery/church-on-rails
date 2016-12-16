@@ -1,4 +1,4 @@
-<%= render 'kiosk/child_groups/title', title: "Pick up #{@child_group_membership.person.first_name}", icon: 'sign-out' %>
+<%= render 'kiosk/child_groups/title', title: "Pick up #{@child_group_membership.person.short_name}", icon: 'sign-out' %>
 <h4 class="text-xs-center text-light"><%= Time.now.strftime('%H:%M') %></h4>
 
 <hr/>

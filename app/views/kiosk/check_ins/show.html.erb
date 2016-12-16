@@ -1,4 +1,4 @@
-<%= render 'kiosk/child_groups/title', title: "Check in #{@child_group_membership.person.first_name}", icon: 'sign-in' %>
+<%= render 'kiosk/child_groups/title', title: "Check in #{@child_group_membership.person.short_name}", icon: 'sign-in' %>
 <h4 class="text-xs-center text-light"><%= Time.now.strftime('%H:%M') %></h4>
 
 <hr/>

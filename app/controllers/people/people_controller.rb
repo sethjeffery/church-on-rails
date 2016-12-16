@@ -2,8 +2,8 @@ class People::PeopleController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @people = @people.where("lower(first_name) LIKE ? OR lower(last_name) LIKE ?", "%#{params[:q].downcase}%", "%#{params[:q].downcase}%") if params[:q]
-    @people = @people.includes(:teams).order(:first_name, :last_name).page(params[:page]).per(20)
+    @people = @people.where("search_name LIKE ?", "%#{params[:q].downcase}%") if params[:q]
+    @people = @people.includes(:teams).order(:search_name).page(params[:page]).per(20)
   end
 
   def create

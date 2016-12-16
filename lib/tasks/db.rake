@@ -78,8 +78,8 @@ namespace :db do
     people = (1..200).to_a.map{ create_person }
     families = (1..50).to_a.map{
       family = create_family
-      adults = (0..rand(3)).to_a.map{ create_person(last_name: family.name).join family }
-      children = (1..rand(4)).to_a.map{ create_person(last_name: family.name, dob: Faker::Date.birthday(0, 18) ).join family }
+      adults = (0..rand(3)).to_a.map{ create_person(last_name: family.name).join(family, head: true) }
+      children = (1..rand(4)).to_a.map{ create_person(last_name: family.name, dob: Faker::Date.birthday(0, 18) ).join(family) }
       children.sample&.join child_groups.sample
     }
 
