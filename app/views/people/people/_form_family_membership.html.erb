@@ -4,7 +4,8 @@
 
     <div class="list-group-item" id="family-picker">
       <div class="my-sm">
-        <%= f.select :family_ids, [['< Start new family >', 'New']] + Family.all.map{|family| [ family.name, family.id ] }, { include_blank: true }, class: 'form-control', data: { selectpicker: true, placeholder: 'Choose a Family', :'allow-clear' => true } %>
+        <%= f.select :family_ids, [], { include_blank: true }, class: 'form-control',
+                     data: { selectpicker: true, placeholder: 'Choose a Family', :'allow-clear' => true, ajax: '/families.json', new: "Start new family", template: :family } %>
         <%= f.text_field :family_name, class: 'form-control mt-1', placeholder: 'Family name' %>
       </div>
     </div>

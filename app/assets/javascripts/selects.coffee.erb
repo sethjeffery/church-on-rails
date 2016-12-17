@@ -1,0 +1,63 @@
+$(document).on 'turbolinks:load', ->
+
+  templates =
+    child: (item) ->
+      item.icon or= 'child'
+      templates.default(item)
+
+    person: (item) ->
+      item.icon or= 'user'
+      templates.default(item)
+
+    family: (item) ->
+      item.icon or= 'address-card-o'
+      templates.default(item)
+
+    team: (item) ->
+      item.icon or= 'team'
+      item.icon = 'users' if item.icon == 'team'
+      templates.default(item)
+
+    default: (item) ->
+      return item.text if item.loading
+
+      if item.icon and item.color
+        """<div class="fa-container fa-container-colored">
+          <i class="fa fa-#{item.icon}" style="background-color: ##{item.color};"></i>
+          #{item.text}
+        </div>"""
+      else if item.icon
+        """<div class="fa-container">
+          <i class="fa fa-#{item.icon}"></i>
+          #{item.text}
+        </div>"""
+      else
+        item.text
+
+
+  # More beautiful looking selects with <select data-selectpicker></select>
+  $('[data-selectpicker] + .select2').remove()
+  $('[data-selectpicker]').removeClass('select2-hidden-accessible').each ->
+    do ($el = $(@)) ->
+      options =
+        theme: 'bootstrap'
+        escapeMarkup: (markup) -> markup
+        templateResult: templates[$el.data('template') || 'default']
+        templateSelection: templates[$el.data('template') || 'default']
+
+      if $el.data('ajax')
+        $.extend options,
+          ajax:
+            url: $el.data('ajax')
+            dataType: 'json'
+            delay: 250
+            data: (params) ->
+              q: params.term
+              page: params.page
+            processResults: (data, params) ->
+              data.unshift({ id: 'New', icon: 'plus', text: "<strong>#{$el.data('new')}</strong>" }) if !params.page and $el.data('new')
+              results: data
+              pagination:
+                more: data.length >= <%= ApplicationController::PAGE_SIZE %>
+
+      $el.select2 options

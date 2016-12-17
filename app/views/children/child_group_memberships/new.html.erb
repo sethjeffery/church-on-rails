@@ -13,9 +13,9 @@
           Choose a child from the database, or register a new one.
         </div>
         <div class="my-sm">
-          <%= f.select :person_id, [['< Register new child >', 'New']] + Person.all.map{|person| [ person.name, person.id ] }, { include_blank: true },
+          <%= f.select :person_id, [], { include_blank: true },
                        class: 'form-control',
-                       data: { selectpicker: true, placeholder: 'Choose a person', :'allow-clear' => true } %>
+                       data: { selectpicker: true, placeholder: 'Choose a person', :'allow-clear' => true, new: 'Register new child', ajax: '/people.json', template: :child } %>
         </div>
       </div>
     </div>

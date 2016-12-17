@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  PAGE_SIZE = 20
+
   protect_from_forgery with: :exception
   helper_method :current_person
   helper_method :current_church

@@ -9,7 +9,7 @@
       </p>
 
       <div class="my-sm">
-        <%= f.collection_select :assignee_ids, all_people, :id, :name, { }, multiple: true, data: { selectpicker: true, width: '100%', placeholder: 'Choose assignees' } %>
+        <%= f.select :assignee_ids, [], { }, multiple: true, data: { selectpicker: true, width: '100%', placeholder: 'Choose assignees', ajax: '/people.json' } %>
       </div>
     </div>
   </div>

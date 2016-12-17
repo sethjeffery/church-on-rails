@@ -3,7 +3,7 @@ class People::FamiliesController < ApplicationController
 
   def index
     @families = @families.where("lower(name) LIKE ?", "%#{params[:q].downcase}%") if params[:q]
-    @families = @families.includes(:people).order(:name).page(params[:page]).per(20)
+    @families = @families.includes(:people).order(:name).page(params[:page]).per(PAGE_SIZE)
   end
 
   def create

@@ -11,9 +11,8 @@
       <%= render 'shared/list_group_header', title: "Merge #{@person.short_name} into..." %>
 
       <div class="list-group-item">
-        <%= f.collection_select :merger_id, Person.where.not(id: @person.id).order(:search_name).all, :id, :name,
-                                { include_blank: true },
-                                { data: { selectpicker: true, width: '100%', placeholder: "Choose a person" }} %>
+        <%= f.select :merger_id, [], { include_blank: true },
+                     { data: { selectpicker: true, width: '100%', placeholder: "Choose a person", ajax: '/people.json' }} %>
       </div>
     </div>
 

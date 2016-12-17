@@ -11,8 +11,8 @@
 <% end %>
 
 <%= render 'shared/list_group_item_field', f: f, field: :family_ids do %>
-  <%= f.select :family_ids, [['< Start new family >', 'New']] + Family.all.map{|family| [ family.name, family.id ] }, { include_blank: true },
+  <%= f.select :family_ids, [], { include_blank: true },
                class: 'form-control',
-               data: { selectpicker: true, placeholder: 'Choose a Family', :'allow-clear' => true, width: '100%' } %>
+               data: { selectpicker: true, placeholder: 'Choose a Family', :'allow-clear' => true, width: '100%', ajax: '/families.json', new: 'Start new family', template: :family } %>
   <%= f.text_field :family_name, class: 'form-control mt-sm', placeholder: 'Family name' %>
 <% end %>

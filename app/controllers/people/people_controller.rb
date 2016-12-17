@@ -3,7 +3,7 @@ class People::PeopleController < ApplicationController
 
   def index
     @people = @people.where("search_name LIKE ?", "%#{params[:q].downcase}%") if params[:q]
-    @people = @people.includes(:teams).order(:search_name).page(params[:page]).per(20)
+    @people = @people.includes(:teams).order(:search_name).page(params[:page]).per(PAGE_SIZE)
   end
 
   def create

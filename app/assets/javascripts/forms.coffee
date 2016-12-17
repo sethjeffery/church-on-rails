@@ -22,10 +22,6 @@ $(document).on 'turbolinks:load', ->
   $('[data-datetimepicker]').each ->
     $(@).datetimepicker pickerOptions($(@))
 
-  # More beautiful looking selects with <select data-selectpicker></select>
-  $('[data-selectpicker] + .select2').remove()
-  $('[data-selectpicker]').removeClass('select2-hidden-accessible').select2 theme: 'bootstrap'
-
   # Auto-size all text areas
   $('textarea').autosize()
 

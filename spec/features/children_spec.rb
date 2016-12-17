@@ -69,9 +69,10 @@ RSpec.describe "Children" do
         expect(page).to have_content 'New description'
       end
 
-      it 'can add children' do
+      xit 'can add children' do
         click_on 'Add child'
 
+        # This is performed with AJAX which we can't test in normal Rack testing
         within '.side-and-details--details' do
           select child.name, from: 'child_group_membership[person_id]'
           click_on 'Add child'

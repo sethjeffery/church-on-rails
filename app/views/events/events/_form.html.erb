@@ -10,7 +10,7 @@
 
     <div class="list-group-item">
       Who is this for?
-      <%= f.collection_select :team_id, Team.all, :id, :name, { include_blank: 'Everyone' }, data: { selectpicker: true, width: '100%' }, class_name: 'my-sm' %>
+      <%= f.select :team_id, [], { include_blank: true }, data: { selectpicker: true, placeholder: 'Everyone', width: '100%', ajax: '/teams.json', template: :team, :'allow-clear' => true }, class_name: 'my-sm' %>
     </div>
 
     <div class="list-group-item">

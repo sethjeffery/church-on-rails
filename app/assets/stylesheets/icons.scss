@@ -22,7 +22,6 @@
     float: left;
     margin: 0 -1rem 0 -2rem;
     width: 2rem;
-    height: 1rem;
     text-align: center;
     line-height: inherit;
   }
@@ -38,6 +37,18 @@
       margin-left: -2.25rem;
       line-height: 1.5rem;
     }
+  }
+}
+
+.fa-container-colored {
+  padding-left: 2rem;
+
+  > .fa {
+    border-radius: 4px;
+    margin-left: -2rem;
+    width: 1.5rem;
+    color: white;
+    background-color: #ccc;
   }
 }
 
