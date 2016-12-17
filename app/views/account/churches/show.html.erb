@@ -2,8 +2,6 @@
 <%= render 'title' %>
 
 <div class="container">
-  <% can_view_stats = can?(:read, Person) || can?(:read, Team) || can?(:read, Event) || can?(:read, ChurchProcess) %>
-
   <% if current_church.full_address.present? %>
     <div class="row">
       <div class="col-md-6 col-lg-8">
@@ -11,7 +9,7 @@
           <%= render 'shared/list_group_header', title: 'Map' %>
 
           <% if current_church.lat && current_church.lng %>
-            <%= map_for current_church, height: '300px' %>
+            <%= map_for current_church, height: '300px', address: [current_church.name, current_church.address1, current_church.address2, current_church.postcode, current_church.country].select(&:present?).join(', ') %>
           <% end %>
         </div>
       </div>
@@ -21,7 +19,11 @@
           <%= render 'shared/list_group_header', title: 'Address', button: { href: edit_account_church_path, icon: 'pencil', title: 'Edit', can: [:update, current_church] } %>
 
           <%= icon_container 'map-marker', class: "list-group-item size-xs-small size-sm-normal" do %>
-            <%= [current_church.address1, current_church.address2, current_church.postcode, current_church.country].select(&:present?).map{|address| h(address)}.join('<br/>').html_safe %>
+            <div class="font-weight-bold"><%= current_church.name %></div>
+            <div><%= current_church.address1 %></div>
+            <div><%= current_church.address2 %></div>
+            <div><%= current_church.postcode %></div>
+            <div><%= current_church.country %></div>
           <% end %>
 
           <%= icon_container :phone, class: "list-group-item size-xs-small size-sm-normal" do %>
@@ -57,18 +59,32 @@
     </div>
   <% end %>
 
-  <% if can_view_stats %>
+  <% if can?(:read, Person) %>
     <div class="row">
-      <div class="col-md-12 col-lg-6">
+      <div class="col-sm-6">
         <div class="list-group mb-2">
-          <%= render 'chart_header', title: 'Joined members' %>
-          <div class="list-group-item">
-            <%= line_chart Action.of_type(:joined).where('created_at > ?', 12.months.ago ).group_by_month %>
-          </div>
+          <%= render 'chart_header', title: 'Recently added' %>
+          <% Action.of_type(:added).order('created_at DESC').limit(6).includes(:actor).each do |action| %>
+            <%= icon_container action.actor, class: 'list-group-item clearfix' do %>
+              <div class="float-xs-right text-light"><span class="size-xs-small"><%= action.created_at.strftime('%-d %b') %></span></div>
+              <%= link_to action.actor, action.actor, class: 'text-ellipsis' %>
+            <% end %>
+          <% end %>
         </div>
       </div>
 
-      <div class="col-md-6 col-lg-3">
+      <div class="col-sm-6">
+        <div class="list-group mb-2">
+          <%= render 'chart_header', title: 'Joined per month' %>
+          <div class="list-group-item">
+            <%= line_chart Action.of_type(:joined).where('created_at > ?', 12.months.ago ).group_by_month, height: '270px' %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
         <div class="list-group mb-2">
           <%= render 'chart_header', title: 'Age distribution' %>
           <div class="list-group-item">
@@ -77,7 +93,7 @@
         </div>
       </div>
 
-      <div class="col-md-6 col-lg-3">
+      <div class="col-sm-6">
         <div class="list-group mb-2">
           <%= render 'chart_header', title: 'Gender distribution' %>
           <div class="list-group-item">

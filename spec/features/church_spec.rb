@@ -38,7 +38,7 @@ RSpec.describe "Church" do
         fill_in 'Email', with: 'test@example.com'
         click_on 'Save changes'
 
-        expect(page).to have_content '1 The StreetDistrictAB1 2CDUnited Kingdom'
+        expect(page).to have_content '1 The Street District AB1 2CD United Kingdom'
         expect(page).to have_no_content 'No address'
         expect(page).to have_content '01234567890'
         expect(page).to have_content 'test@example.com'
@@ -55,7 +55,7 @@ RSpec.describe "Church" do
 
         expect(page).to have_content 'Age distribution'
         expect(page).to have_content 'Gender distribution'
-        expect(page).to have_content 'Joined members'
+        expect(page).to have_content 'Joined per month'
       end
     end
   end
