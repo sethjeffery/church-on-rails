@@ -1,6 +1,7 @@
 class Account::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     @user = User.from_omniauth(request.env["omniauth.auth"], current_church)
+    return redirect_to root_path, alert: 'No account found for your Facebook account.' unless @user.present?
 
     if @user.persisted?
       @user.confirm

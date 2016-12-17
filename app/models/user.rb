@@ -39,9 +39,9 @@ class User < ApplicationRecord
       user.person.update_attributes(facebook: auth.uid) unless user.person.facebook
     else
       user.person = Person.create user: user,
-                                  first_name: auth_info.info.first_name || auth.info.name.split(' ').first,
+                                  first_name: auth.info.first_name || auth.info.name.split(' ').first,
                                   middle_name: (auth.info.name.split(' ')[1..-2].join(' ') if auth.info.name.split(' ').length > 2),
-                                  last_name: auth_info.info.last_name || auth.info.name.split(' ').last,
+                                  last_name: auth.info.last_name || auth.info.name.split(' ').last,
                                   facebook: auth.id
     end
 
