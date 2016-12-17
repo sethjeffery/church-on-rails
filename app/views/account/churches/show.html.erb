@@ -61,7 +61,7 @@
 
   <% if can?(:read, Person) %>
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-md-6">
         <div class="list-group mb-2">
           <%= render 'chart_header', title: 'Recently added' %>
           <% Action.of_type(:added).order('created_at DESC').limit(6).includes(:actor).each do |action| %>
@@ -73,7 +73,7 @@
         </div>
       </div>
 
-      <div class="col-sm-6">
+      <div class="col-md-6">
         <div class="list-group mb-2">
           <%= render 'chart_header', title: 'Joined per month' %>
           <div class="list-group-item">
