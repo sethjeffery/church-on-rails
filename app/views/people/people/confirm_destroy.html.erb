@@ -1,7 +1,12 @@
 <%= render 'menu', active: :destroy, title: 'Remove' do %>
   <div class="alert alert-info py-2 text-xs-center">
     <p>
-      If you do this, <strong><%= @person %></strong> will be removed from the database.
+      <% if @person == current_person %>
+        If you do this, <strong>your account will be removed</strong> and you will lose
+        all permissions and access to the database.
+      <% else %>
+        If you do this, <strong><%= @person %></strong> will be removed from the database.
+      <% end %>
     </p>
 
     <p class="size-xs-large">

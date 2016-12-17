@@ -23,21 +23,17 @@ class People::PersonProcessesController < ApplicationController
     end
   end
 
-  def show
-    render 'processes/person_processes/show'
-  end
-
   protected
 
   def create_params
     params.require(:person_process).permit(:church_process_id, :assignee_ids, :steps, assignee_ids: [], steps: []).tap{|hash|
-      hash[:assignee_ids].select!(&:present?)
-      hash[:steps].select!(&:present?)
+      hash[:assignee_ids]&.select!(&:present?)
+      hash[:steps]&.select!(&:present?)
     }
   end
 
   def load_and_authorize_person
-    @person = @person_process.person || Person.find(params[:person_id])
+    @person = Person.find(params[:person_id])
     authorize! :read, @person
   end
 end

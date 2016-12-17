@@ -36,6 +36,9 @@ class Ability
     # Everyone can view the church info
     can :read, Church
 
+    # Can view anything you have been assigned to
+    can [:read, :update], user.person&.assigned_person_processes
+
     user.teams&.each do |team|
       add_team_abilities(user, team)
     end

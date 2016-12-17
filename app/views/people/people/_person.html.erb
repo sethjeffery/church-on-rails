@@ -26,7 +26,7 @@
   <% end %>
 </div>
 
-<% if can?(:read, Property) && person.property_joins.present? %>
+<% if person.property_joins.includes(:property) .present? %>
   <div class="list-group mb-2">
     <%= render 'shared/list_group_header', title: 'Custom properties', icon: :property %>
     <%= render partial: 'people/property_joins/property_join', collection: person.property_joins.includes(:property) %>
@@ -44,10 +44,17 @@
   </div>
 <% end %>
 
+<% if (can?(:read, PersonProcess) || person == current_person) && person.assigned_person_processes.present? %>
+  <div class="list-group mb-2">
+    <%= render 'shared/list_group_header', title: 'Assigned Processes', icon: :person %>
+    <%= render partial: 'people/people/assigned_person_process_item', collection: person.assigned_person_processes %>
+  </div>
+<% end %>
+
 <% if can?(:read, PersonProcess) && person.person_processes.present?%>
   <div class="list-group mb-2">
-    <%= render 'shared/list_group_header', title: 'Processes' %>
-    <%= render partial: 'processes/person_processes/person_process_item', collection: person.person_processes %>
+    <%= render 'shared/list_group_header', title: 'Processes', icon: :process %>
+    <%= render partial: 'processes/person_processes/person_process_item', collection: person.person_processes, person: person %>
   </div>
 <% end %>
 

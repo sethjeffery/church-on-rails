@@ -1,0 +1,9 @@
+<% @person_process.church_process.steps.select(&:present?).each do |step| %>
+  <div class="list-group-item">
+    <label class="custom-switch custom-control my-sm">
+      <%= f.check_box :steps, { name: "person_process[steps][]", class: 'custom-control-input' }, step.parameterize, "" %>
+      <span class="custom-control-indicator"></span>
+      <%= step %>
+    </label>
+  </div>
+<% end %>

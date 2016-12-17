@@ -1,0 +1,16 @@
+<% if can?(:update, PersonProcess) %>
+  <div class="list-group mb-2">
+    <%= render 'shared/list_group_header', title: 'Assignees', icon: :person %>
+
+    <div class="list-group-item">
+      <p class="size-xs-small">
+        Assign leaders or pastors to help fulfil the process for this person.
+        They will get email notifications when any changes are made to this process.
+      </p>
+
+      <div class="my-sm">
+        <%= f.collection_select :assignee_ids, all_people, :id, :name, { }, multiple: true, data: { selectpicker: true, width: '100%', placeholder: 'Choose assignees' } %>
+      </div>
+    </div>
+  </div>
+<% end %>

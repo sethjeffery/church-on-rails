@@ -27,6 +27,13 @@ $avatar-width: 1.5rem;
 
 .avatar-container {
   @include avatar-container(.5rem);
+
+  &.list-group-item {
+    padding-left: 3.25rem;
+    > .avatar {
+      margin-left: -2.125rem;
+    }
+  }
 }
 
 .avatar-md-container {

@@ -1,0 +1,9 @@
+<span class="size-xs-small">
+  <% person_process_item.church_process.steps.each do |step| %>
+    <% if person_process_item.completed_step?(step) %>
+      <%= icon_for 'square', class: 'text-success' %>
+    <% else %>
+      <%= icon_for 'square', class: 'text-lighter' %>
+    <% end %>
+  <% end %>
+</span>

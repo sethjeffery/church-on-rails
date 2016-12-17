@@ -1,0 +1,6 @@
+<%= render 'people/people/menu',
+           title: @person_process,
+           active: @person_process.person,
+           items: (@person_process.person == @person ? [] : ["-", { title: @person_process.person, icon: @person_process.person, href: [@person, @person_process] }]) do %>
+  <%= render 'form' %>
+<% end %>

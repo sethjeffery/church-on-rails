@@ -27,8 +27,14 @@ class People::PeopleController < ApplicationController
   end
 
   def destroy
-    @person.destroy
-    redirect_to people_path, notice: "#{@person} has been removed from the database."
+    if @person == current_person
+      sign_out(@current_user)
+      @person.destroy
+      redirect_to root_path, notice: "Your account has been removed from the database."
+    else
+      @person.destroy
+      redirect_to people_path, notice: "#{@person} has been removed from the database."
+    end
   end
 
   private

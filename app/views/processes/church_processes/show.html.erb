@@ -24,7 +24,7 @@
   <% if @church_process.active_processes.present? %>
     <div class="list-group mb-2">
       <%= render 'shared/list_group_header', title: 'People on this process' %>
-      <%= render partial: 'processes/person_processes/person_process_item', collection: @church_process.active_processes %>
+      <%= render partial: 'processes/church_processes/person_process_item', collection: @church_process.active_processes %>
     </div>
   <% else %>
     <div class="alert alert-info py-2">

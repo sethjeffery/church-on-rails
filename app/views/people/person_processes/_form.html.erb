@@ -1,4 +1,4 @@
-<%= form_for([@person_process.church_process, @person_process]) do |f| %>
+<%= form_for([@person, @person_process]) do |f| %>
   <div class="list-group mb-2">
     <% if @person_process.church_process %>
       <%= render 'shared/list_group_header', title: @person_process.church_process, icon: @person_process %>
@@ -7,20 +7,20 @@
     <% end %>
 
     <% if @person_process.new_record? %>
-      <div class="list-group-item">
+      <div class="list-group-item pb-2">
         <p class="size-xs-small">
-          Select the person in the database who will start this process.
+          Select the process to start for <strong><%= @person_process.person %></strong>.
         </p>
         <div class="my-sm">
-          <%= f.collection_select :person_id, all_people, :id, :name, { include_blank: true }, { data: { selectpicker: true, placeholder: "Choose a person", width: '100%' }} %>
+          <%= f.collection_select :church_process_id, all_church_processes, :id, :name, { include_blank: true }, { data: { selectpicker: true, placeholder: "Choose a process", width: '100%' }} %>
         </div>
       </div>
     <% else %>
-      <%= render 'form_steps', f: f %>
+      <%= render 'processes/person_processes/form_steps', f: f %>
     <% end %>
   </div>
 
-  <%= render 'form_assign', f: f %>
+  <%= render 'processes/person_processes/form_assign', f: f %>
 
   <%= render 'shared/form_submit', title: (@person_process.new_record? ? 'Start process' : 'Save changes'), icon: 'arrow-right' %>
 <% end %>

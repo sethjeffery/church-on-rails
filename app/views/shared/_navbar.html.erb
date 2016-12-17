@@ -31,11 +31,13 @@
               <% end %>
             </div>
           </li>
-          <li class="nav-item nav-item-search hidden-sm-down">
-            <a class="nav-link" href="<%= people_path %>">
-              <%= icon_for :search %>
-            </a>
-          </li>
+          <% if can?(:read, People) %>
+            <li class="nav-item nav-item-search hidden-sm-down">
+              <a class="nav-link" href="<%= people_path %>">
+                <%= icon_for :search %>
+              </a>
+            </li>
+          <% end %>
         </ul>
       <% end %>
     </div>

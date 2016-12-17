@@ -1,0 +1,8 @@
+<div class="list-group-item avatar-container clearfix">
+  <%= avatar_tag person_process_item.person %>
+  <%= link_to person_process_item.person, [@church_process, person_process_item], class: 'float-sm-left' %>
+
+  <div class="float-sm-right">
+    <%= render 'processes/person_processes/squares', person_process_item: person_process_item %>
+  </div>
+</div>

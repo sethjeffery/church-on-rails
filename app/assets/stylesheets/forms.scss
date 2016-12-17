@@ -21,6 +21,10 @@ textarea.form-control {
 .custom-switch {
   padding-left: 3.5rem;
 
+  &.list-group-item {
+    padding-left: 5rem;
+  }
+
   .custom-control-indicator {
     border-radius: 1000px;
     width: 2.5rem;

@@ -9,9 +9,10 @@
       <div class="col-sm-6">
         <%= link_to_if can?(:read, property), property, property %>
       </div>
-      <div class="col-sm-6 text-light size-xs-small size-md-normal">
+      <div class="col-sm-6 size-xs-small size-md-normal">
         <%= property_join.value %>
       </div>
     </div>
   <% end %>
+  <div class="text-light size-xs-tiny size-sm-small"><%= markdown property.description %></div>
 <% end %>

@@ -7,6 +7,9 @@ class People::UsersController < ApplicationController
   end
 
   def create
+    # Admin created the user so we don't need confirmation email to be sent.
+    @user.skip_confirmation!
+
     if @user.save
       @person.update_attributes user: @user
       redirect_to @person, notice: "Account created successfully"

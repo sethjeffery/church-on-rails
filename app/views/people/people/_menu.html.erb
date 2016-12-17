@@ -4,18 +4,18 @@
   <%= render 'shared/side_and_details',
              title: local_assigns[:title],
              active: local_assigns[:active],
-             items: local_assigns[:items] || [{ title: 'People', icon: :search, href: :people },
-                                              '-',
-                                              ({ title: @person.first_name,  icon: @person,         href: @person }),
-                                              ({ title: 'Edit',              icon: :edit,           href: edit_person_path(@person)}               if can?(:update, @person)),
-                                              ({ title: 'Join a family',     icon: :family,         href: person_families_path(@person)}           if can?(:create, FamilyMembership)),
-                                              ({ title: 'Join teams',        icon: :team,           href: person_teams_path(@person)}              if can?(:create, TeamMembership)),
-                                              ({ title: 'Start a process',   icon: :person_process, href: new_person_person_process_path(@person)} if can?(:create, PersonProcess)),
-                                              ({ title: 'Change password',   icon: :password,       href: person_user_password_path(@person)}      if can?(:manage, @person) && @person.user.present?),
-                                              ({ title: 'Add login account', icon: :user,           href: new_person_user_path(@person)}           if can?(:manage, @person) && @person.user.blank?),
-                                              ({ title: 'Merge people',      icon: :merge,          href: person_merge_path(@person)}              if can?(:manage, Person)),
-                                              ({ title: 'Remove',            icon: :destroy,        href: confirm_destroy_person_path(@person)}    if can?(:manage, @person))
-  ] { yield } %>
+             items: [({ title: 'People', icon: :search, href: :people } if can?(:read, Person)),
+                     ('-' if can?(:read, Person)),
+                     ({ title: @person.first_name,  icon: @person,         href: @person }),
+                     ({ title: 'Edit',              icon: :edit,           href: edit_person_path(@person)}               if can?(:update, @person)),
+                     ({ title: 'Join a family',     icon: :family,         href: person_families_path(@person)}           if can?(:create, FamilyMembership)),
+                     ({ title: 'Join teams',        icon: :team,           href: person_teams_path(@person)}              if can?(:create, TeamMembership)),
+                     ({ title: 'Start a process',   icon: :person_process, href: new_person_person_process_path(@person)} if can?(:create, PersonProcess)),
+                     ({ title: 'Change password',   icon: :password,       href: person_user_password_path(@person)}      if can?(:manage, @person) && @person.user.present?),
+                     ({ title: 'Add login account', icon: :user,           href: new_person_user_path(@person)}           if can?(:manage, @person) && @person.user.blank?),
+                     ({ title: 'Merge people',      icon: :merge,          href: person_merge_path(@person)}              if can?(:manage, Person)),
+                     ({ title: 'Remove',            icon: :destroy,        href: confirm_destroy_person_path(@person)}    if can?(:manage, @person))
+  ] + (local_assigns[:items] || []) do yield end %>
 <% else %>
   <%= render 'shared/side_and_details',
              title: local_assigns[:title],
