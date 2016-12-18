@@ -33,8 +33,17 @@
   </div>
 <% end %>
 
-<% person.families.each do |family| %>
-  <%= render 'people/families/family_list_group', family: family %>
+<% if person.families.present? %>
+  <% person.families.each do |family| %>
+    <%= render 'people/families/family_list_group', family: family %>
+  <% end %>
+<% elsif can?(:create, FamilyMembership) %>
+  <div class="list-group mb-2">
+    <div class="list-group-item">
+      <h3 class="mt-sm">No family defined.</h3>
+      <div class="mb-sm">This person is not yet part of a family. Would you like to <%= link_to 'add them to a family', person_families_path(@person) %>?</div>
+    </div>
+  </div>
 <% end %>
 
 <% if can?(:read, Team) && person.team_memberships.present? %>

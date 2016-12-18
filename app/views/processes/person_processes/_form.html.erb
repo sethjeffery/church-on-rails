@@ -12,7 +12,7 @@
           Select the person in the database who will start this process.
         </p>
         <div class="my-sm">
-          <%= f.select :person_id, [], { include_blank: true }, data: { selectpicker: true, placeholder: "Choose a person", width: '100%', ajax: '/people.json' } %>
+          <%= f.select :person_id, [], { include_blank: true }, data: { selectpicker: true, placeholder: "Choose a person", width: '100%', ajax: '/people.json', template: :person } %>
         </div>
       </div>
     <% else %>
