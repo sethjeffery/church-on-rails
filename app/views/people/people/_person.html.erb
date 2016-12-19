@@ -56,14 +56,14 @@
 <% if (can?(:read, PersonProcess) || person == current_person) && person.assigned_person_processes.present? %>
   <div class="list-group mb-2">
     <%= render 'shared/list_group_header', title: 'Assigned Processes', icon: :person %>
-    <%= render partial: 'people/people/assigned_person_process_item', collection: person.assigned_person_processes %>
+    <%= render partial: 'people/people/assigned_person_process_item', collection: person.assigned_person_processes.active %>
   </div>
 <% end %>
 
 <% if can?(:read, PersonProcess) && person.person_processes.present?%>
   <div class="list-group mb-2">
     <%= render 'shared/list_group_header', title: 'Processes', icon: :process %>
-    <%= render partial: 'processes/person_processes/person_process_item', collection: person.person_processes, person: person %>
+    <%= render partial: 'processes/person_processes/person_process_item', collection: person.person_processes.active, person: person %>
   </div>
 <% end %>
 

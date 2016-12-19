@@ -1,6 +1,8 @@
 class Person < ApplicationRecord
   include Concerns::Naming
   include Concerns::Commentable
+  include Concerns::Capitalize
+
   attr_accessor :family_name
 
   belongs_to :user,                     dependent: :destroy, autosave: true
@@ -32,10 +34,11 @@ class Person < ApplicationRecord
   after_save        :track_joined, if: :joined_at_changed?
   after_create      :track_added
   before_validation :copy_changes_to_user
-  before_validation :sanitize_names
   before_validation :sanitize_facebook
   before_validation :sanitize_twitter
   before_validation :update_search_name
+
+  auto_capitalize :first_name, :middle_name, :last_name
 
   def start_family(family_name)
     join Family.create(name: family_name), head: true
@@ -140,12 +143,6 @@ class Person < ApplicationRecord
     user.email = email if email_changed? && email.present? && user.present?
   end
 
-  def sanitize_names
-    self.first_name  = capitalize(first_name)  if first_name
-    self.middle_name = capitalize(middle_name) if middle_name
-    self.last_name   = capitalize(last_name)   if last_name
-  end
-
   def join_team(team, args={})
     team_memberships.create({ team: team }.merge(args))
   end
@@ -156,10 +153,6 @@ class Person < ApplicationRecord
 
   def join_child_group(group, args={})
     child_group_memberships.create({ child_group: group }.merge(args))
-  end
-
-  def capitalize(name)
-    name.slice(0,1).capitalize + name.slice(1..-1)
   end
 
   def sanitize_facebook

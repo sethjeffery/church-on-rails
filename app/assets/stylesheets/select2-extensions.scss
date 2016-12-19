@@ -5,22 +5,26 @@
 
 .select2-container--bootstrap {
   .select2-selection__choice .fa-container {
+    // icon containers cannot be block-level inside selection containers
     display: inline-block;
     margin-left: .125rem;
   }
 
   .select2-selection--multiple .select2-selection__choice {
+    // slightly larger 'tags' easier to click
     margin: 3px 0 0 4px;
     padding: 2px 6px;
   }
 
   .select2-selection--multiple .select2-selection__choice__remove {
+    // larger area for clicking X icon
     margin: 0 -1px 0 -4px;
     padding: 0 6px;
   }
 
   .select2-results__option, .select2-selection--single .select2-selection__rendered {
     .fa-container {
+      // better spacing of icons inside custom templates
       padding-left: 2rem;
 
       > .fa {
@@ -30,13 +34,44 @@
     }
   }
 
+  .select2-results__option {
+    // More padding in results to reflect style
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
   .select2-selection {
-    border-radius: 1000px;
+    // fully-rounded corners and no box shadow
+    border-radius: 19px;
     padding-right: 32px;
+    padding-left: 16px;
     box-shadow: none;
   }
 
   .select2-selection--single .select2-selection__arrow {
+    // more space for dropdown caret
     right: 18px;
+  }
+
+  .select2-dropdown--above {
+    // weaker shadow when dropping above
+    box-shadow: 0 -1px 6px rgba(0,0,0,0.175);
+  }
+
+  .select2-search--dropdown {
+    // More padding and appropriate styling of text search in dropdown
+    padding-left: 0;
+    padding-right: 0;
+
+    .select2-search__field {
+      border-radius: 0;
+      padding-left: 16px;
+      padding-right: 16px;
+      line-height: 1.5rem;
+      border-left: none;
+      border-right: none;
+      box-shadow: none;
+      background-color: #f0f0f0;
+    }
   }
 }

@@ -1,6 +1,7 @@
 class Family < ApplicationRecord
   include Concerns::Geocoding
   include Concerns::Commentable
+  include Concerns::Capitalize
 
   has_many :family_memberships, dependent: :destroy
   has_many :people,             through: :family_memberships, inverse_of: :families
@@ -8,6 +9,7 @@ class Family < ApplicationRecord
   has_many :heads,              class_name: 'Person', through: :head_memberships, source: :person
 
   validates_presence_of :name
+  auto_capitalize :name
 
   def family_name
     name + ' Family'

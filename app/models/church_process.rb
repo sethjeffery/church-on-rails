@@ -13,6 +13,7 @@ class ChurchProcess < ApplicationRecord
 
   after_initialize :generate_steps
   after_validation :compact_steps
+  before_validation :update_search_name
 
   def generate_steps
     self.steps ||= ["", "", ""]
@@ -32,5 +33,9 @@ class ChurchProcess < ApplicationRecord
 
   def to_s
     name
+  end
+
+  def update_search_name
+    self.search_name = name.downcase
   end
 end

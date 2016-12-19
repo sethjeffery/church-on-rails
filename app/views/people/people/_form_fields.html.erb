@@ -8,7 +8,8 @@
 <%= render 'shared/list_group_item_field', f: f, field: :suffix, autocapitalize: :words %>
 
 <%= render 'shared/list_group_item_field', f: f, field: :gender do %>
-  <%= f.select :gender, genders, { include_blank: true }, class: 'form-control', data: { selectpicker: true, placeholder: '', :'allow-clear' => true } %>
+  <%= f.select :gender, genders, { include_blank: true }, class: 'form-control',
+               data: { data: genders.map{|gender| {id: gender[1], text: gender[0], icon: gender[0].downcase} }, selectpicker: true, placeholder: '', :'allow-clear' => true } %>
 <% end %>
 
 <%= render 'shared/list_group_item_field', f: f, field: :dob do %>

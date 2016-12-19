@@ -1,5 +1,6 @@
 class Team < ApplicationRecord
   include Concerns::Commentable
+  include Concerns::Capitalize
 
   ICONS = %w(team star laptop pencil music medkit briefcase bullhorn child heart thumbs-up cutlery home map-marker globe car)
   COLORS = %w(54aeea ea695c ea8e2b eccf0f 65d268 da1ae1 c0c0c0 606060)
@@ -12,6 +13,8 @@ class Team < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :color, format: /\A[0-9a-f]{6}\z/, allow_nil: true
+
+  auto_capitalize :name
 
   def has_permissions?
     admin? || has_permissions_for?(:people)

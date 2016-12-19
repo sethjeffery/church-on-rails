@@ -10,7 +10,7 @@ $(document).on 'turbolinks:load', ->
   $familyIds.change ->
     value = $(this).val()
     if value == 'New'
-      $familyName.show().val $lastName.val()
+      $familyName.show().val($lastName.val() || $familyIds.data('select2')?.$dropdown.find('input').val())
     else
       $familyName.hide().val ''
 

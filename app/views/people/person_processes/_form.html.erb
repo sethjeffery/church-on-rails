@@ -12,7 +12,8 @@
           Select the process to start for <strong><%= @person_process.person %></strong>.
         </p>
         <div class="my-sm">
-          <%= f.collection_select :church_process_id, all_church_processes, :id, :name, { include_blank: true }, { data: { selectpicker: true, placeholder: "Choose a process", width: '100%' }} %>
+          <%= f.select :church_process_id, [], { include_blank: true },
+                       data: { selectpicker: true, placeholder: "Choose a process", width: '100%', template: :process, ajax: '/processes.json' } %>
         </div>
       </div>
     <% else %>

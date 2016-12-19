@@ -1,25 +1,18 @@
 $(document).on 'turbolinks:load', ->
 
   templates =
-    child: (item) ->
-      item.icon or= 'child'
-      templates.default(item)
+    child:   (item) -> templates.default(item, icon: 'child')
+    process: (item) -> templates.default(item, icon: 'process')
+    person:  (item) -> templates.default(item, icon: 'person')
+    family:  (item) -> templates.default(item, icon: 'family')
+    team:    (item) -> templates.default(item, icon: 'team')
 
-    person: (item) ->
-      item.icon or= 'user'
-      templates.default(item)
-
-    family: (item) ->
-      item.icon or= 'address-card-o'
-      templates.default(item)
-
-    team: (item) ->
-      item.icon or= 'team'
-      item.icon = 'users' if item.icon == 'team'
-      templates.default(item)
-
-    default: (item) ->
+    default: (item, defaults={}) ->
       return item.text if item.loading
+
+      # Set up defaults
+      item[key] or= val for own key, val of defaults
+      item.icon = iconNameFor(item.icon) if item.icon
 
       if item.icon and item.color
         """<div class="fa-container fa-container-colored">
@@ -42,8 +35,8 @@ $(document).on 'turbolinks:load', ->
       options =
         theme: 'bootstrap'
         escapeMarkup: (markup) -> markup
-        templateResult: templates[$el.data('template') || 'default']
-        templateSelection: templates[$el.data('template') || 'default']
+        templateResult: templates[$el.data('template') or 'default']
+        templateSelection: templates[$el.data('template') or 'default']
 
       if $el.data('ajax')
         $.extend options,
