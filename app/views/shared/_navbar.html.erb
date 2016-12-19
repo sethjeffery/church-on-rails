@@ -16,7 +16,8 @@
 
           <li class="nav-item nav-item-account dropdown hidden-sm-down">
             <a class="nav-link dropdown-toggle" href="<%= account_path %>" data-toggle="dropdown">
-              <%= avatar_tag current_user.person %>
+              <%= avatar_tag current_person %>
+              <span class="hidden-sm-down ml-sm"><%= current_person&.first_name %></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="py-sm px-1 font-weight-bold size-xs-small text-ellipsis">

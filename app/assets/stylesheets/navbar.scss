@@ -187,29 +187,6 @@
   }
 }
 
-@include media-breakpoint-up(lg) {
-  .navbar.navbar-short .nav-item-account {
-    top: 63px;
-
-    .nav-link {
-      padding: .5rem 1rem .5rem .75rem;
-      border-top-left-radius: 18px;
-      border-top-right-radius: 18px;
-    }
-
-    .fa {
-      font-size: 1rem;
-    }
-
-    .avatar {
-      margin-top: -2px;
-      margin-bottom: -2px;
-      width: 1.5rem;
-      height: 1.5rem;
-    }
-  }
-}
-
 .nav-link {
   font-weight: normal;
 }
