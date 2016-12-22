@@ -5,7 +5,7 @@ $(document).on 'turbolinks:load', ->
     process: (item) -> templates.default(item, icon: 'process')
     person:  (item) -> templates.default(item, icon: 'person')
     family:  (item) -> templates.default(item, icon: 'family')
-    team:    (item) -> templates.default(item, icon: 'team')
+    team:    (item) -> templates.default(item, icon: 'users')
 
     default: (item, defaults={}) ->
       return item.text if item.loading

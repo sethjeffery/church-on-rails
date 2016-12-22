@@ -1,0 +1,15 @@
+<%= render 'shared/mail_greeting', person: @assignee %>
+
+<p>
+  Well done! <strong><%= @person_process.person %></strong> has completed the process: <strong><%= @person_process.church_process %></strong>.
+</p>
+
+<ul>
+  <% @person_process.church_process.steps.each do |step| %>
+    <li class="step-completed"><%= step %></li>
+  <% end %>
+</ul>
+
+<%= render 'shared/mail_login', person: @assignee %>
+
+<%= render 'shared/mail_footer' %>

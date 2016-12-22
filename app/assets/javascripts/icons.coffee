@@ -1,7 +1,7 @@
 window.iconNameFor = (resource) ->
   switch resource.toLowerCase()
     # models
-    when 'user' then 'user-circle-o'
+    when 'account' then 'user-circle-o'
     when 'church' then 'home'
     when 'person' then 'user'
     when 'team'  then 'users'

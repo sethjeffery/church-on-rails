@@ -33,7 +33,7 @@ en:
       schedule:
       person:
         dob: 'Date of birth'
-        joined_at: 'Joined'
+        joined_at: 'Joined church'
         family_ids: 'Family'
       team:
       family:

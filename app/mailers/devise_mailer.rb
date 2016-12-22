@@ -1,4 +1,4 @@
-class ApplicationMailer < ActionMailer::Base
+class DeviseMailer < Devise::Mailer
   default from: Proc.new { mail_from }
   layout 'mailer'
   helper :users

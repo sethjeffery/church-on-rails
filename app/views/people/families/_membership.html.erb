@@ -12,7 +12,7 @@
                   method: :put,
                   params: { family_membership: { head: !membership.head? } },
                   data: { tooltip: true },
-                  title: membership.head? ? "Parent / Head" : "Child",
+                  title: membership.head? ? "Parent/Guardian" : "Child",
                   remote: true,
                   class: "btn #{membership.head? ? 'btn-primary' : 'btn-secondary'} btn-align-middle btn-sm mr-sm float-xs-right" do %>
       <%= icon_for 'id-card-o' %>

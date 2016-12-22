@@ -1,0 +1,9 @@
+<p>
+  <% if (local_assigns[:person] || @person).user %>
+    Log in at <%= link_to new_user_session_url, new_user_session_url %> with your email and password.
+  <% elsif current_church.can_sign_up? %>
+    Register your account at <%= link_to new_user_registration_url, new_user_registration_url(email: (local_assigns[:person] || @person).email) %>.
+  <% else %>
+    Please contact the site administrator if you would like an account created for you.
+  <% end %>
+</p>

@@ -28,6 +28,10 @@ class PersonProcess < ApplicationRecord
   def set_complete
     if church_process&.steps&.all?{|step| completed_step? step }
       self.complete = true
+
+      process_assignees.each do |assignee|
+        ProcessMailer.completed_process(assignee).deliver_now if assignee.assignee&.email.present?
+      end
     end
   end
 

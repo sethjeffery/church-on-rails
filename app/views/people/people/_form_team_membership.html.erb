@@ -3,8 +3,9 @@
     <%= render 'shared/list_group_header', title: 'Add to Teams' %>
 
     <div class="list-group-item">
-      <%= f.select :team_ids, [], { }, multiple: true, class: 'form-control',
-                   data: { selectpicker: true, placeholder: 'Choose Teams', ajax: '/teams.json', template: :team } %>
+      <%= f.select :team_ids, f.object.teams.map{|a| [a.name, a.id] }, { }, multiple: true, class: 'form-control',
+                   data: { selectpicker: true, placeholder: 'Choose Teams', ajax: '/teams.json', template: :team,
+                           data: f.object.teams.map{ |a| { text: a.name, id: a.id, icon: a.icon, color: a.color} }} %>
     </div>
   </div>
 <% end %>

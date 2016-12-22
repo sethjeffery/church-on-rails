@@ -15,6 +15,10 @@ class User < ApplicationRecord
     email
   end
 
+  def short_name
+    person&.short_name || email
+  end
+
   def auto_connect_person
     if confirmed_at.present?
       person = Person.find_by(email: email)

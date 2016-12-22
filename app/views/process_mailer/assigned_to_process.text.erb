@@ -1,0 +1,16 @@
+<%= render 'shared/mail_greeting', person: @assignee %>
+
+You have been assigned to the <%= @person_process.church_process %> process for <%= @person_process.person %>.
+You will find more details on your profile page.
+
+<%= @person_process.church_process.steps.map { |step|
+  if @person_process.completed_step?(step)
+    "  ✓ #{step} (done)"
+  else
+    "  - #{step}"
+  end
+}.join("\n") %>
+
+<%= render 'shared/mail_login', person: @assignee %>
+
+<%= render 'shared/mail_footer' %>

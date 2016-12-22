@@ -49,6 +49,9 @@ gem 'autosize-rails'
 gem 'chartkick'
 gem 'dateslices'
 
+# email
+gem 'roadie-rails'
+
 # google maps
 gem 'gmaps-rails'
 gem 'geocoder'
@@ -73,6 +76,7 @@ group :development, :test do
   gem 'capybara'
   gem 'faker'
   gem 'webmock'
+  gem 'poltergeist'
 end
 
 group :development do

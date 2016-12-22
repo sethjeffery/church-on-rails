@@ -18,6 +18,7 @@ class Account::PeopleController < ApplicationController
   def create
     @person = Person.new(create_params)
     @person.user = current_user
+    @person.email ||= current_user.email
 
     if @person.save
       if Person.count == 1 && !Team.exists?

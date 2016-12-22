@@ -1,0 +1,9 @@
+<%= render 'shared/mail_greeting', person: @assignee %>
+
+Well done! <%= @person_process.person %> has completed the process: <%= @person_process.church_process %>.
+
+<%= @person_process.church_process.steps.map { |step| "  ✓ #{step} (done)" }.join("\n") %>
+
+<%= render 'shared/mail_login', person: @assignee %>
+
+<%= render 'shared/mail_footer' %>

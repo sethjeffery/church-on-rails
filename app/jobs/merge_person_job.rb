@@ -17,6 +17,8 @@ class MergePersonJob < ApplicationJob
       target.facebook     ||= actor.facebook
       target.twitter      ||= actor.twitter
       target.avatar       ||= actor.avatar
+      target.joined_at    ||= actor.joined_at
+      target.user_id      ||= actor.user_id
 
       actor.family_memberships      .where.not(family_id:                 target.family_memberships      .pluck(:family_id))                 .update_all(person_id: target.id)
       actor.team_memberships        .where.not(team_id:                   target.team_memberships        .pluck(:team_id))                   .update_all(person_id: target.id)

@@ -125,7 +125,7 @@ class Person < ApplicationRecord
 
   def icon
     icon = gender == 'f' ? :female : :male
-    icon = :child if dob && years_old < 18
+    icon = :child if dob && years_old < 16
     icon
   end
 

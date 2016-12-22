@@ -40,4 +40,9 @@ module UsersHelper
       48
     end
   end
+
+  def current_church
+    @current_church ||= Church.first || Church.new(name: 'Church-on-Rails')
+  end
+
 end
