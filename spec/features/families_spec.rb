@@ -48,7 +48,7 @@ RSpec.describe "Families" do
         user.person.join create(:team, people_reader: true, people_editor: true)
       end
 
-      xit 'can edit families' do
+      it 'can edit families', :js do
         family = create(:family, name: 'Smith')
 
         visit "/families/#{family.id}"
@@ -66,10 +66,16 @@ RSpec.describe "Families" do
         new_person = create(:person)
         click_on "Add member"
 
-        # This is performed with AJAX which we can't test in normal Rack testing
         within '.side-and-details--details' do
-          expect(page).to have_content 'Add to Family'
+          expect(page).to have_content 'ADD TO FAMILY'
+
+          # Select2 is notoriously difficult to test in Capybara
+          # and it gets the results by AJAX
+          # so we will just hack the options into it
+          expect(page).to have_selector "[name='family_membership[person_id]']"
+          page.execute_script("$('[name=\"family_membership[person_id]\"]').append('<option value=#{new_person.id}>#{new_person.name}</option>')")
           select new_person.name, from: 'family_membership[person_id]'
+
           click_on 'Add member'
         end
 
