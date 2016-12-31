@@ -56,6 +56,13 @@ FactoryGirl.define do
     name  { Faker::Lorem.sentence }
   end
 
-  factory :family_membership
-  factory :team_membership
+  factory :family_membership do
+    family
+    person
+  end
+
+  factory :team_membership do
+    team
+    person
+  end
 end
