@@ -75,7 +75,7 @@ module ListHelper
   end
 
   def by_gender(people)
-    people.select(:gender).group(:gender).count('*').map{|k,v|
+    people.select(:gender).group(:gender).reorder(:gender).count('*').map{|k,v|
       if k == 'm'
         ['Male', v]
       elsif k == 'f'
