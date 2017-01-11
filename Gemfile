@@ -48,9 +48,9 @@ gem 'bootstrap4-kaminari-views'
 gem 'autosize-rails'
 gem 'chartkick'
 gem 'dateslices'
-
-# email
-gem 'roadie-rails'
+gem 'simple-spreadsheet'
+gem 'premailer-rails'
+gem 'nokogiri'
 
 # google maps
 gem 'gmaps-rails'

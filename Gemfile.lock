@@ -159,6 +159,7 @@ GEM
       rspec (>= 2.99.0, < 4.0)
     hashdiff (0.3.1)
     hashie (3.4.6)
+    htmlentities (4.3.4)
     i18n (0.7.0)
     ice_cube (0.14.0)
     jbuilder (2.6.0)
@@ -232,6 +233,12 @@ GEM
       websocket-driver (>= 0.2.0)
     postgresql (1.0.0)
       pg
+    premailer (1.8.7)
+      css_parser (>= 1.4.5)
+      htmlentities (>= 4.0.0)
+    premailer-rails (1.9.5)
+      actionmailer (>= 3, < 6)
+      premailer (~> 1.7, >= 1.7.9)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -274,12 +281,13 @@ GEM
     redcarpet (3.3.4)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
-    roadie (3.2.0)
-      css_parser (~> 1.4.5)
-      nokogiri (>= 1.5.0, < 1.7.0)
-    roadie-rails (1.1.1)
-      railties (>= 3.0, < 5.1)
-      roadie (~> 3.1)
+    roo (2.5.1)
+      nokogiri (~> 1)
+      rubyzip (~> 1.1, < 2.0.0)
+    roo-xls (1.0.0)
+      nokogiri
+      roo (>= 2.0.0beta1, < 3)
+      spreadsheet (> 0.9.0)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
@@ -301,7 +309,9 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+    ruby-ole (1.2.12)
     ruby-progressbar (1.8.1)
+    rubyzip (1.2.0)
     safe_yaml (1.0.4)
     sass (3.4.22)
     sass-rails (5.0.6)
@@ -313,7 +323,12 @@ GEM
     select2-rails (4.0.3)
       thor (~> 0.14)
     shellany (0.0.1)
+    simple-spreadsheet (0.5.0)
+      roo (~> 2.4)
+      roo-xls (~> 1.0)
     slop (3.6.0)
+    spreadsheet (1.1.4)
+      ruby-ole (>= 1.0)
     spring (2.0.0)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -388,20 +403,22 @@ DEPENDENCIES
   listen (~> 3.0.5)
   momentjs-rails
   mysql2
+  nokogiri
   omniauth-facebook
   paperclip
   poltergeist
   postgresql
+  premailer-rails
   pry-rails
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
   rails-assets-tether (>= 1.1.0)!
   redcarpet
-  roadie-rails
   rspec-rails
   sass-rails (~> 5.0)
   schedulable!
   select2-rails
+  simple-spreadsheet
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
