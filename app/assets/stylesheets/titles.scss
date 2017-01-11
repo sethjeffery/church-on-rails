@@ -9,11 +9,17 @@
     z-index: 0;
   }
 
-  .btn-lg {
+  .btn-lg, .btn-group {
     vertical-align: top;
     margin-top: -.75rem;
     margin-bottom: -.75rem;
+
+    .btn-group, .btn-lg {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
   }
+
 }
 
 .title-overlay {

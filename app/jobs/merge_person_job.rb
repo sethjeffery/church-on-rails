@@ -2,6 +2,7 @@ class MergePersonJob < ApplicationJob
   queue_as :default
   
   def perform(actor, target)
+    return if actor == target
     ActiveRecord::Base.transaction do
       target.user_id, actor.user_id = actor.user_id, nil if actor.user_id && !target.user_id
 

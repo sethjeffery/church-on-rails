@@ -47,7 +47,7 @@ class Ability
   def add_team_abilities(user, team)
     can :manage, :all if team.admin?
 
-    [User, Person, Family, Team, TeamMembership, FamilyMembership, Property, PropertyJoin].each do |klass|
+    [User, Person, Family, Team, TeamMembership, FamilyMembership, Property, PropertyJoin, Import].each do |klass|
       can :read,   klass if team.people_reader?
       can :update, klass if team.people_editor?
       can :create, klass if team.people_editor?

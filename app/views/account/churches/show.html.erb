@@ -64,10 +64,10 @@
       <div class="col-md-6">
         <div class="list-group mb-2">
           <%= render 'chart_header', title: 'Recently added' %>
-          <% Action.of_type(:added).order('created_at DESC').limit(6).includes(:actor).each do |action| %>
-            <%= icon_container action.actor, class: 'list-group-item clearfix' do %>
+          <% Action.of_type(:added).order('created_at DESC').limit(6).each do |action| %>
+            <%= icon_container action.data[:icon], class: 'list-group-item clearfix' do %>
               <div class="float-xs-right text-light"><span class="size-xs-small"><%= action.created_at.strftime('%-d %b') %></span></div>
-              <%= link_to action.actor, action.actor, class: 'text-ellipsis' %>
+              <%= link_to_if !!action.actor_id, "#{action.data[:first_name]} #{action.data[:last_name]}", action.actor_id ? person_path(action.actor_id) : '', class: 'text-ellipsis' %>
             <% end %>
           <% end %>
         </div>

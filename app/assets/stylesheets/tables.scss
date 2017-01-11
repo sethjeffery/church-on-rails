@@ -1,0 +1,38 @@
+.table-responsive {
+  border: solid 1px #ccc;
+  border-radius: 4px;
+
+  > .table {
+    white-space: nowrap;
+    background-color: white;
+    margin: 0;
+    border: solid 6px #f4f4f4;
+  }
+
+  tbody {
+    height: 320px;
+    overflow-y: auto;
+    display: block;
+  }
+
+  thead {
+    display: block;
+  }
+
+  td {
+    width: 200px;
+    padding: 0.5rem;
+
+    > span {
+      width: 200px - 17px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+    }
+  }
+}
+
+.table-row-disabled {
+  opacity: 0.25;
+  background-color: #f0f0f0;
+}

@@ -1,0 +1,22 @@
+<%= render 'people/people/menu', active: :table, title: 'Import spreadsheet' do %>
+  <p class="alert alert-info">
+    Upload an XLS or CSV table with your church members, and we should be able to
+    import them into the database.
+  </p>
+
+  <%= form_for @import do |f| %>
+    <div class="list-group mb-2">
+      <%= render 'shared/list_group_header', title: 'Upload file' %>
+      <div class="list-group-item py-2">
+        <label class="custom-control custom-file">
+          <%= f.file_field :file, class: 'custom-file-input', data: { 'auto-submit': true }, hide_errors: true,
+                           accept: ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" %>
+          <span class="custom-file-control"></span>
+        </label>
+      </div>
+      <%= field_error @import, :file %>
+    </div>
+
+    <%= f.submit 'Import', class: 'sr-only' %>
+  <% end %>
+<% end %>

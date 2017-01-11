@@ -20,5 +20,9 @@
   <%= render 'shared/side_and_details',
              title: local_assigns[:title],
              active: local_assigns[:active],
-             items: [{ title: 'People', icon: :search, href: :people }, '-', { title: 'New person', icon: :new, href: new_person_path}] { yield } %>
+             items: [{ title: 'People', icon: :search, href: :people },
+                     '-',
+                     { title: 'New person', icon: :new, href: new_person_path },
+                     { title: 'Import', icon: :table, href: new_import_path }
+] { yield } %>
 <% end %>

@@ -74,4 +74,10 @@
       background-color: #f0f0f0;
     }
   }
+
+  &.select2-container--focus, &.select2-container--open {
+    .select2-selection {
+      box-shadow: none;
+    }
+  }
 }

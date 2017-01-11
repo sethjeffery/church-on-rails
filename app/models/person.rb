@@ -137,6 +137,13 @@ class Person < ApplicationRecord
     actions.of_type(type).first&.update_attributes(args) || track(type, args)
   end
 
+  def name=(full_name)
+    names = full_name.split(' ')
+    self.first_name = names[0]
+    self.last_name = names.last if names.length > 1
+    self.middle_name = names.slice(1..-2).join(' ') if names.length > 2
+  end
+
   protected
 
   def copy_changes_to_user
@@ -184,14 +191,14 @@ class Person < ApplicationRecord
 
   def track_joined
     if joined_at
-      track_unique :joined, created_at: joined_at
+      track_unique :joined, created_at: joined_at, data: { first_name: first_name, last_name: last_name, icon: icon }
     else
       actions.of_type(type).delete_all
     end
   end
 
   def track_added
-    track_unique :added, created_at: created_at
+    track_unique :added, created_at: created_at, data: { first_name: first_name, last_name: last_name, icon: icon }
   end
 
   def update_search_name

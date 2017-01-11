@@ -19,7 +19,7 @@ class People::FamilyMembershipsController < ApplicationController
     @family_membership.destroy
 
     respond_to do |format|
-      format.html { redirect_to @family }
+      format.html { redirect_to @family_membership.family.present? ? @family : root_path }
       format.js
     end
   end

@@ -15,7 +15,7 @@
   <% end %>
 
   <div class="clearfix">
-    <% if local_assigns[:btn] %>
+    <% if local_assigns[:btn].is_a?(Hash) %>
       <% if !btn[:can] || can?(*btn[:can]) %>
         <%= link_to btn[:href], class: "btn btn-lg float-xs-right #{btn[:btn_class] || 'btn-info'}" do %>
           <%= icon_for 'plus' %> New
@@ -26,6 +26,8 @@
     <h2 class="mb-0 <%= "text-xs-#{align}" if local_assigns[:align] %> <%= 'float-xs-left' if local_assigns[:btn] %>">
       <%= link_to_if !!local_assigns[:href], title, local_assigns[:href] %>
     </h2>
+
+    <%= yield if block_given? %>
   </div>
 
   <% if local_assigns[:color].is_a? String %>

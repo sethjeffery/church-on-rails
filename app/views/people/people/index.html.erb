@@ -1,7 +1,31 @@
 <% content_for :menu, :people %>
 
 <div class="container">
-  <%= render 'shared/title', title: 'People', btn: { can: [:create, Person], href: new_person_path } %>
+  <div class="clearfix">
+    <%= render 'shared/title', title: 'People', btn: true do %>
+
+      <% if can?(:create, Person) %>
+        <div class="btn-group float-xs-right">
+          <%= link_to new_person_path, class: "btn btn-lg btn-info" do %>
+            <%= icon_for 'plus' %> New
+          <% end %>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-info btn-lg dropdown-toggle pl-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item" href="<%= new_person_path %>">
+                <%= icon_container "New person", :person %>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="<%= new_import_path %>">
+                <%= icon_container "Import from spreadsheet", :table %>
+              </a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    <% end %>
+  </div>
 
   <div class="list-group">
     <%= render 'shared/search_header', resource: :people, options: [:people, :families, :teams] %>

@@ -130,30 +130,6 @@
     margin-top: 0;
     border-radius: 22px 0 22px 22px;
     border-color: white;
-    padding: 0.5rem;
-
-    .fa-container {
-      margin-left: -.75rem;
-      padding-left: 2.5rem;
-
-      // do not over-extend on mobile
-      max-width: calc(100vw - 7rem);
-      overflow: hidden;
-      text-overflow: ellipsis;
-
-      .fa {
-        line-height: 1.5rem;
-        font-size: 1.25rem;
-        margin-left: -2.25rem;
-      }
-    }
-  }
-
-  .dropdown-item {
-    padding: 0.5rem 1rem;
-    border-radius: 1000px;
-    margin: 0.25rem 0;
-    line-height: 1.5rem;
   }
 }
 

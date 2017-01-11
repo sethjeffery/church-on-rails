@@ -28,9 +28,13 @@ Rails.application.routes.draw do
       end
       resources :people, concerns: :paginatable do
         get :confirm_destroy, on: :member
+        get :import, on: :collection
+        post :import, on: :collection
+
         resource :user do
           resource :password
         end
+
         resource :teams, controller: :person_teams
         resource :families, controller: :person_families
         resources :person_processes, path: 'processes'
@@ -39,6 +43,7 @@ Rails.application.routes.draw do
       resources :properties, concerns: :paginatable do
         get :confirm_destroy, on: :member
       end
+      resources :imports
     end
 
     scope module: 'events' do

@@ -13,6 +13,7 @@ $width-xl: (map-get($container-max-widths, xl) - $grid-gutter-width-base);
 
 .side-and-details--details {
   padding-top: .375rem;
+  padding-bottom: 1rem;
 
   @include media-breakpoint-up(md) {
     float: left;
@@ -36,7 +37,7 @@ $width-xl: (map-get($container-max-widths, xl) - $grid-gutter-width-base);
 
 .side-and-details--side {
   font-size: 0.875rem;
-  margin-bottom: 2rem;
+  padding-bottom: 1rem;
 
   @include media-breakpoint-up(md) {
     float: left;
@@ -92,8 +93,8 @@ $width-xl: (map-get($container-max-widths, xl) - $grid-gutter-width-base);
 
     .nav-divider {
       border-top: solid 1px $darken;
-      margin-top: .25rem;
-      margin-bottom: .25rem;
+      margin-top: .5rem;
+      margin-bottom: .5rem;
     }
 
     .nav-link {
@@ -111,6 +112,10 @@ $width-xl: (map-get($container-max-widths, xl) - $grid-gutter-width-base);
       .fa {
         line-height: 1.25rem;
       }
+    }
+
+    .nav-item + .nav-item {
+      margin-top: 0;
     }
 
     .nav-link.active,

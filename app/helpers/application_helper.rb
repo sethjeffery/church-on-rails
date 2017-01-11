@@ -22,7 +22,7 @@ module ApplicationHelper
   end
 
   def field_name(object, method)
-    ActionView::Helpers::Tags::Translator.new(object, object.class.name.underscore, method, scope: "helpers.label").translate
+    ActionView::Helpers::Tags::Translator.new(object, object.class.name.underscore, method, scope: "activerecord.attributes").translate
   end
 
   def field_help(object, method)

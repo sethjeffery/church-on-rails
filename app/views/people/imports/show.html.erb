@@ -1,0 +1,38 @@
+<%= render 'people/people/menu', active: :table, title: 'Import spreadsheet' do %>
+  <p class="alert alert-info">
+    Check your imported data below, and specify which columns are to be matched
+    to the database.
+  </p>
+
+  <%= form_for @import do |f| %>
+
+    <div class="mb-sm mt-1">
+      <%= render 'shared/form_switch', f: f, field: :has_header, name: "Hide first row", help: "Select if row 1 is a table header and its values should not be imported." %>
+    </div>
+
+    <div class="table-responsive mb-1">
+      <table class="table table-bordered size-xs-small table-sm">
+        <thead>
+          <tr>
+            <% @import.column_matches.each_with_index do |column_match, index| %>
+              <td><%= select_tag :column_matches, '<option></option>'.html_safe + options_for_select(@import.class.column_names, column_match),
+                               name: "import[column_matches][]",
+                               data: { selectpicker: true, width: "100%", placeholder: "Choose column", 'allow-clear': true } %></td>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% @import.rows.each do |row| %>
+            <tr id="table-row-<%= row %>" class="<%= 'table-row-disabled' if @import.has_header && row == 1 %>">
+              <% @import.columns.each do |column| %>
+                <td><span><%= @import.cell(row, column) %></span></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <%= render 'shared/form_submit', title: 'Import into database', icon: :table %>
+  <% end %>
+<% end %>

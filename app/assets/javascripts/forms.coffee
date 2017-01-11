@@ -39,3 +39,16 @@ $(document).on 'turbolinks:load', ->
     icon = $el.data('icon')
     $el.parents('form').find("input[name*='[icon]']").val $el.data('value') or icon
     $el.parents('.input-group-btn').find('> a .fa').removeClass().addClass('fa fa-' + icon + ' fa-1x')
+
+  $('input[type=file]').change (e) ->
+    $el = $(@)
+    file = @files[0]
+
+    if file
+      $el.next('.custom-file-control').attr('data-placeholder', file.name)
+    else
+      $el.next('.custom-file-control').removeAttr('data-placeholder')
+
+    if $el.data('auto-submit')
+      $el.closest('form').submit()
+      $el.prop(disabled: true)

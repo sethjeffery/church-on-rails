@@ -63,3 +63,18 @@ textarea.form-control {
     box-shadow: inset 0 2px 2px $darken;
   }
 }
+
+.custom-file-control[data-placeholder]::after {
+  content: attr(data-placeholder);
+}
+
+.custom-file-control::after {
+  overflow: hidden;
+  white-space: nowrap;
+  display: block;
+}
+
+input[disabled] + .custom-file-control {
+  opacity: 0.5;
+  background-color: #f0f0f0;
+}
