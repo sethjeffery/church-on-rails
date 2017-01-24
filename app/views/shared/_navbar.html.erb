@@ -60,6 +60,10 @@
             <%= link_to 'People', people_path, class: 'nav-link' %>
           <% end if can?(:read, Person) %>
 
+          <%= content_tag :div, class: "nav-item #{'active' if content_for(:menu) == 'families'}" do %>
+            <%= link_to 'Families', families_path, class: 'nav-link' %>
+          <% end if can?(:read, Family) %>
+
           <%= content_tag :div, class: "nav-item #{'active' if content_for(:menu) == 'properties'}" do %>
             <%= link_to 'Properties', properties_path, class: 'nav-link' %>
           <% end if can?(:read, Property) %>
