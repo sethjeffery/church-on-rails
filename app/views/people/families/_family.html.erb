@@ -9,7 +9,7 @@
 
     <% if family.full_address.present? %>
       <% if family.lat && family.lng %>
-        <%= map_for family, height: '400px' %>
+        <%= map_for family, height: '400px', icon: { url: image_url('map-user.png'), scaledSize: { width: 20, height: 30 } } %>
       <% end %>
 
       <div class="list-group-item size-xs-small size-sm-normal">
