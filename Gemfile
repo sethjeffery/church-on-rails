@@ -51,6 +51,7 @@ gem 'dateslices'
 gem 'simple-spreadsheet'
 gem 'premailer-rails'
 gem 'nokogiri'
+gem "non-stupid-digest-assets"
 
 # google maps
 gem 'gmaps-rails'
