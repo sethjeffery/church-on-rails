@@ -6,7 +6,7 @@
     <div class="list-group-item">
       <div class="mb-1">
         <%= f.select :person_id, [], { include_blank: true }, class: 'form-control',
-                     data: { selectpicker: true, placeholder: 'Choose a member', ajax: '/people.json', template: :person } %>
+                     data: { selectpicker: true, placeholder: 'Choose a member', ajax: people_path, template: :person } %>
       </div>
     </div>
   </div>

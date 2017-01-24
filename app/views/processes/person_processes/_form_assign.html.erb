@@ -10,7 +10,7 @@
 
       <div class="my-sm">
         <%= f.select :assignee_ids, f.object.assignees.map{|a| [a.name, a.id] }, { }, multiple: true,
-                     data: { selectpicker: true, width: '100%', placeholder: 'Choose assignees', ajax: '/people.json', template: :person,
+                     data: { selectpicker: true, width: '100%', placeholder: 'Choose assignees', ajax: people_path, template: :person,
                              data: f.object.assignees.map{ |a| { text: a.name, id: a.id, icon: a.icon} }} %>
       </div>
     </div>

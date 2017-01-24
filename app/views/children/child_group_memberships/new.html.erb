@@ -15,7 +15,7 @@
         <div class="my-sm">
           <%= f.select :person_id, [], { include_blank: true },
                        class: 'form-control',
-                       data: { selectpicker: true, placeholder: 'Choose a person', :'allow-clear' => true, new: 'Register new child', ajax: '/people.json', template: :child } %>
+                       data: { selectpicker: true, placeholder: 'Choose a person', :'allow-clear' => true, new: 'Register new child', ajax: people_path, template: :child } %>
         </div>
       </div>
     </div>

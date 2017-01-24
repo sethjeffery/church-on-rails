@@ -13,6 +13,6 @@
 <%= render 'shared/list_group_item_field', f: f, field: :family_ids do %>
   <%= f.select :family_ids, [], { include_blank: true },
                class: 'form-control',
-               data: { selectpicker: true, placeholder: 'Choose a Family', :'allow-clear' => true, width: '100%', ajax: '/families.json', new: 'Start new family', template: :family } %>
+               data: { selectpicker: true, placeholder: 'Choose a Family', :'allow-clear' => true, width: '100%', ajax: families_path, new: 'Start new family', template: :family } %>
   <%= f.text_field :family_name, class: 'form-control mt-sm', placeholder: 'Family name' %>
 <% end %>

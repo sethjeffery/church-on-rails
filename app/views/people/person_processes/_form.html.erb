@@ -13,7 +13,7 @@
         </p>
         <div class="my-sm">
           <%= f.select :church_process_id, [], { include_blank: true },
-                       data: { selectpicker: true, placeholder: "Choose a process", width: '100%', template: :process, ajax: '/processes.json' } %>
+                       data: { selectpicker: true, placeholder: "Choose a process", width: '100%', template: :process, ajax: church_processes_path } %>
         </div>
       </div>
     <% else %>
