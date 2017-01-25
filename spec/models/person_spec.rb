@@ -45,7 +45,7 @@ RSpec.describe Person do
 
   describe '#start_family' do
     before do
-      subject.start_family "Robinson"
+      subject.start_family family_name: "Robinson", family_address1: 'The Robinson Household', family_country: 'Switzerland'
     end
 
     it 'persists person' do
@@ -54,6 +54,12 @@ RSpec.describe Person do
 
     it 'starts a new family' do
       expect(Family.find_by(name: 'Robinson')).to be_present
+    end
+
+    it 'sets properties on the family' do
+      family = Family.find_by(name: 'Robinson')
+      expect(family.address1).to eq 'The Robinson Household'
+      expect(family.country).to eq 'Switzerland'
     end
 
     it 'adds to the family' do

@@ -35,7 +35,7 @@ class Children::ChildGroupMembershipsController < ApplicationController
 
   def create_params
     hash = blanks_to_nil params.require(:child_group_membership).permit :person_id, person: [
-      :first_name, :middle_name, :last_name, :gender, :dob, :family_ids, :family_name, family_ids: []
+      :first_name, :middle_name, :last_name, :gender, :dob, :family_ids, :family_name, :family_address1, :family_address2, :family_postcode, :family_country, family_ids: []
     ]
 
     hash[:person].delete(:family_ids) if hash[:person].try(:[], :family_ids) == "New"
@@ -51,6 +51,6 @@ class Children::ChildGroupMembershipsController < ApplicationController
   end
 
   def start_family
-    @child_group_membership.person.start_family(create_params[:person][:family_name]) if @child_group_membership.person.families.blank?
+    @child_group_membership.person.start_family(create_params[:person]) if @child_group_membership.person.families.blank?
   end
 end

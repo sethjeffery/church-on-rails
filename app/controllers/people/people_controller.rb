@@ -9,7 +9,7 @@ class People::PeopleController < ApplicationController
   def create
     if @person.save
       if create_params[:family_name].present? && @person.families.blank?
-        @person.start_family(create_params[:family_name])
+        @person.start_family(create_params)
       end
 
       redirect_to show_path
@@ -45,8 +45,8 @@ class People::PeopleController < ApplicationController
 
   def create_params
     fields      = [ :first_name, :middle_name, :last_name, :prefix, :suffix, :dob, :gender, :email, :phone, :facebook, :twitter, :avatar, :joined_at ]
-    fields.concat [ :family_name, :family_ids, family_ids: []]    if can? :create, FamilyMembership
-    fields.concat [ :team_ids, team_ids: []]                      if can? :create, TeamMembership
+    fields.concat [ :family_name, :family_address1, :family_address2, :family_postcode, :family_country, :family_ids, family_ids: []] if can? :create, FamilyMembership
+    fields.concat [ :team_ids, team_ids: []] if can? :create, TeamMembership
 
     hash = blanks_to_nil(params.require(:person).permit(*fields))
     hash.delete(:family_ids) if hash[:family_ids] == "New"

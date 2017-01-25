@@ -3,7 +3,7 @@ class Person < ApplicationRecord
   include Concerns::Commentable
   include Concerns::Capitalize
 
-  attr_accessor :family_name
+  attr_accessor :family_name, :family_address1, :family_address2, :family_postcode, :family_country
 
   belongs_to :user,                     dependent: :destroy, autosave: true
   has_many :family_memberships,         dependent: :destroy
@@ -40,8 +40,9 @@ class Person < ApplicationRecord
 
   auto_capitalize :first_name, :middle_name, :last_name
 
-  def start_family(family_name)
-    join Family.create(name: family_name), head: true
+  def start_family(args)
+    family_args = %i(name address1 address2 postcode country).map{|arg| [arg, args[:"family_#{arg}"]]}.to_h
+    join(Family.create(family_args), head: true) if family_args[:name].present?
   end
 
   def join(group, args={})

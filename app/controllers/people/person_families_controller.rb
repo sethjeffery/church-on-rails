@@ -16,7 +16,7 @@ class People::PersonFamiliesController < ApplicationController
   private
 
   def update_params
-    hash = blanks_to_nil params.require(:person).permit(:head, :family_name, :family_ids, family_ids: [])
+    hash = blanks_to_nil params.require(:person).permit(:head, :family_name, :family_address1, :family_address2, :family_postcode, :family_country, :family_ids, family_ids: [])
     hash.delete(:family_ids) if hash[:family_ids] == "New"
     hash
   end
@@ -27,7 +27,7 @@ class People::PersonFamiliesController < ApplicationController
   end
 
   def start_family
-    @person.start_family(update_params[:family_name]) if @person.families.blank?
+    @person.start_family(update_params) if @person.families.blank?
   end
 
   def join_family
