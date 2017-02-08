@@ -14,7 +14,7 @@ class People::ImportsController < ApplicationController
   end
 
   def update
-    if @import.import
+    if @import.import(update_params)
       @import.destroy
       redirect_to people_path, notice: import_notice
     else

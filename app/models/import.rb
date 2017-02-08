@@ -5,6 +5,10 @@ class Import
 
   delegate :cell, :first_row, :last_row, :first_column, :last_column, to: :spreadsheet
 
+  PERSON_NAMES = %i[ prefix first_name middle_name last_name name suffix dob gender email phone joined_at facebook twitter ]
+  FAMILY_NAMES = %i[ address1 address2 postcode country ]
+  COLUMN_NAMES = PERSON_NAMES + FAMILY_NAMES
+
   def initialize(args={})
     @column_matches = []
     @has_header = false
@@ -26,7 +30,9 @@ class Import
 
   # Called when the user has finished setting up the import process and
   # wishes to now import the data into the database.
-  def import
+  def import(args={})
+    @column_matches = args[:column_matches] if args[:column_matches]
+    @has_header     = args[:has_header]     if args[:has_header]
     ImportPeopleJob.perform_now(self)
     true
   end
@@ -90,7 +96,7 @@ class Import
 
     # The list of column names that are recognised by the importer
     def column_names
-      keys = %i[ prefix first_name middle_name last_name name suffix dob gender email phone joined_at facebook twitter ]
+      keys = COLUMN_NAMES
       keys.map{|key| [Person.field_name(key), key]}
     end
 
