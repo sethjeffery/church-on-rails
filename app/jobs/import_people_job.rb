@@ -45,7 +45,7 @@ class ImportPeopleJob < ApplicationJob
 
   def apply_column(row, model, column_name)
     new_val = model.send(column_name) || import.cell_for_column(row, column_name)
-    model.send("#{column_name}=", new_val) if new_val.present?
+    model.send("#{column_name}=", new_val) if valid?(new_val, column_name)
   end
 
   def save_person(person)
@@ -70,5 +70,14 @@ class ImportPeopleJob < ApplicationJob
 
   def save_family(person, args)
     person.families.find_by_name(args[:name])&.update_attributes(args) or person.families.create(args)
+  end
+
+  def valid?(new_val, column_name)
+    return false if new_val.blank?
+    case column_name
+      when 'email' then /@.+\./.test(new_val)
+      when 'phone' then /^[0-9 ]+$/.test(new_val)
+      else true
+    end
   end
 end
