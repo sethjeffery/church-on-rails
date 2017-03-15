@@ -35,6 +35,9 @@ RSpec.describe FamilyMembership do
           expect {
             subject.update_attributes family: new_family
           }.to change { Family.count }.by(-1)
+
+          expect(Family.find(new_family.id)).to be_present
+          expect{ Family.find(family.id) }.to raise_error ActiveRecord::RecordNotFound
         end
       end
 
