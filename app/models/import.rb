@@ -74,7 +74,7 @@ class Import
 
   def cell_for_column(row, name)
     index = column_matches.index(name.to_s)
-    cell(row, index + 1) if index
+    cell(row, index + 1).to_s.strip if index
   end
 
   def has_header?; !!has_header; end
