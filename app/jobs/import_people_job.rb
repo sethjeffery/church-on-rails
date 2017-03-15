@@ -75,8 +75,8 @@ class ImportPeopleJob < ApplicationJob
   def valid?(new_val, column_name)
     return false if new_val.blank?
     case column_name
-      when 'email' then /@.+\./.test(new_val)
-      when 'phone' then /^[0-9 ]+$/.test(new_val)
+      when 'email' then new_val =~ /@.+\./
+      when 'phone' then new_val =~ /^[0-9 ]+$/
       else true
     end
   end
