@@ -1,5 +1,10 @@
 module MailHelper
   def mail_from
-    Church.first.try(:email) || "no-reply@#{(ENV["HOST_NAME"] || 'example.com').to_s.sub(/^(https?:\/\/)?www\./, '')}"
+    church = Church.first
+    if church&.email.present?
+      church.email
+    else
+      "no-reply@#{(ENV["HOST_NAME"] || 'example.com').to_s.sub(/^(https?:\/\/)?www\./, '')}"
+    end
   end
 end
