@@ -11,7 +11,9 @@
 
       <div class="list-group-item">
         <%= f.select :merger_id, [], { include_blank: true },
-                     { data: { selectpicker: true, width: '100%', placeholder: "Choose a family", ajax: families_path, template: :family }} %>
+                     { data: { selectpicker: true, width: '100%', placeholder: "Choose a family",
+                               ajax: families_path(not: @family.id),
+                               template: :family }} %>
       </div>
     </div>
 

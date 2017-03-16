@@ -12,7 +12,9 @@
 
       <div class="list-group-item">
         <%= f.select :merger_id, [], { include_blank: true },
-                     { data: { selectpicker: true, width: '100%', placeholder: "Choose a person", ajax: people_path, template: :person }} %>
+                     { data: { selectpicker: true, width: '100%', placeholder: "Choose a person",
+                               ajax: people_path(not: @person.id),
+                               template: :person }} %>
       </div>
     </div>
 

@@ -5,7 +5,9 @@
     <div class="list-group-item" id="family-picker">
       <div class="my-sm">
         <%= f.select :family_ids, [], { include_blank: true }, class: 'form-control',
-                     data: { selectpicker: true, placeholder: 'Choose a Family', :'allow-clear' => true, ajax: families_path, new: "Start new family", template: :family } %>
+                     data: { selectpicker: true, placeholder: 'Choose a Family', :'allow-clear' => true,
+                             ajax: families_path(not: @person.family_memberships.pluck(:family_id).join(',')),
+                             new: "Start new family", template: :family } %>
         <div id="person_family_name">
           <%= f.text_field :family_name, class: 'form-control mt-1', placeholder: 'Family name', autocapitalize: :words, id: 'person_family_name_field' %>
           <%= f.text_field :family_address1, class: 'form-control mt-sm', placeholder: 'Address',  autocapitalize: :words %>

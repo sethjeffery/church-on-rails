@@ -6,7 +6,9 @@
     <div class="list-group-item">
       <div class="mb-1">
         <%= f.select :person_id, [], { include_blank: true }, class: 'form-control',
-                     data: { selectpicker: true, placeholder: 'Choose a member', ajax: people_path, template: :person } %>
+                     data: { selectpicker: true, placeholder: 'Choose a member',
+                             ajax: people_path(not: @team.team_memberships.pluck(:person_id).join(',')),
+                             template: :person } %>
       </div>
     </div>
   </div>

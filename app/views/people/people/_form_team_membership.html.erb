@@ -4,7 +4,9 @@
 
     <div class="list-group-item">
       <%= f.select :team_ids, f.object.teams.map{|a| [a.name, a.id] }, { }, multiple: true, class: 'form-control',
-                   data: { selectpicker: true, placeholder: 'Choose Teams', ajax: teams_path, template: :team,
+                   data: { selectpicker: true, placeholder: 'Choose Teams',
+                           ajax: teams_path(not: @person.team_memberships.pluck(:team_id).join(',')),
+                           template: :team,
                            data: f.object.teams.map{ |a| { text: a.name, id: a.id, icon: a.icon, color: a.color} }} %>
     </div>
   </div>

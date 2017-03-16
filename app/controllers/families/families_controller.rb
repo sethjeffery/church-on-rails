@@ -2,7 +2,8 @@ class Families::FamiliesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @families = @families.where("lower(name) LIKE ?", "%#{params[:q].downcase}%") if params[:q]
+    @families = @families.where("lower(name) LIKE ?", "%#{params[:q].downcase}%") if params[:q].present?
+    @families = @families.where.not(id: params[:not].split(',')) if params[:not].present?
     @families = @families.includes(:people).order(:name).page(params[:page]).per(PAGE_SIZE)
   end
 

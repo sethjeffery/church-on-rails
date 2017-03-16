@@ -2,7 +2,8 @@ class People::PeopleController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @people = @people.where("search_name LIKE ?", "%#{params[:q].downcase}%") if params[:q]
+    @people = @people.where("search_name LIKE ?", "%#{params[:q].downcase}%") if params[:q].present?
+    @people = @people.where.not(id: params[:not]) if params[:not].present?
     @people = @people.includes(:teams).order(:search_name).page(params[:page]).per(PAGE_SIZE)
   end
 
