@@ -1,5 +1,7 @@
 module EventsHelper
   def map_for(item, width: '100%', height:, icon: nil, items: [])
+    return if Rails.env.test?
+
     map = GMaps.new(lat: item.lat, lng: item.lng)
     map.directives << { name: 'addMarker',
                         args: [{ lat: item.lat,

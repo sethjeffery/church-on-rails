@@ -1,0 +1,20 @@
+<% content_for :menu, :people %>
+
+<% if @family.try(:persisted?) %>
+  <%= render 'shared/side_and_details',
+             title: local_assigns[:title],
+             active: local_assigns[:active],
+             items: local_assigns[:items] || [{ title: 'People', icon: :search, href: :people },
+                                              '-',
+                                              ({ title: @family,          icon: @family,   href: @family }),
+                                              ({ title: 'Edit',           icon: :edit,     href: edit_family_path(@family)}                  if can?(:update, @family)),
+                                              ({ title: 'Add member',     icon: :person,   href: new_family_family_membership_path(@family)} if can?(:create, FamilyMembership)),
+                                              ({ title: 'Merge families', icon: :merge,    href: family_merge_path(@family)}                 if can?(:manage, Family)),
+                                              ({ title: 'Remove',         icon: :destroy,  href: confirm_destroy_family_path(@family)}       if can?(:destroy, @family))
+  ] { yield } %>
+<% else %>
+  <%= render 'shared/side_and_details',
+             title: local_assigns[:title],
+             active: local_assigns[:active],
+             items: [{ title: 'Families', icon: :search, href: :families }, '-', { title: 'New family', icon: :new, href: new_family_path}] { yield } %>
+<% end %>

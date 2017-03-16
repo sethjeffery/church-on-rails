@@ -1,0 +1,20 @@
+<%= render 'families/families/menu', active: :merge, title: 'Merge families' do %>
+  <p class="alert alert-info">
+    You can merge this family into another if you accidentally made duplicate records.
+    All family memberships will be combined, and any duplicate fields (like address)
+    will be replaced with the family you merge into.
+  </p>
+
+  <%= form_for :merge, url: family_merge_path(@family), method: :put do |f| %>
+    <div class="list-group mb-2">
+      <%= render 'shared/list_group_header', title: "Merge #{@family} into..." %>
+
+      <div class="list-group-item">
+        <%= f.select :merger_id, [], { include_blank: true },
+                     { data: { selectpicker: true, width: '100%', placeholder: "Choose a family", ajax: families_path, template: :family }} %>
+      </div>
+    </div>
+
+    <%= render 'shared/form_submit', icon: 'handshake-o', title: 'Merge!' %>
+  <% end %>
+<% end %>

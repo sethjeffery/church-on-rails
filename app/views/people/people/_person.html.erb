@@ -35,7 +35,7 @@
 
 <% if person.families.present? %>
   <% person.families.each do |family| %>
-    <%= render 'people/families/family_list_group', family: family %>
+    <%= render 'families/families/family_list_group', family: family %>
   <% end %>
 <% elsif can?(:create, FamilyMembership) %>
   <div class="list-group mb-2">

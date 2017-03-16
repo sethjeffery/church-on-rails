@@ -1,6 +1,6 @@
 $("#family_membership-<%= @family_membership.id %> [data-tooltip]").tooltip('dispose');
 setTimeout(function() {
-  var $el = $("<%= j render("people/families/membership", membership: @family_membership) %>");
+  var $el = $("<%= j render("families/families/membership", membership: @family_membership) %>");
   $("#family_membership-<%= @family_membership.id %>").replaceWith($el);
   $el.find('[data-tooltip]').tooltip();
 }, 50);

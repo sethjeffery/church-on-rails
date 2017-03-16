@@ -19,7 +19,6 @@
 //= require bootstrap
 //= require bootstrap-datetimepicker
 //= require select2-full
-//= require gmaps
 //= require sortable
 //= require jquery.autosize
 //= require Chart.bundle

@@ -16,11 +16,15 @@ Rails.application.routes.draw do
   end
 
   authenticate do
-    scope module: 'people' do
+    scope module: 'families' do
       resources :families, concerns: :paginatable do
         get :confirm_destroy, on: :member
         resources :family_memberships, path: 'memberships'
+        resource :merge
       end
+    end
+
+    scope module: 'people' do
       resources :teams, concerns: :paginatable do
         get :confirm_destroy, on: :member
         resources :team_memberships, path: 'memberships'

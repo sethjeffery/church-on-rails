@@ -114,7 +114,28 @@ RSpec.describe "Families" do
         visit '/families'
         expect(page).to have_no_content family.name
       end
+
+      it 'can merge families', :js do
+        actor = create(:family)
+        target = create(:family)
+        member = create(:person)
+        member.join actor
+
+        visit "/families/#{actor.id}"
+        click_on 'Merge families'
+
+        within '.side-and-details--details' do
+          expect(page).to have_selector "[name='merge[merger_id]']"
+          page.execute_script("$('[name=\"merge[merger_id]\"]').append('<option value=#{target.id}>#{target.name}</option>')")
+          select target.name, from: 'merge[merger_id]'
+
+          click_on 'Merge!'
+
+          expect(page).to have_content target.family_name
+          expect(page).to have_content 'MEMBERS'
+          expect(page).to have_content member.name
+        end
+      end
     end
   end
-
 end

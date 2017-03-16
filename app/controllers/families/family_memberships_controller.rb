@@ -1,4 +1,4 @@
-class People::FamilyMembershipsController < ApplicationController
+class Families::FamilyMembershipsController < ApplicationController
   load_and_authorize_resource
   before_action :load_and_authorize_family
 

@@ -18,4 +18,8 @@ class Family < ApplicationRecord
   def to_s
     family_name
   end
+
+  def merge_into(target)
+    MergeFamilyJob.perform_now(self, target)
+  end
 end
