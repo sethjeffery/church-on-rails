@@ -85,31 +85,46 @@ RSpec.describe "Children" do
         expect(page).to have_content child.name
       end
 
-      it 'can check in/out children' do
-        group = create(:child_group)
-        child = create(:person)
-        family = create(:family)
-        parent = create(:person)
-        child.join group
-        child.join family
-        parent.join family, head: true
+      context 'in kiosk mode' do
+        let(:family) { create(:family) }
+        let(:parent) { create(:person) }
 
-        visit "/children/groups/#{group.id}"
+        before do
+          child.join group
+          child.join family
+          parent.join family, head: true
 
-        click_on 'Kiosk / Tablet mode'
+          click_on 'Kiosk / Tablet mode'
+        end
 
-        expect(page).to have_selector    '.btn-secondary', text: /#{child.name}/
-        expect(page).to have_no_selector '.btn-outline-warning', text: /#{child.name}/
+        it 'can check in/out children' do
+          expect(page).to have_selector    '.btn-secondary', text: /#{child.name}/
+          expect(page).to have_no_selector '.btn-outline-warning', text: /#{child.name}/
 
-        click_on child.name
-        click_on parent.name
-        expect(page).to have_selector    '.btn-outline-warning', text: /#{parent.name} #{child.name}/
+          click_on child.name
+          click_on parent.name
+          expect(page).to have_selector    '.btn-outline-warning', text: /#{parent.name} #{child.name}/
 
-        click_on child.name
-        click_on 'Non-family member'
-        expect(page).to have_no_selector '.btn-outline-warning', text: /#{child.name}/
+          click_on child.name
+          click_on 'Non-family member'
+          expect(page).to have_no_selector '.btn-outline-warning', text: /#{child.name}/
 
-        click_on 'Close'
+          click_on 'Close'
+        end
+
+        it 'can add children', :js do
+          click_on 'Add child'
+
+          # Select2 is notoriously difficult to test in Capybara
+          # and it gets the results by AJAX so we will just hack the options into it
+          expect(page).to have_selector "[name='child_group_membership[person_id]']"
+          page.execute_script("$('[name=\"child_group_membership[person_id]\"]').append('<option value=#{child.id}>#{child.name}</option>')")
+          select child.name, from: 'child_group_membership[person_id]'
+          find('button', text: /Add child/).click
+
+          expect(page).to have_content child.name
+          expect(current_url).to include 'kiosk'
+        end
       end
     end
 

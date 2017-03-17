@@ -1,0 +1,39 @@
+<div class="container-sm py-2">
+  <h1>Register new child</h1>
+
+  <p class="alert alert-info">
+    Adding children to your group allows parents to check in their child, and then pick them up later.
+  </p>
+
+  <%= form_for @child_group_membership, url: kiosk_child_group_child_group_memberships_path(@child_group) do |f| %>
+    <div class="list-group mb-2">
+      <%= render 'shared/list_group_header', title: 'Child' %>
+
+      <div class="list-group-item">
+        <div class="">
+          Choose a child from the database, or register a new one.
+        </div>
+        <div class="my-sm">
+          <%= f.select :person_id, [], { include_blank: true },
+                       class: 'form-control',
+                       data: { selectpicker: true, placeholder: 'Choose a person', :'allow-clear' => true, new: 'Register new child', ajax: people_path, template: :child } %>
+        </div>
+      </div>
+    </div>
+
+    <div class="list-group mb-2" id="child_group_membership_new_child">
+      <%= render 'shared/list_group_header', title: 'Add child' %>
+      <%= f.fields_for @child_group_membership.person do |p| %>
+        <%= render 'children/people/form_fields', f: p %>
+      <% end %>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg btn-block size-xs-normal size-md-large mt-1">
+      <%= icon_for @child_group_membership, class: 'mr-xs' %>
+      Add child
+    </button>
+
+    <%= link_to 'Cancel', kiosk_child_group_path(@child_group_membership.child_group), class: 'btn-block btn btn-secondary btn-lg size-xs-normal size-md-large mt-1 mb-2' %>
+
+  <% end %>
+</div>

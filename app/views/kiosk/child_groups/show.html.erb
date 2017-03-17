@@ -1,6 +1,13 @@
 <div class="container py-2">
   <div class="float-xs-right">
-    <%= link_to(@child_group, class: 'btn btn-secondary btn-lg btn-subtle btn-align-middle') { icon_for(:x) + content_tag(:div, 'Close', class: 'sr-only') } %>
+    <%= link_to(new_kiosk_child_group_child_group_membership_path(@child_group), class: 'btn btn-outline-primary btn-lg btn-align-middle mr-sm') do %>
+      <%= icon_for(:new, class: 'mr-xs') %>
+      Add child
+    <% end %>
+    <%= link_to(@child_group, class: 'btn btn-secondary btn-lg btn-subtle btn-align-middle') do %>
+      <%= icon_for(:x) %>
+      <div class="sr-only">Close</div>
+    <% end %>
   </div>
 
   <h1><%= @child_group %></h1>

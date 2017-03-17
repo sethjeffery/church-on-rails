@@ -72,8 +72,9 @@ Rails.application.routes.draw do
     end
 
     namespace :kiosk do
-      resources :child_groups, path: 'children/groups'
-      resources :people, path: 'children'
+      resources :child_groups, path: 'children/groups' do
+        resources :child_group_memberships, path: 'memberships'
+      end
       resources :check_ins
       resources :check_outs
     end
