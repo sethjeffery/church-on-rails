@@ -8,12 +8,6 @@
 
       <% if user_signed_in? %>
         <ul class="nav navbar-nav float-xs-right">
-          <li class="nav-item hidden-md-up">
-            <a class="nav-link" href="#" data-toggle="drawer">
-              <span class="bars"></span>
-            </a>
-          </li>
-
           <li class="nav-item nav-item-account dropdown hidden-sm-down">
             <a class="nav-link dropdown-toggle" href="<%= account_path %>" data-toggle="dropdown">
               <%= avatar_tag current_person %>
@@ -32,13 +26,20 @@
               <% end %>
             </div>
           </li>
+
           <% if can?(:read, People) %>
-            <li class="nav-item nav-item-search hidden-sm-down">
+            <li class="nav-item nav-item-search">
               <a class="nav-link" href="<%= people_path %>">
                 <%= icon_for :search %>
               </a>
             </li>
           <% end %>
+
+          <li class="nav-item hidden-md-up">
+            <a class="nav-link" href="#" data-toggle="drawer">
+              <span class="bars"></span>
+            </a>
+          </li>
         </ul>
       <% end %>
     </div>
@@ -92,6 +93,12 @@
 
           <%= content_tag :div, class: "nav-item hidden-md-up" do %>
             <%= link_to 'Log out', destroy_user_session_path, class: 'nav-link' %>
+          <% end %>
+
+          <% if can?(:read, People) %>
+            <%= content_tag :div, class: "nav-item nav-item-search hidden-sm-down" do %>
+              <%= link_to icon_for(:search), people_path, class: 'nav-link' %>
+            <% end %>
           <% end %>
         </div>
       </div>

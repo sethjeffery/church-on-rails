@@ -38,13 +38,13 @@
 }
 
 .navbar-transition {
-  transition: top 0.3s;
+  // transition: top 0.3s;
 
   .nav-item-search, .nav-item-account {
-    transition: top .3s;
+    // transition: top .3s;
 
-    .nav-link { transition: padding .3s, border-top-left-radius .3s, border-top-right-radius .3s; }
-    .fa { transition: font-size .3s; }
+    // .nav-link { transition: padding .3s, border-top-left-radius .3s, border-top-right-radius .3s; }
+    // .fa { transition: font-size .3s; }
   }
 }
 
@@ -135,32 +135,8 @@
 }
 
 @include media-breakpoint-up(md) {
-  body:not(.kiosk) {
-    padding-top: 120px;
-  }
-
-  .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1050;
-
-    &.navbar-short {
-      top: -76px;
-
-      .nav-item-search {
-        top: 63px;
-
-        .nav-link {
-          padding: 0.5rem 1rem;
-        }
-
-        .fa {
-          font-size: 1rem;
-        }
-      }
-    }
+  .navbar-short {
+    padding-bottom: 44px;
   }
 }
 
