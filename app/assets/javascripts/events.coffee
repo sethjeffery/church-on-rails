@@ -1,4 +1,6 @@
 $(document).on 'turbolinks:load', ->
+  return unless window.GMaps
+
   $mapElements = $('[data-map]')
   for mapElement in $mapElements
     mapData = eval '(' + mapElement.dataset.map + ')'

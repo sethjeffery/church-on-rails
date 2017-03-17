@@ -80,4 +80,21 @@
       box-shadow: none;
     }
   }
+
+  .select2-selection--single {
+    // auto-height to account for multi-row items
+    line-height: 1.5;
+    font-size: 1rem;
+    min-height: 38px;
+    height: auto;
+  }
+
+  .select2-selection--single .select2-selection__clear {
+    // vertically center X button
+    line-height: 1.25;
+    top: 50%;
+    position: absolute;
+    right: 1.5rem;
+    margin-top: -12px;
+  }
 }

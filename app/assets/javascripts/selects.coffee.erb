@@ -1,11 +1,11 @@
 $(document).on 'turbolinks:load', ->
 
   templates =
-    child:   (item) -> templates.default(item, icon: 'child')
+    child:   (item) -> templates.default(item, icon: 'child', subtitle: item.age)
     process: (item) -> templates.default(item, icon: 'process')
-    person:  (item) -> templates.default(item, icon: 'person')
-    family:  (item) -> templates.default(item, icon: 'family')
-    team:    (item) -> templates.default(item, icon: 'users')
+    person:  (item) -> templates.default(item, icon: 'person', subtitle: item.email)
+    family:  (item) -> templates.default(item, icon: 'family', subtitle: item.members?.join(', '))
+    team:    (item) -> templates.default(item, icon: 'users', subtitle: item.members?.join(', '))
 
     default: (item, defaults={}) ->
       return item.text if item.loading
@@ -18,11 +18,13 @@ $(document).on 'turbolinks:load', ->
         """<div class="fa-container fa-container-colored">
           <i class="fa fa-#{item.icon}" style="background-color: ##{item.color};"></i>
           #{item.text}
+          <div class="size-xs-tiny text-light">#{item.subtitle or ''}</div>
         </div>"""
       else if item.icon
         """<div class="fa-container">
           <i class="fa fa-#{item.icon}"></i>
           #{item.text}
+          <div class="size-xs-tiny text-light">#{item.subtitle or ''}</div>
         </div>"""
       else
         item.text
