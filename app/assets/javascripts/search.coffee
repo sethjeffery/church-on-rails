@@ -1,5 +1,3 @@
-<% self.class.include Rails.application.routes.url_helpers %>
-
 $(document).on 'shown.bs.modal', '#search-modal', ->
   $('#search-modal input').focus().select()
 
@@ -14,7 +12,7 @@ $(document).on 'keyup change paste', '#search-modal input', ->
 
   # Abort any current AJAX calls and then query the server for search results
   searchXhr?.abort()
-  searchXhr = $.getJSON "<%= search_path %>", { q }, (data) ->
+  searchXhr = $.getJSON Routes.search_path(), { q }, (data) ->
 
     # Render each search result using the search_result template
     html = ""
@@ -24,13 +22,13 @@ $(document).on 'keyup change paste', '#search-modal input', ->
 
       switch item.type
         when 'person'
-          item.href = "<%= people_path %>/#{item.id}"
+          item.href = Routes.person_path(item.id)
           item.subtitle = item.email
         when 'family'
-          item.href = "<%= families_path %>/#{item.id}"
+          item.href = Routes.family_path(item.id)
           item.subtitle = item.members?.join(', ')
         when 'team'
-          item.href = "<%= teams_path %>/#{item.id}"
+          item.href = Routes.team_path(item.id)
           item.subtitle = item.members?.join(', ')
 
       html += HandlebarsTemplates.search_result(item)

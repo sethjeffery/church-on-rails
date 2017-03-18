@@ -24,4 +24,5 @@
 //= require Chart.bundle
 //= require chartkick
 //= require handlebars.runtime
+//= require js-routes
 //= require_tree .

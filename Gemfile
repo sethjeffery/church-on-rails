@@ -53,6 +53,7 @@ gem 'premailer-rails'
 gem 'nokogiri'
 gem "non-stupid-digest-assets"
 gem 'handlebars_assets'
+gem 'js-routes'
 
 # google maps
 gem 'gmaps-rails'
