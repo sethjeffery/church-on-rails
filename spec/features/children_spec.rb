@@ -95,12 +95,11 @@ RSpec.describe "Children" do
           parent.join family, head: true
 
           click_on 'Kiosk / Tablet mode'
+          expect(page).to have_selector    '.btn-secondary', text: /#{child.name}/
+          expect(page).to have_no_selector '.btn-outline-warning', text: /#{child.name}/
         end
 
         it 'can check in/out children' do
-          expect(page).to have_selector    '.btn-secondary', text: /#{child.name}/
-          expect(page).to have_no_selector '.btn-outline-warning', text: /#{child.name}/
-
           click_on child.name
           click_on parent.name
           expect(page).to have_selector    '.btn-outline-warning', text: /#{parent.name} #{child.name}/
