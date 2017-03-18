@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   end
 
   authenticate do
+    resource :search
+
     scope module: 'families' do
       resources :families, concerns: :paginatable do
         get :confirm_destroy, on: :member

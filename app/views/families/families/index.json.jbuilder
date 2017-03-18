@@ -1,5 +1,3 @@
 json.array! @families do |family|
-  json.extract! family, :id, :name
-  json.text family.name
-  json.members family.people.pluck('first_name')
+  json.partial! 'families/families/family', family: family
 end

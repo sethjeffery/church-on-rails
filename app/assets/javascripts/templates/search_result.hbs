@@ -1,0 +1,10 @@
+<a class="list-group-item list-group-search-item" href="{{href}}">
+  <h2>{{ category }}</h2>
+  <div class="fa-container {{#if color}}fa-container-colored{{/if}}">
+    <i class="fa fa-{{icon}}" {{#if color}}style="background-color: #{{color}};"{{/if}}></i>
+
+    <div class="search-title {{#if bold}}font-weight-bold{{/if}}">{{text}}</div>
+    <div class="search-subtitle size-xs-tiny text-light">{{subtitle}}</div>
+
+  </div>
+</a>

@@ -78,3 +78,20 @@ input[disabled] + .custom-file-control {
   opacity: 0.5;
   background-color: #f0f0f0;
 }
+
+.form-control-icon-container {
+  position: relative;
+
+  .form-control {
+    padding-left: 2.5rem;
+
+    + .form-control-icon {
+      position: absolute;
+      left: 16px;
+    }
+  }
+
+  .form-control-lg + .form-control-icon {
+    margin-top: -34px;
+  }
+}

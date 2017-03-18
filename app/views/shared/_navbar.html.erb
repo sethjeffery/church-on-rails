@@ -27,9 +27,9 @@
             </div>
           </li>
 
-          <% if can?(:read, People) %>
+          <% if can?(:read, Person) %>
             <li class="nav-item nav-item-search">
-              <a class="nav-link" href="<%= people_path %>">
+              <a class="nav-link" href="<%= people_path %>" data-toggle="modal" data-target="#search-modal">
                 <%= icon_for :search %>
               </a>
             </li>
@@ -95,13 +95,25 @@
             <%= link_to 'Log out', destroy_user_session_path, class: 'nav-link' %>
           <% end %>
 
-          <% if can?(:read, People) %>
+          <% if can?(:read, Person) %>
             <%= content_tag :div, class: "nav-item nav-item-search hidden-sm-down" do %>
-              <%= link_to icon_for(:search), people_path, class: 'nav-link' %>
+              <%= link_to icon_for(:search), people_path, class: 'nav-link', data: { toggle: "modal", target: "#search-modal" } %>
             <% end %>
           <% end %>
         </div>
       </div>
     </div>
   <% end %>
+</div>
+
+<div class="modal fade" id="search-modal" data-turbolinks-permanent>
+  <form class="modal-dialog">
+    <h1>Search the database...</h1>
+    <div class="form-control-icon-container">
+      <input type="text" class="form-control form-control-lg" autocomplete="off" />
+      <%= icon_for :search, class: 'form-control-icon' %>
+    </div>
+    <div class="search-modal-results list-group mt-1">
+    </div>
+  </form>
 </div>

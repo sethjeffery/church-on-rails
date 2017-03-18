@@ -1,0 +1,35 @@
+@import 'variables';
+@import 'bootstrap/mixins/hover';
+
+.modal-backdrop {
+  background-color: #f4f4f4;
+}
+
+.modal-backdrop.in {
+  opacity: 0.9;
+}
+
+.list-group-search-item {
+  color: $gray-dark;
+
+  h2 {
+    float: right;
+    font-size: .75rem;
+    margin-bottom: 0;
+    opacity: 0.5;
+    line-height: 26px;
+  }
+
+  .search-title {
+    color: $link-color;
+  }
+
+  @include hover-focus {
+    text-decoration: none;
+    background-color: #fafafa;
+
+    .search-title {
+      color: $link-hover-color;
+    }
+  }
+}
