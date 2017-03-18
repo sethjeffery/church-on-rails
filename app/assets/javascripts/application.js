@@ -23,4 +23,5 @@
 //= require jquery.autosize
 //= require Chart.bundle
 //= require chartkick
+//= require handlebars.runtime
 //= require_tree .

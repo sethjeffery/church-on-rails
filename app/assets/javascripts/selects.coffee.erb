@@ -8,26 +8,12 @@ $(document).on 'turbolinks:load', ->
     team:    (item) -> templates.default(item, icon: 'users', subtitle: item.members?.join(', '))
 
     default: (item, defaults={}) ->
-      return item.text if item.loading
-
       # Set up defaults
       item[key] or= val for own key, val of defaults
       item.icon = iconNameFor(item.icon) if item.icon
 
-      if item.icon and item.color
-        """<div class="fa-container fa-container-colored">
-          <i class="fa fa-#{item.icon}" style="background-color: ##{item.color};"></i>
-          #{item.text}
-          <div class="size-xs-tiny text-light">#{item.subtitle or ''}</div>
-        </div>"""
-      else if item.icon
-        """<div class="fa-container">
-          <i class="fa fa-#{item.icon}"></i>
-          #{item.text}
-          <div class="size-xs-tiny text-light">#{item.subtitle or ''}</div>
-        </div>"""
-      else
-        item.text
+      # Render handlebars template
+      HandlebarsTemplates.select_result(item)
 
 
   # More beautiful looking selects with <select data-selectpicker></select>
@@ -50,7 +36,8 @@ $(document).on 'turbolinks:load', ->
               q: params.term
               page: params.page
             processResults: (data, params) ->
-              data.unshift({ id: 'New', icon: 'plus', text: "<strong>#{$el.data('new')}</strong>" }) if !params.page and $el.data('new')
+              if !params.page and $el.data('new')
+                data.unshift({ id: 'New', icon: 'plus', bold: true, text: $el.data('new') })
               results: data
               pagination:
                 more: data.length >= <%= ApplicationController::PAGE_SIZE %>

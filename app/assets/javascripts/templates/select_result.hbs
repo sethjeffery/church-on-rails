@@ -1,0 +1,19 @@
+{{#if loading}}
+  {{text}}
+{{else}}
+  {{#if icon}}
+    <div class="fa-container {{#if color}}fa-container-colored{{/if}}">
+      <i class="fa fa-{{icon}}" {{#if color}}style="background-color: #{{color}};"{{/if}}></i>
+
+      {{#if bold}}
+        <strong>{{text}}</strong>
+      {{else}}
+        {{text}}
+      {{/if}}
+
+      <div class="size-xs-tiny text-light">{{subtitle}}</div>
+    </div>
+  {{else}}
+    {{text}}
+  {{/if}}
+{{/if}}

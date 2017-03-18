@@ -52,6 +52,7 @@ gem 'simple-spreadsheet'
 gem 'premailer-rails'
 gem 'nokogiri'
 gem "non-stupid-digest-assets"
+gem 'handlebars_assets'
 
 # google maps
 gem 'gmaps-rails'

@@ -157,6 +157,11 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
+    handlebars_assets (0.23.1)
+      execjs (~> 2.0)
+      multi_json (~> 1.0)
+      sprockets (>= 2.0.0)
+      tilt (>= 1.2)
     hashdiff (0.3.1)
     hashie (3.4.6)
     htmlentities (4.3.4)
@@ -397,6 +402,7 @@ DEPENDENCIES
   guard-migrate
   guard-rails
   guard-rspec
+  handlebars_assets
   ice_cube
   jbuilder (~> 2.5)
   jquery-rails
