@@ -4,8 +4,8 @@ checkNavbarScroll = ->
 $(window).on 'resize scroll', checkNavbarScroll
 $(document).on 'turbolinks:load scroll', checkNavbarScroll
 
-$(document).on 'turbolinks:load', ->
-  setTimeout (-> $('.navbar').addClass('navbar-transition')), 10
+$(document).on 'turbolinks:before-cache', ->
+  $('.navbar').removeClass('navbar-short')
 
 $(document).on 'click', '[data-toggle=drawer]', (e) ->
   e.preventDefault()
