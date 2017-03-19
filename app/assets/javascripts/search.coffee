@@ -1,6 +1,9 @@
 $(document).on 'shown.bs.modal', '#search-modal', ->
   $('#search-modal input').focus().select()
 
+showLoader = ->
+  $('.search-modal-results').html("<div class='loader'><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>")
+
 searchXhr = null
 searchQuery = null
 $(document).on 'keyup change paste', '#search-modal input', ->
@@ -11,6 +14,7 @@ $(document).on 'keyup change paste', '#search-modal input', ->
   searchQuery = q
 
   # Abort any current AJAX calls and then query the server for search results
+  showLoader()
   searchXhr?.abort()
   searchXhr = $.getJSON Routes.search_path(), { q }, (data) ->
 
