@@ -11,9 +11,9 @@ RSpec.describe MergeFamilyJob, type: :job do
   end
 
   context 'with memberships' do
-    let(:person_1) { create(:person) }
-    let(:person_2) { create(:person) }
-    let(:person_3) { create(:person) }
+    let(:person_1) { create(:person, first_name: 'A') }
+    let(:person_2) { create(:person, first_name: 'B') }
+    let(:person_3) { create(:person, first_name: 'C') }
 
     before do
       person_1.join actor
@@ -27,6 +27,24 @@ RSpec.describe MergeFamilyJob, type: :job do
       expect(person_1.reload.families).to contain_exactly target
       expect(person_2.reload.families).to contain_exactly target
       expect(person_3.reload.families).to contain_exactly target
+    end
+  end
+
+  context 'with same person in both families' do
+    let(:person_1) { create(:person, first_name: 'John') }
+    let(:person_2) { create(:person, first_name: 'John') }
+    let(:person_3) { create(:person, first_name: 'Eric') }
+
+    before do
+      person_1.join actor
+      person_2.join target
+      person_3.join actor
+    end
+
+    it 'merges people' do
+      perform_now
+      expect(target.reload.people).to contain_exactly(person_2, person_3)
+      expect{Person.find(person_1.id)}.to raise_error ActiveRecord::RecordNotFound
     end
   end
 

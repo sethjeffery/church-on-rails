@@ -9,8 +9,17 @@ class MergeFamilyJob < ApplicationJob
       target.country = actor.country
     end
 
-    existing_person_ids = target.family_memberships.pluck(:person_id)
-    actor.family_memberships.where.not(person_id: existing_person_ids).update_all(family_id: target.id)
+    existing_people = target.people
+
+    actor.family_memberships.where.not(person_id: existing_people.map(&:id)).each do |membership|
+      # Move member into new family
+      membership.update_attributes(family_id: target.id)
+
+      # Check if member already exists in family
+      person = membership.person
+      existing_person = existing_people.find{|existing_person| existing_person.first_name == person.first_name}
+      person.merge_into existing_person if existing_person.present?
+    end
 
     target.save!
     actor.destroy
