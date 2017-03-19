@@ -13,8 +13,10 @@ $(document).on 'keyup change paste', '#search-modal input', ->
   return if searchQuery == q
   searchQuery = q
 
+  # Show a pretty ajax spinner
+  showLoader() unless $('.search-modal-results .loader').length
+
   # Abort any current AJAX calls and then query the server for search results
-  showLoader()
   searchXhr?.abort()
   searchXhr = $.getJSON Routes.search_path(), { q }, (data) ->
 
