@@ -10,7 +10,13 @@
 
     <div class="list-group-item">
       Who is this for?
-      <%= f.select :team_id, [], { include_blank: true }, data: { selectpicker: true, placeholder: 'Everyone', width: '100%', ajax: '/teams.json', template: :team, :'allow-clear' => true }, class_name: 'my-sm' %>
+      <%= f.select :team_id, [[@event.team&.name, @event.team&.id].compact],
+                   { include_blank: true },
+                   data: { selectpicker: true, placeholder: 'Everyone', width: '100%',
+                           ajax: teams_path, template: :team, :'allow-clear' => true,
+                           data: Array.wrap(@event.team).map{ |t| { text: t.name, id: t.id, icon: t.icon, color: t.color}}
+                   },
+                   class_name: 'my-sm' %>
     </div>
 
     <div class="list-group-item">

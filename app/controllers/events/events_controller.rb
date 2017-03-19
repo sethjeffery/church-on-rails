@@ -8,7 +8,7 @@ class Events::EventsController < ApplicationController
   end
 
   def new
-    @event.team_id = params[:team_id]
+    @event.team = Team.find(params[:team_id]) if params[:team_id]
     @event.address1 = current_church.address1
     @event.address2 = current_church.address2
     @event.postcode = current_church.postcode
