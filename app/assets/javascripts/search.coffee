@@ -40,6 +40,7 @@ $(document).on 'keyup change paste', '#search-modal input', ->
       html += HandlebarsTemplates.search_result(item)
 
     # Replace search results with built HTML
+    html = "<h4 class='text-lighter'>No results</h4>" unless html
     $('.search-modal-results').html(html)
 
 # When pressing enter, click the first link
