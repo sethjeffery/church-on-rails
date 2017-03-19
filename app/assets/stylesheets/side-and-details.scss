@@ -57,21 +57,6 @@ $width-xl: (map-get($container-max-widths, xl) - $grid-gutter-width-base);
         margin: 0 -2rem 0 -1rem;
       }
     }
-
-    @media (min-height: 600px) {
-      transition: margin-top 0.3s;
-      position: fixed;
-      margin-top: 0;
-
-      .navbar-short + div & {
-        margin-top: -56px;
-      }
-
-      .title-container + div & {
-        margin-top: 0;
-        position: static;
-      }
-    }
   }
 
   @include media-breakpoint-up(lg) {
