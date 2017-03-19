@@ -1,6 +1,12 @@
 class People::MergesController < ApplicationController
   before_action :load_and_authorize_person
 
+  def show
+    @merge = Merge.new(person: Person
+                                 .where(search_name: @person.name.downcase)
+                                 .where.not(id: @person.id).first)
+  end
+
   def update
     if merge_params[:merger_id].present?
       merger = Person.find(merge_params[:merger_id])

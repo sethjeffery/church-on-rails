@@ -6,14 +6,16 @@
     with the record you merge into.
   </p>
 
-  <%= form_for :merge, url: person_merge_path(@person), method: :put do |f| %>
+  <%= form_for @merge, url: person_merge_path(@person), method: :put do |f| %>
     <div class="list-group mb-2">
       <%= render 'shared/list_group_header', title: "Merge #{@person.short_name} into..." %>
 
       <div class="list-group-item">
-        <%= f.select :merger_id, [], { include_blank: true },
+        <%= f.select :merger_id, [[@merge.name, @merge.id].compact],
+                     { include_blank: true },
                      { data: { selectpicker: true, width: '100%', placeholder: "Choose a person",
                                ajax: people_path(not: @person.id),
+                               data: @merge.merger_data,
                                template: :person }} %>
       </div>
     </div>

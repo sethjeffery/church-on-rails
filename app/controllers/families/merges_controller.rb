@@ -1,6 +1,12 @@
 class Families::MergesController < ApplicationController
   before_action :load_and_authorize_family
 
+  def show
+    @merge = Merge.new(family: Family
+                                 .where("lower(name) = ?", @family.name.downcase)
+                                 .where.not(id: @family.id).first)
+  end
+
   def update
     if merge_params[:merger_id].present?
       merger = Family.find(merge_params[:merger_id])

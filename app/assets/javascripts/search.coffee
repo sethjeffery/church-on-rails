@@ -29,7 +29,7 @@ $(document).on 'keyup change paste', '#search-modal input', ->
       switch item.type
         when 'person'
           item.href = Routes.person_path(item.id)
-          item.subtitle = item.email
+          item.subtitle = item.email or item.phone
         when 'family'
           item.href = Routes.family_path(item.id)
           item.subtitle = item.members?.join(', ')

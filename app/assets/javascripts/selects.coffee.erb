@@ -3,7 +3,7 @@ $(document).on 'turbolinks:load', ->
   templates =
     child:   (item) -> templates.default(item, icon: 'child', subtitle: item.age)
     process: (item) -> templates.default(item, icon: 'process')
-    person:  (item) -> templates.default(item, icon: 'person', subtitle: item.email)
+    person:  (item) -> templates.default(item, icon: 'person', subtitle: item.email or item.phone)
     family:  (item) -> templates.default(item, icon: 'family', subtitle: item.members?.join(', '))
     team:    (item) -> templates.default(item, icon: 'users', subtitle: item.members?.join(', '))
 
