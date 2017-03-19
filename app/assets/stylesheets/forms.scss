@@ -18,6 +18,12 @@ textarea.form-control {
   }
 }
 
+.custom-checkbox {
+  .custom-control-indicator {
+    top: 0;
+  }
+}
+
 .custom-switch {
   padding-left: 3.5rem;
 
