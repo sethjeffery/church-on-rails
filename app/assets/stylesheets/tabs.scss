@@ -102,6 +102,9 @@
     .nav-link {
       font-size: 0.875rem;
     }
+    .nav-item + .nav-item {
+      margin-left: .75rem;
+    }
   }
 
   @include media-breakpoint-only(sm) {
