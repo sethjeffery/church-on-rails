@@ -108,6 +108,4 @@ Rails.application.routes.draw do
                sign_out: 'logout'
              }
 
-  resources :users
-
 end

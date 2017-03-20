@@ -22,17 +22,14 @@
   font-size: 1rem;
   margin-right: 0;
   font-weight: $headings-font-weight;
-
-  @include media-breakpoint-down(sm) {
-    width: calc(100vw - 110px);
-  }
+  max-width: calc(100% - 170px);
 
   @include media-breakpoint-up(sm) {
-    width: auto;
     font-size: 1.25rem;
   }
 
   @include media-breakpoint-up(md) {
+    max-width: 100%;
     font-size: 1.5rem;
   }
 }
@@ -51,7 +48,6 @@
 
 .navbar-dark .navbar-nav {
   .open > .nav-link,
-  .active > .nav-link,
   .nav-link.open,
   .nav-link.active {
     @include plain-hover-focus {
@@ -120,12 +116,6 @@
     border-radius: 22px 0 22px 22px;
     border-color: white;
     min-width: calc(100% + 1.5rem);
-  }
-}
-
-@include media-breakpoint-up(md) {
-  .navbar-short {
-    padding-bottom: 44px;
   }
 }
 

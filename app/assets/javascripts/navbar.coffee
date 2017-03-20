@@ -1,5 +1,8 @@
 checkNavbarScroll = ->
-  $('.navbar').toggleClass('navbar-short', $(window).scrollTop() > 76)
+  scrolled = $(window).scrollTop() > 60
+  $el = $('.navbar > .nav-material-tabs.fixed-top')
+  $el = $('.navbar > .nav-material-tabs').clone().addClass('fixed-top').appendTo($('.navbar')) unless $el.length
+  $el.toggleClass('hidden-xs-up', !scrolled)
 
 $(window).on 'resize scroll', checkNavbarScroll
 $(document).on 'turbolinks:load scroll', checkNavbarScroll

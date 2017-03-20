@@ -1,3 +1,5 @@
+@import 'variables';
+
 html {
   min-height: 100%;
 }
@@ -8,9 +10,10 @@ body {
   background-position: 90% bottom;
   background-repeat: no-repeat;
   font-weight: 300;
+  overflow-x: hidden;
 }
 
-html {
-  overflow-x: hidden;
-  overflow-y: scroll;
+.bg-light {
+  background-color: $gray-lighter;
+  color: $gray-dark;
 }

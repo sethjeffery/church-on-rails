@@ -2,31 +2,11 @@
   <div class="bg-primary">
     <div class="container clearfix">
       <a class="navbar-brand" href="<%= root_path %>">
-        <%= icon_for current_church, class: 'mr-xs hidden-xs-down' %>
-        <%= truncate(current_church.to_s, length: 30) %>
+        <%= truncate(current_church.to_s, length: 50) %>
       </a>
 
       <% if user_signed_in? %>
-        <ul class="nav navbar-nav float-xs-right">
-          <li class="nav-item nav-item-account dropdown hidden-sm-down">
-            <a class="nav-link dropdown-toggle" href="<%= account_path %>" data-toggle="dropdown">
-              <%= avatar_tag current_person %>
-              <span class="hidden-sm-down ml-sm"><%= current_person&.first_name %></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right">
-              <div class="py-sm px-1 font-weight-bold size-xs-small text-ellipsis">
-                <%= current_user.person || current_user %>
-              </div>
-              <div class="dropdown-divider"></div>
-              <%= link_to account_path, class: 'dropdown-item' do %>
-                <%= icon_container 'Profile', current_user %>
-              <% end %>
-              <%= link_to destroy_user_session_path, class: 'dropdown-item' do %>
-                <%= icon_container 'Log out', 'sign-out' %>
-              <% end %>
-            </div>
-          </li>
-
+        <ul class="nav navbar-nav float-xs-right hidden-md-up">
           <% if can?(:read, Person) %>
             <li class="nav-item nav-item-search">
               <a class="nav-link" href="<%= people_path %>" data-toggle="modal" data-target="#search-modal">
@@ -35,10 +15,19 @@
             </li>
           <% end %>
 
-          <li class="nav-item hidden-md-up">
+          <li class="nav-item">
             <a class="nav-link" href="#" data-toggle="drawer">
               <span class="bars"></span>
             </a>
+          </li>
+        </ul>
+      <% else %>
+        <ul class="nav navbar-nav float-xs-right hidden-xs-down">
+          <li class="nav-item <%= 'active' if current_page?(new_session_path(:user)) %>">
+            <%= link_to 'Log in', new_session_path(:user), class: 'nav-link' %>
+          </li>
+          <li class="nav-item ml-0 <%= 'active' if current_page?(new_registration_path(:user)) %>">
+            <%= link_to 'Sign up', new_registration_path(:user), class: 'nav-link' %>
           </li>
         </ul>
       <% end %>
@@ -49,59 +38,53 @@
     <div class="nav nav-material-tabs">
       <div class="bg-primary">
         <div class="container">
-          <%= content_tag :div, class: "nav-item #{'active' if content_for(:menu) == 'church'}" do %>
-            <%= link_to 'Church', root_path, class: 'nav-link' %>
-          <% end if can?(:read, current_church) %>
 
-          <%= content_tag :div, class: "nav-item #{'active' if content_for(:menu) == 'people'} hidden-sm-down" do %>
-            <%= link_to 'Profile', account_path, class: 'nav-link' %>
-          <% end unless can?(:read, Person) %>
+          <%= menu_to 'Church',     root_path,             menu: :church     if can? :read, current_church %>
+          <%= menu_to 'People',     people_path,           menu: [:people, :teams, :families, :children] if can? :read, Person %>
+          <%= menu_to 'Properties', properties_path,       menu: :properties if can? :read, Property %>
+          <%= menu_to 'Events',     events_path,           menu: :events     if can? :read, Event %>
+          <%= menu_to 'Processes',  church_processes_path, menu: :processes  if can? :read, ChurchProcess %>
 
-          <%= content_tag :div, class: "nav-item #{'active' if content_for(:menu) == 'people'}" do %>
-            <%= link_to 'People', people_path, class: 'nav-link' %>
-          <% end if can?(:read, Person) %>
+          <div class="hidden-md-up">
+            <%= menu_to 'Profile',  account_path %>
+            <%= menu_to 'Log out',  destroy_user_session_path %>
+          </div>
 
-          <%= content_tag :div, class: "nav-item #{'active' if content_for(:menu) == 'families'}" do %>
-            <%= link_to 'Families', families_path, class: 'nav-link' %>
-          <% end if can?(:read, Family) %>
+          <div class="float-md-right hidden-sm-down">
+            <%= content_tag :div, class: "nav-item dropdown #{'active' if active_menu?(:account)}" do %>
+              <%= link_to(account_path, class: 'nav-link', data: { toggle: 'dropdown' }) do %>
+                <%= icon_for(:user, class: 'hidden-sm-down') %>
+                <span class="hidden-md-up">Account</span>
+              <% end %>
 
-          <%= content_tag :div, class: "nav-item #{'active' if content_for(:menu) == 'properties'}" do %>
-            <%= link_to 'Properties', properties_path, class: 'nav-link' %>
-          <% end if can?(:read, Property) %>
+              <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-header">
+                  <%= current_user.person || current_user %>
+                </div>
+                <%= link_to 'Profile', account_path, class: 'dropdown-item' %>
+                <%= link_to 'Log out', destroy_user_session_path, class: 'dropdown-item' %>
+              </div>
 
-          <%= content_tag :div, class: "nav-item #{'active' if content_for(:menu) == 'teams'}" do %>
-            <%= link_to 'Teams', teams_path, class: 'nav-link' %>
-          <% end if can?(:read, Team) %>
-
-          <%= content_tag :div, class: "nav-item #{'active' if content_for(:menu) == 'children'}" do %>
-            <%= link_to 'Children', child_groups_path, class: 'nav-link' %>
-          <% end if can?(:read, ChildGroup) %>
-
-          <%= content_tag :div, class: "nav-item #{'active' if content_for(:menu) == 'events'}" do %>
-            <%= link_to 'Events', events_path, class: 'nav-link' %>
-          <% end if can?(:read, Event) %>
-
-          <%= content_tag :div, class: "nav-item #{'active' if content_for(:menu) == 'processes'}" do %>
-            <%= link_to 'Processes', church_processes_path, class: 'nav-link' %>
-          <% end if can?(:read, ChurchProcess) %>
-
-          <div class="nav-material-tabs-divider"></div>
-
-          <%= content_tag :div, class: "nav-item hidden-md-up #{'active' if content_for(:menu) == 'account'}" do %>
-            <%= link_to 'Profile', account_path, class: 'nav-link' %>
-          <% end %>
-
-          <%= content_tag :div, class: "nav-item hidden-md-up" do %>
-            <%= link_to 'Log out', destroy_user_session_path, class: 'nav-link' %>
-          <% end %>
-
-          <% if can?(:read, Person) %>
-            <%= content_tag :div, class: "nav-item nav-item-search hidden-sm-down" do %>
-              <%= link_to icon_for(:search), people_path, class: 'nav-link', data: { toggle: "modal", target: "#search-modal" } %>
             <% end %>
-          <% end %>
+
+            <%= menu_to icon_for(:search), people_path,
+                        data: { toggle: "modal", target: "#search-modal" },
+                        class: "nav-item-search hidden-sm-down" if can?(:read, Person) %>
+          </div>
         </div>
       </div>
+
+      <% if active_menu? [:people, :teams, :families, :children] %>
+        <div class="bg-light">
+          <div class="container">
+            <%= menu_to 'People',   people_path,       menu: :people   if can? :read, Person %>
+            <%= menu_to 'Teams',    teams_path,        menu: :teams    if can? :read, Team %>
+            <%= menu_to 'Families', families_path,     menu: :families if can? :read, Team %>
+            <%= menu_to 'Children', child_groups_path, menu: :children if can? :read, Children %>
+          </div>
+        </div>
+      <% end %>
+
     </div>
   <% end %>
 </div>

@@ -4,13 +4,16 @@ $font-size-h4:          1rem !default;
 
 
 // COLOURS
-$brand-info-light: #83d8f8;
+$brand-info-lighter: #c4eaf8 !default;
+$brand-info-light: #83d8f8 !default;
+$brand-info-dark: #3d96b1 !default;
 $brand-primary-light: #8edd9a !default;
 $brand-primary: #42a85f !default;
-$brand-danger-light: #ea695c;
-$brand-success-light: #65d268;
+$brand-primary-dark: #298d46 !default;
+$brand-danger-light: #ea695c !default;
 $brand-success: #ebd359;
 $darken: rgba(0,0,0,0.1);
+$lighten: rgba(255,255,255,0.2);
 
 
 // SPACING HELPERS
@@ -60,7 +63,6 @@ $side-menu-max-height-sm: 669px;
 
 
 // NAVBAR
-$navbar-padding-y:            $spacer-y !default;
 $navbar-padding-x:            0 !default;
 $navbar-light-active-color:   $brand-primary !default;
 $navbar-dark-color:           rgba(255,255,255,.7) !default;
@@ -82,6 +84,10 @@ $input-padding-x:             1rem !default;
 
 // ALERTS
 $alert-border-width:          0 !default;
+
+
+// TABS
+$material-tabs-height:         44px !default;
 
 
 @import 'bootstrap/variables';
