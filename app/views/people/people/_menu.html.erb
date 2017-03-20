@@ -22,7 +22,9 @@
              active: local_assigns[:active],
              items: [{ title: 'People', icon: :search, href: :people },
                      '-',
-                     { title: 'New person', icon: :new, href: new_person_path },
-                     { title: 'Import', icon: :table, href: new_import_path }
+                     { title: 'New person', icon: :new,    href: new_person_path },
+                     { title: 'Import',     icon: :upload, href: new_import_path },
+                     { title: 'Export XLS', icon: :excel,  href: people_path(format: :xls) },
+                     { title: 'Export CSV', icon: :table,  href: people_path(format: :csv) },
 ] { yield } %>
 <% end %>

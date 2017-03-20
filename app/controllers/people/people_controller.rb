@@ -4,7 +4,15 @@ class People::PeopleController < ApplicationController
   def index
     @people = @people.where("search_name LIKE ?", "%#{params[:q].downcase}%") if params[:q].present?
     @people = @people.where.not(id: params[:not]) if params[:not].present?
-    @people = @people.includes(:teams).order(:search_name).page(params[:page]).per(PAGE_SIZE)
+    @people = @people.includes(:teams).order(:search_name)
+
+    respond_to do |format|
+      format.html {
+        @people = @people.page(params[:page]).per(PAGE_SIZE)
+      }
+      format.csv
+      format.xls
+    end
   end
 
   def create

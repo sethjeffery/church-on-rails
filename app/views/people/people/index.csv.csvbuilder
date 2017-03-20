@@ -1,0 +1,11 @@
+csv << ['ID', 'First Name', 'Last Name', 'Email', 'Phone']
+
+@people.each do |person|
+  csv << [
+    person.id,
+    person.first_name,
+    person.last_name,
+    person.email,
+    person.phone
+  ]
+end

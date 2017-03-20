@@ -41,6 +41,7 @@ module IconsHelper
       when :new then 'plus'
       when :index then 'search'
       when :destroy then 'times'
+      when :excel then 'file-excel-o'
 
       # treat anything left as a FontAwesome icon name
       else resource.dasherize
