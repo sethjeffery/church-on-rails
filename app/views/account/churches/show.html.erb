@@ -10,15 +10,15 @@
 
           <% if current_church.lat && current_church.lng %>
             <% if Setting.present?(:gmaps_api_key) %>
-              <div class="list-group-item text-light">
-                Google Maps API not set up.
-              </div>
-            <% else %>
               <%= map_for current_church,
                           height: '400px',
                           icon: { url: image_url('map-church.png'), scaledSize: { width: 20, height: 30 } },
                           items: Family.all
               %>
+            <% else %>
+              <div class="list-group-item text-light">
+                Google Maps API not set up.
+              </div>
             <% end %>
           <% end %>
         </div>
