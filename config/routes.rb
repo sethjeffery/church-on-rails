@@ -89,6 +89,7 @@ Rails.application.routes.draw do
       end
       resource :person
       resource :church
+      resource :settings
     end
 
     scope module: 'comments' do

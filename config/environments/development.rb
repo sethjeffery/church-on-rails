@@ -55,3 +55,4 @@ Rails.application.configure do
 end
 
 ENV["DB_ADAPTER"] ||= 'sqlite3'
+ENV["CAN_SIGN_UP"] ||= '1'

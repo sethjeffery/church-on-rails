@@ -57,8 +57,8 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "churchonrails_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
-  warn "HOST_NAME is not set, it should be like https://www.yourwebsite.com" unless Setting.fetch("HOST_NAME").present?
-  config.action_mailer.default_url_options = { host: Setting.fetch("HOST_NAME") }
+  warn "HOST_NAME is not set, it should be like https://www.yourwebsite.com" unless Setting.present?(:host_name)
+  config.action_mailer.default_url_options = { host: Setting.fetch(:host_name) }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -78,7 +78,7 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if Setting.fetch("RAILS_LOG_TO_STDOUT").present?
+  if Setting.present?("RAILS_LOG_TO_STDOUT")
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)
@@ -87,3 +87,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
+
+# We need to let at least one person sign up
+ENV["CAN_SIGN_UP"] ||= '1'

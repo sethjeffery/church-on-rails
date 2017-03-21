@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170321155117) do
+ActiveRecord::Schema.define(version: 20170321173435) do
 
   create_table "actions", force: :cascade do |t|
     t.string   "action_type"
@@ -76,15 +76,14 @@ ActiveRecord::Schema.define(version: 20170321155117) do
     t.string   "charity_number"
     t.string   "phone"
     t.string   "email"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.float    "latitude"
     t.float    "longitude"
     t.string   "cover_file_name"
     t.string   "cover_content_type"
     t.integer  "cover_file_size"
     t.datetime "cover_updated_at"
-    t.boolean  "can_sign_up",        default: true
   end
 
   create_table "comments", force: :cascade do |t|

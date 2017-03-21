@@ -39,7 +39,7 @@
       <div class="bg-primary">
         <div class="container">
 
-          <%= menu_to 'Church',     root_path,             menu: :church     if can? :read, current_church %>
+          <%= menu_to 'Church',     root_path,             menu: [:church, :edit_church, :settings]      if can? :read, current_church %>
           <%= menu_to 'People',     people_path,           menu: [:people, :teams, :families, :children] if can? :read, Person %>
           <%= menu_to 'Properties', properties_path,       menu: :properties if can? :read, Property %>
           <%= menu_to 'Events',     events_path,           menu: :events     if can? :read, Event %>
@@ -83,6 +83,18 @@
             <%= menu_to 'Children', child_groups_path, menu: :children if can? :read, Children %>
           </div>
         </div>
+      <% end %>
+
+      <% if active_menu? [:church, :edit_church, :settings] %>
+        <% if can?(:update, current_church) || can?(:update, Setting) %>
+          <div class="bg-light">
+            <div class="container">
+              <%= menu_to 'Church',           root_path,                 menu: :church %>
+              <%= menu_to 'Church settings',  edit_account_church_path,  menu: :edit_church   if can? :update, current_church %>
+              <%= menu_to 'Site settings',    account_settings_path,     menu: :settings      if can? :update, Setting %>
+            </div>
+          </div>
+        <% end %>
       <% end %>
 
     </div>

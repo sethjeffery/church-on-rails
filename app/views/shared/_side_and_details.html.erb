@@ -18,23 +18,25 @@
       <%= yield %>
     </div>
 
-    <div class="side-and-details--side">
-      <ul class="nav nav-stacked">
-        <% items.compact.each do |item| %>
-          <% if item.blank? || item == '-' %>
-            <li class="nav-divider"></li>
-          <% else %>
-            <li class="nav-item">
-              <%= link_to item[:href], class: "nav-link #{'active' if item[:active] || local_assigns[:active] == item[:icon]}" do %>
-                <div class="fa-container">
-                  <%= icon_for item[:icon] %>
-                  <%= item[:title] %>
-                </div>
-              <% end %>
-            </li>
+    <% if local_assigns[:items] %>
+      <div class="side-and-details--side">
+        <ul class="nav nav-stacked">
+          <% items.compact.each do |item| %>
+            <% if item.blank? || item == '-' %>
+              <li class="nav-divider"></li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to item[:href], class: "nav-link #{'active' if item[:active] || local_assigns[:active] == item[:icon]}" do %>
+                  <div class="fa-container">
+                    <%= icon_for item[:icon] %>
+                    <%= item[:title] %>
+                  </div>
+                <% end %>
+              </li>
+            <% end %>
           <% end %>
-        <% end %>
-      </ul>
-    </div>
+        </ul>
+      </div>
+    <% end %>
   </div>
 </div>

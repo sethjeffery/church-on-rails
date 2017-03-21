@@ -9,18 +9,24 @@
           <%= render 'shared/list_group_header', title: 'Map' %>
 
           <% if current_church.lat && current_church.lng %>
-            <%= map_for current_church,
-                        height: '400px',
-                        icon: { url: image_url('map-church.png'), scaledSize: { width: 20, height: 30 } },
-                        items: Family.all
-            %>
+            <% if Setting.present?(:gmaps_api_key) %>
+              <div class="list-group-item text-light">
+                Google Maps API not set up.
+              </div>
+            <% else %>
+              <%= map_for current_church,
+                          height: '400px',
+                          icon: { url: image_url('map-church.png'), scaledSize: { width: 20, height: 30 } },
+                          items: Family.all
+              %>
+            <% end %>
           <% end %>
         </div>
       </div>
 
       <div class="col-md-6 col-lg-4">
         <div class="list-group mb-2">
-          <%= render 'shared/list_group_header', title: 'Address', button: { href: edit_account_church_path, icon: 'pencil', title: 'Edit', can: [:update, current_church] } %>
+          <%= render 'shared/list_group_header', title: 'Address' %>
 
           <%= icon_container 'map-marker', class: "list-group-item size-xs-small size-sm-normal" do %>
             <div class="font-weight-bold"><%= current_church.name %></div>

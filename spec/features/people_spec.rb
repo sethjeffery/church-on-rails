@@ -222,9 +222,13 @@ RSpec.describe "People" do
         click_on 'Add account'
 
         visit '/users/logout'
-        fill_in 'Email', with: 'new_account@example.com'
-        fill_in 'Password', with: 'pass123'
-        click_on 'Log in'
+
+        within '.container-login' do
+          fill_in 'Email', with: 'new_account@example.com'
+          fill_in 'Password', with: 'pass123'
+          click_on 'Log in'
+        end
+
         expect(page).to have_content 'Signed in successfully'
       end
     end

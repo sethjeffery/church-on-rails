@@ -250,7 +250,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
-  if Setting.fetch("FACEBOOK_APP_ID") && Setting.fetch("FACEBOOK_APP_SECRET")
+  if Setting.present?("FACEBOOK_APP_ID") && Setting.present?("FACEBOOK_APP_SECRET")
     config.omniauth :facebook,
                     Setting.fetch("FACEBOOK_APP_ID"),
                     Setting.fetch("FACEBOOK_APP_SECRET"),

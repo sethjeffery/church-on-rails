@@ -55,8 +55,9 @@ en:
         format_text: Text
         format_list: List
     help:
-      church:
+      settings_list:
         can_sign_up: Switch off if you don't want a sign up screen where people can join the site without invitation.
+        gmaps_api_key: Providing a Google Maps API key will let the site render maps for addresses.
       property:
         format_flag: A simple property that is either present on a database field or not.
         format_text: A property that allows you to assign a text value to it. e.g. a reference number.

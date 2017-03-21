@@ -1,5 +1,5 @@
 class Account::RegistrationsController < Devise::RegistrationsController
-  before_filter :authorize_church
+  before_action :authorize_church
 
   def new
     @user = User.new(email: params[:email])
@@ -8,7 +8,7 @@ class Account::RegistrationsController < Devise::RegistrationsController
   protected
 
   def authorize_church
-    redirect_to new_session_path(resource_name) unless current_church.can_sign_up?
+    redirect_to new_session_path(resource_name) unless Setting.truthy?(:can_sign_up)
   end
 
   def after_sign_up_path_for(resource)

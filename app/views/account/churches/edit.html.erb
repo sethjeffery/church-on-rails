@@ -1,6 +1,6 @@
 <%= render 'title' %>
 
-<%= render 'menu', active: :edit do %>
+<%= render 'menu', menu: :edit_church do %>
   <%= form_for(current_church, url: account_church_path) do |f| %>
 
     <div class="list-group mb-2">
@@ -31,15 +31,6 @@
     <div class="list-group mb-2">
       <%= render 'shared/list_group_header', title: 'Registration' %>
       <%= render 'shared/list_group_item_field', f: f, field: :charity_number %>
-    </div>
-
-    <div class="list-group mb-2">
-      <%= render 'shared/list_group_header', title: 'Settings' %>
-      <div class="list-group-item">
-        <div class="mt-sm">
-          <%= render 'shared/form_switch', f: f, field: :can_sign_up, help: true %>
-        </div>
-      </div>
     </div>
 
     <%= render 'shared/form_submit', icon: :home %>

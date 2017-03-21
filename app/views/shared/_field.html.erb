@@ -28,3 +28,7 @@
     <% end %>
   </div>
 </div>
+
+<% if local_assigns[:help] %>
+  <div class="text-light size-xs-tiny mt-sm"><%= help.is_a?(String) ? help : field_help(f.object, field) %></div>
+<% end %>

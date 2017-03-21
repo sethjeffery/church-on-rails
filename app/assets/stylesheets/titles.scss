@@ -20,6 +20,9 @@
     }
   }
 
+  &.bg-warning, &.bg-info, &.bg-success, &.bg-danger, &.bg-primary {
+    color: white;
+  }
 }
 
 .title-overlay {
@@ -38,21 +41,6 @@
   @extend .title-overlay;
   content: '';
   z-index: -3;
-}
-
-.title-container-info {
-  background-color: $brand-info-light;
-  color: white;
-}
-
-.title-container-danger {
-  background-color: $brand-danger;
-  color: white;
-}
-
-.title-container-success {
-  background-color: $brand-success;
-  color: white;
 }
 
 .title-background-image {

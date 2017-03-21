@@ -59,9 +59,12 @@ RSpec.describe "Account" do
 
       visit '/users/logout'
 
-      fill_in 'Email', with: user.email
-      fill_in 'Password', with: 'newpass123'
-      click_on 'Log in'
+      within '.container-login' do
+        fill_in 'Email', with: user.email
+        fill_in 'Password', with: 'newpass123'
+        click_on 'Log in'
+      end
+
       expect(page).to have_content 'Signed in successfully'
     end
   end

@@ -26,9 +26,9 @@ class User < ApplicationRecord
     end
   end
 
-  def self.from_omniauth(auth, current_church)
+  def self.from_omniauth(auth)
     user   = find_by(provider: auth.provider, uid: auth.uid) || find_by(email: auth.info.email)
-    return nil unless user || current_church.can_sign_up?
+    return nil unless user || Setting.truthy?(:can_sign_up)
 
     user ||= create do |new_user|
       new_user.provider = auth.provider

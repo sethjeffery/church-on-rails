@@ -7,13 +7,25 @@ class Setting < ApplicationRecord
 
   # Stores a setting in the database.
   def self.store(key, value)
-    store_to_cache(key, value)
-    store_to_database(key, value)
+    unless Rails.cache.read("Setting.#{safe_key(key)}") == value
+      store_to_cache(key, value)
+      store_to_database(key, value)
+    end
   end
 
   # Reads a setting from the database, or from ENV.
   def self.fetch(key)
-    _fetch(key).tap{|value| write_cache(key, value)}
+    _fetch(key).tap{|value| store_to_cache(key, value)}
+  end
+
+  # Checks if the setting is truthy (on, true, yes, etc).
+  def self.truthy?(key)
+    fetch(key).to_s.downcase.in? %w(true 1 yes)
+  end
+
+  # Checks if the setting is not blank.
+  def self.present?(key)
+    fetch(key).present?
   end
 
   private
