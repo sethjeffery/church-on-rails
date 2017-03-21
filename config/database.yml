@@ -2,7 +2,8 @@
 #
 # The database for running tests is always sqlite3.
 # But for development and production it can be easily customised
-# to your system by setting environment variables on the server.
+# to your system by setting environment variables on the server,
+# or in a config.application.yml file.
 #
 #   DB_ADAPTER:   sqlite3 | mysql2 | postgresql
 #   DB_NAME:      your database name

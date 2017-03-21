@@ -250,12 +250,12 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
-  if ENV["FACEBOOK_APP_ID"] && ENV["FACEBOOK_APP_SECRET"]
+  if Setting.fetch("FACEBOOK_APP_ID") && Setting.fetch("FACEBOOK_APP_SECRET")
     config.omniauth :facebook,
-                    ENV["FACEBOOK_APP_ID"],
-                    ENV["FACEBOOK_APP_SECRET"],
+                    Setting.fetch("FACEBOOK_APP_ID"),
+                    Setting.fetch("FACEBOOK_APP_SECRET"),
                     scope: 'public_profile,email',
-                    callback_url: "#{ENV["HOST_NAME"]}/users/auth/facebook/callback"
+                    callback_url: "#{Setting.fetch("HOST_NAME")}/users/auth/facebook/callback"
   end
 
   # ==> Warden configuration
