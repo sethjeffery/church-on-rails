@@ -18,6 +18,16 @@ Rails.application.routes.draw do
   authenticate do
     resource :search
 
+    namespace :calendar do
+      # Oauth 2.0
+      get 'redirect', to: 'calendars#redirect', as: 'redirect'
+      get 'callback', to: 'calendars#callback', as: 'callback'
+    end
+
+    scope module: 'calendar' do
+      resource :calendar
+    end
+
     scope module: 'families' do
       resources :families, concerns: :paginatable do
         get :confirm_destroy, on: :member

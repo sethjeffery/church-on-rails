@@ -1,0 +1,86 @@
+@import 'variables';
+@import 'bootstrap/mixins';
+
+.calendar-day {
+  opacity: 0.5;
+  font-size: 12px;
+}
+
+.calendar-event {
+  font-size: 11px;
+  margin: 2px 0;
+  line-height: 14px;
+  padding-left: 12px;
+
+  &::before {
+    content: '';
+    float: left;
+    width: 8px;
+    height: 8px;
+    background-color: $brand-info;
+    margin: 3px -8px 0 -12px;
+    vertical-align: top;
+  }
+
+  time {
+
+  }
+}
+
+.calendar-legend {
+  @extend .calendar-event;
+  font-size: 12px;
+  margin: 4px 0;
+
+  &::before {
+    margin-right: 4px;
+  }
+}
+
+.calendar-event-1 {
+  &::before { background-color: $brand-success; }
+}
+
+.calendar-event-2 {
+  &::before { background-color: $brand-primary; }
+}
+
+.calendar-event-3 {
+  &::before { background-color: $brand-warning; }
+}
+
+.calendar-event-4 {
+  &::before { background-color: $brand-danger; }
+}
+
+.simple-calendar {
+  .prev-month, .next-month {
+    background-color: initial;
+    .calendar-day {
+      opacity: 0.2;
+    }
+  }
+
+  th {
+    @include media-breakpoint-down(sm) {
+      font-size: 11px;
+      padding: 4px;
+    }
+  }
+
+  .calendar-event {
+    @include media-breakpoint-down(xs) {
+      font-size: 0;
+      color: transparent;
+      line-height: 0;
+      padding-left: 0;
+
+      &::before {
+        float: none;
+        width: auto;
+        display: block;
+        margin: 2px 0;
+      }
+    }
+  }
+}

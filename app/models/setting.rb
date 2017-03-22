@@ -14,8 +14,8 @@ class Setting < ApplicationRecord
   end
 
   # Reads a setting from the database, or from ENV.
-  def self.fetch(key)
-    _fetch(key).tap{|value| store_to_cache(key, value)}
+  def self.fetch(key, default=nil)
+    _fetch(key, default).tap{|value| store_to_cache(key, value)}
   end
 
   # Checks if the setting is truthy (on, true, yes, etc).
@@ -43,13 +43,13 @@ class Setting < ApplicationRecord
     find_or_initialize_by(key: safe_key(key)).update(value: value)
   end
 
-  def self._fetch(key)
+  def self._fetch(key, default=nil)
     key = safe_key(key)
     if Rails.cache.exist?("Setting.#{key}")
       Rails.cache.read("Setting.#{key}")
     else
       record = where(key: key).first
-      record.nil? ? ENV[key] : record.value
+      record ? record.value : ENV.fetch(key, default)
     end
   end
 end

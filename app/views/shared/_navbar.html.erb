@@ -44,6 +44,7 @@
           <%= menu_to 'Properties', properties_path,       menu: :properties if can? :read, Property %>
           <%= menu_to 'Events',     events_path,           menu: :events     if can? :read, Event %>
           <%= menu_to 'Processes',  church_processes_path, menu: :processes  if can? :read, ChurchProcess %>
+          <%= menu_to 'Calendar',   calendar_path,         menu: :calendar   if can? :read, Calendar %>
 
           <div class="hidden-md-up">
             <%= menu_to 'Profile',  account_path %>

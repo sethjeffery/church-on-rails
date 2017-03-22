@@ -9,6 +9,12 @@
     </div>
 
     <div class="list-group mb-2">
+      <%= render 'shared/list_group_header', title: 'Calendar' %>
+      <%= render 'shared/list_group_item_field', f: f, field: :google_client_id %>
+      <%= render 'shared/list_group_item_field', f: f, field: :google_client_secret %>
+    </div>
+
+    <div class="list-group mb-2">
       <%= render 'shared/list_group_header', title: 'Accounts' %>
       <div class="list-group-item">
         <div class="mt-sm">

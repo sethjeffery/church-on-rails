@@ -82,5 +82,7 @@ class Ability
       can :destroy, klass if team.children_editor?
       can :manage,  klass if team.children_admin?
     end
+
+    can :read, Calendar if Setting.present?(:google_refresh_token)
   end
 end

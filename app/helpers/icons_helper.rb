@@ -42,6 +42,8 @@ module IconsHelper
       when :index then 'search'
       when :destroy then 'times'
       when :excel then 'file-excel-o'
+      when :previou then 'chevron-left' # 'previous'.singularize == 'previou' ?!
+      when :next then 'chevron-right'
 
       # treat anything left as a FontAwesome icon name
       else resource.dasherize

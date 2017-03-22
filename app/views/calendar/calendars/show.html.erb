@@ -1,0 +1,21 @@
+<% content_for :menu, :calendar %>
+
+<div class="container mt-2">
+  <%= month_calendar(events: @events) do |date, events| %>
+    <div class="calendar-day"><%= date.strftime('%-d') %></div>
+    <% events.each do |event| %>
+      <div class="calendar-event calendar-event-<%= event.calendar_index.to_i % 5 %>">
+        <% unless event.all_day? %>
+          <time><%= event.simple_time %></time>
+        <% end %>
+        <%= event.summary %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div class="mt-1">
+    <% @calendars.items.each_with_index do |calendar, index| %>
+      <div class="calendar-legend calendar-event-<%= index % 5 %>"><%= calendar.summary %></div>
+    <% end %>
+  </div>
+</div>

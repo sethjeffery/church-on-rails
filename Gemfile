@@ -54,6 +54,11 @@ gem 'nokogiri'
 gem "non-stupid-digest-assets"
 gem 'handlebars_assets'
 gem 'js-routes'
+gem 'timecop'
+
+# google calendars
+gem 'google-api-client', require: 'google/apis/calendar_v3'
+gem 'simple_calendar'
 
 # google maps
 gem 'gmaps-rails'
