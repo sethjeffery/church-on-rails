@@ -14,7 +14,7 @@
   <% end %>
 
   <div class="mt-1">
-    <% @calendars.items.each_with_index do |calendar, index| %>
+    <% @calendars.each_with_index do |calendar, index| %>
       <div class="calendar-legend calendar-event-<%= index % 5 %>"><%= calendar.summary %></div>
     <% end %>
   </div>

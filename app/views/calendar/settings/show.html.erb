@@ -1,0 +1,40 @@
+<h1 class="mt-2 text-xs-center">Calendar settings</h1>
+
+<%= render 'menu' do %>
+  <%= form_for(@settings, url: calendar_settings_path) do |f| %>
+
+    <% @settings.calendars.each do |calendar| %>
+      <div class="list-group mb-2">
+        <%= render 'shared/list_group_header' do %>
+          <%= icon_for :calendar, class: 'mr-xs' %>
+          <%= calendar.summary %>
+        <% end %>
+        <div class="list-group-item">
+          <%= f.fields_for calendar.id, calendar do |fields| %>
+            <div>
+              <%= render 'shared/form_radio', f: fields, field: :visibility, value: :none, name: 'Hide this calendar' %>
+            </div>
+            <div>
+              <%= render 'shared/form_radio', f: fields, field: :visibility, value: :all, name: 'Anyone can see this calendar' %>
+            </div>
+            <div>
+              <%= render 'shared/form_radio', f: fields, field: :visibility, value: :teams, name: 'Show this calendar to certain teams only' %>
+            </div>
+            <div class="teams-list">
+              <%= fields.select :team_ids, calendar.teams.map{|t| [t.name, t.id]},
+                                { include_blank: true },
+                                multiple: true,
+                                data: { selectpicker: true, placeholder: 'Select teams', width: '100%',
+                                        ajax: teams_path, template: :team,
+                                        data: Array.wrap(calendar.teams).map{ |t| { text: t.name, id: t.id, icon: t.icon, color: t.color}}
+                                } %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <%= render 'shared/form_submit', icon: :cogs %>
+
+  <% end %>
+<% end %>

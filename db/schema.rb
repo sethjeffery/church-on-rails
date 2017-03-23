@@ -26,6 +26,14 @@ ActiveRecord::Schema.define(version: 20170323123716) do
     t.index ["actor_id"], name: "index_actions_on_actor_id"
   end
 
+  create_table "calendar_teams", force: :cascade do |t|
+    t.integer  "team_id"
+    t.string   "calendar_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["team_id"], name: "index_calendar_teams_on_team_id"
+  end
+
   create_table "child_group_checkins", force: :cascade do |t|
     t.integer  "child_group_membership_id"
     t.datetime "checked_in_at"
@@ -229,15 +237,6 @@ ActiveRecord::Schema.define(version: 20170323123716) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["key"], name: "index_settings_on_key"
-  end
-
-  create_table "team_calendars", force: :cascade do |t|
-    t.integer  "team_id"
-    t.string   "calendar_id"
-    t.boolean  "write"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["team_id"], name: "index_team_calendars_on_team_id"
   end
 
   create_table "team_memberships", force: :cascade do |t|

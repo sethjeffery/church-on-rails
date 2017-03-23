@@ -54,7 +54,7 @@ gem 'nokogiri'
 gem "non-stupid-digest-assets"
 gem 'handlebars_assets'
 gem 'js-routes'
-gem 'timecop'
+gem 'request_store'
 
 # google calendars
 gem 'google-api-client', require: 'google/apis/calendar_v3'
@@ -85,6 +85,7 @@ group :development, :test do
   gem 'faker'
   gem 'webmock'
   gem 'poltergeist'
+  gem 'timecop'
 end
 
 group :development do

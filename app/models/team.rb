@@ -8,6 +8,7 @@ class Team < ApplicationRecord
   has_many :events,           dependent: :destroy
   has_many :team_memberships, dependent: :destroy
   has_many :people,           through: :team_memberships, inverse_of: :teams
+  has_many :calendar_teams,   dependent: :destroy
 
   scope :admins, -> { where(admin: true) }
 

@@ -4,7 +4,7 @@ class Account::ChurchesController < ApplicationController
 
   def update
     if @church.update_attributes(church_params)
-      redirect_to account_church_path
+      redirect_to root_path
     else
       render :edit
     end

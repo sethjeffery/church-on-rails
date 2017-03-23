@@ -22,6 +22,8 @@ Rails.application.routes.draw do
       # Oauth 2.0
       get 'redirect', to: 'calendars#redirect', as: 'redirect'
       get 'callback', to: 'calendars#callback', as: 'callback'
+
+      resource :settings
     end
 
     scope module: 'calendar' do

@@ -320,6 +320,7 @@ GEM
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
       uber (< 0.2.0)
+    request_store (1.3.2)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
     retriable (3.0.1)
@@ -469,6 +470,7 @@ DEPENDENCIES
   rails (~> 5.0.0, >= 5.0.0.1)
   rails-assets-tether (>= 1.1.0)!
   redcarpet
+  request_store
   rspec-rails
   sass-rails (~> 5.0)
   schedulable!

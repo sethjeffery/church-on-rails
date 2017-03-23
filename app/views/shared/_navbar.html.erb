@@ -39,12 +39,12 @@
       <div class="bg-primary">
         <div class="container">
 
-          <%= menu_to 'Church',     root_path,             menu: [:church, :edit_church, :settings]      if can? :read, current_church %>
-          <%= menu_to 'People',     people_path,           menu: [:people, :teams, :families, :children] if can? :read, Person %>
-          <%= menu_to 'Properties', properties_path,       menu: :properties if can? :read, Property %>
-          <%= menu_to 'Events',     events_path,           menu: :events     if can? :read, Event %>
-          <%= menu_to 'Processes',  church_processes_path, menu: :processes  if can? :read, ChurchProcess %>
-          <%= menu_to 'Calendar',   calendar_path,         menu: :calendar   if can? :read, Calendar %>
+          <%= menu_to 'Church',     root_path,             icon: :home,     menu: [:church, :edit_church, :settings]      if can? :read, current_church %>
+          <%= menu_to 'People',     people_path,           icon: :person,   menu: [:people, :teams, :families, :children] if can? :read, Person %>
+          <%= menu_to 'Properties', properties_path,       icon: :property, menu: :properties if can? :read, Property %>
+          <%= menu_to 'Events',     events_path,           icon: :event,    menu: :events     if can? :read, Event %>
+          <%= menu_to 'Processes',  church_processes_path, icon: :process,  menu: :processes  if can? :read, ChurchProcess %>
+          <%= menu_to 'Calendar',   calendar_path,         icon: :calendar, menu: [:calendar, :calendar_settings]         if can? :read, Calendar %>
 
           <div class="hidden-md-up">
             <%= menu_to 'Profile',  account_path %>
@@ -96,6 +96,15 @@
             </div>
           </div>
         <% end %>
+      <% end %>
+
+      <% if active_menu?([:calendar, :calendar_settings]) && can?(:update, Calendar) %>
+        <div class="bg-light">
+          <div class="container">
+            <%= menu_to 'Calendar',          calendar_path,          menu: :calendar %>
+            <%= menu_to 'Calendar settings', calendar_settings_path, menu: :calendar_settings %>
+          </div>
+        </div>
       <% end %>
 
     </div>

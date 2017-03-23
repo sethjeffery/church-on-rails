@@ -1,6 +1,6 @@
 <h1 class="mt-2 text-xs-center">Site settings</h1>
 
-<%= render 'menu', menu: :settings do %>
+<%= render 'menu' do %>
   <%= form_for(@settings, url: account_settings_path) do |f| %>
 
     <div class="list-group mb-2">

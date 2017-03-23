@@ -1,7 +1,7 @@
 class ChurchProcess < ApplicationRecord
   include Concerns::Commentable
 
-  ICONS = %w(arrow-right star link pencil music smile-o frown-o heart thumbs-up wheelchair home phone user-plus male female child)
+  ICONS = %w(ellipsis-h star link pencil music smile-o frown-o heart thumbs-up wheelchair home phone user-plus male female child)
   COLORS = %w(65d268)
 
   has_many :person_processes, dependent: :destroy
