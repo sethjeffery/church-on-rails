@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  before_action :set_time_zone, if: -> { signed_in? }
   include UsersHelper
 
   PAGE_SIZE = 20
@@ -19,9 +18,5 @@ class ApplicationController < ActionController::Base
 
   def track(type, args={})
     Action.create!({ action_type: type }.merge(args))
-  end
-
-  def set_time_zone
-    Time.zone = current_user.try(:time_zone) || 'GMT'
   end
 end
