@@ -40,11 +40,9 @@
         <div class="container">
 
           <%= menu_to 'Church',     root_path,             icon: :home,     menu: [:church, :edit_church, :settings]      if can? :read, current_church %>
-          <%= menu_to 'People',     people_path,           icon: :person,   menu: [:people, :teams, :families, :children] if can? :read, Person %>
-          <%= menu_to 'Properties', properties_path,       icon: :property, menu: :properties if can? :read, Property %>
-          <%= menu_to 'Events',     events_path,           icon: :event,    menu: :events     if can? :read, Event %>
+          <%= menu_to 'People',     people_path,           icon: :person,   menu: [:people, :teams, :families, :children, :properties] if can? :read, Person %>
           <%= menu_to 'Processes',  church_processes_path, icon: :process,  menu: :processes  if can? :read, ChurchProcess %>
-          <%= menu_to 'Calendar',   calendar_path,         icon: :calendar, menu: [:calendar, :calendar_settings]         if can? :read, Calendar %>
+          <%= menu_to 'Calendar',   calendar_path,         icon: :calendar, menu: [:calendar, :events, :calendar_settings] if can? :read, Calendar %>
 
           <div class="hidden-md-up">
             <%= menu_to 'Profile',  account_path %>
@@ -75,13 +73,14 @@
         </div>
       </div>
 
-      <% if active_menu? [:people, :teams, :families, :children] %>
+      <% if active_menu? [:people, :teams, :families, :children, :properties] %>
         <div class="bg-light">
           <div class="container">
-            <%= menu_to 'People',   people_path,       menu: :people   if can? :read, Person %>
-            <%= menu_to 'Teams',    teams_path,        menu: :teams    if can? :read, Team %>
-            <%= menu_to 'Families', families_path,     menu: :families if can? :read, Team %>
-            <%= menu_to 'Children', child_groups_path, menu: :children if can? :read, Children %>
+            <%= menu_to 'People',     people_path,       menu: :people     if can? :read, Person %>
+            <%= menu_to 'Teams',      teams_path,        menu: :teams      if can? :read, Team %>
+            <%= menu_to 'Families',   families_path,     menu: :families   if can? :read, Team %>
+            <%= menu_to 'Children',   child_groups_path, menu: :children   if can? :read, Children %>
+            <%= menu_to 'Properties', properties_path,   menu: :properties if can? :read, Property %>
           </div>
         </div>
       <% end %>
@@ -98,11 +97,12 @@
         <% end %>
       <% end %>
 
-      <% if active_menu?([:calendar, :calendar_settings]) && can?(:update, Calendar) %>
+      <% if active_menu?([:calendar, :events, :calendar_settings]) && (can?(:read, Event) || can?(:update, Calendar)) %>
         <div class="bg-light">
           <div class="container">
-            <%= menu_to 'Calendar',          calendar_path,          menu: :calendar %>
-            <%= menu_to 'Calendar settings', calendar_settings_path, menu: :calendar_settings %>
+            <%= menu_to 'Calendar', calendar_path,          menu: :calendar %>
+            <%= menu_to 'Events',   events_path,            menu: :events if can? :read, Event %>
+            <%= menu_to 'Settings', calendar_settings_path, menu: :calendar_settings if can? :update, Event %>
           </div>
         </div>
       <% end %>
