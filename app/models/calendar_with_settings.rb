@@ -45,7 +45,7 @@ class CalendarWithSettings
         CalendarTeam.create(calendar_id: id, team_id: nil)
 
       when 'teams'
-        attrs[:team_ids].each{|team_id| CalendarTeam.create(calendar_id: self.id, team_id: team_id)}
+        attrs[:team_ids].select(&:present?).each{|team_id| CalendarTeam.create(calendar_id: self.id, team_id: team_id)}
 
       else
         nil # no op

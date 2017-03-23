@@ -20,4 +20,10 @@
       <% end %>
     </div>
   <% end %>
+
+  <% if @calendars.length == 0 && can?(:update, Calendar) %>
+    <%= icon_for :warning %>
+    You have not enabled any calendars.
+    <%= link_to 'Go to Calendar Settings.', calendar_settings_path %>
+  <% end %>
 </div>

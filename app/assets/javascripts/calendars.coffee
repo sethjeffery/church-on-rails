@@ -4,5 +4,5 @@ toggleTeams = ->
 
 $(document).on 'change', '.edit_calendar_settings input[name*=visibility]', toggleTeams
 
-$ ->
+$(document).on 'turbolinks:load', ->
   $('.edit_calendar_settings input[name*=visibility]').each(toggleTeams)
