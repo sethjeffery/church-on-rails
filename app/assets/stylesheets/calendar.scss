@@ -2,7 +2,7 @@
 @import 'bootstrap/mixins';
 
 .calendar-day {
-  opacity: 0.5;
+  opacity: 0.6;
   font-size: 12px;
 }
 
@@ -20,10 +20,6 @@
     background-color: $brand-info;
     margin: 3px -8px 0 -12px;
     vertical-align: top;
-  }
-
-  time {
-
   }
 }
 

@@ -4,14 +4,36 @@
   <%= form_for(@settings, url: account_settings_path) do |f| %>
 
     <div class="list-group mb-2">
-      <%= render 'shared/list_group_header', title: 'APIs' %>
-      <%= render 'shared/list_group_item_field', f: f, field: :gmaps_api_key, help: true %>
+      <%= render 'shared/list_group_header', title: 'Google API' %>
+      <%= render 'shared/list_group_item_field', f: f, field: :google_client_id, help: true %>
+      <%= render 'shared/list_group_item_field', f: f, field: :google_client_secret %>
+
+      <% if @settings.google_client_id.present? && @settings.google_client_secret.present? %>
+        <div class="list-group-item">
+          <div class="row py-sm">
+            <% if @settings.google_refresh_token.present? %>
+              <div class="col-sm-5">
+                Google is <strong>connected</strong>.
+              </div>
+              <div class="col-sm-7">
+                <%= link_to 'Reconnect', calendar_redirect_path, class: 'btn btn-info btn-align-middle' %>
+              </div>
+            <% else %>
+              <div class="col-sm-5">
+                Google is <strong>not connected</strong>.
+              </div>
+              <div class="col-sm-7">
+                <%= link_to 'Connect', calendar_redirect_path, class: 'btn btn-info btn-align-middle' %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
 
     <div class="list-group mb-2">
-      <%= render 'shared/list_group_header', title: 'Calendar' %>
-      <%= render 'shared/list_group_item_field', f: f, field: :google_client_id %>
-      <%= render 'shared/list_group_item_field', f: f, field: :google_client_secret %>
+      <%= render 'shared/list_group_header', title: 'Maps' %>
+      <%= render 'shared/list_group_item_field', f: f, field: :gmaps_api_key, help: true %>
     </div>
 
     <div class="list-group mb-2">

@@ -57,7 +57,7 @@ class Calendar::CalendarsController < ApplicationController
     client.fetch_access_token!
     Setting.store(:google_refresh_token, client.refresh_token) if client.refresh_token
 
-    redirect_to calendars_url
+    redirect_to account_settings_path
   end
 
   private
