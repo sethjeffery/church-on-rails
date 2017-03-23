@@ -13,9 +13,11 @@
     <% end %>
   <% end %>
 
-  <div class="mt-1">
-    <% @calendars.each_with_index do |calendar, index| %>
-      <div class="calendar-legend calendar-event-<%= index % 5 %>"><%= calendar.summary %></div>
-    <% end %>
-  </div>
+  <% if @calendars.length > 1 %>
+    <div class="mt-1">
+      <% @calendars.each_with_index do |calendar, index| %>
+        <div class="calendar-legend calendar-event-<%= index % 5 %>"><%= calendar.summary %></div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
