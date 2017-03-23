@@ -48,7 +48,7 @@ class Setting < ApplicationRecord
     if Rails.cache.exist?("Setting.#{key}")
       Rails.cache.read("Setting.#{key}")
     else
-      record = where(key: key).first
+      record = find_by(key: key) rescue nil
       record ? record.value : ENV.fetch(key, default)
     end
   end

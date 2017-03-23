@@ -61,18 +61,25 @@ namespace :db do
     # Prevent geocoding while creating fake addresses
     Geocoder.configure(:lookup => :test)
 
-    church = create_church
-    admin = create_person   user: create_user(email: 'test@example.com', password: 'test123'), email: 'test@example.com'
-    admins = create_team    name: 'Admins', icon: 'star', admin: true
-    admin.join admins
+    unless Church.first
+      create_church
+      admin = create_person   user: create_user(email: 'test@example.com', password: 'test123'), email: 'test@example.com'
+      admins = create_team    name: 'Admins', icon: 'star', admin: true
+      admin.join admins
+    end
 
-    child_groups = (1..20).to_a.map{ create_child_group }
-    processes    = (1..20).to_a.map{ create_process }
+    (1..20).to_a.map{ create_child_group } unless ChildGroup.first
+    child_groups = ChildGroup.all
 
-    Property.create! name: 'Disabled',          icon: 'wheelchair', description: 'This person is disabled.'
-    Property.create! name: 'Visually impaired', icon: 'low-vision', description: 'This person may need visual assistance.'
-    Property.create! name: 'Hearing impaired',  icon: 'deaf',       description: 'This person may need hearing assistance.'
-    Property.create! name: 'Medic',             icon: 'medkit',     description: 'This person is medically trained.'
+    (1..20).to_a.map{ create_process } unless ChurchProcess.first
+    processes = ChurchProcess.all
+
+    unless Property.count
+      Property.create! name: 'Disabled',          icon: 'wheelchair', description: 'This person is disabled.'
+      Property.create! name: 'Visually impaired', icon: 'low-vision', description: 'This person may need visual assistance.'
+      Property.create! name: 'Hearing impaired',  icon: 'deaf',       description: 'This person may need hearing assistance.'
+      Property.create! name: 'Medic',             icon: 'medkit',     description: 'This person is medically trained.'
+    end
     properties = Property.all
 
     people = (1..200).to_a.map{ create_person }

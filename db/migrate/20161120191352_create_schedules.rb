@@ -1,7 +1,7 @@
 class CreateSchedules < ActiveRecord::Migration
   def self.up
     create_table :schedules do |t|
-      t.references :schedulable, polymorphic: true
+      t.references :schedulable, polymorphic: true, index: true
       
       t.date :date
       t.time :time

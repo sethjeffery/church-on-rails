@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170321173435) do
+ActiveRecord::Schema.define(version: 20170323123716) do
 
   create_table "actions", force: :cascade do |t|
     t.string   "action_type"
@@ -161,6 +161,7 @@ ActiveRecord::Schema.define(version: 20170321173435) do
     t.string   "search_name"
     t.index ["first_name"], name: "index_people_on_first_name"
     t.index ["gender"], name: "index_people_on_gender"
+    t.index ["joined_at"], name: "index_people_on_joined_at"
     t.index ["last_name"], name: "index_people_on_last_name"
     t.index ["user_id"], name: "index_people_on_user_id"
   end
@@ -219,6 +220,7 @@ ActiveRecord::Schema.define(version: 20170321173435) do
     t.integer  "count"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["schedulable_type", "schedulable_id"], name: "index_schedules_on_schedulable_type_and_schedulable_id"
   end
 
   create_table "settings", force: :cascade do |t|
@@ -227,6 +229,15 @@ ActiveRecord::Schema.define(version: 20170321173435) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["key"], name: "index_settings_on_key"
+  end
+
+  create_table "team_calendars", force: :cascade do |t|
+    t.integer  "team_id"
+    t.string   "calendar_id"
+    t.boolean  "write"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["team_id"], name: "index_team_calendars_on_team_id"
   end
 
   create_table "team_memberships", force: :cascade do |t|

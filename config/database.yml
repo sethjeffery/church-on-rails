@@ -13,9 +13,9 @@
 default: &default
   pool: 5
   timeout: 5000
-  adapter: <%= ENV["DB_ADAPTER"] %>
+  adapter: <%= ENV["DB_ADAPTER"] || 'sqlite3' %>
 
-  <% if ENV["DB_ADAPTER"] == 'sqlite3' %>
+  <% if ENV["DB_ADAPTER"] || 'sqlite3' == 'sqlite3' %>
   database: db/<%= Rails.env %>.sqlite3
 
   <% elsif ENV["DB_ADAPTER"] == 'postgresql' %>
