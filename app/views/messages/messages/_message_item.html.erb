@@ -1,0 +1,13 @@
+<a class="list-group-item list-group-item-action" href="<%= message_path(message_item.message) %>">
+  <div class="clearfix">
+    <div class="float-xs-right text-light size-xs-tiny py-xs">
+      <%= timeago_tag message_item.created_at %>
+    </div>
+    <div>
+      <%= icon_container message_item.read? ? :'envelope-o' : 'envelope' do %>
+        <div class="text-ellipsis"><%= message_item.subject %></div>
+        <div class="size-xs-tiny text-light"><%= message_item.message.sender %></div>
+      <% end %>
+    </div>
+  </div>
+</a>

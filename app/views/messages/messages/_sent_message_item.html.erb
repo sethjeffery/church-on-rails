@@ -1,0 +1,13 @@
+<div class="list-group-item">
+  <div class="clearfix">
+    <div class="float-xs-right text-light size-xs-tiny py-xs">
+      <%= timeago_tag sent_message_item.created_at %>
+    </div>
+    <div>
+      <%= icon_container :'paper-plane-o' do %>
+        <div class="text-ellipsis"><%= sent_message_item.subject %></div>
+        <div class="size-xs-tiny text-light text-ellipsis"><%= sent_message_item.recipients.map(&:to_s).join(', ') %></div>
+      <% end %>
+    </div>
+  </div>
+</div>

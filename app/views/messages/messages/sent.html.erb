@@ -1,0 +1,30 @@
+<% content_for :menu, :messages %>
+
+<%= render 'menu', active: :'paper-plane' do %>
+  <h2>Sent Items</h2>
+
+  <% if @messages.present?  %>
+    <div class="list-group">
+      <div class="list-group-item active">
+        <div class="float-xs-right">Sent at</div>
+        Message
+      </div>
+      <%= render partial: 'sent_message_item', collection: @messages %>
+    </div>
+
+    <div class="text-xs-center mt-1">
+      <%= paginate @messages, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
+    </div>
+
+  <% else %>
+    <div class="list-group">
+      <div class="list-group-item list-group-item-padded">
+        <h1>Empty!</h1>
+        <p>
+          You have not sent any messages yet. Check back here in the future to see a log of
+          all messages you have sent.
+        </p>
+      </div>
+    </div>
+  <% end %>
+<% end %>

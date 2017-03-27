@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       resources :messages do
         get :reply_to, on: :member, path: 'reply', action: 'reply'
         get :forward, on: :member
+        get :sent, on: :collection
       end
     end
 

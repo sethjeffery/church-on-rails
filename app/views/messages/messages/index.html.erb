@@ -1,19 +1,7 @@
 <% content_for :menu, :messages %>
 
-<div class="container">
-  <div class="clearfix">
-    <%= render 'shared/title', title: 'Inbox', btn: true do %>
-
-      <% if can?(:create, Message) %>
-        <div class="btn-group float-xs-right">
-          <%= link_to new_message_path, class: "btn btn-lg btn-info" do %>
-            <%= icon_for 'plus' %> New
-          <% end %>
-        </div>
-      <% end %>
-
-    <% end %>
-  </div>
+<%= render 'menu', active: :inbox do %>
+  <h2>Inbox</h2>
 
   <% if @messages.present?  %>
     <div class="list-group">
@@ -21,21 +9,7 @@
         <div class="float-xs-right">Sent at</div>
         Message
       </div>
-      <% @messages.each do |message| %>
-        <a class="list-group-item list-group-item-action" href="<%= message_path(message.message) %>">
-          <div class="clearfix">
-            <div class="float-xs-right text-light size-xs-tiny py-xs">
-              <%= timeago_tag message.created_at %>
-            </div>
-            <div>
-              <%= icon_container message.read? ? :'envelope-o' : 'envelope' do %>
-                <div class="text-ellipsis"><%= message.subject %></div>
-                <div class="size-xs-tiny text-light"><%= message.message.sender %></div>
-              <% end %>
-            </div>
-          </div>
-        </a>
-      <% end %>
+      <%= render partial: 'message_item', collection: @messages %>
     </div>
 
     <div class="text-xs-center mt-1">
@@ -69,4 +43,4 @@
       </div>
     </div>
   <% end %>
-</div>
+<% end %>

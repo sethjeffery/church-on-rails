@@ -1,1 +1,2 @@
-<%= render partial: 'families/families/membership', collection: family.family_memberships.joins(:person).includes(:person).order('head DESC', 'first_name') %>
+<%= render partial: 'families/families/membership',
+           collection: family.family_memberships.joins(:person).includes(:person).order(head: :desc, first_name: :asc) %>

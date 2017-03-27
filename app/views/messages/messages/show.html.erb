@@ -1,7 +1,7 @@
 <% content_for :menu, :messages %>
 
-<div class="container">
-  <div class="my-1 clearfix">
+<%= render 'menu' do %>
+  <div class="mb-1 clearfix">
     <div class="float-xs-left">
       <a href="<%= messages_path %>" class="btn btn-secondary px-2">
         <%= icon_for 'chevron-left' %>
@@ -35,4 +35,4 @@
       <%= markdown @message.content %>
     </div>
   </div>
-</div>
+<% end %>

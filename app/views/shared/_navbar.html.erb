@@ -50,7 +50,7 @@
           <%= menu_to 'People',     people_path,           icon: :person,   menu: [:people, :teams, :families, :children, :properties] if can? :read, Person %>
           <%= menu_to 'Processes',  church_processes_path, icon: :process,  menu: :processes  if can? :read, ChurchProcess %>
           <%= menu_to 'Calendar',   calendar_path,         icon: :calendar, menu: [:calendar, :events, :calendar_settings] if can? :read, Calendar %>
-          <%= menu_to 'Messages',   messages_path,         icon: :message,  menu: [:messages] if can? :read, :message %>
+          <%= menu_to 'Messages',   messages_path,         icon: :message,  menu: [:messages] %>
 
           <div class="hidden-md-up">
             <%= menu_to 'Profile',  account_path %>

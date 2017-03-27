@@ -1,0 +1,17 @@
+<% content_for :menu, local_assigns[:menu] || :messages %>
+<% content_for :title, local_assigns[:title] if local_assigns[:title] %>
+
+<% if can?(:create, Message) %>
+  <%= render 'shared/side_and_details',
+             title: local_assigns[:title],
+             active: local_assigns[:active],
+             items: [{ title: 'Inbox',       icon: :inbox,         href: messages_path },
+                     { title: 'Sent items',  icon: :'paper-plane', href: sent_messages_path },
+                     '-',
+                     { title: 'New message', icon: :new,          href: new_message_path }
+  ] { yield } %>
+<% else %>
+  <div class="container mt-1">
+    <%= yield %>
+  </div>
+<% end %>

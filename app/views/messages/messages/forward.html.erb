@@ -1,5 +1,5 @@
 <% content_for :menu, :messages %>
 
-<div class="container mt-2">
+<%= render 'menu', active: :new do %>
   <%= render 'form' %>
-</div>
+<% end %>

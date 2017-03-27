@@ -3,7 +3,12 @@ class Messages::MessagesController < ApplicationController
 
   def index
     @messages = MessageRecipient.joins(message: :sender).where(recipient_id: current_person.id)
-    @messages = @messages.page(params[:page]).per(PAGE_SIZE)
+    @messages = @messages.order(created_at: :desc).page(params[:page]).per(PAGE_SIZE)
+  end
+
+  def sent
+    @messages = Message.where(sender_id: current_person.id)
+    @messages = @messages.order(created_at: :desc).page(params[:page]).per(PAGE_SIZE)
   end
 
   def new
@@ -15,6 +20,7 @@ class Messages::MessagesController < ApplicationController
   def show
     @message = find_message
     authorize! :read, @message
+    @message.update_attributes read: true
   end
 
   def reply
