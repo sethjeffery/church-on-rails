@@ -1,0 +1,12 @@
+<h1>Message from <%= @message.sender %></h1>
+
+<%= markdown @message.message %>
+
+<hr/>
+
+<p>
+  You can read the message online at this link:<br/>
+  <%= link_to message_url(@message), message_url(@message) %>
+</p>
+
+<%= render 'shared/mail_footer' %>

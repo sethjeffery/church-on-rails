@@ -25,4 +25,5 @@
 //= require chartkick
 //= require handlebars.runtime
 //= require js-routes
+//= require rails-timeago
 //= require_tree .

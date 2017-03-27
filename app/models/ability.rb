@@ -42,6 +42,12 @@ class Ability
     user.teams&.each do |team|
       add_team_abilities(user, team)
     end
+
+    can :read, Message do |message|
+      message.message_recipients.where(person_id: user.person.id).exists?
+    end
+
+    can :read, Calendar if Setting.present?(:google_refresh_token)
   end
 
   def add_team_abilities(user, team)
@@ -82,7 +88,5 @@ class Ability
       can :destroy, klass if team.children_editor?
       can :manage,  klass if team.children_admin?
     end
-
-    can :read, Calendar if Setting.present?(:google_refresh_token)
   end
 end

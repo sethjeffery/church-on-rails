@@ -29,7 +29,7 @@ RSpec.describe SettingsList, type: :model do
     end
   end
 
-  describe 'save' do
+  describe 'save', :caching do
     it 'stores the attributes as Settings' do
       expect {
         subject.save

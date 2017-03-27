@@ -1,0 +1,50 @@
+<% if @message.errors.present? %>
+  <div class="alert alert-danger">Please fill in the highlighted fields below.</div>
+<% else %>
+  <div class="alert alert-info">Please fill out your message below, all fields are required.</div>
+<% end %>
+
+<%= form_for @message do |f| %>
+  <div class="mx-1">
+    <%= render 'shared/form_radio', field: :send_to, value: :people, f: f, data: { toggle: '.select-people' } %>
+    <%= render 'shared/form_radio', field: :send_to, value: :team, f: f, data: { toggle: '.select-team' } %>
+  </div>
+
+  <div class="select-people mb-sm <%= 'has-danger' if @message.errors[:person_ids].present? %>">
+    <%= f.select :person_ids, f.select_model_options(:people),
+                 { include_hidden: false, hide_errors: true },
+                 multiple: true,
+                 class: 'form-control',
+                 data: { selectpicker: true, placeholder: 'Choose recipients',
+                         width: '100%',
+                         ajax: people_path,
+                         data: f.select_model_data(:people),
+                         template: :person } %>
+  </div>
+
+  <div class="select-team hidden-xs-up mb-sm <%= 'has-danger' if @message.errors[:team_id].present? %>">
+    <%= f.select :team_id, f.select_model_options(:team),
+                 { include_blank: true, hide_errors: true },
+                 class: 'form-control',
+                 data: { selectpicker: true, placeholder: 'Choose team',
+                         width: '100%',
+                         ajax: teams_path,
+                         data: f.select_model_data(:team),
+                         template: :team } %>
+  </div>
+
+  <div class="<%= 'has-danger' if @message.errors[:subject].present? %>">
+    <%= f.text_field :subject, class: 'form-control my-sm', placeholder: 'Subject', hide_errors: true %>
+  </div>
+
+  <div class="<%= 'has-danger' if @message.errors[:message].present? %>">
+    <%= f.text_area :message, class: 'form-control my-sm', placeholder: 'Message', hide_errors: true %>
+  </div>
+
+  <div class="mx-1 my-sm">
+    <%= render 'shared/form_checkbox', field: :email, f: f %>
+    <%= render 'shared/form_checkbox', field: :sms, f: f %>
+  </div>
+
+  <%= render 'shared/form_submit', icon: :envelope, title: 'Send message' %>
+<% end %>

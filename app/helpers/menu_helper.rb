@@ -20,7 +20,7 @@ module MenuHelper
       end
     else
       content_tag :div, class: "nav-item #{'active' if active_menu?(args[:menu])} #{args[:class]}" do
-        icon = args[:icon] ? icon_for(args[:icon], class: 'mr-sm hidden-lg-down') : h('')
+        icon = args[:icon] ? icon_for(args[:icon], class: 'mr-sm hidden-md-down') : h('')
         link_to(icon + content, path, class: 'nav-link', data: args[:data])
       end
     end

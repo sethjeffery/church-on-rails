@@ -2,7 +2,7 @@ class CreateActions < ActiveRecord::Migration[5.0]
   def change
     create_table :actions do |t|
       t.string :action_type
-      t.references :actor, references: :people, index: true
+      t.references :actor, references: :people
       t.references :actionable, polymorphic: true, index: true
       t.text :data
 

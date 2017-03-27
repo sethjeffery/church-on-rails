@@ -28,6 +28,7 @@ module IconsHelper
       when :comment then 'comment'
       when :property then 'toggle-on'
       when :child then 'child'
+      when :message then 'envelope'
 
       # other common nouns
       when :x then 'times'

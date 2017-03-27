@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170323123716) do
+ActiveRecord::Schema.define(version: 20170324075937) do
 
   create_table "actions", force: :cascade do |t|
     t.string   "action_type"
@@ -144,6 +144,28 @@ ActiveRecord::Schema.define(version: 20170323123716) do
     t.boolean  "head"
     t.index ["family_id"], name: "index_family_memberships_on_family_id"
     t.index ["person_id"], name: "index_family_memberships_on_person_id"
+  end
+
+  create_table "message_recipients", force: :cascade do |t|
+    t.integer  "message_id"
+    t.integer  "recipient_id"
+    t.boolean  "email",        default: false, null: false
+    t.boolean  "sms",          default: false, null: false
+    t.boolean  "read",         default: false, null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["message_id"], name: "index_message_recipients_on_message_id"
+    t.index ["recipient_id", "read"], name: "index_message_recipients_on_recipient_id_and_read"
+    t.index ["recipient_id"], name: "index_message_recipients_on_recipient_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string   "subject"
+    t.text     "message"
+    t.integer  "sender_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "people", force: :cascade do |t|

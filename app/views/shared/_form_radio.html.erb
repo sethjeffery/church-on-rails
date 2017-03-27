@@ -1,7 +1,9 @@
 <% object = local_assigns[:object] || f.object %>
+<% args = { class: 'custom-control-input',
+            data: local_assigns[:data] } %>
 
 <label class="size-xs-small size-sm-normal custom-<%= local_assigns[:type] || 'radio' %> custom-control">
-  <%= f.radio_button field, value, class: 'custom-control-input' %>
+  <%= f.radio_button field, value, args %>
   <span class="custom-control-indicator"></span>
 
   <%= local_assigns[:name] || field_name(object, "#{field}_#{value}") %>

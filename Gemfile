@@ -55,6 +55,7 @@ gem "non-stupid-digest-assets"
 gem 'handlebars_assets'
 gem 'js-routes'
 gem 'request_store'
+gem 'rails-timeago'
 
 # google calendars
 gem 'google-api-client', require: 'google/apis/calendar_v3'

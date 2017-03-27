@@ -10,6 +10,7 @@ class People::PeopleController < ApplicationController
       format.html {
         @people = @people.page(params[:page]).per(PAGE_SIZE)
       }
+      format.json
       format.csv
       format.xls
     end

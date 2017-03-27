@@ -1,11 +1,19 @@
 $(document).on 'turbolinks:load', ->
 
   templates =
-    child:   (item) -> templates.default(item, icon: 'child', subtitle: item.age)
-    process: (item) -> templates.default(item, icon: 'process')
-    person:  (item) -> templates.default(item, icon: 'person', subtitle: item.email or item.phone)
-    family:  (item) -> templates.default(item, icon: 'family', subtitle: item.members?.join(', '))
-    team:    (item) -> templates.default(item, icon: 'users', subtitle: item.members?.join(', '))
+    selections:
+      child:   (item) -> templates.default(item, template: 'select_selection')
+      process: (item) -> templates.default(item, template: 'select_selection')
+      person:  (item) -> templates.default(item, template: 'select_selection')
+      family:  (item) -> templates.default(item, template: 'select_selection')
+      team:    (item) -> templates.default(item, template: 'select_selection_team', icon: 'users')
+
+    results:
+      child:   (item) -> templates.default(item, icon: 'child', subtitle: item.age)
+      process: (item) -> templates.default(item, icon: 'process')
+      person:  (item) -> templates.default(item, icon: 'person', subtitle: "#{item.email or ''} #{item.phone or ''}")
+      family:  (item) -> templates.default(item, icon: 'family', subtitle: item.members?.join(', '))
+      team:    (item) -> templates.default(item, icon: 'users', subtitle: item.members?.join(', '))
 
     default: (item, defaults={}) ->
       # Set up defaults
@@ -13,7 +21,7 @@ $(document).on 'turbolinks:load', ->
       item.icon = iconNameFor(item.icon) if item.icon
 
       # Render handlebars template
-      HandlebarsTemplates.select_result(item)
+      HandlebarsTemplates[defaults.template || 'select_result'](item)
 
 
   # More beautiful looking selects with <select data-selectpicker></select>
@@ -23,8 +31,8 @@ $(document).on 'turbolinks:load', ->
       options =
         theme: 'bootstrap'
         escapeMarkup: (markup) -> markup
-        templateResult: templates[$el.data('template') or 'default']
-        templateSelection: templates[$el.data('template') or 'default']
+        templateResult: templates.results[$el.data('template') or 'default']
+        templateSelection: templates.selections[$el.data('template') or 'default']
 
       if $el.data('ajax')
         $.extend options,

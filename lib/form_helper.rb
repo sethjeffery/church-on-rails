@@ -41,6 +41,20 @@ module ActionView
         end
       end
     end
+
+    class FormBuilder
+      def select_model_data(method)
+        Array.wrap(@object.send(method)).map{ |a| { text: a.try(:name) || a.try(:title) || a.to_s,
+                                                    id: a.id,
+                                                    icon: a.try(:icon),
+                                                    color: a.try(:color)} }
+      end
+
+      def select_model_options(method)
+        Array.wrap(@object.send(method)).map{|a| [ a.try(:name) || a.try(:title) || a.to_s,
+                                                   a.id ] }
+      end
+    end
   end
 
   # Better field rendering for error fields

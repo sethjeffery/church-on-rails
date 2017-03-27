@@ -18,6 +18,13 @@ Rails.application.routes.draw do
   authenticate do
     resource :search
 
+    scope module: 'messages' do
+      resources :messages do
+        get :reply_to, on: :member, path: 'reply', action: 'reply'
+        get :forward, on: :member
+      end
+    end
+
     namespace :calendar do
       # Oauth 2.0
       get 'redirect', to: 'calendars#redirect', as: 'redirect'

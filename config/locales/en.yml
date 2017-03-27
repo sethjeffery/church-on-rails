@@ -54,6 +54,9 @@ en:
         format_flag: Flag
         format_text: Text
         format_list: List
+      message:
+        send_to_person: 'Send to specific people'
+        send_to_team: 'Send to a team'
     help:
       settings_list:
         can_sign_up: Switch off if you don't want a sign up screen where people can join the site without invitation.

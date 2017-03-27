@@ -1,0 +1,38 @@
+<% content_for :menu, :messages %>
+
+<div class="container">
+  <div class="my-1 clearfix">
+    <div class="float-xs-left">
+      <a href="<%= messages_path %>" class="btn btn-secondary px-2">
+        <%= icon_for 'chevron-left' %>
+      </a>
+    </div>
+
+    <div class="float-xs-right btn-group">
+      <a href="<%= reply_to_message_path(@message.message) %>" class="btn btn-info pl-2">
+        <%= icon_for :reply, class: 'mr-xs' %>
+        <span class="hidden-xs-down">Reply</span>
+      </a>
+      <a href="javascript:void(0)" class="dropdown-toggle btn btn-info pl-sm" data-toggle="dropdown"></a>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a href="<%= reply_to_message_path(@message.message) %>" class="dropdown-item">
+          <%= icon_for :reply, class: 'mr-xs' %>
+          Reply
+        </a>
+        <a href="<%= forward_message_path(@message.message) %>" class="dropdown-item">
+          <%= icon_for :share, class: 'mr-xs' %>
+          Forward
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-block">
+    <h1><%= @message.subject %></h1>
+    <h4 class="text-lighter"><%= @message.sender %></h4>
+    <div class="text-light"><%= @message.created_at.strftime('%-d %B %Y, %H:%M') %></div>
+    <div class="mt-2">
+      <%= markdown @message.content %>
+    </div>
+  </div>
+</div>

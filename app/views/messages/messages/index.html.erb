@@ -1,0 +1,72 @@
+<% content_for :menu, :messages %>
+
+<div class="container">
+  <div class="clearfix">
+    <%= render 'shared/title', title: 'Inbox', btn: true do %>
+
+      <% if can?(:create, Message) %>
+        <div class="btn-group float-xs-right">
+          <%= link_to new_message_path, class: "btn btn-lg btn-info" do %>
+            <%= icon_for 'plus' %> New
+          <% end %>
+        </div>
+      <% end %>
+
+    <% end %>
+  </div>
+
+  <% if @messages.present?  %>
+    <div class="list-group">
+      <div class="list-group-item active">
+        <div class="float-xs-right">Sent at</div>
+        Message
+      </div>
+      <% @messages.each do |message| %>
+        <a class="list-group-item list-group-item-action" href="<%= message_path(message.message) %>">
+          <div class="clearfix">
+            <div class="float-xs-right text-light size-xs-tiny py-xs">
+              <%= timeago_tag message.created_at %>
+            </div>
+            <div>
+              <%= icon_container message.read? ? :'envelope-o' : 'envelope' do %>
+                <div class="text-ellipsis"><%= message.subject %></div>
+                <div class="size-xs-tiny text-light"><%= message.message.sender %></div>
+              <% end %>
+            </div>
+          </div>
+        </a>
+      <% end %>
+    </div>
+
+    <div class="text-xs-center mt-1">
+      <%= paginate @messages, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm" %>
+    </div>
+
+  <% elsif can?(:create, Message) %>
+    <div class="list-group">
+      <div class="list-group-item list-group-item-padded">
+        <h1>Open Communication.</h1>
+        <p>
+          The messages section provides a virtual inbox and announcements centre. You can send messages to
+          any person in the database that has a registered email address or mobile phone number,
+          even to whole teams at once.
+        </p>
+        <p>
+          Messages are sent by email, SMS message (if the option is set up), and each registered account can also see their
+          history of received messages on this page.
+        </p>
+      </div>
+    </div>
+
+  <% else %>
+    <div class="list-group">
+      <div class="list-group-item list-group-item-padded">
+        <h1>Empty!</h1>
+        <p>
+          You have not received any messages yet. Check back here in the future to see a log of
+          all messages sent to you or your teams.
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>
