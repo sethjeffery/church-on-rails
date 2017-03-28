@@ -73,12 +73,7 @@ RSpec.describe "Children" do
         find('.nav-link', text: /ADD CHILD/).click
 
         within '.side-and-details--details' do
-          # Select2 is notoriously difficult to test in Capybara
-          # and it gets the results by AJAX
-          # so we will just hack the options into it
-          expect(page).to have_selector "[name='child_group_membership[person_id]']"
-          page.execute_script("$('[name=\"child_group_membership[person_id]\"]').append('<option value=#{child.id}>#{child.name}</option>')")
-          select child.name, from: 'child_group_membership[person_id]'
+          select_ajax 'child_group_membership[person_id]', child.id, child.name
           find('button', text: /Add child/).click
         end
 
@@ -114,11 +109,7 @@ RSpec.describe "Children" do
         it 'can add children', :js do
           click_on 'Add child'
 
-          # Select2 is notoriously difficult to test in Capybara
-          # and it gets the results by AJAX so we will just hack the options into it
-          expect(page).to have_selector "[name='child_group_membership[person_id]']"
-          page.execute_script("$('[name=\"child_group_membership[person_id]\"]').append('<option value=#{child.id}>#{child.name}</option>')")
-          select child.name, from: 'child_group_membership[person_id]'
+          select_ajax 'child_group_membership[person_id]', child.id, child.name
           find('button', text: /Add child/).click
 
           expect(page).to have_content child.name

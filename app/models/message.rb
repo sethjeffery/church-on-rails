@@ -65,7 +65,9 @@ class Message < ApplicationRecord
   def send_to_people!
     Person.find(person_ids).each do |person|
       unless message_recipients.find_by(recipient_id: person.id)
-        message_recipients.create! recipient: person, email: email, sms: sms
+        message_recipients.create! recipient: person,
+                                   email: self.email && person.email.present?,
+                                   sms: self.sms && person.phone.present?
       end
     end
   end

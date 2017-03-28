@@ -47,6 +47,10 @@ class Ability
       message.message_recipients.where(person_id: user.person.id).exists?
     end
 
+    can :read, MessageRecipient do |message_recipient|
+      message_recipient.recipient_id == user.person.id
+    end
+
     can :read, Calendar if Setting.present?(:google_refresh_token)
   end
 

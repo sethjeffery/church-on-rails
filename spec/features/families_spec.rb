@@ -68,14 +68,7 @@ RSpec.describe "Families" do
 
         within '.side-and-details--details' do
           expect(page).to have_content 'ADD TO FAMILY'
-
-          # Select2 is notoriously difficult to test in Capybara
-          # and it gets the results by AJAX
-          # so we will just hack the options into it
-          expect(page).to have_selector "[name='family_membership[person_id]']"
-          page.execute_script("$('[name=\"family_membership[person_id]\"]').append('<option value=#{new_person.id}>#{new_person.name}</option>')")
-          select new_person.name, from: 'family_membership[person_id]'
-
+          select_ajax 'family_membership[person_id]', new_person.id, new_person.name
           click_on 'Add member'
         end
 
