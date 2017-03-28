@@ -1,4 +1,4 @@
-<%= render 'shared/list_group_item_field', f: f, field: :first_name, required: true, autocapitalize: :words, autofocus: true %>
+<%= render 'shared/list_group_item_field', f: f, field: :first_name, required: true, autocapitalize: :words, autofocus: can_autofocus? %>
 <%= render 'shared/list_group_item_field', f: f, field: :middle_name, autocapitalize: :words %>
 <%= render 'shared/list_group_item_field', f: f, field: :last_name, required: true, autocapitalize: :words %>
 

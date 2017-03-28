@@ -2,7 +2,7 @@
   <%= f.select :prefix, prefixes, { include_blank: true }, class: 'form-control', data: { selectpicker: true, placeholder: '', :'allow-clear' => true } %>
 <% end %>
 
-<%= render 'shared/list_group_item_field', f: f, field: :first_name, required: true, autocapitalize: :words, autofocus: true %>
+<%= render 'shared/list_group_item_field', f: f, field: :first_name, required: true, autocapitalize: :words, autofocus: can_autofocus? %>
 <%= render 'shared/list_group_item_field', f: f, field: :middle_name, autocapitalize: :words %>
 <%= render 'shared/list_group_item_field', f: f, field: :last_name, required: true, autocapitalize: :words %>
 <%= render 'shared/list_group_item_field', f: f, field: :suffix, autocapitalize: :words %>

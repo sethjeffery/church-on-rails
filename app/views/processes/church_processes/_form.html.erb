@@ -6,7 +6,7 @@
     <div class="list-group-item">
       <%= f.label :name, class: 'text-required mb-0' %>
       <div class="input-group my-sm <%= 'has-danger' if @church_process.errors[:name].present? %>">
-        <%= f.text_field :name, class: 'form-control', autofocus: true, hide_errors: true %>
+        <%= f.text_field :name, class: 'form-control', autofocus: can_autofocus?, hide_errors: true %>
         <%= f.hidden_field :icon %>
 
         <div class="input-group-btn dropdown">

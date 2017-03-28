@@ -9,7 +9,7 @@
       <% end %>
 
       <div class="input-group my-sm <%= 'has-danger' if @team.errors[:name].present? %>">
-        <%= f.text_field :name, class: 'form-control', autofocus: true, placeholder: "e.g. Editors, Worship team, Pastors, ...", hide_errors: true %>
+        <%= f.text_field :name, class: 'form-control', autofocus: can_autofocus?, placeholder: "e.g. Editors, Worship team, Pastors, ...", hide_errors: true %>
         <%= f.hidden_field :icon %>
         <%= f.hidden_field :color %>
 

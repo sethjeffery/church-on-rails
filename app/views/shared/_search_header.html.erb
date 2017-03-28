@@ -4,7 +4,7 @@
       <label class="input-group-addon" for="q">
         <%= icon_for :search %>
       </label>
-      <%= text_field_tag :q, params[:q], class: 'form-control', autofocus: true %>
+      <%= text_field_tag :q, params[:q], class: 'form-control', autofocus: can_autofocus? %>
     </div>
 
     <button type="submit" class="sr-only" onclick="$(this).closest('form').submit();">

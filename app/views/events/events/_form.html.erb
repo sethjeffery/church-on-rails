@@ -5,7 +5,7 @@
 
     <div class="list-group-item">
       <%= f.label :name, class: 'mb-0 text-required' %>
-      <%= f.text_field :name, class: 'form-control my-sm', autofocus: true, required: true, autocapitalize: :sentences %>
+      <%= f.text_field :name, class: 'form-control my-sm', autofocus: can_autofocus?, required: true, autocapitalize: :sentences %>
     </div>
 
     <div class="list-group-item">

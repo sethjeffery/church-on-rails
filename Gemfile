@@ -56,6 +56,7 @@ gem 'handlebars_assets'
 gem 'js-routes'
 gem 'request_store'
 gem 'rails-timeago'
+gem 'browser'
 
 # google calendars
 gem 'google-api-client', require: 'google/apis/calendar_v3'

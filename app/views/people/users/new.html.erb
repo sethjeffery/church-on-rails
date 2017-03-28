@@ -21,7 +21,7 @@
           <label class="input-group-addon" for="user_email">
             <span class="fa fa-envelope fa-1x"></span>
           </label>
-          <%= f.email_field :email, autocomplete: "off", autofocus: true, class: 'form-control', placeholder: 'Email', hide_errors: true %>
+          <%= f.email_field :email, autocomplete: "off", autofocus: can_autofocus?, class: 'form-control', placeholder: 'Email', hide_errors: true %>
         </div>
         <%= field_error(@user, :email) %>
       </div>
