@@ -18,6 +18,9 @@
 !/log/.keep
 !/tmp/.keep
 
+# Ignore assets
+/public/system
+
 # Ignore Byebug command history file.
 .byebug_history
 
