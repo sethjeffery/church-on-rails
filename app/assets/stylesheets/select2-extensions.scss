@@ -36,28 +36,14 @@
     }
   }
 
-  .select2-results__option {
-    // More padding in results to reflect style
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
   .select2-selection {
-    // fully-rounded corners and no box shadow
-    border-radius: 19px;
-    padding-right: 32px;
-    padding-left: 16px;
+    // no box shadow
     box-shadow: none;
 
     // danger border color
     .has-danger & {
       border-color: $brand-danger;
     }
-  }
-
-  .select2-selection--single .select2-selection__arrow {
-    // more space for dropdown caret
-    right: 18px;
   }
 
   .select2-dropdown--above {
@@ -72,8 +58,8 @@
 
     .select2-search__field {
       border-radius: 0;
-      padding-left: 16px;
-      padding-right: 16px;
+      padding-left: 12px;
+      padding-right: 12px;
       line-height: 1.5rem;
       border-left: none;
       border-right: none;
