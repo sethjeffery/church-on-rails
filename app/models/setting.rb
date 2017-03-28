@@ -7,7 +7,7 @@ class Setting < ApplicationRecord
 
   # Stores a setting in the database.
   def self.store(key, value)
-    unless Rails.cache.read("Setting.#{safe_key(key)}") == value
+    unless Rails.cache&.read("Setting.#{safe_key(key)}") == value
       store_to_cache(key, value)
       store_to_database(key, value)
     end
@@ -36,7 +36,7 @@ class Setting < ApplicationRecord
   end
 
   def self.store_to_cache(key, value)
-    Rails.cache.write("Setting.#{safe_key(key)}", value)
+    Rails.cache&.write("Setting.#{safe_key(key)}", value)
   end
 
   def self.store_to_database(key, value)
@@ -45,7 +45,7 @@ class Setting < ApplicationRecord
 
   def self._fetch(key, default=nil)
     key = safe_key(key)
-    if Rails.cache.exist?("Setting.#{key}")
+    if Rails.cache&.exist?("Setting.#{key}")
       Rails.cache.read("Setting.#{key}")
     else
       record = find_by(key: key) rescue nil
