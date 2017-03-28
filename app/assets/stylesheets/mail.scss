@@ -13,10 +13,8 @@ li.step-completed {
 
 #mainTable {
   border-collapse: collapse;
-  margin: 16px auto;
-  max-width: 800px !important;
-  min-width: 500px !important;
-  width: 100% !important;
+  margin: auto;
+  width: 560px !important;
   background-color: white;
   border: solid 1px #eee;
   border-radius: 4px;
@@ -46,16 +44,16 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 h1, .h1 {
-  font-size: 2.5 * 16px;
+  font-size: 2 * 16px;
   margin-top: 0;
 }
 
 h2, .h2 {
-  font-size: 2 * 16px;
+  font-size: 1.75 * 16px;
 }
 
 h3, .h3 {
-  font-size: 1.75 * 16px;
+  font-size: 1.5 * 16px;
 }
 
 h4, .h4 {
