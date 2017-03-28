@@ -48,7 +48,7 @@ RSpec.describe "Families" do
         user.person.join create(:team, people_reader: true, people_editor: true)
       end
 
-      it 'can edit families', :js do
+      it 'can edit families' do
         family = create(:family, name: 'Smith')
 
         visit "/families/#{family.id}"
@@ -67,7 +67,7 @@ RSpec.describe "Families" do
         click_on "Add member"
 
         within '.side-and-details--details' do
-          expect(page).to have_content 'ADD TO FAMILY'
+          expect(page).to have_content 'Add to Family'
           select_ajax 'family_membership[person_id]', new_person.id, new_person.name
           click_on 'Add member'
         end
@@ -108,7 +108,7 @@ RSpec.describe "Families" do
         expect(page).to have_no_content family.name
       end
 
-      it 'can merge families', :js do
+      it 'can merge families' do
         actor = create(:family)
         target = create(:family)
         member = create(:person)
@@ -118,16 +118,13 @@ RSpec.describe "Families" do
         click_on 'Merge families'
 
         within '.side-and-details--details' do
-          expect(page).to have_selector "[name='merge[merger_id]']"
-          page.execute_script("$('[name=\"merge[merger_id]\"]').append('<option value=#{target.id}>#{target.name}</option>')")
-          select target.name, from: 'merge[merger_id]'
-
+          select_ajax 'merge[merger_id]', target.id, target.name
           click_on 'Merge!'
-
-          expect(page).to have_content target.family_name
-          expect(page).to have_content 'MEMBERS'
-          expect(page).to have_content member.name
         end
+
+        expect(page).to have_content target.family_name
+        expect(page).to have_content 'Members'
+        expect(page).to have_content member.name
       end
     end
   end

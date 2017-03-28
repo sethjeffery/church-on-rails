@@ -51,7 +51,7 @@ RSpec.describe "Messages" do
         expect(page).to have_content "New message"
       end
 
-      it 'can send messages', :js do
+      it 'can send messages' do
         click_on 'New message'
         recipient = create(:person)
 

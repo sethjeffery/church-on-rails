@@ -69,8 +69,8 @@ RSpec.describe "Children" do
         expect(page).to have_content 'New description'
       end
 
-      it 'can add children', :js do
-        find('.nav-link', text: /ADD CHILD/).click
+      it 'can add children' do
+        find('.nav-link', text: /Add child/).click
 
         within '.side-and-details--details' do
           select_ajax 'child_group_membership[person_id]', child.id, child.name
@@ -106,7 +106,7 @@ RSpec.describe "Children" do
           click_on 'Close'
         end
 
-        it 'can add children', :js do
+        it 'can add children' do
           click_on 'Add child'
 
           select_ajax 'child_group_membership[person_id]', child.id, child.name
