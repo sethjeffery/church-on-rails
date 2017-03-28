@@ -84,7 +84,19 @@ Rails.application.configure do
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
-  if ENV['MAILGUN_SMTP_PORT']
+  if ENV['POSTMARK_SMTP_SERVER']
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      :port           => '25',
+      :address        => ENV['POSTMARK_SMTP_SERVER'],
+      :user_name      => ENV['POSTMARK_API_TOKEN'],
+      :password       => ENV['POSTMARK_API_TOKEN'],
+      :domain         => Setting.fetch(:host_name),
+      :authentication => :cram_md5,
+      :enable_starttls_auto => true
+    }
+  elsif ENV['MAILGUN_SMTP_SERVER']
+    config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
       :port           => ENV['MAILGUN_SMTP_PORT'],
       :address        => ENV['MAILGUN_SMTP_SERVER'],
@@ -93,7 +105,6 @@ Rails.application.configure do
       :domain         => Setting.fetch(:host_name),
       :authentication => :plain,
     }
-    config.action_mailer.delivery_method = :smtp
   end
 
   # Do not dump schema after migrations.

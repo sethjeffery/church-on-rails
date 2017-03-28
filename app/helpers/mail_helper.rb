@@ -4,7 +4,7 @@ module MailHelper
     if church&.email.present?
       church.email
     else
-      "no-reply@#{(Setting.fetch('HOST_NAME') || 'example.com').to_s.sub(/^(https?:\/\/)?www\./, '')}"
+      Setting.fetch('MAIL_FROM') || "no-reply@#{(Setting.fetch('HOST_NAME') || 'example.com').to_s.sub(/^(https?:\/\/)?www\./, '')}"
     end
   end
 end
