@@ -25,7 +25,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Support for any of these database types
-gem 'sqlite3', require: false
 gem 'postgresql', require: false
 gem 'mysql2', require: false
 
@@ -91,6 +90,9 @@ group :development, :test do
 end
 
 group :development do
+  # use sqlite3 on localhost only
+  gem 'sqlite3', require: false
+
   gem 'better_errors'
   gem 'bullet'
   gem 'listen', '~> 3.0.5'
