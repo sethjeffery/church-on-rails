@@ -3,9 +3,13 @@ class Person < ApplicationRecord
   include Concerns::Commentable
   include Concerns::Capitalize
 
+  # Values received from a form allowing a person to join a new family.
   attr_accessor :family_name, :family_address1, :family_address2, :family_postcode, :family_country
 
-  belongs_to :user,                     dependent: :destroy, autosave: true
+  # If the person can log in, the User is the account information.
+  belongs_to :user,                     dependent: :destroy, autosave: true, optional: true
+
+  # Memberships, properties, etc...
   has_many :family_memberships,         dependent: :destroy
   has_many :team_memberships,           dependent: :destroy
   has_many :events,                     dependent: :destroy, inverse_of: :author, foreign_key: :author_id
@@ -40,11 +44,14 @@ class Person < ApplicationRecord
 
   auto_capitalize :first_name, :middle_name, :last_name
 
+  # Given a set of args like `{ family_name: ..., family_address1... }`, it starts
+  # a new family for this person and joins it.
   def start_family(args)
     family_args = %i(name address1 address2 postcode country).map{|arg| [arg, args[:"family_#{arg}"]]}.to_h
     join(Family.create(family_args), head: true) if family_args[:name].present?
   end
 
+  # Allows a person to join any joinable object (Family, Team, ChildGroup).
   def join(group, args={})
     save if new_record?
 
@@ -73,6 +80,7 @@ class Person < ApplicationRecord
     end
   end
 
+  # The person's current age in a readable format.
   def age(t = Date.current)
     return unless dob
     months = months_old(t)
@@ -82,6 +90,7 @@ class Person < ApplicationRecord
     readable_age(months / 12, months % 12)
   end
 
+  # Numerical value of how many months old this person is.
   def months_old(t = Date.current)
     return unless dob
     months = (t.year * 12 + t.month) - (dob.year * 12 + dob.month)
@@ -89,15 +98,19 @@ class Person < ApplicationRecord
     months
   end
 
+  # Numerical value of how many years old this person is.
   def years_old(t = Date.current)
     return unless dob
     months_old(t) / 12
   end
 
+  # Merges this record into another person record.
   def merge_into(target)
     MergePersonJob.perform_now(self, target)
   end
 
+  # Provided a list of property params, updates all the properties for
+  # this person.
   def update_properties(properties)
     properties.each do |id, value|
       property = Property.find(id)
@@ -112,32 +125,41 @@ class Person < ApplicationRecord
     end
   end
 
+  # Whether this person has a value for the given property id.
   def has_property?(id)
     property_joins.where(property_id: id.to_i).exists?
   end
 
+  # Gets the property value of this person for the given property id.
   def property(id)
     property_joins.where(property_id: id.to_i).first&.value
   end
 
+  # Starts a process for the person.
   def start(church_process)
     person_processes.create({ church_process: church_process })
   end
 
+  # Determines the correct icon to be used, dependent on the person's gender.
   def icon
     icon = gender == 'f' ? :female : :male
     icon = :child if dob && years_old < 16
     icon
   end
 
+  # Tracks an action type for the person.
   def track(type, args={})
     actions.create({ action_type: type }.merge(args))
   end
 
+  # Tracks a unique action type, where only one action for this person can
+  # exist for this type. Any previous action of this type will be updated.
   def track_unique(type, args={})
     actions.of_type(type).first&.update_attributes(args) || track(type, args)
   end
 
+  # Sets a person's full name, intelligently splitting it into
+  # first and last names.
   def name=(full_name)
     names = full_name.split(' ')
     self.first_name = names[0]

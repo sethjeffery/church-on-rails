@@ -25,6 +25,8 @@ class Family < ApplicationRecord
     MergeFamilyJob.perform_now(self, target)
   end
 
+  # Loop through all families in the database and merge
+  # any with the same name.
   def self.auto_merge!
     families = order(:search_name).all
     families.each_with_index do |family, index|
