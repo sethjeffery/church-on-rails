@@ -1,0 +1,23 @@
+<% content_for :menu, :families %>
+
+<div class="container-sm my-1">
+  <%= form_for :merge, url: merge_families_path, method: :get do |f| %>
+    <%= f.hidden_field :confirm, value: 1 %>
+
+    <h2>Merge duplicate names</h2>
+    <p>
+      All families with the same surname will be merged into one family. Persons in both
+      families with the same name will be merged into one person.
+    </p>
+
+    <div class="alert alert-danger">
+      It's highly recommended that you back up your data before doing this.
+    </div>
+
+    <p class="size-xs-large">
+      Are you absolutely sure?
+    </p>
+
+    <%= render 'shared/form_submit', icon: :merge, title: 'Merge all!' %>
+  <% end %>
+</div>

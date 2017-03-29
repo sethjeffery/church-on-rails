@@ -2,9 +2,9 @@ class Families::FamiliesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @families = @families.where("lower(name) LIKE ?", "%#{params[:q].downcase}%") if params[:q].present?
+    @families = @families.where("search_name LIKE ?", "%#{params[:q].downcase}%") if params[:q].present?
     @families = @families.where.not(id: params[:not].split(',')) if params[:not].present?
-    @families = @families.includes(:people).order(:name).page(params[:page]).per(PAGE_SIZE)
+    @families = @families.includes(:people).order(:search_name).page(params[:page]).per(PAGE_SIZE)
   end
 
   def create
@@ -26,6 +26,13 @@ class Families::FamiliesController < ApplicationController
   def destroy
     @family.destroy
     redirect_to families_path, notice: "#{@family} has been removed from the database."
+  end
+
+  def merge
+    if params[:merge].try(:[], :confirm)
+      Family.auto_merge!
+      redirect_to families_path, notice: 'All families auto-merged!'
+    end
   end
 
   private

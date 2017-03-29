@@ -108,7 +108,7 @@ RSpec.describe "Families" do
         expect(page).to have_no_content family.name
       end
 
-      it 'can merge families' do
+      it 'can merge a family' do
         actor = create(:family)
         target = create(:family)
         member = create(:person)
@@ -125,6 +125,23 @@ RSpec.describe "Families" do
         expect(page).to have_content target.family_name
         expect(page).to have_content 'Members'
         expect(page).to have_content member.name
+      end
+
+      it 'can merge all families' do
+        actor  = create(:family, name: 'Smith')
+        target = create(:family, name: 'Smith')
+        other  = create(:family, name: 'Smythe')
+        member = create(:person)
+        member.join actor
+
+        visit "/families/merge"
+        click_on 'Merge all!'
+
+        expect(page).to have_content 'Families'
+        expect(page.html).to     include family_path(target)
+        expect(page.html).to     include family_path(other)
+        expect(page.html).not_to include family_path(actor)
+        expect(member.families.all).to eq [target]
       end
     end
   end

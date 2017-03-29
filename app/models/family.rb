@@ -11,6 +11,8 @@ class Family < ApplicationRecord
   validates_presence_of :name
   auto_capitalize :name
 
+  before_validation :update_search_name
+
   def family_name
     name + ' Family'
   end
@@ -21,5 +23,21 @@ class Family < ApplicationRecord
 
   def merge_into(target)
     MergeFamilyJob.perform_now(self, target)
+  end
+
+  def self.auto_merge!
+    families = order(:search_name).all
+    families.each_with_index do |family, index|
+      unless index == families.length - 1
+        next_family = families[index+1]
+        if next_family.search_name == family.search_name
+          family.merge_into next_family
+        end
+      end
+    end
+  end
+
+  def update_search_name
+    self.search_name = name.downcase
   end
 end

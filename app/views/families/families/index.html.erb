@@ -1,8 +1,28 @@
 <% content_for :menu, :families %>
 
 <div class="container">
-  <%= render 'shared/title', title: 'Families', btn: { can: [:create, Family], href: new_family_path } %>
+  <%= render 'shared/title', title: 'Families', btn: true do %>
 
+    <% if can? :create, Family %>
+      <div class="btn-group float-xs-right">
+        <%= link_to new_family_path, class: "btn btn-lg btn-info" do %>
+          <%= icon_for 'plus' %> New
+        <% end %>
+
+        <% if can? :manage, Family %>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-info btn-lg dropdown-toggle pl-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item" href="<%= merge_families_path %>">
+                <%= icon_container "Merge all duplicate names", :merge %>
+              </a>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+  <% end %>
   <div class="list-group">
     <%= render 'shared/search_header', resource: :families, options: [:people, :families, :teams] %>
 

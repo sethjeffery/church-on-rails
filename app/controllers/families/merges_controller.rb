@@ -3,7 +3,7 @@ class Families::MergesController < ApplicationController
 
   def show
     @merge = Merge.new(family: Family
-                                 .where("lower(name) = ?", @family.name.downcase)
+                                 .where(search_name: @family.search_name)
                                  .where.not(id: @family.id).first)
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170324075937) do
+ActiveRecord::Schema.define(version: 20170329055847) do
 
   create_table "actions", force: :cascade do |t|
     t.string   "action_type"
@@ -124,8 +124,8 @@ ActiveRecord::Schema.define(version: 20170324075937) do
 
   create_table "families", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "address1"
     t.string   "address2"
     t.string   "city"
@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(version: 20170324075937) do
     t.string   "country"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "search_name"
     t.index ["name"], name: "index_families_on_name"
   end
 

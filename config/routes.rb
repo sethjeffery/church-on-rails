@@ -43,6 +43,7 @@ Rails.application.routes.draw do
         get :confirm_destroy, on: :member
         resources :family_memberships, path: 'memberships'
         resource :merge
+        get :merge, on: :collection
       end
     end
 

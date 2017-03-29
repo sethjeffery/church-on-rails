@@ -4,7 +4,7 @@
   <%= render 'shared/side_and_details',
              title: local_assigns[:title],
              active: local_assigns[:active],
-             items: local_assigns[:items] || [{ title: 'People', icon: :search, href: :people },
+             items: local_assigns[:items] || [{ title: 'Families',   icon: :search, href: families_path },
                                               '-',
                                               ({ title: @family,          icon: @family,   href: @family }),
                                               ({ title: 'Edit',           icon: :edit,     href: edit_family_path(@family)}                  if can?(:update, @family)),
